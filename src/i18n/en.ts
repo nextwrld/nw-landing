@@ -87,6 +87,22 @@ export const commonEN = {
     "dontHaveAccount": "Don't have an account?",
     "createAccount": "Create Account"
   },
+  "services": {
+    "title": "Clear Offerings",
+    "subtitle": "Services",
+    "service1": {
+      "name": "Operational Systems Engineering",
+      "description": "We design and centralize your company's 'operating system' (CRM, ERP, Dashboards) to eliminate dependency on endless spreadsheets."
+    },
+    "service2": {
+      "name": "Automation & Applied AI",
+      "description": "We detect bottlenecks and deploy AI agents and automations that execute heavy work for you 24 hours a day."
+    },
+    "service3": {
+      "name": "Strategic Evolution Retainers",
+      "description": "High-level support and constant optimization. We ensure your technology evolves alongside market demands."
+    }
+  },
   "contact": {
     "title": "Contact Us",
     "subtitle": "Get in touch with us",

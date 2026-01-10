@@ -92,6 +92,22 @@ export const commonES = {
     "dontHaveAccount": "¿No tienes una cuenta?",
     "createAccount": "Crear Cuenta"
   },
+  "services": {
+    "title": "La Oferta Clara",
+    "subtitle": "Servicios",
+    "service1": {
+      "name": "Ingeniería de Sistemas Operativos",
+      "description": "Diseñamos y centralizamos el 'sistema operativo' de tu empresa (CRM, ERP, Dashboards) para eliminar la dependencia de las hojas de cálculo infinitas."
+    },
+    "service2": {
+      "name": "Automatización e IA Aplicada",
+      "description": "Detectamos cuellos de botella y desplegamos agentes de IA y automatizaciones que ejecutan el trabajo pesado por ti las 24 horas del día."
+    },
+    "service3": {
+      "name": "Retainers de Evolución Estratégica",
+      "description": "Soporte de alto nivel y optimización constante. Aseguramos que tu tecnología evolucione a la par de las demandas del mercado."
+    }
+  },
   "contact": {
     "title": "Contáctanos",
     "subtitle": "Ponte en contacto con nosotros",
