@@ -156,6 +156,37 @@ export const commonES = {
     },
     "cta": "Agenda una Consulta"
   },
+  "faq": {
+    "title": "Derribando Objeciones",
+    "subtitle": "FAQ",
+    "paragraph": "Respondemos las preguntas más comunes sobre nuestro modelo de trabajo.",
+    "questions": [
+      {
+        "question": "¿En qué se diferencian de una Software Factory?",
+        "answer": "En que vendemos criterio y orden operativo. No somos tomadores de pedidos; somos consultores estratégicos que diseñan el sistema que tu negocio realmente necesita para escalar, no solo el que pides."
+      },
+      {
+        "question": "¿Cómo integran la IA en mis procesos?",
+        "answer": "Solo donde genera impacto real. La usamos para acelerar operaciones o mejorar la toma de decisiones, integrándola silenciosamente en tu flujo de trabajo para que la tecnología trabaje para ti, y no al revés."
+      },
+      {
+        "question": "¿Mi empresa es demasiado 'analógica' para esto?",
+        "answer": "Al contrario. Las organizaciones con procesos manuales son las que ven el salto de rentabilidad más grande al implementar nuestros sistemas de evolución."
+      },
+      {
+        "question": "¿Qué tipo de empresas pueden trabajar con Next Wrld?",
+        "answer": "Nos especializamos en organizaciones de servicios que han alcanzado un techo operativo. Si tu negocio depende de procesos manuales, hojas de cálculo infinitas y el conocimiento reside solo en la cabeza de las personas, somos tu solución."
+      },
+      {
+        "question": "¿Tengo que cambiar todo mi software actual?",
+        "answer": "No necesariamente. Nuestro enfoque es de 'Arquitectura Flexible'. Auditamos lo que ya usas (CRM, ERP, herramientas de comunicación) y lo conectamos o potenciamos para crear un ecosistema unificado y eficiente."
+      },
+      {
+        "question": "¿Qué resultados puedo esperar a corto plazo?",
+        "answer": "Aunque construimos para el largo plazo, implementamos optimizaciones desde el primer mes. El resultado inmediato es la recuperación de tiempo de liderazgo, mayor visibilidad de datos para decidir y la eliminación de cuellos de botella críticos."
+      }
+    ]
+  },
   "blog": {
     "title": "Blog",
     "subtitle": "Últimas noticias y artículos",

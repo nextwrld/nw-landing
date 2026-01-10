@@ -151,6 +151,37 @@ export const commonEN = {
     },
     "cta": "Schedule a Consultation"
   },
+  "faq": {
+    "title": "Breaking Down Objections",
+    "subtitle": "FAQ",
+    "paragraph": "We answer the most common questions about our work model.",
+    "questions": [
+      {
+        "question": "How are you different from a Software Factory?",
+        "answer": "We sell criteria and operational order. We're not order-takers; we're strategic consultants who design the system your business actually needs to scale, not just what you ask for."
+      },
+      {
+        "question": "How do you integrate AI into my processes?",
+        "answer": "Only where it generates real impact. We use it to accelerate operations or improve decision-making, integrating it silently into your workflow so technology works for you, not the other way around."
+      },
+      {
+        "question": "Is my company too 'analog' for this?",
+        "answer": "On the contrary. Organizations with manual processes are the ones that see the biggest profitability leap when implementing our evolution systems."
+      },
+      {
+        "question": "What type of companies can work with Next Wrld?",
+        "answer": "We specialize in service organizations that have hit an operational ceiling. If your business depends on manual processes, endless spreadsheets, and knowledge resides only in people's heads, we're your solution."
+      },
+      {
+        "question": "Do I have to change all my current software?",
+        "answer": "Not necessarily. Our approach is 'Flexible Architecture'. We audit what you already use (CRM, ERP, communication tools) and connect or enhance it to create a unified and efficient ecosystem."
+      },
+      {
+        "question": "What results can I expect in the short term?",
+        "answer": "While we build for the long term, we implement optimizations from the first month. Immediate results include leadership time recovery, greater data visibility for decision-making, and elimination of critical bottlenecks."
+      }
+    ]
+  },
   "blog": {
     "title": "Blog",
     "subtitle": "Latest news and articles",
