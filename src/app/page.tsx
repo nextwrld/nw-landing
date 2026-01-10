@@ -25,7 +25,6 @@ export default function Home() {
       <Hero />
       <Features />
       <About />
-      <CallToAction />
       <Pricing />
       <Faq />
       <HomeBlogSection posts={posts} />
