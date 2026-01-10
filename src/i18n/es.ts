@@ -9,9 +9,7 @@ export const commonES = {
     "aboutPage": "Página Acerca de",
     "pricingPage": "Página de Precios",
     "blogPage": "Página de Blog",
-    "contactPage": "Página de Contacto",
-    "signIn": "Iniciar Sesión",
-    "signUp": "Registrarse"
+    "contactPage": "Página de Contacto"
   },
   "hero": {
     "title": "BIENVENIDO AL NUEVO ESTÁNDAR OPERATIVO",
@@ -77,20 +75,6 @@ export const commonES = {
     "filter": "Filtrar",
     "close": "Cerrar",
     "open": "Abrir"
-  },
-  "auth": {
-    "signIn": "Iniciar Sesión",
-    "signUp": "Registrarse",
-    "signOut": "Cerrar Sesión",
-    "email": "Correo Electrónico",
-    "password": "Contraseña",
-    "confirmPassword": "Confirmar Contraseña",
-    "forgotPassword": "¿Olvidaste tu contraseña?",
-    "resetPassword": "Restablecer Contraseña",
-    "rememberMe": "Recuérdame",
-    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
-    "dontHaveAccount": "¿No tienes una cuenta?",
-    "createAccount": "Crear Cuenta"
   },
   "services": {
     "title": "La Oferta Clara",

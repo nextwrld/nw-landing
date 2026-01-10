@@ -9,9 +9,7 @@
     "aboutPage": "About Page",
     "pricingPage": "Pricing Page",
     "blogPage": "Blog Page",
-    "contactPage": "Contact Page",
-    "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "contactPage": "Contact Page"
   },
   "hero": {
     "title": "Open-source SaaS Starter Kit and Boilerplate for Next.js",
@@ -50,20 +48,6 @@
     "filter": "Filter",
     "close": "Close",
     "open": "Open"
-  },
-  "auth": {
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
-    "signOut": "Sign Out",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "forgotPassword": "Forgot Password?",
-    "resetPassword": "Reset Password",
-    "rememberMe": "Remember Me",
-    "alreadyHaveAccount": "Already have an account?",
-    "dontHaveAccount": "Don't have an account?",
-    "createAccount": "Create Account"
   },
   "contact": {
     "title": "Contact Us",

@@ -12,32 +12,24 @@ export const useFeaturesData = (): Feature[] => {
     icon: <LightBulbIcon className="w-10 h-10 text-white" />,
     title: t('features.feature1.title'),
     paragraph: t('features.feature1.paragraph'),
-    btn: t('features.learnMore'),
-    btnLink: "/#",
   },
   {
     id: 2,
     icon: <CpuChipIcon className="w-10 h-10 text-white" />,
     title: t('features.feature2.title'),
     paragraph: t('features.feature2.paragraph'),
-    btn: t('features.learnMore'),
-    btnLink: "/#",
   },
   {
     id: 3,
     icon: <ServerStackIcon className="w-10 h-10 text-white" />,
     title: t('features.feature3.title'),
     paragraph: t('features.feature3.paragraph'),
-    btn: t('features.learnMore'),
-    btnLink: "/#",
   },
   {
     id: 4,
     icon: <ShieldCheckIcon className="w-10 h-10 text-white" />,
     title: t('features.feature4.title'),
     paragraph: t('features.feature4.paragraph'),
-    btn: t('features.learnMore'),
-    btnLink: "/#",
   },
   ];
 };

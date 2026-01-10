@@ -21,7 +21,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: typeof window !== 'undefined' ? localStorage.getItem('language') || 'en' : 'en',
+    lng: 'en', // Always start with 'en' to prevent hydration mismatch
     fallbackLng: 'en',
     defaultNS: 'common',
     interpolation: {
@@ -38,5 +38,13 @@ i18n.on('languageChanged', (lng) => {
     localStorage.setItem('language', lng);
   }
 });
+
+// Restore language from localStorage after hydration (client-side only)
+if (typeof window !== 'undefined') {
+  const savedLanguage = localStorage.getItem('language');
+  if (savedLanguage && savedLanguage !== i18n.language) {
+    i18n.changeLanguage(savedLanguage);
+  }
+}
 
 export default i18n;

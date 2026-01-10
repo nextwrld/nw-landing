@@ -9,9 +9,7 @@ export const commonEN = {
     "aboutPage": "About Page",
     "pricingPage": "Pricing Page",
     "blogPage": "Blog Page",
-    "contactPage": "Contact Page",
-    "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "contactPage": "Contact Page"
   },
   "hero": {
     "title": "WELCOME TO THE NEW OPERATIONAL STANDARD",
@@ -43,7 +41,7 @@ export const commonEN = {
     }
   },
   "about": {
-    "title": "Preparing organizations for the world to come.",
+    "title": "Preparing organizations for the Next World.",
     "description": "At Next Wrld, we don't just deliver tools; we transform the operational culture of service businesses. We move from 'doing for doing's sake' to systemic execution.",
     "studyCases": "Case Studies"
   },
@@ -77,20 +75,6 @@ export const commonEN = {
     "filter": "Filter",
     "close": "Close",
     "open": "Open"
-  },
-  "auth": {
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
-    "signOut": "Sign Out",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "forgotPassword": "Forgot Password?",
-    "resetPassword": "Reset Password",
-    "rememberMe": "Remember Me",
-    "alreadyHaveAccount": "Already have an account?",
-    "dontHaveAccount": "Don't have an account?",
-    "createAccount": "Create Account"
   },
   "services": {
     "title": "Clear Offerings",
