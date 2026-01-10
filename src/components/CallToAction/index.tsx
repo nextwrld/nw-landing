@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon, SparklesIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 
 const CallToAction = () => {
   const { t } = useTranslation('common');
@@ -26,7 +26,7 @@ const CallToAction = () => {
             <div className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 p-8 transition-all duration-300 hover:bg-white/10 hover:border-secondary/50 hover:shadow-xl">
               <div className="mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 group-hover:bg-secondary/30 transition-colors duration-300">
-                  <CheckCircleIcon className="w-8 h-8 text-secondary" />
+                  <ArrowPathIcon className="w-8 h-8 text-secondary" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
@@ -41,7 +41,7 @@ const CallToAction = () => {
             <div className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 p-8 transition-all duration-300 hover:bg-white/10 hover:border-secondary/50 hover:shadow-xl">
               <div className="mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 group-hover:bg-secondary/30 transition-colors duration-300">
-                  <CheckCircleIcon className="w-8 h-8 text-secondary" />
+                  <SparklesIcon className="w-8 h-8 text-secondary" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
@@ -56,7 +56,7 @@ const CallToAction = () => {
             <div className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 p-8 transition-all duration-300 hover:bg-white/10 hover:border-secondary/50 hover:shadow-xl">
               <div className="mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 group-hover:bg-secondary/30 transition-colors duration-300">
-                  <CheckCircleIcon className="w-8 h-8 text-secondary" />
+                  <RocketLaunchIcon className="w-8 h-8 text-secondary" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">

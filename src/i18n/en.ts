@@ -98,14 +98,39 @@ export const commonEN = {
     "address": "Address"
   },
   "pricing": {
-    "title": "Pricing Plans",
-    "subtitle": "Choose the plan that's right for you",
-    "monthly": "Monthly",
-    "yearly": "Yearly",
-    "perMonth": "per month",
-    "perYear": "per year",
-    "getStarted": "Get Started",
-    "mostPopular": "Most Popular"
+    "title": "Partnership Model",
+    "subtitle": "Investment Plans",
+    "paragraph": "We choose to work with companies seeking real transformation, not temporary patches.",
+    "plan1": {
+      "name": "Digital Foundation",
+      "type": "Project",
+      "description": "Diagnosis, base architecture design, and main system launch. Ideal for leaving current chaos behind.",
+      "features": [
+        "Complete process diagnosis",
+        "Digital architecture design",
+        "Main system implemented",
+        "Robust automated workflows",
+        "Migration from manual processes",
+        "Team training"
+      ],
+      "cta": "Start Transformation"
+    },
+    "plan2": {
+      "name": "Evolution & Scale",
+      "type": "Retainer",
+      "badge": "Next Wrld Standard",
+      "description": "The Next Wrld standard. Monthly optimization, new AI integrations, strategic support, and updates. Your business never stops.",
+      "features": [
+        "Continuous monthly optimization",
+        "New AI integrations",
+        "Priority strategic support",
+        "Automatic updates",
+        "Proactive monitoring and improvements",
+        "Elite systems department"
+      ],
+      "cta": "Schedule Consultation"
+    },
+    "contactUs": "Contact Us"
   },
 "callToAction": {
     "title": "What Are You Looking For?",

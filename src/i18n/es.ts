@@ -103,14 +103,39 @@ export const commonES = {
     "address": "Dirección"
   },
   "pricing": {
-    "title": "Planes de Precios",
-    "subtitle": "Elige el plan adecuado para ti",
-    "monthly": "Mensual",
-    "yearly": "Anual",
-    "perMonth": "por mes",
-    "perYear": "por año",
-    "getStarted": "Comenzar",
-    "mostPopular": "Más Popular"
+    "title": "Modelo de Sociedad",
+    "subtitle": "Planes de Inversión",
+    "paragraph": "Elegimos trabajar con empresas que buscan transformación real, no parches temporales.",
+    "plan1": {
+      "name": "Cimentación Digital",
+      "type": "Proyecto",
+      "description": "Diagnóstico, diseño de arquitectura base y puesta en marcha del sistema principal. Ideal para salir del desorden actual.",
+      "features": [
+        "Diagnóstico completo de procesos",
+        "Diseño de arquitectura digital",
+        "Sistema principal implementado",
+        "Flujos automatizados robustos",
+        "Migración desde procesos manuales",
+        "Capacitación del equipo"
+      ],
+      "cta": "Iniciar Transformación"
+    },
+    "plan2": {
+      "name": "Evolución & Escala",
+      "type": "Retainer",
+      "badge": "Estándar Next Wrld",
+      "description": "El estándar Next Wrld. Optimización mensual, integración de nuevas IAs, soporte estratégico y actualizaciones. Tu negocio nunca se detiene.",
+      "features": [
+        "Optimización continua mensual",
+        "Integración de nuevas IAs",
+        "Soporte estratégico prioritario",
+        "Actualizaciones automáticas",
+        "Monitoreo y mejoras proactivas",
+        "Departamento de sistemas de élite"
+      ],
+      "cta": "Agendar Consulta"
+    },
+    "contactUs": "Contáctanos"
   },
   "callToAction": {
     "title": "¿Qué Estás Buscando?",
