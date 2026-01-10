@@ -1,0 +1,7 @@
+- Cambiar footer
+- Cambiar contacto
+- Definir los casos de estudio (InmoCRM, Gym Partner, Chat bot con IA)
+- Cambiar barra de navegación
+- Justificar el contenido de las secciones
+- Agregar animaciones para la navegacion entre secciones
+- Configurar envio de mail
