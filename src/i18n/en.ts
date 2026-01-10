@@ -14,33 +14,38 @@ export const commonEN = {
     "signUp": "Sign Up"
   },
   "hero": {
-    "title": "Open-source SaaS Starter Kit and Boilerplate for Next.js",
-    "description": "Next.js SaaS Boilerplate and Starter Kit designed and built for SaaS startups. It comes with all necessary integrations, pages, and components you need to launch a feature-rich SaaS websites.",
-    "downloadNow": "Download Now",
-    "starOnGithub": "Star on Github",
-    "availableFrameworks": "Play is now available for all popular frameworks"
+    "title": "WELCOME TO THE NEW OPERATIONAL STANDARD",
+    "description": "We build the systems that free your organization from operational chaos.",
+    "primaryCTA": "Evolve Your Operation",
+    "secondaryCTA": "Our Method",
+    "subHeadline": "We leave behind manual management and disorder. We design digital architecture with product criteria and strategic AI so your business stops surviving and starts scaling."
   },
   "features": {
-    "title": "Features",
-    "subtitle": "Main Features",
-    "description": "There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.",
+    "title": "The Difference (Criteria vs. Code)",
+    "subtitle": "We're not a software agency. We're your architecture partner.",
+    "description": "We focus on four fundamental pillars that ensure technology drives your business growth.",
     "learnMore": "Learn More",
     "feature1": {
-      "title": "Crafted for SaaS",
-      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+      "title": "Product & Business Criteria",
+      "paragraph": "We're not 'order takers'. Before writing a single line of code, we question and optimize your model to ensure technology serves growth, not the other way around."
     },
     "feature2": {
-      "title": "Modern Design",
-      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+      "title": "AI as Accelerator, Not Fashion",
+      "paragraph": "We implement Artificial Intelligence with one goal: eliminate human friction in repetitive tasks and enhance data-driven decision making."
     },
     "feature3": {
-      "title": "SaaS Starter Kit",
-      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+      "title": "Continuous Evolution Infrastructure",
+      "paragraph": "We create systems that don't expire. We design a scalable digital backbone that allows your company to operate with autonomy and total clarity."
     },
     "feature4": {
-      "title": "All Essential Integrations",
-      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+      "title": "Own Digital Assets",
+      "paragraph": "We stop renting generic software that doesn't adapt to you. We build intellectual property for your company, transforming your internal processes into digital assets that increase your business's real value."
     }
+  },
+  "about": {
+    "title": "Preparing organizations for the world to come.",
+    "description": "At Next Wrld, we don't just deliver tools; we transform the operational culture of service businesses. We move from 'doing for doing's sake' to systemic execution.",
+    "studyCases": "Case Studies"
   },
   "footer": {
     "company": "Company",
@@ -148,7 +153,7 @@ export const commonEN = {
     },
     "contactUs": "Contact Us"
   },
-"callToAction": {
+  "callToAction": {
     "title": "What Are You Looking For?",
     "subtitle": "Get Started Now",
     "bulletPoints": {
