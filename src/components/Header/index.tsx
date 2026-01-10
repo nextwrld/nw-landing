@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import LanguageSelector from "@/components/LanguageSelector";
 
 import menuData from "./menuData";
 
@@ -243,6 +244,11 @@ const Header = () => {
                 </nav>
               </div>
               <div className="hidden items-center justify-end pr-16 sm:flex lg:pr-0">
+                {/* Language Selector */}
+                <div className="mr-3">
+                  <LanguageSelector />
+                </div>
+
                 {/* theme toggler */}
                 <button
                   aria-label="theme toggler"

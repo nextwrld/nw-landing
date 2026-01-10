@@ -1,0 +1,99 @@
+{
+  "menu": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "pricing": "Precios",
+    "contact": "Contacto",
+    "blog": "Blog",
+    "pages": "Páginas",
+    "aboutPage": "Página Acerca de",
+    "pricingPage": "Página de Precios",
+    "blogPage": "Página de Blog",
+    "contactPage": "Página de Contacto",
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse"
+  },
+  "hero": {
+    "title": "Kit de Inicio y Plantilla de código abierto para SaaS en Next.js",
+    "description": "Plantilla y Kit de Inicio de Next.js SaaS diseñado y construido para startups SaaS. Viene con todas las integraciones, páginas y componentes necesarios para lanzar sitios web SaaS con todas las funciones.",
+    "downloadNow": "Descargar Ahora",
+    "starOnGithub": "Estrella en Github",
+    "availableFrameworks": "Play ahora está disponible para todos los frameworks populares"
+  },
+  "footer": {
+    "company": "Empresa",
+    "aboutUs": "Acerca de Nosotros",
+    "careers": "Carreras",
+    "newsAndBlog": "Noticias y Blog",
+    "support": "Soporte",
+    "helpCenter": "Centro de Ayuda",
+    "documentation": "Documentación",
+    "community": "Comunidad",
+    "legal": "Legal",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "allRightsReserved": "Todos los derechos reservados"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "close": "Cerrar",
+    "open": "Abrir"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer Contraseña",
+    "rememberMe": "Recuérdame",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "createAccount": "Crear Cuenta"
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "Ponte en contacto con nosotros",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "message": "Mensaje",
+    "sendMessage": "Enviar Mensaje",
+    "phone": "Teléfono",
+    "address": "Dirección"
+  },
+  "pricing": {
+    "title": "Planes de Precios",
+    "subtitle": "Elige el plan adecuado para ti",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "perMonth": "por mes",
+    "perYear": "por año",
+    "getStarted": "Comenzar",
+    "mostPopular": "Más Popular"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Últimas noticias y artículos",
+    "readMore": "Leer Más",
+    "publishedOn": "Publicado el",
+    "by": "por",
+    "categories": "Categorías",
+    "tags": "Etiquetas",
+    "relatedPosts": "Publicaciones Relacionadas",
+    "share": "Compartir"
+  }
+}
