@@ -20,6 +20,28 @@ export const commonES = {
     "secondaryCTA": "Nuestro Método",
     "subHeadline": "Dejamos atrás la gestión manual y el desorden. Diseñamos arquitectura digital con criterio de producto e IA estratégica para que tu negocio deje de sobrevivir y empiece a escalar."
   },
+  "features": {
+    "title": "El Diferencial (Criterio vs. Código)",
+    "subtitle": "No somos una agencia de software. Somos tu socio de arquitectura.",
+    "description": "Nos enfocamos en cuatro pilares fundamentales que garantizan que la tecnología impulse tu crecimiento empresarial.",
+    "learnMore": "Saber Más",
+    "feature1": {
+      "title": "Criterio de Producto & Negocio",
+      "paragraph": "No somos \"tomadores de pedidos\". Antes de escribir una sola línea de código, cuestionamos y optimizamos tu modelo para asegurar que la tecnología sirva al crecimiento, no al revés."
+    },
+    "feature2": {
+      "title": "IA como Acelerador, no como Moda",
+      "paragraph": "Implementamos Inteligencia Artificial con un solo objetivo: eliminar la fricción humana en tareas repetitivas y potenciar la toma de decisiones basada en datos reales."
+    },
+    "feature3": {
+      "title": "Infraestructura de Evolución Continua",
+      "paragraph": "Creamos sistemas que no caducan. Diseñamos una columna vertebral digital escalable que permite que tu empresa opere con autonomía y claridad total."
+    },
+    "feature4": {
+      "title": "Activos Digitales Propios",
+      "paragraph": "Dejamos de alquilar software genérico que no se adapta a ti. Construimos propiedad intelectual para tu empresa, transformando tus procesos internos en activos digitales que aumentan el valor real de tu negocio."
+    }
+  },
   "footer": {
     "company": "Empresa",
     "aboutUs": "Acerca de Nosotros",

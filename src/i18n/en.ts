@@ -20,6 +20,28 @@ export const commonEN = {
     "starOnGithub": "Star on Github",
     "availableFrameworks": "Play is now available for all popular frameworks"
   },
+  "features": {
+    "title": "Features",
+    "subtitle": "Main Features",
+    "description": "There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.",
+    "learnMore": "Learn More",
+    "feature1": {
+      "title": "Crafted for SaaS",
+      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+    },
+    "feature2": {
+      "title": "Modern Design",
+      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+    },
+    "feature3": {
+      "title": "SaaS Starter Kit",
+      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+    },
+    "feature4": {
+      "title": "All Essential Integrations",
+      "paragraph": "Lorem Ipsum is simply dummy text of the printing and industry."
+    }
+  },
   "footer": {
     "company": "Company",
     "aboutUs": "About Us",
