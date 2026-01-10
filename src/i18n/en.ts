@@ -107,6 +107,25 @@ export const commonEN = {
     "getStarted": "Get Started",
     "mostPopular": "Most Popular"
   },
+"callToAction": {
+    "title": "What Are You Looking For?",
+    "subtitle": "Get Started Now",
+    "bulletPoints": {
+      "bullet1": {
+        "title": "From Chaos to Order:",
+        "description": "We replace fragile manual processes with robust and predictable digital workflows."
+      },
+      "bullet2": {
+        "title": "Technology with Purpose:",
+        "description": "Every AI or software integration has a clear ROI in efficiency or scalability."
+      },
+      "bullet3": {
+        "title": "Evolution Partner:",
+        "description": "We don't disappear after delivery; we become your elite systems department."
+      }
+    },
+    "cta": "Schedule a Consultation"
+  },
   "blog": {
     "title": "Blog",
     "subtitle": "Latest news and articles",

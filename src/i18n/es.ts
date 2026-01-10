@@ -40,7 +40,12 @@ export const commonES = {
     "feature4": {
       "title": "Activos Digitales Propios",
       "paragraph": "Dejamos de alquilar software genérico que no se adapta a ti. Construimos propiedad intelectual para tu empresa, transformando tus procesos internos en activos digitales que aumentan el valor real de tu negocio."
-    }
+    },
+  },
+  "about": {
+    "title": "Preparando organizaciones para el mundo que viene.",
+    "description": "En Next Wrld, no solo entregamos herramientas; transformamos la cultura operativa de negocios de servicios. Pasamos del \"hacer por hacer\" a la ejecución sistémica.",
+    "studyCases": "Casos de Estudio"
   },
   "footer": {
     "company": "Empresa",
@@ -106,6 +111,25 @@ export const commonES = {
     "perYear": "por año",
     "getStarted": "Comenzar",
     "mostPopular": "Más Popular"
+  },
+  "callToAction": {
+    "title": "¿Qué Estás Buscando?",
+    "subtitle": "Comienza Ahora",
+    "bulletPoints": {
+      "bullet1": {
+        "title": "Del Caos al Orden:",
+        "description": "Sustituimos procesos manuales frágiles por flujos digitales robustos y predecibles."
+      },
+      "bullet2": {
+        "title": "Tecnología con Propósito:",
+        "description": "Cada integración de IA o software tiene un ROI claro en eficiencia o capacidad de escala."
+      },
+      "bullet3": {
+        "title": "Socio de Evolución:",
+        "description": "No desaparecemos tras la entrega; nos convertimos en tu departamento de sistemas de élite."
+      }
+    },
+    "cta": "Agenda una Consulta"
   },
   "blog": {
     "title": "Blog",

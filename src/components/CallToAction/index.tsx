@@ -1,32 +1,81 @@
+"use client";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 const CallToAction = () => {
+  const { t } = useTranslation('common');
+
   return (
     <section className="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <div className="relative overflow-hidden">
-          <div className="-mx-4 flex flex-wrap items-stretch">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[570px] text-center">
-                <h2 className="mb-2.5 text-3xl font-bold text-white md:text-[38px] md:leading-[1.44]">
-                  <span>What Are You Looking For?</span>
-                  <span className="text-3xl font-normal md:text-[40px]">
-                    {" "}
-                    Get Started Now{" "}
-                  </span>
-                </h2>
-                <p className="mx-auto mb-6 max-w-[515px] text-base leading-[1.5] text-white">
-                  There are many variations of passages of Lorem Ipsum but the
-                  majority have suffered in some form.
-                </p>
-                <Link
-                  href="/"
-                  className="inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-[#0BB489]"
-                >
-                  Start using Play
-                </Link>
+          {/* Header */}
+          <div className="mx-auto max-w-[700px] text-center mb-12">
+            <h2 className="mb-4 text-3xl font-bold text-white md:text-[38px] md:leading-[1.44]">
+              <span>{t('callToAction.title')}</span>
+              <span className="block text-3xl font-normal md:text-[40px] mt-2">
+                {t('callToAction.subtitle')}
+              </span>
+            </h2>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            {/* Card 1 */}
+            <div className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 p-8 transition-all duration-300 hover:bg-white/10 hover:border-secondary/50 hover:shadow-xl">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 group-hover:bg-secondary/30 transition-colors duration-300">
+                  <CheckCircleIcon className="w-8 h-8 text-secondary" />
+                </div>
               </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                {t('callToAction.bulletPoints.bullet1.title')}
+              </h3>
+              <p className="text-base leading-relaxed text-white/80">
+                {t('callToAction.bulletPoints.bullet1.description')}
+              </p>
             </div>
+
+            {/* Card 2 */}
+            <div className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 p-8 transition-all duration-300 hover:bg-white/10 hover:border-secondary/50 hover:shadow-xl">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 group-hover:bg-secondary/30 transition-colors duration-300">
+                  <CheckCircleIcon className="w-8 h-8 text-secondary" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                {t('callToAction.bulletPoints.bullet2.title')}
+              </h3>
+              <p className="text-base leading-relaxed text-white/80">
+                {t('callToAction.bulletPoints.bullet2.description')}
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 p-8 transition-all duration-300 hover:bg-white/10 hover:border-secondary/50 hover:shadow-xl">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 group-hover:bg-secondary/30 transition-colors duration-300">
+                  <CheckCircleIcon className="w-8 h-8 text-secondary" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                {t('callToAction.bulletPoints.bullet3.title')}
+              </h3>
+              <p className="text-base leading-relaxed text-white/80">
+                {t('callToAction.bulletPoints.bullet3.description')}
+              </p>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="text-center">
+            <Link
+              href="/contact"
+              className="inline-block rounded-lg border border-transparent bg-secondary px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#0BB489] hover:shadow-xl hover:scale-105"
+            >
+              {t('callToAction.cta')}
+            </Link>
           </div>
         </div>
       </div>
