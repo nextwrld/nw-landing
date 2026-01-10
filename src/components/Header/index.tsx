@@ -141,8 +141,18 @@ const Header = () => {
                         <li key={index} className="group relative">
                           {pathUrl !== "/" ? (
                             <Link
-                              onClick={navbarToggleHandler}
-                              scroll={false}
+                              onClick={(e) => {
+                                navbarToggleHandler();
+                                // Handle smooth scroll for anchor links
+                                if (menuItem.path?.startsWith("/#")) {
+                                  e.preventDefault();
+                                  const targetId = menuItem.path.substring(2);
+                                  const element = document.getElementById(targetId);
+                                  if (element) {
+                                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                                  }
+                                }
+                              }}
                               href={menuItem.path}
                               className={`ud-menu-scroll flex py-2 text-base text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary lg:inline-flex lg:px-0 lg:py-6 ${pathUrl === menuItem?.path && "text-primary"
                                 }`}
@@ -151,7 +161,17 @@ const Header = () => {
                             </Link>
                           ) : (
                             <Link
-                              scroll={false}
+                              onClick={(e) => {
+                                // Handle smooth scroll for anchor links
+                                if (menuItem.path?.startsWith("/#")) {
+                                  e.preventDefault();
+                                  const targetId = menuItem.path.substring(2);
+                                  const element = document.getElementById(targetId);
+                                  if (element) {
+                                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                                  }
+                                }
+                              }}
                               href={menuItem.path}
                               className={`ud-menu-scroll flex py-2 text-base lg:inline-flex lg:px-0 lg:py-6 ${sticky
                                 ? "text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary"

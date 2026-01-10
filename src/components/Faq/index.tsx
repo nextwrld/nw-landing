@@ -13,7 +13,7 @@ const Faq = () => {
   const questions = t('faq.questions', { returnObjects: true }) as FaqItem[];
 
   return (
-    <section className="relative z-20 overflow-hidden bg-white pb-8 pt-20 dark:bg-dark lg:pb-[50px] lg:pt-[120px]">
+    <section id="faq" className="relative z-20 overflow-hidden bg-white pb-8 pt-20 dark:bg-dark lg:pb-[50px] lg:pt-[120px]">
       <div className="container">
         <SectionTitle
           subtitle={t('faq.subtitle')}
