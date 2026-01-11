@@ -56,7 +56,7 @@ const Pricing = () => {
             </div>
 
             <Link
-              href="/contact"
+              href="/#contact"
               className="block w-full rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
             >
               {t('pricing.plan1.cta')}
@@ -99,7 +99,7 @@ const Pricing = () => {
             </div>
 
             <Link
-              href="/contact"
+              href="/#contact"
               className="block w-full rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
             >
               {t('pricing.plan2.cta')}
