@@ -197,6 +197,13 @@ export const commonEN = {
     "tags": "Tags",
     "relatedPosts": "Related Posts",
     "share": "Share"
+  },
+  "successCases": {
+    "title": "Success Cases",
+    "subtitle": "Our Projects",
+    "description": "Real solutions for real businesses. See how we've transformed operations.",
+    "readMore": "Read Case Study",
+    "viewAll": "View All Cases"
   }
 };
 

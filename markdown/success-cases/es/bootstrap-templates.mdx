@@ -1,0 +1,184 @@
+---
+title: "InmoCRM · De operaciones manuales a una plataforma PropTech escalable"
+description: "Cómo diseñamos una plataforma inmobiliaria modular que unifica operaciones, automatiza procesos críticos e integra IA sin complejidad."
+date: "2024-06-12"
+author: "Next Wrld"
+category: "Case Study"
+tags: ["PropTech", "Arquitectura", "Microservicios", "IA", "SaaS"]
+---
+
+## Contexto del proyecto
+
+El sector inmobiliario en Latinoamérica presenta una **adopción tecnológica fragmentada**.
+
+La mayoría de las inmobiliarias operan con procesos manuales, herramientas aisladas y una fuerte dependencia de portales externos para la captación de clientes.
+
+El desafío no era construir otro CRM genérico, sino **diseñar una plataforma PropTech capaz de unificar operaciones, automatizar tareas críticas y escalar con el negocio**, sin aumentar la complejidad operativa.
+
+Así nace **InmoCRM**: una plataforma inteligente orientada a agentes y pequeñas inmobiliarias que necesitan eficiencia, visibilidad y control, sin infraestructura compleja.
+
+---
+
+## El problema real
+
+Detrás de la baja eficiencia operativa se identificaron problemas estructurales:
+
+- Publicación manual de propiedades en múltiples canales  
+- Duplicación de tareas administrativas  
+- Falta de métricas centralizadas en tiempo real  
+- CRMs genéricos no adaptados al dominio inmobiliario  
+- Escasa utilización de datos para la toma de decisiones  
+- Arquitecturas rígidas y difíciles de evolucionar  
+- Integraciones costosas o inexistentes con IA  
+
+El problema no era tecnológico, sino **sistémico**:  
+el negocio había crecido sin una plataforma preparada para acompañarlo.
+
+---
+
+## El enfoque de Next Wrld
+
+Desde Next Wrld abordamos el proyecto con una premisa clara:
+
+> **La automatización solo funciona cuando está sostenida por una arquitectura sólida.**
+
+Nuestro enfoque se basó en tres principios clave.
+
+### Pensar en dominios, no en features
+
+Cada parte del negocio inmobiliario se modeló como un dominio independiente:  
+usuarios, propiedades, publicaciones, métricas e inteligencia artificial.
+
+### Arquitectura modular desde el inicio
+
+Diseñamos una arquitectura basada en microservicios y eventos, preparada para escalar horizontalmente y evolucionar sin reescrituras costosas.
+
+### IA como componente desacoplado
+
+La inteligencia artificial debía ser un **módulo intercambiable**, no un parche ni una dependencia rígida.
+
+---
+
+## Diseño de la solución
+
+InmoCRM se diseñó como una **plataforma distribuida**, compuesta por servicios especializados que colaboran entre sí.
+
+Decisiones técnicas clave:
+
+- Microservicios desacoplados y orientados a dominio (DDD)  
+- Comunicación asíncrona mediante eventos  
+- Separación entre datos transaccionales y motores de búsqueda  
+- Cache en memoria para métricas en tiempo real  
+- IA aplicada a generación de contenido y recomendaciones  
+- Preparación para despliegue híbrido (cloud / on-premise)  
+
+El resultado fue una base técnica preparada para crecer sin comprometer estabilidad ni mantenibilidad.
+
+---
+
+## Arquitectura del sistema
+
+<img
+  src="https://assets.bytebytego.com/diagrams/0396-typical-microservice-architecture.png"
+  alt="Arquitectura de microservicios"
+/>
+
+La plataforma se compone de:
+
+- **API Gateway** como punto único de entrada  
+- Microservicios de dominio independientes  
+- Base de datos relacional para datos críticos  
+- Motor de búsqueda especializado para consultas complejas  
+- Cache en memoria para métricas en tiempo real  
+- Bus de mensajería para desacoplar procesos  
+- Orquestación con contenedores para escalabilidad  
+
+Este diseño permite:
+
+- Escalar solo los servicios necesarios  
+- Evitar cuellos de botella  
+- Introducir nuevos módulos sin afectar los existentes  
+
+---
+
+## Inteligencia artificial aplicada con criterio
+
+Uno de los diferenciales clave fue la integración de IA **de forma extensible y controlada**.
+
+- Generación automática de descripciones de propiedades  
+- Contexto estandarizado mediante Model Context Protocol (MCP)  
+- Strategy Pattern para intercambiar proveedores de IA  
+- Control de costos mediante rate limiting  
+- IA como asistente, no como caja negra  
+
+Esto permitió integrar IA generativa sin atar el sistema a un único proveedor ni comprometer el dominio del negocio.
+
+---
+
+## Implementación
+
+La implementación priorizó:
+
+- Separación estricta de responsabilidades  
+- Comunicación basada en eventos  
+- Refactorización segura y progresiva  
+- Observabilidad y tolerancia a fallos  
+- Preparación para CI/CD y despliegues automatizados  
+
+Cada componente fue diseñado para evolucionar de forma independiente, reduciendo riesgos técnicos a largo plazo.
+
+---
+
+## Resultados obtenidos
+
+El impacto del sistema se refleja en:
+
+- Reducción significativa de tareas manuales  
+- Publicación de propiedades en múltiples canales en minutos  
+- Métricas centralizadas en tiempo real  
+- Mayor control operativo para agentes inmobiliarios  
+- Arquitectura lista para escalar sin rediseños  
+- Base sólida para incorporar nuevos modelos de IA  
+
+Más allá de las métricas, el mayor resultado fue **convertir una operación manual en un sistema digital inteligente**.
+
+---
+
+## Aprendizajes clave
+
+Este proyecto consolidó aprendizajes fundamentales que aplicamos en Next Wrld:
+
+- La arquitectura define la velocidad futura del negocio  
+- IA sin diseño estructural genera dependencia, no valor  
+- Los sistemas deben diseñarse para evolucionar, no solo funcionar  
+- La automatización real comienza en el backend  
+
+---
+
+## Valor estratégico para Next Wrld
+
+InmoCRM demuestra cómo en Next Wrld:
+
+- Diseñamos plataformas orientadas a dominio  
+- Integramos IA con criterio de ingeniería  
+- Construimos sistemas preparados para escalar  
+- Transformamos procesos manuales en sistemas digitales inteligentes  
+
+No desarrollamos software por encargo.  
+**Diseñamos sistemas que acompañan la evolución del negocio.**
+
+---
+
+## ¿Tu industria también opera con procesos fragmentados?
+
+En Next Wrld ayudamos a convertir operaciones complejas en plataformas digitales escalables.
+
+**Hablemos de tu sistema.**
+
+---
+
+<small>
+Este caso de estudio se basa en el Trabajo Final de Grado  
+<strong>“InmoCRM: Plataforma Inteligente para Gestión y Automatización Inmobiliaria”</strong>,  
+desarrollado como investigación aplicada en ingeniería de software.
+</small>

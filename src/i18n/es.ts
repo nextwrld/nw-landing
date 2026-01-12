@@ -197,5 +197,12 @@ export const commonES = {
     "tags": "Etiquetas",
     "relatedPosts": "Publicaciones Relacionadas",
     "share": "Compartir"
+  },
+  "successCases": {
+    "title": "Casos de Éxito",
+    "subtitle": "Nuestros Proyectos",
+    "description": "Soluciones reales para negocios reales. Conocé cómo transformamos operaciones.",
+    "readMore": "Ver Caso Completo",
+    "viewAll": "Ver Todos los Casos"
   }
 };

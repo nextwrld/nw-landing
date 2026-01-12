@@ -42,6 +42,27 @@ const Header = () => {
 
   const { theme, setTheme } = useTheme();
 
+  // Handle navigation to anchor links from different pages
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    // Check if it's an anchor link (starts with /#)
+    if (path.startsWith("/#")) {
+      const sectionId = path.substring(2); // Remove /#
+
+      // If we're not on the home page, navigate to home first
+      if (pathUrl !== "/") {
+        e.preventDefault();
+        window.location.href = path;
+      } else {
+        // We're on home page, just scroll to section
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
+
   return (
     <>
       <header
@@ -145,12 +166,9 @@ const Header = () => {
                                 navbarToggleHandler();
                                 // Handle smooth scroll for anchor links
                                 if (menuItem.path?.startsWith("/#")) {
-                                  e.preventDefault();
-                                  const targetId = menuItem.path.substring(2);
-                                  const element = document.getElementById(targetId);
-                                  if (element) {
-                                    element.scrollIntoView({ behavior: "smooth", block: "start" });
-                                  }
+                                  // Navigate to home page with anchor
+                                  // The browser will handle scrolling automatically
+                                  return; // Let the default link behavior happen
                                 }
                               }}
                               href={menuItem.path}
