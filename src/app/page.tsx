@@ -22,7 +22,7 @@ export default function Home() {
   const casesEN = getAllSuccessCases("en", ["title", "date", "excerpt", "coverImage", "slug"]);
 
   return (
-    <main>
+    <main suppressHydrationWarning>
       <ScrollUp />
       <Hero />
       <Features />

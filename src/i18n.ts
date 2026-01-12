@@ -21,8 +21,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en', // Always start with 'en' to prevent hydration mismatch
-    fallbackLng: 'en',
+    lng: 'es', // Default to Spanish (primary site language)
+    fallbackLng: 'es',
     defaultNS: 'common',
     interpolation: {
       escapeValue: false, // React ya hace el escape
