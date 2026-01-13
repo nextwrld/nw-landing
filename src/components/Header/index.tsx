@@ -86,36 +86,33 @@ const Header = () => {
                     <Image
                       src={`/images/logo/logo.svg`}
                       alt="logo"
-                      width={240}
+                      width={120}
                       height={30}
-                      className="header-logo w-full dark:hidden"
+                      className="header-logo dark:hidden"
                     />
                     <Image
-                      src={`/images/logo/logo-white.svg`}
+                      src={`/images/logo/blanco.svg`}
                       alt="logo"
-                      width={240}
-                      height={30}
-                      className="header-logo hidden w-full dark:block"
+                      width={60}
+                      height={15}
+                      className="header-logo hidden dark:block w-[60px] h-auto"
                     />
                   </>
                 ) : (
                   <>
                     <Image
-                      src={`${sticky
-                        ? "/images/logo/logo.svg"
-                        : "/images/logo/logo-white.svg"
-                        }`}
+                      src={`${sticky ? "/images/logo/logo.svg" : "/images/logo/blanco.svg"}`}
                       alt="logo"
-                      width={140}
-                      height={30}
-                      className="header-logo w-full dark:hidden"
+                      width={sticky ? 140 : 70}
+                      height={sticky ? 30 : 15}
+                      className="header-logo dark:hidden"
                     />
                     <Image
-                      src={"/images/logo/logo-white.svg"}
+                      src={"/images/logo/blanco.svg"}
                       alt="logo"
-                      width={140}
-                      height={30}
-                      className="header-logo hidden w-full dark:block"
+                      width={70}
+                      height={15}
+                      className="header-logo hidden dark:block w-[70px] h-auto"
                     />
                   </>
                 )}
