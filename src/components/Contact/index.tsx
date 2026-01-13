@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
+  const { t } = useTranslation('common');
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -43,7 +45,7 @@ const Contact = () => {
         console.log("✅ Form submitted successfully");
         setSubmitStatus({
           type: "success",
-          message: "Message sent successfully! We'll get back to you soon.",
+          message: t("contact.successMessage", "¡Gracias por contactarnos! Te responderemos pronto."),
         });
         setFormData({ fullName: "", email: "", phone: "", message: "" });
       } else {
@@ -57,7 +59,7 @@ const Contact = () => {
       console.error("❌ Network error:", error);
       setSubmitStatus({
         type: "error",
-        message: "Network error. Please check your connection and try again.",
+        message: t("contact.errorMessage", "Error de red. Comprueba tu conexión y vuelve a intentarlo."),
       });
     } finally {
       setIsSubmitting(false);
@@ -74,10 +76,10 @@ const Contact = () => {
             <div className="ud-contact-content-wrapper">
               <div className="ud-contact-title mb-12 lg:mb-[150px]">
                 <span className="mb-6 block text-base font-medium text-dark dark:text-white">
-                  Contacto
+                  {t('contact.subtitle', 'Ponte en contacto con nosotros')}
                 </span>
                 <h2 className="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white">
-                  Hablemos de tu problema.
+                  {t('contact.title', 'Contáctanos')}
                 </h2>
               </div>
               <div className="mb-12 flex flex-wrap justify-between lg:mb-0">
@@ -95,11 +97,15 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                      Our Location
+                      {t('contact.location', 'Your location')}
                     </h3>
-                    <p className="text-base text-body-color dark:text-dark-6">
-                      401 Broadway, 24th Floor, Orchard Cloud View, London
-                    </p>
+                    <div className="text-base text-body-color dark:text-dark-6">
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>Caracas, Venezuela</li>
+                        <li>Valencia, Venezuela.</li>
+                        <li>Buenos Aires, Argentina.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div className="mb-8 flex w-[330px] max-w-full">
@@ -115,13 +121,13 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                      How Can We Help?
+                      {t('contact.email', 'Correo Electrónico')}
                     </h3>
                     <p className="text-base text-body-color dark:text-dark-6">
-                      info@yourdomain.com
+                      info@nextwrld.com
                     </p>
                     <p className="mt-1 text-base text-body-color dark:text-dark-6">
-                      contact@yourdomain.com
+                      contact@nextwrld.com
                     </p>
                   </div>
                 </div>
@@ -135,7 +141,7 @@ const Contact = () => {
               "
             >
               <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
-                Send us a Message
+                {t('contact.sendMessage', 'Enviar Mensaje')}
               </h3>
 
               {submitStatus.type && (
@@ -155,7 +161,7 @@ const Contact = () => {
                     htmlFor="fullName"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    Full Name*
+                    {t('contact.name', 'Nombre')}*
                   </label>
                   <input
                     type="text"
@@ -163,7 +169,7 @@ const Contact = () => {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    placeholder="Adam Gelius"
+                    placeholder= {t('contact.name', 'Nombre')}
                     className="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   />
                 </div>
@@ -172,7 +178,7 @@ const Contact = () => {
                     htmlFor="email"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    Email*
+                    {t('contact.email', 'Correo Electrónico')}*
                   </label>
                   <input
                     type="email"
@@ -180,7 +186,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    placeholder="example@yourmail.com"
+                    placeholder="example@nextwrld.com"
                     className="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   />
                 </div>
@@ -189,7 +195,7 @@ const Contact = () => {
                     htmlFor="phone"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    Phone
+                    {t('contact.phone', 'Teléfono')}
                   </label>
                   <input
                     type="text"
@@ -205,7 +211,7 @@ const Contact = () => {
                     htmlFor="message"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    Message*
+                    {t('contact.message', 'Mensaje')}*
                   </label>
                   <textarea
                     name="message"
@@ -213,7 +219,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={4}
-                    placeholder="type your message here"
+                    placeholder={t("contact.placeholder", "Escribe tu mensaje aquí")}
                     className="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   ></textarea>
                 </div>
@@ -223,7 +229,7 @@ const Contact = () => {
                     disabled={isSubmitting}
                     className="inline-flex items-center justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Sending..." : "Send"}
+                    {isSubmitting ? t("contact.sending", "Enviando...") : t("contact.send", "Enviar")}
                   </button>
                 </div>
               </form>

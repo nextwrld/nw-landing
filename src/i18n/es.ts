@@ -58,7 +58,11 @@ export const commonES = {
     "legal": "Legal",
     "privacyPolicy": "Política de Privacidad",
     "termsOfService": "Términos de Servicio",
-    "allRightsReserved": "Todos los derechos reservados"
+    "allRightsReserved": "Todos los derechos reservados",
+    "privacy_policy": "Política de Privacidad",
+    "legal_notice": "Aviso Legal",
+    "terms_of_service": "Términos de Servicio",
+    "frase": "El software es un gran arte; siempre se puede mejorar."
   },
   "common": {
     "loading": "Cargando...",
@@ -101,8 +105,14 @@ export const commonES = {
     "message": "Mensaje",
     "sendMessage": "Enviar Mensaje",
     "phone": "Teléfono",
-    "address": "Dirección"
+    "address": "Dirección",
+    "location": "Nuestra ubicación",
+    "sending": "Enviando...",
+    "successMessage": "¡Gracias por contactarnos! Te responderemos pronto.",
+    "errorMessage": "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.",
+    "send": "Enviar"
   },
+  
   "pricing": {
     "title": "Modelo de Sociedad",
     "subtitle": "Planes de Inversión",
@@ -205,5 +215,5 @@ export const commonES = {
     "description": "Soluciones reales para negocios reales. Conocé cómo transformamos operaciones.",
     "readMore": "Ver Caso Completo",
     "viewAll": "Ver Todos los Casos"
-  }
+  },
 };

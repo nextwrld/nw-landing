@@ -99,8 +99,15 @@ export const commonEN = {
     "email": "Email",
     "message": "Message",
     "sendMessage": "Send Message",
+    "placeholder": "Type your message here",
     "phone": "Phone",
-    "address": "Address"
+    "address": "Address",
+    "location": "Our Location",
+    "sending": "Sending...",
+    "send": "Send",
+    "successMessage": "Thank you for reaching out! We will get back to you soon.",
+    "errorMessage": "There was an error sending your message. Please try again.",
+    
   },
   "pricing": {
     "title": "Partnership Model",
