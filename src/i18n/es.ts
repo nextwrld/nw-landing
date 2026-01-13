@@ -2,6 +2,8 @@ export const commonES = {
   "menu": {
     "home": "Inicio",
     "about": "Acerca de",
+    "services": "Servicios",
+    "successCases": "Casos de Éxito",
     "features": "Quienes somos",
     "pricing": "Precios",
     "contact": "Contacto",

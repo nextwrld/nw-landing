@@ -9,7 +9,10 @@ export const commonEN = {
     "aboutPage": "About Page",
     "pricingPage": "Pricing Page",
     "blogPage": "Blog Page",
-    "contactPage": "Contact Page"
+    "contactPage": "Contact Page",
+    "services": "Services",
+    "successCases": "Success Cases",
+    "faq": "FAQs",
   },
   "hero": {
     "title": "WELCOME TO THE NEW OPERATIONAL STANDARD",

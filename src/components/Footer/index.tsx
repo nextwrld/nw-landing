@@ -12,22 +12,22 @@ const Footer = () => {
       data-wow-delay=".15s"
     >
       <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
-            <div className="mb-10 w-full">
+          <div className="-mx-4 flex flex-wrap">
+            <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 mx-auto">
+            <div className="mb-10 w-full text-center">
               <Link href="/" className="mb-6 inline-block max-w-[160px]">
                 <Image
-                  src="/images/logo/logo-white.svg"
+                  src="/images/logo/blanco.svg"
                   alt="logo"
-                  width={140}
-                  height={30}
-                  className="max-w-full"
+                  width={90}
+                  height={20}
+                  className="max-w-full w-[70px] h-auto mx-auto"
                 />
               </Link>
-              <p className="mb-8 max-w-[270px] text-base text-gray-7">
+              <p className="mb-8 max-w-[270px] text-base text-gray-7 mx-auto text-center">
                 {t('footer.frase', 'Software is a great art; it can always be improved.')} &copy; {new Date().getFullYear()} Nextwrld
               </p>
-              <div className="-mx-3 flex items-center">
+              <div className="-mx-3 flex items-center justify-center">
                 <Link
                   aria-label="social link"
                   href="#"
