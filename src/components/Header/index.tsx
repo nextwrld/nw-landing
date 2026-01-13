@@ -75,11 +75,10 @@ const Header = () => {
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <div className="w-60 max-w-full px-4">
+            <div className="w-auto max-w-full px-4">
               <Link
                 href="/"
-                className={`navbar-logo block w-full ${sticky ? "py-2" : "py-5"
-                  } `}
+                className={`navbar-logo ${sticky ? "py-2" : "py-5"} inline-flex items-center whitespace-nowrap`}
               >
                 {pathUrl !== "/" ? (
                   <>
@@ -116,6 +115,17 @@ const Header = () => {
                     />
                   </>
                 )}
+                <span
+                  className={`ml-3 text-lg font-semibold tracking-wide ${
+                    pathUrl !== "/"
+                      ? "text-dark dark:text-white"
+                      : sticky
+                        ? "text-dark dark:text-white"
+                        : "text-white"
+                  }`}
+                >
+                  NEXT WRLD
+                </span>
               </Link>
             </div>
             <div className="flex w-full items-center justify-between px-4">

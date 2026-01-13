@@ -13,6 +13,7 @@ export const commonES = {
     "pricingPage": "Página de Precios",
     "blogPage": "Página de Blog",
     "contactPage": "Página de Contacto",
+    "faq": "FAQs",
   },
   "hero": {
     "title": "BIENVENIDO AL NUEVO ESTÁNDAR OPERATIVO",
@@ -64,7 +65,8 @@ export const commonES = {
     "privacy_policy": "Política de Privacidad",
     "legal_notice": "Aviso Legal",
     "terms_of_service": "Términos de Servicio",
-    "frase": "La evolución no es un evento. Es un sistema en movimiento."
+    "frase": "La evolución no es un evento. Es un sistema en movimiento.",
+    "developedBy": "Desarrollado por",
   },
   "common": {
     "loading": "Cargando...",
