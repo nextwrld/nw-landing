@@ -12,7 +12,7 @@ export const commonES = {
     "aboutPage": "Página Acerca de",
     "pricingPage": "Página de Precios",
     "blogPage": "Página de Blog",
-    "contactPage": "Página de Contacto"
+    "contactPage": "Página de Contacto",
   },
   "hero": {
     "title": "BIENVENIDO AL NUEVO ESTÁNDAR OPERATIVO",
@@ -64,7 +64,7 @@ export const commonES = {
     "privacy_policy": "Política de Privacidad",
     "legal_notice": "Aviso Legal",
     "terms_of_service": "Términos de Servicio",
-    "frase": "El software es un gran arte; siempre se puede mejorar."
+    "frase": "La evolución no es un evento. Es un sistema en movimiento."
   },
   "common": {
     "loading": "Cargando...",
@@ -118,6 +118,7 @@ export const commonES = {
   "pricing": {
     "title": "Modelo de Sociedad",
     "subtitle": "Planes de Inversión",
+    "footerNote": "¿Tienes un proyecto específico en mente?",
     "paragraph": "Elegimos trabajar con empresas que buscan transformación real, no parches temporales.",
     "plan1": {
       "name": "Cimentación Digital",

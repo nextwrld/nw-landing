@@ -99,7 +99,9 @@ const Pricing = () => {
             </div>
 
             <Link
-              href="/#contact"
+              href="https://calendar.app.google/JQnkVUqK3FF5VSRU6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-full rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
             >
               {t('pricing.plan2.cta')}
@@ -110,8 +112,8 @@ const Pricing = () => {
         {/* Footer Note */}
         <div className="mt-12 text-center">
           <p className="text-base text-body-color dark:text-dark-6">
-            ¿Tienes un proyecto específico en mente?{" "}
-            <Link href="/contact" className="font-semibold text-primary hover:underline">
+            {t('pricing.footerNote', 'Tienes un proyecto específico en mente?')}{' '}
+            <Link href="/#contact" className="font-semibold text-primary hover:underline">
               {t('pricing.contactUs')}
             </Link>
           </p>

@@ -102,8 +102,8 @@ const Contact = () => {
                     <div className="text-base text-body-color dark:text-dark-6">
                       <ul className="list-disc pl-5 space-y-1">
                         <li>Caracas, Venezuela</li>
-                        <li>Valencia, Venezuela.</li>
-                        <li>Buenos Aires, Argentina.</li>
+                        <li>Valencia, Venezuela</li>
+                        <li>Buenos Aires, Argentina</li>
                       </ul>
                     </div>
                   </div>
