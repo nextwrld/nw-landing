@@ -2,6 +2,7 @@ export const commonES = {
   "menu": {
     "home": "Inicio",
     "about": "Acerca de",
+    "features": "Quienes somos",
     "pricing": "Precios",
     "contact": "Contacto",
     "blog": "Blog",
@@ -41,7 +42,7 @@ export const commonES = {
     },
   },
   "about": {
-    "title": "Preparando organizaciones para el mundo que viene.",
+    "title": "El futuro pertenece a aquellos que se preparan hoy",
     "description": "En Next Wrld, no solo entregamos herramientas; transformamos la cultura operativa de negocios de servicios. Pasamos del \"hacer por hacer\" a la ejecución sistémica.",
     "studyCases": "Casos de Estudio"
   },
@@ -157,25 +158,25 @@ export const commonES = {
     "cta": "Agenda una Consulta"
   },
   "faq": {
-    "title": "Derribando Objeciones",
+    "title": "Preguntas Frecuentes",
     "subtitle": "FAQ",
-    "paragraph": "Respondemos las preguntas más comunes sobre nuestro modelo de trabajo.",
+    "paragraph": "Todo lo que necesitas saber para llevar tu negocio al próximo nivel",
     "questions": [
       {
-        "question": "¿En qué se diferencian de una Software Factory?",
-        "answer": "En que vendemos criterio y orden operativo. No somos tomadores de pedidos; somos consultores estratégicos que diseñan el sistema que tu negocio realmente necesita para escalar, no solo el que pides."
+        "question": "¿Cuánto tiempo se tarda en crear un sitio?",
+        "answer": "Los tiempos dependen del alcance y la complejidad de la tarea que tengamos por delante. De media, nuestros clientes reciben una web operativa en 2-3 meses después del comienzo de la cooperación. Los grandes portales pueden tardar más de seis meses y un sitio pequeño puede estar listo en un mes"
       },
       {
-        "question": "¿Cómo integran la IA en mis procesos?",
-        "answer": "Solo donde genera impacto real. La usamos para acelerar operaciones o mejorar la toma de decisiones, integrándola silenciosamente en tu flujo de trabajo para que la tecnología trabaje para ti, y no al revés."
+        "question": "¿Y si no me gusta el desarrollo que me proponen?",
+        "answer": "Creamos un diseño basado en los gustos del cliente junto con los consejos de nuestros diseñadores y requerimientos de los usuarios. En todo caso damos la oportunidad de hacer dos cambios y correcciones sobre el diseño creado."
       },
       {
-        "question": "¿Mi empresa es demasiado 'analógica' para esto?",
-        "answer": "Al contrario. Las organizaciones con procesos manuales son las que ven el salto de rentabilidad más grande al implementar nuestros sistemas de evolución."
+        "question": "¿Proporcionamos soporte después del desarrollo?",
+        "answer": "Nos encargamos del soporte, rendimiento y mantenimiento de la web. Controlamos en todo momento la capacidad de la web, realizamos copias de seguridad con regularidad y aplicamos las mejoras oportunas, etc. Ofrecemos cuotas adaptadas a cada caso, para que sólo te tengas que preocupar solo de tu negocio y de vender cada vez más."
       },
       {
-        "question": "¿Qué tipo de empresas pueden trabajar con Next Wrld?",
-        "answer": "Nos especializamos en organizaciones de servicios que han alcanzado un techo operativo. Si tu negocio depende de procesos manuales, hojas de cálculo infinitas y el conocimiento reside solo en la cabeza de las personas, somos tu solución."
+        "question": "¿Realmente necesito Inteligencia Artificial en mi empresa?",
+        "answer": "No la usamos por moda, sino para ahorrarte trabajo. Nosotros instalamos esa asistencia inteligente dentro de tu sistema para que tú y tu equipo se enfoquen en lo que realmente genera dinero."
       },
       {
         "question": "¿Tengo que cambiar todo mi software actual?",

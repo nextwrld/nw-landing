@@ -1,15 +1,18 @@
 import { Menu } from "@/types/menu";
 
-const menuData: Menu[] = [
+const buildMenuData = (
+  t: (key: string, options?: any) => string
+): Menu[] => [
+  
   {
     id: 1,
-    title: "Home",
+    title: t("menu.home"),
     path: "/",
     newTab: false,
   },
   {
     id: 2,
-    title: "Features",
+    title: t("menu.features"),
     path: "/#features",
     newTab: false,
   },
@@ -50,4 +53,7 @@ const menuData: Menu[] = [
     newTab: false,
   },
 ];
-export default menuData;
+
+export default buildMenuData;
+
+

@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import LanguageSelector from "@/components/LanguageSelector";
 
-import menuData from "./menuData";
+import buildMenuData from "./menuData";
 
 const Header = () => {
-
+  const { t } = useTranslation('common');
+  const menuData = buildMenuData(t);
   const pathUrl = usePathname();
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
