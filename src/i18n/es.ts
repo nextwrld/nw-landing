@@ -1,4 +1,10 @@
 export const commonES = {
+  "seo": {
+    "home": {
+      "title": "Next Wrld – Preparando organizaciones para el Próximo Mundo",
+      "description": "Construimos los sistemas que liberan a tu organización del caos operativo. Arquitectura digital con criterio de producto e IA estratégica."
+    }
+  },
   "menu": {
     "home": "Inicio",
     "about": "Acerca de",

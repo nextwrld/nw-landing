@@ -1,4 +1,10 @@
 export const commonEN = {
+  "seo": {
+    "home": {
+      "title": "Next Wrld – Preparing organizations for the Next World",
+      "description": "We build the systems that free your organization from operational chaos. Digital architecture with product criteria and strategic AI."
+    }
+  },
   "menu": {
     "home": "Home",
     "about": "About",

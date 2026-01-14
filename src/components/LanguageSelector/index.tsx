@@ -13,6 +13,9 @@ const LanguageSelector = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    try {
+      document.cookie = `language=${lng}; Path=/; Max-Age=31536000`;
+    } catch {}
   };
 
   if (!mounted) {

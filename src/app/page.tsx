@@ -10,11 +10,51 @@ import Hero from "@/components/Hero";
 import Pricing from "@/components/Pricing";
 import { getAllSuccessCases } from "@/utils/markdown";
 import { Metadata } from "next";
+import { cookies, headers } from "next/headers";
+import { commonEN } from "@/i18n/en";
+import { commonES } from "@/i18n/es";
 
-export const metadata: Metadata = {
-  title: "Next Wrld - Preparing organizations for the Next World",
-  description: "We build the systems that free your organization from operational chaos. Digital architecture with product criteria and strategic AI.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // Prefer language cookie; fallback to Accept-Language
+  const c = cookies();
+  let cookieLang: string | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (typeof (c as any).get === "function") {
+    // @ts-ignore
+    cookieLang = (c as any).get("language")?.value;
+  } else {
+    const hForCookie = headers();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const cookieHeader = (typeof (hForCookie as any).get === "function")
+      // @ts-ignore
+      ? (hForCookie as any).get("cookie")
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      : (hForCookie as any)["cookie"];
+    if (cookieHeader) {
+      const match = String(cookieHeader).match(/(?:^|;\s*)language=([^;]+)/);
+      if (match) cookieLang = decodeURIComponent(match[1]);
+    }
+  }
+  if (cookieLang === "en" || cookieLang === "es") {
+    const seo = cookieLang === "en" ? commonEN.seo.home : commonES.seo.home;
+    return { title: seo.title, description: seo.description };
+  }
+
+  const h = headers();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const acceptRaw = (typeof (h as any).get === "function"
+    ? (h as any).get("accept-language")
+    : (h as any)["accept-language"]) as string | undefined;
+  const accept = acceptRaw || "es";
+  const isEnglish = /(^|,\s*)en(\b|-)/i.test(accept);
+
+  const seo = isEnglish ? commonEN.seo.home : commonES.seo.home;
+
+  return {
+    title: seo.title,
+    description: seo.description,
+  };
+}
 
 export default function Home() {
   // Load success cases for default locale (Spanish)
