@@ -1,5 +1,5 @@
 import { SuccessCase } from "@/types/success-case";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,7 +23,12 @@ const SingleSuccessCase = ({ successCase }: { successCase: SuccessCase }) => {
       )}
       <div>
         <span className="mb-5 inline-block rounded bg-primary px-4 py-1 text-center text-xs font-semibold leading-loose text-white">
-          {format(new Date(date), "dd MMM yyyy")}
+          {(() => {
+            const parsed = typeof date === "string" ? parseISO(date) : new Date(date as unknown as string);
+            return parsed instanceof Date && !isNaN(parsed.getTime())
+              ? format(parsed, "dd MMM yyyy")
+              : "";
+          })()}
         </span>
         <h3>
           <Link

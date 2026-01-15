@@ -16,31 +16,15 @@ import { commonES } from "@/i18n/es";
 
 export async function generateMetadata(): Promise<Metadata> {
   // Prefer language cookie; fallback to Accept-Language
-  const c = cookies();
-  let cookieLang: string | undefined;
-  if (typeof (c as any).get === "function") {
-    // @ts-ignore
-    cookieLang = (c as any).get("language")?.value;
-  } else {
-    const hForCookie = headers();
-    const cookieHeader = (typeof (hForCookie as any).get === "function")
-      // @ts-ignore
-      ? (hForCookie as any).get("cookie")
-      : (hForCookie as any)["cookie"];
-    if (cookieHeader) {
-      const match = String(cookieHeader).match(/(?:^|;\s*)language=([^;]+)/);
-      if (match) cookieLang = decodeURIComponent(match[1]);
-    }
-  }
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get("language")?.value;
   if (cookieLang === "en" || cookieLang === "es") {
     const seo = cookieLang === "en" ? commonEN.seo.home : commonES.seo.home;
     return { title: seo.title, description: seo.description };
   }
 
-  const h = headers();
-  const acceptRaw = (typeof (h as any).get === "function"
-    ? (h as any).get("accept-language")
-    : (h as any)["accept-language"]) as string | undefined;
+  const h = await headers();
+  const acceptRaw = h.get("accept-language") || undefined;
   const accept = acceptRaw || "es";
   const isEnglish = /(^|,\s*)en(\b|-)/i.test(accept);
 
