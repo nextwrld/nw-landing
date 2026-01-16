@@ -226,5 +226,109 @@ export const commonEN = {
     "description": "Real solutions for real businesses. Discover how we transform operations.",
     "readMore": "View Full Case",
     "viewAll": "View All Cases"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: 01/15/2026",
+    "intro": "At Next Wrld, we take the privacy and protection of your personal data very seriously. This policy explains what information we collect, how we use it, and what your rights are.",
+    "dataCollectedTitle": "Data we collect",
+    "dataCollected": [
+      "Contact data: name, email, phone.",
+      "Usage data: pages visited, session duration, clicks, and technical metrics (IP, device type, browser).",
+      "Information you provide via forms (e.g., sales inquiries or support)."
+    ],
+    "usageTitle": "How we use your data",
+    "usage": [
+      "Respond to inquiries and provide support.",
+      "Improve site content and performance.",
+      "Send relevant communications if you opt in.",
+      "Comply with legal and security obligations."
+    ],
+    "cookiesTitle": "Cookies and similar technologies",
+    "cookies": "We use cookies to remember preferences, analyze traffic, and improve your experience. You can manage or disable cookies in your browser settings.",
+    "legalBasisTitle": "Legal basis",
+    "legalBasis": "We process your data based on consent, contract performance, legitimate interests, and applicable legal obligations.",
+    "sharingTitle": "Data sharing with third parties",
+    "sharing": "We do not sell your data. We may share information with providers that help operate the site (e.g., hosting, analytics), always under data protection agreements.",
+    "retentionTitle": "Data retention",
+    "retention": "We retain your data only for as long as necessary for the purposes described and in accordance with legal obligations.",
+    "rightsTitle": "Your rights",
+    "rights": [
+      "Access, correct, or delete your data.",
+      "Withdraw consent at any time.",
+      "Object to processing or request restrictions.",
+      "File a complaint with the supervisory authority."
+    ],
+    "securityTitle": "Security",
+    "security": "We implement technical and organizational measures to protect your data against unauthorized access, loss, or alteration.",
+    "contactTitle": "Contact",
+    "contact": "If you have questions or wish to exercise your rights, contact us at",
+    "changesTitle": "Changes to this policy",
+    "changes": "We may update this policy to reflect legal or operational changes. We will publish the current version and its update date on this page."
+  }
+  ,
+  "legalNotice": {
+    "title": "Legal Notice",
+    "updated": "Last updated: 01/15/2026",
+    "intro": "This Legal Notice governs use of the Next Wrld website and the relationship between users and the site owner.",
+    "companyInfoTitle": "Owner information",
+    "companyInfo": [
+      "Owner: Next Wrld",
+      "Contact email: privacy@nextwrld.com",
+      "Site purpose: corporate and commercial information"
+    ],
+    "useTitle": "Site use",
+    "use": [
+      "Users agree to use the site lawfully and in good faith.",
+      "Use of the site for unlawful purposes or to cause harm to third parties is prohibited.",
+      "The site owner may modify content or suspend access without prior notice."
+    ],
+    "liabilityTitle": "Liability",
+    "liability": "Next Wrld is not liable for damages arising from site use, service interruptions, or third-party linked content, except as required by applicable law.",
+    "ipTitle": "Intellectual property",
+    "ip": "All content, trademarks, and designs on the site are owned by their respective holders. Reproduction or use without express authorization is prohibited.",
+    "contactTitle": "Contact",
+    "contact": "For any inquiry related to this Legal Notice, write to",
+    "changesTitle": "Changes",
+    "changes": "The owner may update this Legal Notice. The current version and its update date will be published on this page."
+  },
+  "termsOfService": {
+    "title": "Terms of Service",
+    "updated": "Last updated: 01/15/2026",
+    "intro": "These Terms govern access to and use of services and content offered by Next Wrld.",
+    "acceptanceTitle": "Acceptance of terms",
+    "acceptance": [
+      "By using the site, you accept these Terms of Service.",
+      "If you do not agree, you must not use the site or its services."
+    ],
+    "useTitle": "Permitted use",
+    "use": [
+      "You may not use the site for illegal activities or to infringe third-party rights.",
+      "You must respect security rules and technical restrictions.",
+      "We may suspend or cancel access in case of breaches."
+    ],
+    "accountsTitle": "Accounts and security",
+    "accounts": [
+      "Registration information must be true and up to date.",
+      "You are responsible for maintaining the confidentiality of your credentials.",
+      "Report any unauthorized access immediately."
+    ],
+    "paymentsTitle": "Payments",
+    "payments": "Payment terms, pricing, and billing apply as contractually agreed for specific services.",
+    "ipTitle": "Intellectual property",
+    "ip": "Services and content are protected by intellectual property rights. Unauthorized use is not permitted.",
+    "terminationTitle": "Termination",
+    "termination": "We may terminate or suspend access at any time due to non-compliance or operational reasons.",
+    "disclaimersTitle": "Disclaimers",
+    "disclaimers": [
+      "Services are provided \"as is\" without guarantees of uninterrupted operation.",
+      "We are not responsible for losses arising from integrations or third parties, except as required by law."
+    ],
+    "lawTitle": "Governing law",
+    "law": "These terms are governed by the applicable laws in the owner’s jurisdiction, unless otherwise agreed.",
+    "changesTitle": "Changes to terms",
+    "changes": "We may update these Terms. We will publish the current version and its update date on this page.",
+    "contactTitle": "Contact",
+    "contact": "For inquiries about these Terms, write to"
   }
 };

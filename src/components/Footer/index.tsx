@@ -255,19 +255,19 @@ const Footer = () => {
               <div className="my-1">
                 <div className="-mx-3 flex items-center justify-center md:justify-start">
                   <Link
-                    href="#"
+                    href="/privacy-policy"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     {t('footer.privacy_policy', 'Privacy policy')}
                   </Link>
                   <Link
-                    href="#"
+                    href="/legal-notice"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     {t('footer.legal_notice', 'Legal notice')}
                   </Link>
                   <Link
-                    href="#"
+                    href="/terms-of-service"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     {t('footer.terms_of_service', 'Terms of service')}

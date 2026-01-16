@@ -227,4 +227,108 @@ export const commonES = {
     "readMore": "Ver Caso Completo",
     "viewAll": "Ver Todos los Casos"
   },
+  "privacyPolicy": {
+    "title": "Política de Privacidad",
+    "updated": "Última actualización: 15/01/2026",
+    "intro": "En Next Wrld nos tomamos muy en serio la privacidad y la protección de tus datos personales. Esta política explica qué información recopilamos, cómo la utilizamos y cuáles son tus derechos.",
+    "dataCollectedTitle": "Datos que recopilamos",
+    "dataCollected": [
+      "Datos de contacto: nombre, correo electrónico, teléfono.",
+      "Datos de uso: páginas visitadas, tiempo de navegación, clics y métricas técnicas (IP, tipo de dispositivo, navegador).",
+      "Datos que nos proporcionas en formularios (por ejemplo, consultas comerciales o soporte)."
+    ],
+    "usageTitle": "Cómo usamos tus datos",
+    "usage": [
+      "Responder consultas y brindar soporte.",
+      "Mejorar el contenido y rendimiento del sitio.",
+      "Enviar comunicaciones relevantes, si así lo autorizas.",
+      "Cumplir obligaciones legales y de seguridad."
+    ],
+    "cookiesTitle": "Cookies y tecnologías similares",
+    "cookies": "Utilizamos cookies para recordar preferencias, analizar el tráfico y mejorar tu experiencia. Puedes gestionar o deshabilitar las cookies desde la configuración de tu navegador.",
+    "legalBasisTitle": "Base legal",
+    "legalBasis": "Tratamos tus datos sobre la base de tu consentimiento, el cumplimiento de contratos, intereses legítimos y obligaciones legales aplicables.",
+    "sharingTitle": "Compartir datos con terceros",
+    "sharing": "No vendemos tus datos. Podemos compartir información con proveedores que nos ayudan a operar el sitio (por ejemplo, alojamiento, analítica), siempre bajo acuerdos de protección de datos.",
+    "retentionTitle": "Retención",
+    "retention": "Conservamos tus datos solo el tiempo necesario para los fines descritos y según las obligaciones legales aplicables.",
+    "rightsTitle": "Tus derechos",
+    "rights": [
+      "Acceder, corregir o eliminar tus datos.",
+      "Retirar tu consentimiento en cualquier momento.",
+      "Oponerte al tratamiento o solicitar limitaciones.",
+      "Presentar una reclamación ante la autoridad de control."
+    ],
+    "securityTitle": "Seguridad",
+    "security": "Adoptamos medidas técnicas y organizativas para proteger tus datos contra acceso no autorizado, pérdida o alteración.",
+    "contactTitle": "Contacto",
+    "contact": "Si tienes preguntas o deseas ejercer tus derechos, contáctanos en",
+    "changesTitle": "Cambios en esta política",
+    "changes": "Podemos actualizar esta política para reflejar cambios legales o operativos. Publicaremos la versión vigente y su fecha de actualización en esta página."
+  }
+  ,
+  "legalNotice": {
+    "title": "Aviso Legal",
+    "updated": "Última actualización: 15/01/2026",
+    "intro": "Este Aviso Legal regula el uso del sitio web de Next Wrld, así como la relación entre los usuarios y el titular del sitio.",
+    "companyInfoTitle": "Información del titular",
+    "companyInfo": [
+      "Titular: Next Wrld",
+      "Correo de contacto: privacy@nextwrld.com",
+      "Finalidad del sitio: información corporativa y comercial"
+    ],
+    "useTitle": "Uso del sitio",
+    "use": [
+      "El usuario se compromete a utilizar el sitio de forma lícita y conforme a la buena fe.",
+      "No se permite el uso del sitio para fines ilícitos o que puedan causar perjuicio a terceros.",
+      "El titular del sitio puede modificar contenidos o suspender el acceso sin previo aviso."
+    ],
+    "liabilityTitle": "Responsabilidad",
+    "liability": "Next Wrld no se responsabiliza por daños derivados del uso del sitio, interrupciones del servicio, o contenidos de terceros enlazados, salvo en los términos exigidos por la ley aplicable.",
+    "ipTitle": "Propiedad intelectual",
+    "ip": "Todos los contenidos, marcas y diseños presentes en el sitio son propiedad de sus respectivos titulares. Queda prohibida su reproducción o uso sin autorización expresa.",
+    "contactTitle": "Contacto",
+    "contact": "Para cualquier consulta relacionada con este Aviso Legal, escribe a",
+    "changesTitle": "Cambios",
+    "changes": "El titular puede actualizar este Aviso Legal. La versión vigente y su fecha de actualización se publicarán en esta página."
+  },
+  "termsOfService": {
+    "title": "Términos de Servicio",
+    "updated": "Última actualización: 15/01/2026",
+    "intro": "Estos Términos regulan el acceso y uso de los servicios y contenidos ofrecidos por Next Wrld.",
+    "acceptanceTitle": "Aceptación de los términos",
+    "acceptance": [
+      "Al usar el sitio, aceptas estos Términos de Servicio.",
+      "Si no estás de acuerdo, no debes utilizar el sitio ni sus servicios."
+    ],
+    "useTitle": "Uso permitido",
+    "use": [
+      "No puedes emplear el sitio para actividades ilegales o que vulneren derechos de terceros.",
+      "Debes respetar las normas de seguridad y las restricciones técnicas.",
+      "Podemos suspender o cancelar el acceso ante incumplimientos."
+    ],
+    "accountsTitle": "Cuentas y seguridad",
+    "accounts": [
+      "La información de registro debe ser veraz y actualizada.",
+      "Eres responsable de mantener la confidencialidad de tus credenciales.",
+      "Notifica cualquier acceso no autorizado inmediatamente."
+    ],
+    "paymentsTitle": "Pagos",
+    "payments": "Los términos de pago, precios y facturación aplican según lo acordado contractualmente para servicios específicos.",
+    "ipTitle": "Propiedad intelectual",
+    "ip": "Los servicios y contenidos están protegidos por derechos de propiedad intelectual. No se permite su uso no autorizado.",
+    "terminationTitle": "Terminación",
+    "termination": "Podemos finalizar o suspender el acceso en cualquier momento por incumplimiento o por razones operativas.",
+    "disclaimersTitle": "Exclusiones de responsabilidad",
+    "disclaimers": [
+      "Los servicios se ofrecen \"tal cual\" sin garantías de funcionamiento ininterrumpido.",
+      "No nos responsabilizamos por pérdidas derivadas de integraciones o terceros, salvo en lo exigido por la ley."
+    ],
+    "lawTitle": "Legislación aplicable",
+    "law": "Estos términos se rigen por las leyes aplicables en la jurisdicción del titular, salvo acuerdo específico.",
+    "changesTitle": "Cambios en los términos",
+    "changes": "Podemos actualizar estos Términos. Publicaremos la versión vigente y su fecha de actualización en esta página.",
+    "contactTitle": "Contacto",
+    "contact": "Para consultas sobre estos Términos, escribe a"
+  }
 };
