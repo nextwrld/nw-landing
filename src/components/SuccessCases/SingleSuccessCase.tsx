@@ -14,7 +14,7 @@ const SingleSuccessCase = ({ successCase }: { successCase: SuccessCase }) => {
             <Image
               src={coverImage}
               alt="image"
-              className="w-full transition group-hover:rotate-6 group-hover:scale-125"
+              className="w-full object-cover aspect-[3/2] transition group-hover:rotate-6 group-hover:scale-125"
               width={408}
               height={272}
             />
