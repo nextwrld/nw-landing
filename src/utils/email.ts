@@ -18,13 +18,6 @@ const smtpOptions = {
 };
 
 export const sendEmail = async (data: EmailPayload) => {
-  console.log("📧 Email config:", {
-    host: smtpOptions.host,
-    port: smtpOptions.port,
-    secure: smtpOptions.secure,
-    user: smtpOptions.auth.user,
-    hasPassword: !!smtpOptions.auth.pass,
-  });
 
   const transporter = nodemailer.createTransport({
     ...smtpOptions,
