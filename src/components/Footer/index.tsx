@@ -253,7 +253,7 @@ const Footer = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-2/3 lg:w-1/2">
               <div className="my-1">
-                <div className="-mx-3 flex items-center justify-center md:justify-start">
+                <div className="-mx-3 flex flex-col sm:flex-row items-center justify-center sm:justify-start">
                   <Link
                     href="/privacy-policy"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
