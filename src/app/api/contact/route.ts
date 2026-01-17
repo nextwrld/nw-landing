@@ -15,10 +15,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("📧 Attempting to send email...");
-    console.log("From:", email);
-    console.log("Name:", fullName);
-    console.log("Phone:", phone || "N/A");
 
     // Enviar email
     const emailHtml = `

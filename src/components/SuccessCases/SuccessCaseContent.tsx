@@ -16,7 +16,7 @@ interface SuccessCaseData {
 }
 
 export default function SuccessCaseContent({ slug }: { slug: string }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [caseData, setCaseData] = useState<SuccessCaseData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -53,7 +53,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-dark dark:text-white">Loading...</h2>
+          <h2 className="text-2xl font-bold text-dark dark:text-white">{t("common.loading")}</h2>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-dark dark:text-white">Case not found</h2>
+          <h2 className="text-2xl font-bold text-dark dark:text-white">{t("successCases.caseNotFound")}</h2>
         </div>
       </div>
     );
@@ -71,7 +71,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
 
   return (
     <>
-      <Breadcrumb pageName="Success Case Details" />
+      <Breadcrumb pageName={t("successCases.detailsTitle")} />
 
       <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
         <div className="container">
@@ -84,7 +84,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
                 >
                   <Image
                     src={caseData.coverImage}
-                    alt="image"
+                    alt={t("common.imageAlt")}
                     width={1288}
                     height={500}
                     className="h-full w-full object-cover object-center"
@@ -96,7 +96,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
                           <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
                             <Image
                               src={caseData.authorImage}
-                              alt="image"
+                              alt={t("common.imageAlt")}
                               className="w-full"
                               width={40}
                               height={40}
@@ -104,7 +104,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
                           </div>
                         )}
                         <p className="text-base font-medium text-white">
-                          By{" "}
+                          {t("successCases.by")} {" "}
                           <Link href="/#" className="text-white hover:opacity-70">
                             {caseData.author}
                           </Link>
