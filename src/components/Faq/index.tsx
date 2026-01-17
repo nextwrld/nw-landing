@@ -2,7 +2,6 @@
 import { useTranslation } from "react-i18next";
 import SectionTitle from "../Common/SectionTitle";
 import SingleFaq from "./SingleFaq";
-import { ScrollReveal } from "../Common/ScrollReveal";
 
 interface FaqItem {
   question: string;
