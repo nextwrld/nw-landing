@@ -78,6 +78,7 @@ export const commonES = {
   },
   "common": {
     "loading": "Cargando...",
+    "imageAlt": "imagen",
     "error": "Error",
     "success": "Éxito",
     "submit": "Enviar",
@@ -227,7 +228,10 @@ export const commonES = {
     "subtitle": "Nuestros Proyectos",
     "description": "Soluciones reales para negocios reales. Conocé cómo transformamos operaciones.",
     "readMore": "Ver Caso Completo",
-    "viewAll": "Ver Todos los Casos"
+    "viewAll": "Ver Todos los Casos",
+    "detailsTitle": "Detalles del Caso de Éxito",
+    "caseNotFound": "Caso no encontrado",
+    "by": "Por"
   },
   "privacyPolicy": {
     "title": "Política de Privacidad",

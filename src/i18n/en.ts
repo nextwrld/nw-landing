@@ -79,6 +79,7 @@ export const commonEN = {
   },
   "common": {
     "loading": "Loading...",
+    "imageAlt": "image",
     "error": "Error",
     "success": "Success",
     "submit": "Submit",
@@ -227,7 +228,10 @@ export const commonEN = {
     "subtitle": "Our Projects",
     "description": "Real solutions for real businesses. Discover how we transform operations.",
     "readMore": "View Full Case",
-    "viewAll": "View All Cases"
+    "viewAll": "View All Cases",
+    "detailsTitle": "Success Case Details",
+    "caseNotFound": "Case not found",
+    "by": "By"
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
