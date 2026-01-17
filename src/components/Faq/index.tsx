@@ -36,7 +36,7 @@ const Faq = () => {
       </div>
 
       <div>
-        <span className="absolute left-4 top-4 -z-[1]">
+        <span aria-hidden="true" className="hidden md:block absolute md:left-4 md:top-4 -z-[1] pointer-events-none">
           <svg
             width="48"
             height="134"
@@ -326,7 +326,7 @@ const Faq = () => {
             />
           </svg>
         </span>
-        <span className="absolute bottom-4 right-4 -z-[1]">
+        <span aria-hidden="true" className="hidden md:block absolute md:bottom-4 md:right-4 -z-[1] pointer-events-none">
           <svg
             width="48"
             height="134"
