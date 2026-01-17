@@ -285,6 +285,9 @@ const Header = () => {
                         </li>
                       ),
                     )}
+                    <li className="flex items-center py-2 lg:hidden">
+                      <LanguageSelector />
+                    </li>
                   </ul>
                 </nav>
               </div>
