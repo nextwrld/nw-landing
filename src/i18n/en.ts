@@ -53,7 +53,9 @@ export const commonEN = {
   "about": {
     "title": "The future belongs to those who prepare today",
     "description": "At Next Wrld, we do not just deliver tools; we transform the operational culture of service-based businesses. We move from \"doing for the sake of doing\" to systemic execution.",
-    "studyCases": "Case Studies"
+    "studyCases": "Case Studies",
+    "yourStrategicAlly": "Your Strategic Ally in Digital Transformation",
+    "nextWrld": "Next Wrld"
   },
   "footer": {
     "company": "Company",

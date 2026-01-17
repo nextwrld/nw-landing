@@ -53,7 +53,9 @@ export const commonES = {
   "about": {
     "title": "El futuro pertenece a aquellos que se preparan hoy",
     "description": "En Next Wrld, no solo entregamos herramientas; transformamos la cultura operativa de negocios de servicios. Pasamos del \"hacer por hacer\" a la ejecución sistémica.",
-    "studyCases": "Casos de Estudio"
+    "studyCases": "Casos de Estudio",
+    "yourStrategicAlly": "Tu Socio Estratégico en Transformación Digital",
+    "nextWrld": "Next Wrld",
   },
   "footer": {
     "company": "Empresa",
