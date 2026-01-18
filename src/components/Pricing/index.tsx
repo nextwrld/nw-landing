@@ -43,7 +43,7 @@ const Pricing = () => {
 
             <div className="mb-8 flex-1">
               <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                Incluye:
+                {t('pricing.includes')}
               </h4>
               <ul className="space-y-3">
                 {(t('pricing.plan1.features', { returnObjects: true }) as string[]).map((feature, index) => (
@@ -86,7 +86,7 @@ const Pricing = () => {
 
             <div className="mb-8 flex-1">
               <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                Incluye:
+                {t('pricing.includes')}
               </h4>
               <ul className="space-y-3">
                 {(t('pricing.plan2.features', { returnObjects: true }) as string[]).map((feature, index) => (

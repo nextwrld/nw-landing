@@ -22,12 +22,13 @@ export const commonEN = {
     "faq": "FAQs"
   },
   "hero": {
-    "title": "WELCOME TO THE NEW OPERATIONAL STANDARD",
-    "description": "We build the systems that free your organization from operational chaos.",
-    "primaryCTA": "Evolve Your Operations",
-    "secondaryCTA": "Our Method",
-    "subHeadline": "We leave behind manual management and disorder. We design digital architecture with product thinking and strategic AI so your business stops surviving and starts scaling."
-  },
+  "title": "WELCOME TO THE NEW OPERATIONAL STANDARD",
+  "description": "We design and build digital systems that transform manual processes and operational chaos into clear, efficient, and scalable structures.",
+  "primaryCTA": "Evolve Your Operations",
+  "secondaryCTA": "Our Method",
+  "subHeadline": "We leave manual management and disorder behind. We design digital architecture with product-driven thinking and strategically applied artificial intelligence, so your business can stop surviving and start scaling."
+}
+,
   "features": {
     "title": "The Difference (Judgment vs. Code)",
     "subtitle": "We are not a software agency. We are your architecture partner.",
@@ -126,42 +127,44 @@ export const commonEN = {
     "errorMessage": "There was an error sending your message. Please try again.",
     "send": "Send"
   },
-  "pricing": {
-    "title": "Partnership Model",
-    "subtitle": "Investment Plans",
-    "footerNote": "Do you have a specific project in mind?",
-    "paragraph": "We choose to work with companies seeking real transformation, not temporary fixes.",
-    "plan1": {
-      "name": "Digital Foundation",
-      "type": "Project",
-      "description": "Diagnosis, base architecture design, and deployment of the core system. Ideal for escaping current operational disorder.",
-      "features": [
-        "Full process diagnosis",
-        "Digital architecture design",
-        "Core system implemented",
-        "Robust automated workflows",
-        "Migration from manual processes",
-        "Team training"
-      ],
-      "cta": "Start Transformation"
-    },
-    "plan2": {
-      "name": "Evolution & Scale",
-      "type": "Retainer",
-      "badge": "Next Wrld Standard",
-      "description": "The Next Wrld standard. Monthly optimization, new AI integrations, strategic support, and updates. Your business never stops.",
-      "features": [
-        "Continuous monthly optimization",
-        "New AI integrations",
-        "Priority strategic support",
-        "Automatic updates",
-        "Proactive monitoring and improvements",
-        "Elite systems department"
-      ],
-      "cta": "Schedule a Consultation"
-    },
-    "contactUs": "Contact Us"
+"pricing": {
+  "title": "Partnership Model",
+  "subtitle": "How We Work",
+  "includes": "Includes:",
+  "footerNote": "Do you have a specific project in mind?",
+  "paragraph": "We don’t sell isolated projects. We build systems that evolve with your business.",
+  "plan1": {
+    "name": "Digital Foundation",
+    "type": "Project",
+    "description": "Diagnosis, design, and implementation of the core system that organizes operations, eliminates manual disorder, and establishes a solid foundation for controlled growth.",
+    "features": [
+      "Clear visibility into processes, friction points, and critical dependencies",
+      "Digital architecture designed to organize and scale operations",
+      "Core system in production that unifies business management",
+      "Automation of key processes to reduce errors and rework",
+      "Progressive migration from manual processes without disrupting operations",
+      "Team prepared to operate the system autonomously"
+    ],
+    "cta": "Talk About My Operations"
   },
+  "plan2": {
+    "name": "Evolution & Scale",
+    "type": "Retainer",
+    "badge": "Next Wrld Standard",
+    "description": "Continuous optimization and evolution of the implemented system, incorporating improvements, automation, and applied intelligence to support business growth.",
+    "features": [
+      "Continuous optimization of operational processes and workflows",
+      "Selective integration of new AI capabilities",
+      "Priority strategic support for key decisions",
+      "System always up to date, stable, and free of technical debt",
+      "Proactive monitoring and improvements before issues arise",
+      "Systems team operating as an extension of your business"
+    ],
+    "cta": "Schedule an Operational Diagnosis"
+  },
+  "contactUs": "Contact Us"
+}
+,
   "callToAction": {
     "title": "What Are You Looking For?",
     "subtitle": "Start Now",

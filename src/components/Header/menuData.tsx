@@ -25,7 +25,7 @@ const buildMenuData = (
   {
     id: 4,
     title: t("menu.about"),
-    path: "/#about",
+    path: "/#pricing",
     newTab: false,
   },
   {

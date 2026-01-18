@@ -23,10 +23,10 @@ export const commonES = {
   },
   "hero": {
     "title": "BIENVENIDO AL NUEVO ESTÁNDAR OPERATIVO",
-    "description": "Construimos los sistemas que liberan a tu organización del caos operativo.",
+    "description": "Diseñamos y construimos sistemas digitales que transforman procesos manuales y desorden operativo en estructuras claras, eficientes y escalables.",
     "primaryCTA": "Evoluciona tu operación",
     "secondaryCTA": "Nuestro Método",
-    "subHeadline": "Dejamos atrás la gestión manual y el desorden. Diseñamos arquitectura digital con criterio de producto e IA estratégica para que tu negocio deje de sobrevivir y empiece a escalar."
+    "subHeadline": "Dejamos atrás la gestión manual y el desorden. Diseñamos arquitectura digital con criterio de producto e inteligencia artificial aplicada estratégicamente, para que tu negocio deje de sobrevivir y empiece a escalar."
   },
   "features": {
     "title": "El Diferencial (Criterio vs. Código)",
@@ -128,37 +128,38 @@ export const commonES = {
   
   "pricing": {
     "title": "Modelo de Sociedad",
-    "subtitle": "Planes de Inversión",
+    "includes": "Incluye:",
+    "subtitle": "Cómo trabajamos",
     "footerNote": "¿Tienes un proyecto específico en mente?",
-    "paragraph": "Elegimos trabajar con empresas que buscan transformación real, no parches temporales.",
+    "paragraph": "No vendemos proyectos aislados. Construimos sistemas que evolucionan con tu negocio.",
     "plan1": {
       "name": "Cimentación Digital",
       "type": "Proyecto",
-      "description": "Diagnóstico, diseño de arquitectura base y puesta en marcha del sistema principal. Ideal para salir del desorden actual.",
+      "description": "Diagnóstico, diseño e implementación del sistema base que ordena la operación, elimina el desorden manual y establece una estructura sólida para crecer con control.",
       "features": [
-        "Diagnóstico completo de procesos",
-        "Diseño de arquitectura digital",
-        "Sistema principal implementado",
-        "Flujos automatizados robustos",
-        "Migración desde procesos manuales",
-        "Capacitación del equipo"
+        "Visibilidad clara de procesos, fricciones y dependencias críticas",
+        "Arquitectura digital diseñada para ordenar y escalar la operación",
+        "Sistema central en producción que unifica la gestión del negocio",
+        "Automatización de procesos clave para reducir errores y retrabajo",
+        "Migración progresiva desde procesos manuales sin frenar la operación",
+        "Equipo preparado para operar el sistema de forma autónoma"
       ],
-      "cta": "Iniciar Transformación"
+      "cta": "Hablar sobre mi operación"
     },
     "plan2": {
       "name": "Evolución & Escala",
       "type": "Retainer",
       "badge": "Estándar Next Wrld",
-      "description": "El estándar Next Wrld. Optimización mensual, integración de nuevas IAs, soporte estratégico y actualizaciones. Tu negocio nunca se detiene.",
+      "description": "Optimización y evolución continua del sistema implementado, incorporando mejoras, automatización e inteligencia aplicada para acompañar el crecimiento del negocio.",
       "features": [
-        "Optimización continua mensual",
-        "Integración de nuevas IAs",
-        "Soporte estratégico prioritario",
-        "Actualizaciones automáticas",
-        "Monitoreo y mejoras proactivas",
-        "Departamento de sistemas de élite"
+        "Optimización continua de procesos y flujos operativos",
+        "Incorporación selectiva de nuevas capacidades de IA",
+        "Soporte estratégico prioritario para decisiones clave",
+        "Sistema siempre actualizado, estable y sin deuda técnica",
+        "Monitoreo proactivo y mejoras antes de que aparezcan problemas",
+        "Equipo de sistemas operando como extensión del negocio"
       ],
-      "cta": "Agendar Consulta"
+      "cta": "Agendar diagnóstico operativo"
     },
     "contactUs": "Contáctanos"
   },
