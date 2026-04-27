@@ -3,6 +3,10 @@ export const commonES = {
     "home": {
       "title": "Next Wrld – Preparando organizaciones para el Próximo Mundo",
       "description": "Construimos los sistemas que liberan a tu organización del caos operativo. Arquitectura digital con criterio de producto e IA estratégica."
+    },
+    "diagnostico": {
+      "title": "Diagnóstico Operativo | Next Wrld",
+      "description": "Diagnosticamos tu operación para encontrar fugas de tiempo, procesos rotos y oportunidades de escalar sin aumentar tu equipo."
     }
   },
   "menu": {
@@ -125,7 +129,66 @@ export const commonES = {
     "errorMessage": "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.",
     "send": "Enviar"
   },
-  
+  "diagnostico": {
+    "hero": {
+      "title": "Tu negocio no escala porque depende de ti.",
+      "subtitle": "Te ayudamos a convertir tu operación en un sistema que funciona, se ordena y puede crecer.",
+      "primaryCTA": "Agendar diagnóstico operativo",
+      "secondaryCTA": "Ver cómo trabajamos"
+    },
+    "audience": {
+      "title": "Este diagnóstico es para negocios que:",
+      "items": [
+        "Dependen demasiado del dueño o del equipo clave",
+        "Trabajan con procesos manuales",
+        "Tienen información dispersa",
+        "Pierden tiempo apagando incendios",
+        "Quieren crecer, pero sienten que la operación no aguanta"
+      ]
+    },
+    "review": {
+      "title": "En el diagnóstico analizamos:",
+      "items": [
+        "Procesos actuales",
+        "Puntos de fricción",
+        "Tareas repetitivas",
+        "Oportunidades de automatización",
+        "Herramientas actuales",
+        "Áreas donde la IA puede aportar valor real"
+      ]
+    },
+    "outcomes": {
+      "title": "Al finalizar, tendrás claridad sobre:",
+      "items": [
+        "Qué está frenando tu operación",
+        "Qué deberías ordenar primero",
+        "Qué se puede automatizar",
+        "Qué tipo de sistema necesita tu negocio",
+        "Próximos pasos recomendados"
+      ]
+    },
+    "model": {
+      "title": "Si tiene sentido avanzar, trabajamos en dos etapas",
+      "plan1": {
+        "title": "Cimentación Digital",
+        "description": "Ordenamos la base operativa de tu negocio: procesos, información, herramientas y flujos clave.",
+        "cta": "Conocer más"
+      },
+      "plan2": {
+        "title": "Evolución & Escala",
+        "description": "Mejoramos, automatizamos y evolucionamos el sistema para acompañar el crecimiento del negocio.",
+        "cta": "Conocer más"
+      }
+    },
+    "cta": {
+      "title": "Hablemos de tu operación.",
+      "subtitle": "Cuéntanos dónde está el mayor cuello de botella y te ayudamos a identificar el próximo paso.",
+      "placeholder": "Cuéntanos qué parte de tu operación quieres ordenar o automatizar.",
+      "formTitle": "Dejá tu consulta",
+      "buttonText": "Enviar mensaje"
+    }
+  },
+
   "pricing": {
     "title": "Modelo de Sociedad",
     "includes": "Incluye:",

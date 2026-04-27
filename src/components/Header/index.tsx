@@ -13,6 +13,7 @@ const Header = () => {
   const { t } = useTranslation('common');
   const menuData = buildMenuData(t);
   const pathUrl = usePathname();
+  const isHomeLike = pathUrl === "/" || pathUrl === "/diagnostico";
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarToggleHandler = () => {
@@ -80,24 +81,7 @@ const Header = () => {
                 href="/"
                 className={`navbar-logo ${sticky ? "py-2" : "py-5"} inline-flex items-center whitespace-nowrap`}
               >
-                {pathUrl !== "/" ? (
-                  <>
-                    <Image
-                      src={`/images/logo/degradado.svg`}
-                      alt="logo"
-                      width={120}
-                      height={30}
-                      className="header-logo dark:hidden w-[60px] h-auto"
-                    />
-                    <Image
-                      src={`/images/logo/blanco.svg`}
-                      alt="logo"
-                      width={60}
-                      height={15}
-                      className="header-logo hidden dark:block w-[60px] h-auto"
-                    />
-                  </>
-                ) : (
+                {isHomeLike ? (
                   <>
                     <Image
                       src={`${sticky ? "/images/logo/degradado.svg" : "/images/logo/blanco.svg"}`}
@@ -114,10 +98,27 @@ const Header = () => {
                       className="header-logo hidden dark:block w-[70px] h-auto"
                     />
                   </>
+                ) : (
+                  <>
+                    <Image
+                      src={`/images/logo/degradado.svg`}
+                      alt="logo"
+                      width={120}
+                      height={30}
+                      className="header-logo dark:hidden w-[60px] h-auto"
+                    />
+                    <Image
+                      src={`/images/logo/blanco.svg`}
+                      alt="logo"
+                      width={60}
+                      height={15}
+                      className="header-logo hidden dark:block w-[60px] h-auto"
+                    />
+                  </>
                 )}
                 <span
                   className={`ml-3 text-lg font-semibold tracking-wide ${
-                    pathUrl !== "/"
+                    !isHomeLike
                       ? "text-dark dark:text-white"
                       : sticky
                         ? "text-dark dark:text-white"
@@ -138,21 +139,21 @@ const Header = () => {
                 >
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] transition-all duration-300 ${navbarOpen ? " top-[7px] rotate-45" : " "
-                      } ${pathUrl !== "/" && "!bg-dark dark:!bg-white"} ${pathUrl === "/" && sticky
+                      } ${!isHomeLike && "!bg-dark dark:!bg-white"} ${isHomeLike && sticky
                         ? "bg-dark dark:bg-white"
                         : "bg-white"
                       }`}
                   />
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] transition-all duration-300 ${navbarOpen ? "opacity-0 " : " "
-                      } ${pathUrl !== "/" && "!bg-dark dark:!bg-white"} ${pathUrl === "/" && sticky
+                      } ${!isHomeLike && "!bg-dark dark:!bg-white"} ${isHomeLike && sticky
                         ? "bg-dark dark:bg-white"
                         : "bg-white"
                       }`}
                   />
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] transition-all duration-300 ${navbarOpen ? " top-[-8px] -rotate-45" : " "
-                      } ${pathUrl !== "/" && "!bg-dark dark:!bg-white"} ${pathUrl === "/" && sticky
+                      } ${!isHomeLike && "!bg-dark dark:!bg-white"} ${isHomeLike && sticky
                         ? "bg-dark dark:bg-white"
                         : "bg-white"
                       }`}
@@ -169,7 +170,7 @@ const Header = () => {
                     {menuData.map((menuItem, index) =>
                       menuItem.path ? (
                         <li key={index} className="group relative">
-                          {pathUrl !== "/" ? (
+                          {!isHomeLike ? (
                             <Link
                               onClick={(e) => {
                                 navbarToggleHandler();
@@ -214,7 +215,7 @@ const Header = () => {
                         </li>
                       ) : (
                         <li className="submenu-item group relative" key={index}>
-                          {pathUrl !== "/" ? (
+                          {!isHomeLike ? (
                             <button
                               onClick={() => handleSubmenu(index)}
                               className={`ud-menu-scroll flex items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary lg:inline-flex lg:px-0 lg:py-6`}
@@ -313,7 +314,7 @@ const Header = () => {
 
                     <svg
                       viewBox="0 0 23 23"
-                      className={`h-[30px] w-[30px] fill-current text-dark dark:hidden ${!sticky && pathUrl === "/" && "text-white"
+                      className={`h-[30px] w-[30px] fill-current text-dark dark:hidden ${!sticky && isHomeLike && "text-white"
                         }`}
                     >
                       <g clipPath="url(#clip0_40_125)">

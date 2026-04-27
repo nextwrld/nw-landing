@@ -3,6 +3,10 @@ export const commonEN = {
     "home": {
       "title": "Next Wrld – Preparing organizations for the Next World",
       "description": "We build the systems that free your organization from operational chaos. Digital architecture with product criteria and strategic AI."
+    },
+    "diagnostico": {
+      "title": "Operational Diagnosis | Next Wrld",
+      "description": "We diagnose your operation to find time leaks, broken processes, and opportunities to scale without increasing your team."
     }
   },
   "menu": {
@@ -127,7 +131,66 @@ export const commonEN = {
     "errorMessage": "There was an error sending your message. Please try again.",
     "send": "Send"
   },
-"pricing": {
+  "diagnostico": {
+    "hero": {
+      "title": "Your business isn't scaling because it depends on you.",
+      "subtitle": "We help you turn your operation into a system that works, gets organized, and can grow.",
+      "primaryCTA": "Book an operational diagnosis",
+      "secondaryCTA": "See how we work"
+    },
+    "audience": {
+      "title": "For businesses that:",
+      "items": [
+        "Depend too much on the owner or key people",
+        "Run on manual processes",
+        "Have scattered information",
+        "Spend time putting out fires",
+        "Want to grow, but feel operations can't keep up"
+      ]
+    },
+    "review": {
+      "title": "What we review:",
+      "items": [
+        "Current processes",
+        "Friction points",
+        "Repetitive tasks",
+        "Automation opportunities",
+        "Current tools",
+        "Areas where AI can create real value"
+      ]
+    },
+    "outcomes": {
+      "title": "What you'll get clarity on:",
+      "items": [
+        "What is holding your operation back",
+        "What should be organized first",
+        "What can be automated",
+        "What kind of system your business needs",
+        "Recommended next steps"
+      ]
+    },
+    "model": {
+      "title": "If it makes sense to move forward, we work in two stages",
+      "plan1": {
+        "title": "Digital Foundation",
+        "description": "We organize your business's operational base: processes, information, tools, and key flows.",
+        "cta": "Learn more"
+      },
+      "plan2": {
+        "title": "Evolution & Scale",
+        "description": "We improve, automate, and evolve the system to support your business growth.",
+        "cta": "Learn more"
+      }
+    },
+    "cta": {
+      "title": "Let's talk about your operation.",
+      "subtitle": "Tell us where the biggest bottleneck is and we'll help you identify the next step.",
+      "placeholder": "Tell us which part of your operation you want to organize or automate.",
+      "formTitle": "Leave your inquiry",
+      "buttonText": "Send message"
+    }
+  },
+  "pricing": {
   "title": "Partnership Model",
   "subtitle": "How We Work",
   "includes": "Includes:",

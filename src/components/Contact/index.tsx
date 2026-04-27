@@ -2,7 +2,15 @@
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 
-const Contact = () => {
+interface ContactProps {
+  title?: string;
+  subtitle?: string;
+  placeholder?: string;
+  buttonText?: string;
+  formTitle?: string;
+}
+
+const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: ContactProps) => {
   const { t } = useTranslation('common');
   const [formData, setFormData] = useState({
     fullName: "",
@@ -76,10 +84,10 @@ const Contact = () => {
             <div className="ud-contact-content-wrapper">
               <div className="ud-contact-title mb-12 lg:mb-[150px]">
                 <span className="mb-6 block text-base font-medium text-dark dark:text-white">
-                  {t('contact.subtitle', 'Ponte en contacto con nosotros')}
+                  {subtitle ?? t('contact.subtitle', 'Ponte en contacto con nosotros')}
                 </span>
                 <h2 className="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white">
-                  {t('contact.title', 'Contáctanos')}
+                  {title ?? t('contact.title', 'Contáctanos')}
                 </h2>
               </div>
               <div className="mb-12 flex flex-wrap justify-between lg:mb-0">
@@ -141,7 +149,7 @@ const Contact = () => {
               "
             >
               <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
-                {t('contact.sendMessage', 'Enviar Mensaje')}
+                {formTitle ?? t('contact.sendMessage', 'Enviar Mensaje')}
               </h3>
 
               {submitStatus.type && (
@@ -219,7 +227,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={4}
-                    placeholder={t("contact.placeholder", "Escribe tu mensaje aquí")}
+                    placeholder={placeholder ?? t("contact.placeholder", "Escribe tu mensaje aquí")}
                     className="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   ></textarea>
                 </div>
@@ -229,7 +237,7 @@ const Contact = () => {
                     disabled={isSubmitting}
                     className="w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? t("contact.sending", "Enviando...") : t("contact.send", "Enviar")}
+                    {isSubmitting ? t("contact.sending", "Enviando...") : (buttonText ?? t("contact.send", "Enviar"))}
                   </button>
                 </div>
               </form>
