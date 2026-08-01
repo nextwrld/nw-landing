@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -19,6 +20,7 @@ export default async function RootLayout({
     <html suppressHydrationWarning className="!scroll-smooth" lang={initialLang}>
       <body>
         <GoogleTagManager />
+        <GoogleAnalytics />
         <Providers initialLanguage={initialLang}>
           <div className="isolate">
             <Header />
