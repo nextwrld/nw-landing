@@ -40,7 +40,9 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
           }
         }
       } catch (error) {
-        console.error("Error loading success case:", error);
+        if (process.env.NODE_ENV !== "production") {
+          console.error("Error loading success case:", error);
+        }
       } finally {
         setLoading(false);
       }

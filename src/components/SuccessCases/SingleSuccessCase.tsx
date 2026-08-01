@@ -10,10 +10,10 @@ const SingleSuccessCase = ({ successCase }: { successCase: SuccessCase }) => {
     <div className="wow fadeInUp group mb-10" data-wow-delay=".1s">
       {coverImage && (
         <div className="mb-8 overflow-hidden rounded">
-          <Link href={`/success-cases/${slug}`} aria-label="success case cover" className="block">
+          <Link href={`/success-cases/${slug}`} aria-label={title || "success case cover"} className="block">
             <Image
               src={coverImage}
-              alt="image"
+              alt={title || "Success case cover"}
               className="w-full object-cover aspect-[3/2] transition group-hover:rotate-6 group-hover:scale-125"
               width={408}
               height={272}
@@ -24,7 +24,8 @@ const SingleSuccessCase = ({ successCase }: { successCase: SuccessCase }) => {
       <div>
         <span className="mb-5 inline-block rounded bg-primary px-4 py-1 text-center text-xs font-semibold leading-loose text-white">
           {(() => {
-            const parsed = typeof date === "string" ? parseISO(date) : new Date(date as unknown as string);
+            if (!date) return "";
+            const parsed = typeof date === "string" ? parseISO(date) : new Date(date);
             return parsed instanceof Date && !isNaN(parsed.getTime())
               ? format(parsed, "dd MMM yyyy")
               : "";

@@ -2,8 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
-
-const CALENDAR_URL = "https://calendar.app.google/JQnkVUqK3FF5VSRU6";
+import { CALENDAR_URL } from "@/constants/links";
 
 const Hero = () => {
   const { t } = useTranslation("common");

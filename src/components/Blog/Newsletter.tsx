@@ -10,8 +10,12 @@ const Newsletter = () => {
       <p className="mb-5 text-base text-white">
         Enter your email to receive our latest newsletter.
       </p>
-      <form>
+      <form aria-label="Newsletter subscription">
+        <label htmlFor="newsletter-email" className="sr-only">
+          Email address
+        </label>
         <input
+          id="newsletter-email"
           type="email"
           placeholder="Your email address"
           className="mb-4 h-[50px] w-full rounded-md border border-transparent bg-white/10 text-center text-base text-white outline-none placeholder:text-white/60 focus:border-white focus-visible:shadow-none"
@@ -19,6 +23,7 @@ const Newsletter = () => {
         <input
           type="submit"
           value="Subscribe Now"
+          aria-label="Subscribe to newsletter"
           className="mb-4 h-[50px] w-full cursor-pointer rounded-md bg-secondary text-center text-sm font-medium text-white transition duration-300 ease-in-out hover:bg-[#0BB489] hover:bg-opacity-90"
         />
       </form>

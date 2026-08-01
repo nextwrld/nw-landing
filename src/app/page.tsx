@@ -37,9 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Home() {
-  // Load success cases for default locale (Spanish)
-  const casesES = getAllSuccessCases("es", ["title", "date", "excerpt", "coverImage", "slug"]);
-  const casesEN = getAllSuccessCases("en", ["title", "date", "excerpt", "coverImage", "slug"]);
+  const casesES = getAllSuccessCases("es", ["title", "date", "excerpt", "coverImage", "slug", "author", "authorImage"]);
+  const casesEN = getAllSuccessCases("en", ["title", "date", "excerpt", "coverImage", "slug", "author", "authorImage"]);
 
   return (
     <main suppressHydrationWarning>

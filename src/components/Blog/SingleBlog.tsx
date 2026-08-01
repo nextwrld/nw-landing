@@ -9,10 +9,10 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div className="wow fadeInUp group mb-10" data-wow-delay=".1s">
       <div className="mb-8 overflow-hidden rounded">
-        <Link href={`/blogs/${slug}`} aria-label="blog cover" className="block">
+        <Link href={`/blogs/${slug}`} aria-label={title || "blog cover"} className="block">
           <Image
-            src={coverImage!}
-            alt="image"
+            src={coverImage || "/images/blog/blog-01.jpg"}
+            alt={title || "Blog post"}
             className="w-full transition group-hover:rotate-6 group-hover:scale-125"
             width={408}
             height={272}
@@ -21,7 +21,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
       </div>
       <div>
         <span className="mb-5 inline-block rounded bg-primary px-4 py-1 text-center text-xs font-semibold leading-loose text-white">
-          {format(new Date(date), "dd MMM yyyy")}
+          {date ? format(new Date(date), "dd MMM yyyy") : ""}
         </span>
         <h3>
           <Link

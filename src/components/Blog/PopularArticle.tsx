@@ -4,9 +4,8 @@ import Link from "next/link";
 const PopularArticle = (props: {
   image: string;
   title: string;
-  name: string;
 }) => {
-  const { image, title, name } = props;
+  const { image, title } = props;
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-full">
       <div
@@ -16,11 +15,10 @@ const PopularArticle = (props: {
         <div className={`mr-5 overflow-hidden rounded`}>
           <Image
             src={image}
-            alt="image"
+            alt={title}
             width={80}
             height={80}
-            objectFit="cover"
-            objectPosition="center"
+            className="h-20 w-20 object-cover object-center"
           />
         </div>
         <div className="w-full">
@@ -32,7 +30,6 @@ const PopularArticle = (props: {
               {title}
             </Link>
           </h4>
-          <p className="text-sm text-body-color dark:text-dark-6">{name}</p>
         </div>
       </div>
     </div>

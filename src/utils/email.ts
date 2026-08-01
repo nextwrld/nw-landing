@@ -6,11 +6,10 @@ type EmailPayload = {
   html: string;
 };
 
-// Replace with your SMTP credentials
 const smtpOptions = {
   host: process.env.EMAIL_SERVER_HOST,
   port: parseInt(process.env.EMAIL_SERVER_PORT || "465"),
-  secure: parseInt(process.env.EMAIL_SERVER_PORT || "465") === 465, // true for 465, false for other ports
+  secure: parseInt(process.env.EMAIL_SERVER_PORT || "465") === 465,
   auth: {
     user: process.env.EMAIL_SERVER_USER,
     pass: process.env.EMAIL_SERVER_PASSWORD,
@@ -18,7 +17,6 @@ const smtpOptions = {
 };
 
 export const sendEmail = async (data: EmailPayload) => {
-
   const transporter = nodemailer.createTransport({
     ...smtpOptions,
   });
@@ -28,10 +26,15 @@ export const sendEmail = async (data: EmailPayload) => {
       from: process.env.EMAIL_FROM,
       ...data,
     });
-    console.log("✅ Email sent:", result.messageId);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Email sent:", result.messageId);
+    }
     return result;
-  } catch (error: any) {
-    console.error("❌ Email error:", error.message);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Email error:", message);
+    }
     throw error;
   }
 };
