@@ -17,6 +17,11 @@ export default async function RootLayout({
   return (
     <html suppressHydrationWarning className="!scroll-smooth" lang={initialLang}>
       <body>
+          {/* Google Tag Manager (noscript) */}
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJJC2MGP"
+             height="0" width="0" style="display:none;visibility:hidden"></iframe>
+             </noscript>
+          {/* End Google Tag Manager (noscript) */}
         <Providers initialLanguage={initialLang}>
           <div className="isolate">
             <Header />
