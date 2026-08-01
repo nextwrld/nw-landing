@@ -5,6 +5,8 @@ export const CALENDAR_URL =
 export const CONTACT_EMAIL = "info@nextwrld.com";
 export const SECONDARY_EMAIL = "contact@nextwrld.com";
 
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-NJJC2MGP";
+
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/company/nextwrld",
   twitter: "https://twitter.com/nextwrld",
