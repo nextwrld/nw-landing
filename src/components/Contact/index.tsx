@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
+import { CONTACT_EMAIL, SECONDARY_EMAIL } from "@/constants/links";
 
 interface ContactProps {
   title?: string;
@@ -36,8 +37,6 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: Contac
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
-    console.log("📤 Submitting form:", formData);
-
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -50,21 +49,21 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: Contac
       const data = await response.json();
 
       if (response.ok) {
-        console.log("✅ Form submitted successfully");
         setSubmitStatus({
           type: "success",
           message: t("contact.successMessage", "¡Gracias por contactarnos! Te responderemos pronto."),
         });
         setFormData({ fullName: "", email: "", phone: "", message: "" });
       } else {
-        console.error("❌ Form submission failed:", data);
         setSubmitStatus({
           type: "error",
           message: data.error || "Failed to send message. Please try again.",
         });
       }
     } catch (error) {
-      console.error("❌ Network error:", error);
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Network error:", error);
+      }
       setSubmitStatus({
         type: "error",
         message: t("contact.errorMessage", "Error de red. Comprueba tu conexión y vuelve a intentarlo."),
@@ -132,10 +131,10 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: Contac
                       {t('contact.email', 'Correo Electrónico')}
                     </h3>
                     <p className="text-base text-body-color dark:text-dark-6">
-                      info@nextwrld.com
+                      {CONTACT_EMAIL}
                     </p>
                     <p className="mt-1 text-base text-body-color dark:text-dark-6">
-                      contact@nextwrld.com
+                      {SECONDARY_EMAIL}
                     </p>
                   </div>
                 </div>

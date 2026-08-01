@@ -2,8 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import PlanCard from "@/components/PlanCard";
-
-const CALENDAR_URL = "https://calendar.app.google/JQnkVUqK3FF5VSRU6";
+import { CALENDAR_URL } from "@/constants/links";
 
 const Modelo = () => {
   const { t } = useTranslation("common");

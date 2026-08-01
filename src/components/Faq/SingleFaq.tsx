@@ -8,18 +8,21 @@ const SingleFaq = (props: { question: string; answer: string }) => {
 
   return (
     <div className="mb-4 flex w-full flex-col overflow-hidden rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between p-6 text-left transition-all hover:bg-gray-50 dark:hover:bg-dark-3"
-      >
-        <h3 className="pr-4 text-base font-semibold text-dark dark:text-white lg:text-lg">
-          {question}
-        </h3>
-        <ChevronDownIcon
-          className={`h-5 w-5 flex-shrink-0 text-primary transition-transform duration-300 ${isOpen ? "rotate-180" : ""
-            }`}
-        />
-      </button>
+      <h3>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          className="flex w-full items-center justify-between p-6 text-left transition-all hover:bg-gray-50 dark:hover:bg-dark-3"
+        >
+          <span className="pr-4 text-base font-semibold text-dark dark:text-white lg:text-lg">
+            {question}
+          </span>
+          <ChevronDownIcon
+            className={`h-5 w-5 flex-shrink-0 text-primary transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+              }`}
+          />
+        </button>
+      </h3>
 
       <div
         className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"

@@ -1,7 +1,8 @@
 import { Menu } from "@/types/menu";
+import type { TOptions } from "i18next";
 
 const buildMenuData = (
-  t: (key: string, options?: any) => string
+  t: (key: string, options?: TOptions) => string
 ): Menu[] => [
   
   {

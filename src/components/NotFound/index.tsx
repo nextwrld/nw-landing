@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,13 +10,13 @@ const NotFound = () => {
             <div className="relative mx-auto aspect-[129/138] max-w-[357px] text-center">
               <Image
                 src="/images/404.svg"
-                alt="image"
+                alt="404 not found illustration"
                 fill
                 className="mx-auto max-w-full dark:hidden"
               />
               <Image
                 src="/images/404-dark.svg"
-                alt="image"
+                alt="404 not found illustration"
                 fill
                 className="mx-auto hidden max-w-full dark:block"
               />

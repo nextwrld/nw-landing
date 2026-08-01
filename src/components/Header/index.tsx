@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSelector from "@/components/LanguageSelector";
 
 import buildMenuData from "./menuData";
+import type { Menu } from "@/types/menu";
 
 const Header = () => {
   const { t } = useTranslation('common');
@@ -31,11 +32,12 @@ const Header = () => {
   };
   useEffect(() => {
     window.addEventListener("scroll", handleStickyNavbar);
-  });
+    return () => window.removeEventListener("scroll", handleStickyNavbar);
+  }, []);
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
-  const handleSubmenu = (index: any) => {
+  const handleSubmenu = (index: number) => {
     if (openIndex === index) {
       setOpenIndex(-1);
     } else {
@@ -44,27 +46,6 @@ const Header = () => {
   };
 
   const { theme, setTheme } = useTheme();
-
-  // Handle navigation to anchor links from different pages
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
-    // Check if it's an anchor link (starts with /#)
-    if (path.startsWith("/#")) {
-      const sectionId = path.substring(2); // Remove /#
-
-      // If we're not on the home page, navigate to home first
-      if (pathUrl !== "/") {
-        e.preventDefault();
-        window.location.href = path;
-      } else {
-        // We're on home page, just scroll to section
-        e.preventDefault();
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    }
-  };
 
   return (
     <>
@@ -218,6 +199,7 @@ const Header = () => {
                           {!isHomeLike ? (
                             <button
                               onClick={() => handleSubmenu(index)}
+                              aria-expanded={openIndex === index}
                               className={`ud-menu-scroll flex items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary lg:inline-flex lg:px-0 lg:py-6`}
                             >
                               {menuItem.title}
@@ -241,6 +223,7 @@ const Header = () => {
                           ) : (
                             <button
                               onClick={() => handleSubmenu(index)}
+                              aria-expanded={openIndex === index}
                               className={`ud-menu-scroll flex items-center justify-between py-2 text-base lg:inline-flex lg:px-0 lg:py-6 ${sticky
                                 ? "text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary"
                                 : "text-white"
@@ -270,10 +253,10 @@ const Header = () => {
                             className={`submenu relative left-0 top-full w-[250px] rounded-sm bg-white p-4 transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${openIndex === index ? "!-left-[25px]" : "hidden"
                               }`}
                           >
-                            {menuItem?.submenu?.map((submenuItem: any, i) => (
+                            {menuItem?.submenu?.map((submenuItem: Menu, i) => (
                               <Link
-                                href={submenuItem.path}
-                                key={i}
+                                href={submenuItem.path || "#"}
+                                key={submenuItem.id}
                                 className={`block rounded px-4 py-[10px] text-sm ${pathUrl === submenuItem.path
                                   ? "text-primary"
                                   : "text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"

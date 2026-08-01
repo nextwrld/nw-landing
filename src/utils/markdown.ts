@@ -1,6 +1,8 @@
 import fs from "fs";
 import matter from "gray-matter";
 import { join } from "path";
+import type { Blog } from "@/types/blog";
+import type { SuccessCase } from "@/types/success-case";
 
 const successCasesDirectory = join(process.cwd(), "markdown/success-cases");
 
@@ -12,7 +14,9 @@ export function getSuccessCaseSlugs(locale: string = "es") {
   return fs.readdirSync(localeDirectory);
 }
 
-export function getSuccessCaseBySlug(slug: string, locale: string = "es", fields: string[] = []) {
+type SuccessCaseResult = Partial<SuccessCase> & { metadata?: Record<string, unknown> };
+
+export function getSuccessCaseBySlug(slug: string, locale: string = "es", fields: string[] = []): SuccessCaseResult | null {
   const realSlug = slug.replace(/\.mdx$/, "");
   const localeDirectory = join(successCasesDirectory, locale);
   const fullPath = join(localeDirectory, `${realSlug}.mdx`);
@@ -24,46 +28,31 @@ export function getSuccessCaseBySlug(slug: string, locale: string = "es", fields
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  type Items = {
-    [key: string]: string | object;
-  };
+  const items: SuccessCaseResult = {};
 
-  const items: any = {};
-
-  // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = realSlug;
-    }
-    if (field === "content") {
-      // Return raw content - will be processed by markdownToHtml
-      items[field] = content;
-    }
-
-    if (field === "metadata") {
-      items[field] = { ...data, coverImage: data.coverImage || null };
-    }
-
-    if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
+      items.slug = realSlug;
+    } else if (field === "content") {
+      items.content = content;
+    } else if (field === "metadata") {
+      items.metadata = { ...data, coverImage: data.coverImage || null };
+    } else if (typeof data[field] !== "undefined") {
+      (items as Record<string, unknown>)[field] = data[field];
     }
   });
 
   return items;
 }
 
-export function getAllSuccessCases(locale: string = "es", fields: string[] = []) {
+export function getAllSuccessCases(locale: string = "es", fields: string[] = []): SuccessCaseResult[] {
   const slugs = getSuccessCaseSlugs(locale);
-  const cases = slugs
+  return slugs
     .map((slug) => getSuccessCaseBySlug(slug, locale, fields))
-    .filter((item) => item !== null)
-    // sort cases by date in descending order
-    .sort((case1, case2) => (case1.date > case2.date ? -1 : 1));
-
-  return cases;
+    .filter((item): item is SuccessCaseResult => item !== null)
+    .sort((a, b) => ((a.date || "") > (b.date || "") ? -1 : 1));
 }
 
-// Legacy blog functions (keep for backwards compatibility if needed)
 const postsDirectory = join(process.cwd(), "markdown/blogs");
 
 export function getPostSlugs() {
@@ -73,7 +62,14 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
+type PostResult = Partial<Blog> & {
+  author?: string;
+  authorImage?: string;
+  content?: string;
+  metadata?: Record<string, unknown>;
+};
+
+export function getPostBySlug(slug: string, fields: string[] = []): PostResult | null {
   const realSlug = slug.replace(/\.mdx$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.mdx`);
 
@@ -84,42 +80,27 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  type Items = {
-    [key: string]: string | object;
-  };
-
-  const items: any = {};
-
-  function processImages(content: string) {
-    return content.replace(/!\[.*?\]\((.*?)\)/g, '<img src="$1" alt="" />');
-  }
+  const items: PostResult = {};
 
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = realSlug;
-    }
-    if (field === "content") {
-      items[field] = processImages(content);
-    }
-
-    if (field === "metadata") {
-      items[field] = { ...data, coverImage: data.coverImage || null };
-    }
-
-    if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
+      items.slug = realSlug;
+    } else if (field === "content") {
+      items.content = content;
+    } else if (field === "metadata") {
+      items.metadata = { ...data, coverImage: data.coverImage || null };
+    } else if (typeof data[field] !== "undefined") {
+      (items as Record<string, unknown>)[field] = data[field];
     }
   });
 
   return items;
 }
 
-export function getAllPosts(fields: string[] = []) {
+export function getAllPosts(fields: string[] = []): PostResult[] {
   const slugs = getPostSlugs();
-  const posts = slugs
+  return slugs
     .map((slug) => getPostBySlug(slug, fields))
-    .filter((item) => item !== null)
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-
-  return posts;
+    .filter((item): item is PostResult => item !== null)
+    .sort((a, b) => ((a.date || "") > (b.date || "") ? -1 : 1));
 }

@@ -2,6 +2,7 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import PlanCard from "@/components/PlanCard";
+import { CALENDAR_URL } from "@/constants/links";
 
 const Pricing = () => {
   const { t } = useTranslation('common');
@@ -48,7 +49,7 @@ const Pricing = () => {
             features={plan2Features}
             featuresTitle={t('pricing.includes')}
             ctaLabel={t('pricing.plan2.cta')}
-            ctaHref="https://calendar.app.google/JQnkVUqK3FF5VSRU6"
+            ctaHref={CALENDAR_URL}
             ctaTarget="_blank"
             badge={t('pricing.plan2.badge')}
           />
