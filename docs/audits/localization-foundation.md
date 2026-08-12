@@ -55,6 +55,8 @@
 
 ## Verificación de I18N-006 (cierre)
 
+**Cierre 2026-08-12:** commit `ce9f3fe`, Vercel check `success`.
+
 - `pnpm lint` → 0 errores/warnings.
 - `pnpm test` → 68/68 (incluye test de regresión que falla si `i18next`/`react-i18next` reaparecen en `package.json`).
 - `pnpm build` → todas las rutas localizadas `● SSG`; `/api/contact` `ƒ` dinámico.
