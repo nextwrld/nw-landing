@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { CONTACT_EMAIL, SECONDARY_EMAIL } from "@/constants/links";
+import type { ContactSource } from "@/utils/contact";
 
 interface ContactProps {
   title?: string;
@@ -9,15 +10,18 @@ interface ContactProps {
   placeholder?: string;
   buttonText?: string;
   formTitle?: string;
+  source?: ContactSource;
 }
 
-const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: ContactProps) => {
+const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source = "home" }: ContactProps) => {
   const { t } = useTranslation('common');
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
     message: "",
+    source,
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
@@ -53,7 +57,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: Contac
           type: "success",
           message: t("contact.successMessage", "¡Gracias por contactarnos! Te responderemos pronto."),
         });
-        setFormData({ fullName: "", email: "", phone: "", message: "" });
+        setFormData({ fullName: "", email: "", phone: "", message: "", source, website: "" });
       } else {
         setSubmitStatus({
           type: "error",
@@ -163,6 +167,19 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle }: Contac
               )}
 
               <form onSubmit={handleSubmit}>
+                <div className="hidden">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+                </div>
                 <div className="mb-[22px]">
                   <label
                     htmlFor="fullName"

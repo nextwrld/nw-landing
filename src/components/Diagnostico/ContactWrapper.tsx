@@ -8,6 +8,7 @@ const DiagnosticoContact = () => {
 
   return (
     <Contact
+      source="diagnostico"
       title={t("diagnostico.cta.title")}
       formTitle={t("diagnostico.cta.formTitle")}
       subtitle={t("diagnostico.cta.subtitle")}
