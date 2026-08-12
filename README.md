@@ -68,8 +68,11 @@ This will launch the template on [localhost:3000](http://localhost:3000).
 ```bash
 pnpm lint    # eslint src
 pnpm test    # vitest run (tests/**/*.test.ts)
+pnpm test:e2e # build + Playwright (tests/e2e/*.spec.ts, Chromium)
 pnpm build   # next build (production)
 ```
+
+`pnpm test:e2e` levanta el servidor de producción (`next start`) y ejecuta una regresión de navegación `/es` ↔ `/en` que falla si aparecen warnings de React (script/hydration) o si el tema no persiste. Requiere instalar el navegador una vez: `pnpm exec playwright install chromium`.
 
 Our comprehensive documentation includes all the guides you'll need for integrating various features.
 

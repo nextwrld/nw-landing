@@ -59,6 +59,7 @@
 
 - `pnpm lint` → 0 errores/warnings.
 - `pnpm test` → 68/68 (incluye test de regresión que falla si `i18next`/`react-i18next` reaparecen en `package.json`).
+- `pnpm test:e2e` → Playwright (Chromium) navega `/es` → `/en` → `/es`, verifica `lang`, copy localizado, toggle de tema y persistencia, y falla ante warnings de React (script/hydration). Dependencia `@playwright/test` (dev, justificada: único medio de probar hydration/navegación real sin errores de consola).
 - `pnpm build` → todas las rutas localizadas `● SSG`; `/api/contact` `ƒ` dinámico.
 - Smoke local (`next start`): H1, menú, footer, diagnóstico, pricing, legales y contacto renderizan el copy correcto por locale en `/es` y `/en`; `<html lang>` correcto.
 - Sin referencias a `react-i18next`, `useTranslation` ni `i18next` en `src/` ni `tests/`.
