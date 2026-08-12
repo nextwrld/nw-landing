@@ -432,10 +432,10 @@ Conservar `coverImage` durante esta fase para evitar un rename sin valor funcion
 
 **Acceptance criteria:**
 
-- [ ] Los seis casos cumplen el contrato mínimo.
-- [ ] No se reescribe el body ni el copy editorial.
-- [ ] Slug y locale coinciden con path y URL.
-- [ ] Frontmatter inválido falla de forma explícita durante tests/build.
+- [x] Los seis casos cumplen el contrato mínimo.
+- [x] No se reescribe el body ni el copy editorial.
+- [x] Slug y locale coinciden con path y URL.
+- [x] Frontmatter inválido falla de forma explícita durante tests/build.
 
 ### SEO-003 Server-render de casos
 
@@ -453,11 +453,11 @@ Implementar `generateStaticParams`, `generateMetadata`, `notFound()` y contenido
 
 **Acceptance criteria:**
 
-- [ ] Raw HTML contiene nombre, descripción, headings y body del caso.
-- [ ] El caso no depende de hydration para aparecer.
-- [ ] Slug inexistente devuelve 404 real.
-- [ ] Metadata deriva del frontmatter correcto.
-- [ ] ES y EN se generan para cada caso disponible.
+- [x] Raw HTML contiene nombre, descripción, headings y body del caso.
+- [x] El caso no depende de hydration para aparecer.
+- [x] Slug inexistente devuelve 404 real.
+- [x] Metadata deriva del frontmatter correcto.
+- [x] ES y EN se generan para cada caso disponible.
 
 ### SEO-004 Eliminar API de lectura de casos
 
@@ -881,7 +881,7 @@ Checklist de seguridad:
 | F0 Baseline | Implementada y desplegada | `pre-refactor-build.md` + checkout limpio `e526adb` + deployment Vercel success + smoke tests 200 | pnpm lint normalizado a `eslint src` (next lint eliminado en Next 16); build scripts de sharp/unrs-resolver aprobados vía `pnpm-workspace.yaml`; verificación en checkout limpio y deployment completados el 2026-08-12 |
 | SEC Security | Implementada y desplegada | `security-foundation.md` + commit `486cbe8` + deployment Vercel success + smoke prod 200/400/404 + WAF 429 (`x-vercel-mitigated: deny`) | Sin desviaciones; la regla WAF se verifica como aplicada al path `/api/contact` con todos los métodos (sin impacto) |
 | I18N Localization | Implementada y desplegada | `localization-foundation.md` + commits `3cd5ff9`/`b7d3b29` + deployment Vercel success + smoke prod (308/404/200, `lang`, determinismo con cookies y `Accept-Language`) | Las secciones estáticas siguen usando `react-i18next` determinista vía `lng` override; la migración completa a diccionarios en servidor se registra para CLIENT-001 (Fase 6) |
-| SEO Rendering | Pendiente | raw HTML + build route table | - |
+| SEO Rendering | Implementada y desplegada | `seo-rendering-foundation.md` + commits `322bb6c`/`b0380ff` + deployment Vercel success + raw HTML heroes/casos sin loading + API de casos 404 | Fecha canónica de `gym-access-os` = `2025-08-01`; normalización de headings internos de casos queda para trabajo de contenido |
 | META SEO | Pendiente | HTTP metadata/robots/sitemap | - |
 | CONTENT Pipeline | Pendiente | content tests + build | - |
 | CLIENT Boundaries | Pendiente | client inventory + build | - |
