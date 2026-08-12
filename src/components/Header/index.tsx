@@ -1,5 +1,4 @@
 "use client";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSelector from "@/components/LanguageSelector";
 import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
+import { useTheme } from "@/components/ThemeProvider";
 
 import buildMenuData from "./menuData";
 import type { Menu } from "@/types/menu";
