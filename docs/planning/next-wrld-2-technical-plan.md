@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Propuesto para implementación.** Este documento define el trabajo; no registra su ejecución.
+**Foundation implementada y desplegada (cierre 2026-08-12).** Todas las fases F0→CLEANUP están cerradas con evidencia en `docs/audits/` y desplegadas en producción (Vercel). El Definition of Done está marcado abajo. Solo la Fase 10 (Experience 2.0) queda fuera de alcance, como frontera documentada.
 
 ## Objetivo
 
@@ -154,11 +154,11 @@ Locale routing -> Static Rendering -> canonical/hreflang -> sitemap -> rediseño
 
 **Acceptance criteria:**
 
-- [ ] Existe un solo lockfile activo.
-- [ ] `pnpm install --frozen-lockfile` funciona en un checkout limpio.
-- [ ] `pnpm lint` funciona.
-- [ ] `pnpm build` funciona.
-- [ ] Deployment usa el mismo package manager y lockfile.
+- [x] Existe un solo lockfile activo.
+- [x] `pnpm install --frozen-lockfile` funciona en un checkout limpio.
+- [x] `pnpm lint` funciona.
+- [x] `pnpm build` funciona.
+- [x] Deployment usa el mismo package manager y lockfile.
 
 ### F0.2 Registrar baseline de build
 
@@ -186,10 +186,10 @@ La auditoría no encontró test runner ni script `test`. Security Foundation exi
 
 **Acceptance criteria:**
 
-- [ ] `pnpm test` existe y funciona en un checkout limpio.
-- [ ] El comando devuelve non-zero ante una prueba fallida.
-- [ ] Las fases posteriores no inventan comandos de prueba diferentes.
-- [ ] Cualquier dependencia nueva tiene una justificación registrada.
+- [x] `pnpm test` existe y funciona en un checkout limpio.
+- [x] El comando devuelve non-zero ante una prueba fallida.
+- [x] Las fases posteriores no inventan comandos de prueba diferentes.
+- [x] Cualquier dependencia nueva tiene una justificación registrada.
 
 **Gate F0:** instalación, lint, tests y build reproducibles. Si existe un bloqueo, debe documentarse con causa y owner, pero Fase 1 no puede comenzar hasta resolverlo.
 
@@ -214,14 +214,14 @@ Esta fase debe desplegarse antes de localización, SEO o limpieza.
 
 **Acceptance criteria:**
 
-- [ ] `locale=es` funciona.
-- [ ] `locale=en` funciona.
-- [ ] `locale=../blogs` falla.
-- [ ] `locale=../../` falla.
-- [ ] `locale=foo` falla.
-- [ ] `locale=` falla o adopta un default explícito antes del acceso a disco.
-- [ ] Slugs con `..`, separadores codificados o traversal fallan antes de acceso a disco.
-- [ ] Existe una prueba automática que falla sin la corrección.
+- [x] `locale=es` funciona.
+- [x] `locale=en` funciona.
+- [x] `locale=../blogs` falla.
+- [x] `locale=../../` falla.
+- [x] `locale=foo` falla.
+- [x] `locale=` falla o adopta un default explícito antes del acceso a disco.
+- [x] Slugs con `..`, separadores codificados o traversal fallan antes de acceso a disco.
+- [x] Existe una prueba automática que falla sin la corrección.
 
 ### SEC-002 Actualizar Next.js dentro de 16.x
 
@@ -239,10 +239,10 @@ Esta fase debe desplegarse antes de localización, SEO o limpieza.
 
 **Acceptance criteria:**
 
-- [ ] La versión elegida no permanece afectada por advisories conocidos aplicables.
-- [ ] Build exitoso.
-- [ ] Home, casos, formulario y selector de idioma funcionan.
-- [ ] No se aplicó `audit fix --force` sin revisión.
+- [x] La versión elegida no permanece afectada por advisories conocidos aplicables.
+- [x] Build exitoso.
+- [x] Home, casos, formulario y selector de idioma funcionan.
+- [x] No se aplicó `audit fix --force` sin revisión.
 
 ### SEC-003 Endurecer `/api/contact`
 
@@ -262,14 +262,14 @@ Esta fase debe desplegarse antes de localización, SEO o limpieza.
 
 **Acceptance criteria:**
 
-- [ ] Payload inválido devuelve `400`.
-- [ ] Honeypot activado no genera envío.
-- [ ] Error SMTP no expone información interna.
-- [ ] El email recibido identifica el origen.
-- [ ] Casos válidos continúan enviándose.
-- [ ] Existen pruebas para validación y sanitización de respuesta.
-- [ ] Existe un control de abuso activo en el entorno de deployment, con owner identificado.
-- [ ] La evidencia de verificación registra límites, respuesta esperada y mecanismo de observabilidad sin publicar secretos.
+- [x] Payload inválido devuelve `400`.
+- [x] Honeypot activado no genera envío.
+- [x] Error SMTP no expone información interna.
+- [x] El email recibido identifica el origen.
+- [x] Casos válidos continúan enviándose.
+- [x] Existen pruebas para validación y sanitización de respuesta.
+- [x] Existe un control de abuso activo en el entorno de deployment, con owner identificado.
+- [x] La evidencia de verificación registra límites, respuesta esperada y mecanismo de observabilidad sin publicar secretos.
 
 **Gate SEC:** traversal cerrado en producción, Next parcheado y endpoint de contacto endurecido.
 
@@ -875,83 +875,83 @@ curl -s https://nextwrld.com/sitemap.xml
 
 Checklist funcional:
 
-- [ ] H1 real en raw HTML.
-- [ ] Body del caso en raw HTML.
-- [ ] `lang` correcto.
-- [ ] Canonical correcto.
-- [ ] Alternates recíprocos correctos.
-- [ ] Metadata correcta.
-- [ ] No aparece `Loading...`.
-- [ ] No aparece `Cargando...`.
-- [ ] No aparece `Play SaaS`.
-- [ ] No aparece `Your Site Name`.
-- [ ] Robots disponible.
-- [ ] Sitemap disponible.
+- [x] H1 real en raw HTML.
+- [x] Body del caso en raw HTML.
+- [x] `lang` correcto.
+- [x] Canonical correcto.
+- [x] Alternates recíprocos correctos.
+- [x] Metadata correcta.
+- [x] No aparece `Loading...`.
+- [x] No aparece `Cargando...`.
+- [x] No aparece `Play SaaS`.
+- [x] No aparece `Your Site Name`.
+- [x] Robots disponible.
+- [x] Sitemap disponible.
 
 Checklist de seguridad:
 
-- [ ] `locale=../blogs` rechazado.
-- [ ] Locale inválido rechazado.
-- [ ] Slug con traversal o separadores codificados rechazado.
-- [ ] Caso inexistente devuelve 404 real.
-- [ ] Payload de contacto inválido devuelve 400.
-- [ ] Errores internos no se exponen.
+- [x] `locale=../blogs` rechazado.
+- [x] Locale inválido rechazado.
+- [x] Slug con traversal o separadores codificados rechazado.
+- [x] Caso inexistente devuelve 404 real.
+- [x] Payload de contacto inválido devuelve 400.
+- [x] Errores internos no se exponen.
 
 ## Definition of Done - Foundation
 
 ### Security
 
-- [ ] Directory traversal corregido y cubierto por pruebas.
-- [ ] Next.js está en una versión 16.x soportada y parcheada.
-- [ ] Formulario endurecido.
-- [ ] No se exponen errores internos.
+- [x] Directory traversal corregido y cubierto por pruebas.
+- [x] Next.js está en una versión 16.x soportada y parcheada.
+- [x] Formulario endurecido.
+- [x] No se exponen errores internos.
 
 ### Rendering
 
-- [ ] `/es` y `/en` entregan hero completo sin JavaScript.
-- [ ] Diagnóstico entrega contenido real sin JavaScript.
-- [ ] Casos completos existen en raw HTML.
-- [ ] No hay loading text como contenido SEO.
+- [x] `/es` y `/en` entregan hero completo sin JavaScript.
+- [x] Diagnóstico entrega contenido real sin JavaScript.
+- [x] Casos completos existen en raw HTML.
+- [x] No hay loading text como contenido SEO.
 
 ### Localization
 
-- [ ] Locale proviene de URL.
-- [ ] `<html lang>` corresponde a URL.
-- [ ] Cookies no deciden contenido.
-- [ ] Selector navega entre idiomas.
-- [ ] URLs históricas tienen redirect o decisión explícita verificada.
+- [x] Locale proviene de URL.
+- [x] `<html lang>` corresponde a URL.
+- [x] Cookies no deciden contenido.
+- [x] Selector navega entre idiomas.
+- [x] URLs históricas tienen redirect o decisión explícita verificada.
 
 ### Static
 
-- [ ] Contenido comercial no depende de request rendering innecesario.
-- [ ] Páginas compatibles se generan estáticamente.
+- [x] Contenido comercial no depende de request rendering innecesario.
+- [x] Páginas compatibles se generan estáticamente.
 
 ### SEO
 
-- [ ] Metadata global y por página.
-- [ ] Canonical y hreflang.
-- [ ] Open Graph y Twitter metadata.
-- [ ] Robots y sitemap.
-- [ ] Headings y HTML semántico correctos.
+- [x] Metadata global y por página.
+- [x] Canonical y hreflang.
+- [x] Open Graph y Twitter metadata.
+- [x] Robots y sitemap.
+- [x] Headings y HTML semántico correctos.
 
 ### Content
 
-- [ ] Casos usan pipeline server-side consistente.
-- [ ] Demo Play no es indexable.
-- [ ] Identidad Play no se expone públicamente.
+- [x] Casos usan pipeline server-side consistente.
+- [x] Demo Play no es indexable.
+- [x] Identidad Play no se expone públicamente.
 
 ### Analytics
 
-- [ ] Existe una sola estrategia GA/GTM.
-- [ ] Eventos de conversión definidos y verificados.
-- [ ] Formularios distinguen source.
+- [x] Existe una sola estrategia GA/GTM.
+- [x] Eventos de conversión definidos y verificados.
+- [x] Formularios distinguen source.
 
 ### Repository
 
-- [ ] Un package manager y un lockfile.
-- [ ] Build reproducible.
-- [ ] Dependencias muertas principales removidas.
-- [ ] README representa el proyecto actual.
+- [x] Un package manager y un lockfile.
+- [x] Build reproducible.
+- [x] Dependencias muertas principales removidas.
+- [x] README representa el proyecto actual.
 
 ## Restricciones para agentes implementadores
 
