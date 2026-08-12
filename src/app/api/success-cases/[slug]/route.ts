@@ -1,5 +1,7 @@
 import { getSuccessCaseBySlug } from "@/utils/markdown";
 import markdownToHtml from "@/utils/markdownToHtml";
+import { defaultLocale, isLocale } from "@/i18n/config";
+import { isValidSlug } from "@/utils/validate";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -7,8 +9,17 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const searchParams = request.nextUrl.searchParams;
-  const locale = searchParams.get("locale") || "es";
+
+  if (!isValidSlug(slug)) {
+    return NextResponse.json({ error: "Invalid slug" }, { status: 400 });
+  }
+
+  const rawLocale = request.nextUrl.searchParams.get("locale");
+  const locale = rawLocale === null ? defaultLocale : rawLocale;
+
+  if (!isLocale(locale)) {
+    return NextResponse.json({ error: "Invalid locale" }, { status: 400 });
+  }
 
   const successCase = getSuccessCaseBySlug(slug, locale, [
     "title",

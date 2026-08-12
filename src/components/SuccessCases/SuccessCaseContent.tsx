@@ -24,7 +24,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
     const loadCase = async () => {
       setLoading(true);
       try {
-        const locale = i18n.language || "es";
+        const locale = encodeURIComponent(i18n.language || "es");
         const response = await fetch(`/api/success-cases/${slug}?locale=${locale}`);
 
         if (response.ok) {

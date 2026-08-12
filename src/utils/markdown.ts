@@ -1,27 +1,76 @@
 import fs from "fs";
 import matter from "gray-matter";
-import { join } from "path";
+import { join, resolve, sep } from "path";
 import type { Blog } from "@/types/blog";
 import type { SuccessCase } from "@/types/success-case";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
+import { InvalidContentPathError, isValidSlug } from "@/utils/validate";
 
-const successCasesDirectory = join(process.cwd(), "markdown/success-cases");
+const contentRoot = join(process.cwd(), "markdown");
+const successCasesDirectory = join(contentRoot, "success-cases");
+const postsDirectory = join(contentRoot, "blogs");
 
-export function getSuccessCaseSlugs(locale: string = "es") {
-  const localeDirectory = join(successCasesDirectory, locale);
-  if (!fs.existsSync(localeDirectory)) {
+function assertInside(baseDirectory: string, candidate: string): void {
+  const base = resolve(baseDirectory);
+  const candidatePath = resolve(candidate);
+  const baseWithSep = base.endsWith(sep) ? base : `${base}${sep}`;
+  if (candidatePath !== base && !candidatePath.startsWith(baseWithSep)) {
+    throw new InvalidContentPathError(
+      `Resolved path escapes the allowed directory: ${candidatePath}`
+    );
+  }
+}
+
+function assertLocaleValid(locale: Locale): void {
+  if (!isLocale(locale)) {
+    throw new InvalidContentPathError(`Unsupported locale: ${String(locale)}`);
+  }
+}
+
+function resolveSuccessCasePath(locale: Locale, slug: string): string {
+  assertLocaleValid(locale);
+  if (!isValidSlug(slug)) {
+    throw new InvalidContentPathError(`Invalid success case slug: ${String(slug)}`);
+  }
+  const candidate = resolve(successCasesDirectory, locale, `${slug}.mdx`);
+  assertInside(successCasesDirectory, candidate);
+  return candidate;
+}
+
+function resolvePostPath(slug: string): string {
+  if (!isValidSlug(slug)) {
+    throw new InvalidContentPathError(`Invalid post slug: ${String(slug)}`);
+  }
+  const candidate = resolve(postsDirectory, `${slug}.mdx`);
+  assertInside(postsDirectory, candidate);
+  return candidate;
+}
+
+function listSources(directory: string): string[] {
+  if (!fs.existsSync(directory)) {
     return [];
   }
-  return fs.readdirSync(localeDirectory);
+  return fs
+    .readdirSync(directory)
+    .filter((name) => name.endsWith(".mdx"))
+    .map((name) => name.slice(0, -4));
+}
+
+export function getSuccessCaseSlugs(locale: Locale = defaultLocale): string[] {
+  assertLocaleValid(locale);
+  return listSources(join(successCasesDirectory, locale));
 }
 
 type SuccessCaseResult = Partial<SuccessCase> & { metadata?: Record<string, unknown> };
 
-export function getSuccessCaseBySlug(slug: string, locale: string = "es", fields: string[] = []): SuccessCaseResult | null {
-  const realSlug = slug.replace(/\.mdx$/, "");
-  const localeDirectory = join(successCasesDirectory, locale);
-  const fullPath = join(localeDirectory, `${realSlug}.mdx`);
+export function getSuccessCaseBySlug(
+  slug: string,
+  locale: Locale = defaultLocale,
+  fields: string[] = []
+): SuccessCaseResult | null {
+  const fullPath = resolveSuccessCasePath(locale, slug);
 
-  if (!fs.existsSync(fullPath)) {
+  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) {
     return null;
   }
 
@@ -32,7 +81,7 @@ export function getSuccessCaseBySlug(slug: string, locale: string = "es", fields
 
   fields.forEach((field) => {
     if (field === "slug") {
-      items.slug = realSlug;
+      items.slug = slug;
     } else if (field === "content") {
       items.content = content;
     } else if (field === "metadata") {
@@ -45,7 +94,10 @@ export function getSuccessCaseBySlug(slug: string, locale: string = "es", fields
   return items;
 }
 
-export function getAllSuccessCases(locale: string = "es", fields: string[] = []): SuccessCaseResult[] {
+export function getAllSuccessCases(
+  locale: Locale = defaultLocale,
+  fields: string[] = []
+): SuccessCaseResult[] {
   const slugs = getSuccessCaseSlugs(locale);
   return slugs
     .map((slug) => getSuccessCaseBySlug(slug, locale, fields))
@@ -53,13 +105,8 @@ export function getAllSuccessCases(locale: string = "es", fields: string[] = [])
     .sort((a, b) => ((a.date || "") > (b.date || "") ? -1 : 1));
 }
 
-const postsDirectory = join(process.cwd(), "markdown/blogs");
-
-export function getPostSlugs() {
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
-  return fs.readdirSync(postsDirectory);
+export function getPostSlugs(): string[] {
+  return listSources(postsDirectory);
 }
 
 type PostResult = Partial<Blog> & {
@@ -70,10 +117,9 @@ type PostResult = Partial<Blog> & {
 };
 
 export function getPostBySlug(slug: string, fields: string[] = []): PostResult | null {
-  const realSlug = slug.replace(/\.mdx$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.mdx`);
+  const fullPath = resolvePostPath(slug);
 
-  if (!fs.existsSync(fullPath)) {
+  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) {
     return null;
   }
 
@@ -84,7 +130,7 @@ export function getPostBySlug(slug: string, fields: string[] = []): PostResult |
 
   fields.forEach((field) => {
     if (field === "slug") {
-      items.slug = realSlug;
+      items.slug = slug;
     } else if (field === "content") {
       items.content = content;
     } else if (field === "metadata") {

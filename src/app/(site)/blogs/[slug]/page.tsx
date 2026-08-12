@@ -3,6 +3,7 @@ import PopularArticle from "@/components/Blog/PopularArticle";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { getAllPosts, getPostBySlug } from "@/utils/markdown";
+import { InvalidContentPathError } from "@/utils/validate";
 import markdownToHtml from "@/utils/markdownToHtml";
 import { format } from "date-fns";
 import Image from "next/image";
@@ -16,7 +17,16 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const post = getPostBySlug(slug, ["title", "author", "content", "metadata"]);
+  let post: ReturnType<typeof getPostBySlug>;
+  try {
+    post = getPostBySlug(slug, ["title", "author", "content", "metadata"]);
+  } catch (error) {
+    if (error instanceof InvalidContentPathError) {
+      post = null;
+    } else {
+      throw error;
+    }
+  }
 
   const siteName = process.env.SITE_NAME || "Your Site Name";
   const authorName = process.env.AUTHOR_NAME || "Your Author Name";
@@ -71,14 +81,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Post({ params }: Props) {
   const { slug } = await params;
   const posts = getAllPosts(["title", "date", "excerpt", "coverImage", "slug"]);
-  const post = getPostBySlug(slug, [
-    "title",
-    "author",
-    "authorImage",
-    "content",
-    "coverImage",
-    "date",
-  ]);
+
+  let post;
+  try {
+    post = getPostBySlug(slug, [
+      "title",
+      "author",
+      "authorImage",
+      "content",
+      "coverImage",
+      "date",
+    ]);
+  } catch (error) {
+    if (error instanceof InvalidContentPathError) {
+      post = null;
+    } else {
+      throw error;
+    }
+  }
 
   if (!post) {
     notFound();
