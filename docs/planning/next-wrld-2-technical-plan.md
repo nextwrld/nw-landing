@@ -375,22 +375,22 @@ No se crean: `/{locale}/about`, `/{locale}/blogs`, `/{locale}/blogs/:slug`, `/{l
 **Acceptance criteria:**
 
 - [x] Existe una matriz origen/destino/status para todas las rutas de la auditoría.
-- [ ] `/` redirige a `/es` sin leer cookies o headers.
-- [ ] Cada ruta pública migrada tiene redirect probado.
-- [ ] Links internos dejan de apuntar a URLs históricas.
+- [x] `/` redirige a `/es` sin leer cookies o headers.
+- [x] Cada ruta pública migrada tiene redirect probado.
+- [x] Links internos dejan de apuntar a URLs históricas.
 
 ### I18N-004 HTML determinista
 
 **Acceptance criteria:**
 
-- [ ] `/es` siempre entrega español.
-- [ ] `/en` siempre entrega inglés.
-- [ ] Cookies y `Accept-Language` no cambian el body de esas URLs.
-- [ ] `<html lang="es">` en `/es`.
-- [ ] `<html lang="en">` en `/en`.
-- [ ] No se usa `suppressHydrationWarning` para ocultar diferencias de idioma.
-- [ ] `generateStaticParams()` genera exactamente los locales soportados.
-- [ ] La tabla de build registra el mode de `/es` y `/en`.
+- [x] `/es` siempre entrega español.
+- [x] `/en` siempre entrega inglés.
+- [x] Cookies y `Accept-Language` no cambian el body de esas URLs.
+- [x] `<html lang="es">` en `/es`.
+- [x] `<html lang="en">` en `/en`.
+- [x] No se usa `suppressHydrationWarning` para ocultar diferencias de idioma.
+- [x] `generateStaticParams()` genera exactamente los locales soportados.
+- [x] La tabla de build registra el mode de `/es` y `/en`.
 
 ### I18N-005 Selector por navegación
 
@@ -880,7 +880,7 @@ Checklist de seguridad:
 | --- | --- | --- | --- |
 | F0 Baseline | Implementada y desplegada | `pre-refactor-build.md` + checkout limpio `e526adb` + deployment Vercel success + smoke tests 200 | pnpm lint normalizado a `eslint src` (next lint eliminado en Next 16); build scripts de sharp/unrs-resolver aprobados vía `pnpm-workspace.yaml`; verificación en checkout limpio y deployment completados el 2026-08-12 |
 | SEC Security | Implementada y desplegada | `security-foundation.md` + commit `486cbe8` + deployment Vercel success + smoke prod 200/400/404 + WAF 429 (`x-vercel-mitigated: deny`) | Sin desviaciones; la regla WAF se verifica como aplicada al path `/api/contact` con todos los métodos (sin impacto) |
-| I18N Localization | Pendiente | build + HTTP smoke tests | - |
+| I18N Localization | Implementada y desplegada | `localization-foundation.md` + commits `3cd5ff9`/`b7d3b29` + deployment Vercel success + smoke prod (308/404/200, `lang`, determinismo con cookies y `Accept-Language`) | Las secciones estáticas siguen usando `react-i18next` determinista vía `lng` override; la migración completa a diccionarios en servidor se registra para CLIENT-001 (Fase 6) |
 | SEO Rendering | Pendiente | raw HTML + build route table | - |
 | META SEO | Pendiente | HTTP metadata/robots/sitemap | - |
 | CONTENT Pipeline | Pendiente | content tests + build | - |
