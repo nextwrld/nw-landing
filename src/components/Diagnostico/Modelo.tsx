@@ -3,9 +3,11 @@
 import { useTranslation } from "react-i18next";
 import PlanCard from "@/components/PlanCard";
 import { CALENDAR_URL } from "@/constants/links";
+import { useLocale } from "@/hooks/useLocale";
 
 const Modelo = () => {
-  const { t } = useTranslation("common");
+  const locale = useLocale();
+  const { t } = useTranslation("common", { lng: locale });
 
   return (
     <section

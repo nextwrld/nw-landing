@@ -1,9 +1,11 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
+import { useLocale } from "@/hooks/useLocale";
 
 const PrivacyPolicyContent = () => {
-  const { t } = useTranslation();
+  const locale = useLocale();
+  const { t } = useTranslation(undefined, { lng: locale });
   const rights: string[] = t("privacyPolicy.rights", { returnObjects: true }) as string[];
   const dataCollected: string[] = t("privacyPolicy.dataCollected", { returnObjects: true }) as string[];
   const usage: string[] = t("privacyPolicy.usage", { returnObjects: true }) as string[];

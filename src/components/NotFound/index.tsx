@@ -1,7 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 const NotFound = () => {
+  const locale = useLocale();
+  const copy = {
+    es: {
+      title: "No encontramos la página que buscas.",
+      body: "La página que buscas no existe. Puede que haya sido movida o eliminada.",
+      cta: "Ir al inicio",
+    },
+    en: {
+      title: "We Can't Seem to Find The Page You're Looking For.",
+      body: "Oops! The page you are looking for does not exist. It might have been moved or deleted.",
+      cta: "Go To Home",
+    },
+  }[locale];
+
   return (
     <section className="bg-white py-20 dark:bg-dark-2 lg:py-[110px]">
       <div className="container mx-auto">
@@ -56,17 +74,16 @@ const NotFound = () => {
                 </svg>
               </div>
               <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
-                We Can&#39;t Seem to Find The Page You&#39;re Looking For.
+                {copy.title}
               </h3>
               <p className="mb-8 text-base text-body-color dark:text-dark-6">
-                Oops! The page you are looking for does not exist. It might have
-                been moved or deleted.
+                {copy.body}
               </p>
               <Link
-                href="/"
+                href={localizedHref(locale, "/")}
                 className="rounded-md bg-dark px-7 py-3 text-base font-medium text-white transition hover:bg-primary dark:bg-primary dark:hover:bg-primary/80"
               >
-                Go To Home
+                {copy.cta}
               </Link>
             </div>
           </div>

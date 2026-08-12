@@ -1,51 +1,39 @@
-'use client';
+"use client";
 
-import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale } from "@/hooks/useLocale";
+import { replaceLocale } from "@/utils/i18n-url";
+import { locales, type Locale } from "@/i18n/config";
 
 const LanguageSelector = () => {
-  const { i18n } = useTranslation();
-  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    try {
-      document.cookie = `language=${lng}; Path=/; Max-Age=31536000`;
-    } catch {}
+  const navigateTo = (target: Locale) => {
+    if (target === locale) return;
+    const path = replaceLocale(pathname, target);
+    const { search, hash } = window.location;
+    router.push(`${path}${search}${hash}`);
   };
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div className="flex items-center gap-2">
-      <button
-        onClick={() => changeLanguage('en')}
-        className={`rounded px-3 py-1 text-sm font-medium transition-colors duration-200 ${
-          i18n.language === 'en'
-            ? 'bg-primary text-white'
-            : 'text-body-color hover:bg-gray-2 dark:text-white dark:hover:bg-white/5'
-        }`}
-        aria-label="Switch to English"
-      >
-        EN
-      </button>
-      <button
-        onClick={() => changeLanguage('es')}
-        className={`rounded px-3 py-1 text-sm font-medium transition-colors duration-200 ${
-          i18n.language === 'es'
-            ? 'bg-primary text-white'
-            : 'text-body-color hover:bg-gray-2 dark:text-white dark:hover:bg-white/5'
-        }`}
-        aria-label="Cambiar a Español"
-      >
-        ES
-      </button>
+      {locales.map((lng) => (
+        <button
+          key={lng}
+          onClick={() => navigateTo(lng)}
+          aria-pressed={locale === lng}
+          aria-label={lng === "en" ? "Switch to English" : "Cambiar a Español"}
+          className={`rounded px-3 py-1 text-sm font-medium transition-colors duration-200 ${
+            locale === lng
+              ? "bg-primary text-white"
+              : "text-body-color hover:bg-gray-2 dark:text-white dark:hover:bg-white/5"
+          }`}
+        >
+          {lng.toUpperCase()}
+        </button>
+      ))}
     </div>
   );
 };

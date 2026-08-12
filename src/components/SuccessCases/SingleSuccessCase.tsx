@@ -2,15 +2,18 @@ import { SuccessCase } from "@/types/success-case";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { localizedPath } from "@/utils/i18n-url";
+import type { Locale } from "@/i18n/config";
 
-const SingleSuccessCase = ({ successCase }: { successCase: SuccessCase }) => {
+const SingleSuccessCase = ({ successCase, locale }: { successCase: SuccessCase; locale: Locale }) => {
   const { title, coverImage, excerpt, date, slug } = successCase;
+  const href = localizedPath(locale, `/success-cases/${slug}`);
 
   return (
     <div className="wow fadeInUp group mb-10" data-wow-delay=".1s">
       {coverImage && (
         <div className="mb-8 overflow-hidden rounded">
-          <Link href={`/success-cases/${slug}`} aria-label={title || "success case cover"} className="block">
+          <Link href={href} aria-label={title || "success case cover"} className="block">
             <Image
               src={coverImage}
               alt={title || "Success case cover"}
@@ -33,7 +36,7 @@ const SingleSuccessCase = ({ successCase }: { successCase: SuccessCase }) => {
         </span>
         <h3>
           <Link
-            href={`/success-cases/${slug}`}
+            href={href}
             className="mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
           >
             {title}

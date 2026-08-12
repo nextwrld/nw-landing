@@ -2,9 +2,11 @@
 
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { useTranslation } from "react-i18next";
+import { useLocale } from "@/hooks/useLocale";
 
 const TermsOfServicePage = () => {
-  const { t } = useTranslation();
+  const locale = useLocale();
+  const { t } = useTranslation(undefined, { lng: locale });
   const acceptance: string[] = t("termsOfService.acceptance", { returnObjects: true }) as string[];
   const usePoints: string[] = t("termsOfService.use", { returnObjects: true }) as string[];
   const accounts: string[] = t("termsOfService.accounts", { returnObjects: true }) as string[];
@@ -12,7 +14,7 @@ const TermsOfServicePage = () => {
 
   return (
     <main>
-      <Breadcrumb pageName={t("termsOfService.title", "Terms of Service")} />
+      <Breadcrumb pageName={t("termsOfService.title", "Terms of Service")} locale={locale} />
       <section className="relative z-10 bg-white py-16 dark:bg-dark">
         <div className="container">
           <div className="mx-auto max-w-3xl prose prose-lg dark:prose-invert">

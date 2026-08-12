@@ -3,9 +3,13 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import PlanCard from "@/components/PlanCard";
 import { CALENDAR_URL } from "@/constants/links";
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 const Pricing = () => {
-  const { t } = useTranslation('common');
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
+  const contactHref = localizedHref(locale, "/#contact");
 
   const plan1Features = t('pricing.plan1.features', { returnObjects: true }) as string[];
   const plan2Features = t('pricing.plan2.features', { returnObjects: true }) as string[];
@@ -39,7 +43,7 @@ const Pricing = () => {
             features={plan1Features}
             featuresTitle={t('pricing.includes')}
             ctaLabel={t('pricing.plan1.cta')}
-            ctaHref="/#contact"
+            ctaHref={contactHref}
           />
           <PlanCard
             variant="highlighted"
@@ -59,7 +63,7 @@ const Pricing = () => {
         <div className="mt-12 text-center">
           <p className="text-base text-body-color dark:text-dark-6">
             {t('pricing.footerNote', 'Tienes un proyecto específico en mente?')}{' '}
-            <Link href="/#contact" className="font-semibold text-primary hover:underline">
+            <Link href={contactHref} className="font-semibold text-primary hover:underline">
               {t('pricing.contactUs')}
             </Link>
           </p>

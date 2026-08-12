@@ -2,9 +2,11 @@
 
 import { useTranslation } from "react-i18next";
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
+import { useLocale } from "@/hooks/useLocale";
 
 const Checklist = () => {
-  const { t } = useTranslation("common");
+  const locale = useLocale();
+  const { t } = useTranslation("common", { lng: locale });
   const items = t("diagnostico.review.items", { returnObjects: true }) as string[];
 
   return (

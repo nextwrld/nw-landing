@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { localizedPath } from "@/utils/i18n-url";
+import type { Locale } from "@/i18n/config";
 
 interface SuccessCaseData {
   title: string;
@@ -15,8 +17,8 @@ interface SuccessCaseData {
   date: string;
 }
 
-export default function SuccessCaseContent({ slug }: { slug: string }) {
-  const { t, i18n } = useTranslation();
+export default function SuccessCaseContent({ slug, locale }: { slug: string; locale: Locale }) {
+  const { t } = useTranslation(undefined, { lng: locale });
   const [caseData, setCaseData] = useState<SuccessCaseData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,20 +26,11 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
     const loadCase = async () => {
       setLoading(true);
       try {
-        const locale = encodeURIComponent(i18n.language || "es");
-        const response = await fetch(`/api/success-cases/${slug}?locale=${locale}`);
+        const response = await fetch(`/api/success-cases/${encodeURIComponent(slug)}?locale=${locale}`);
 
         if (response.ok) {
           const data = await response.json();
           setCaseData(data);
-        } else {
-          // Try the other language
-          const fallbackLocale = locale === "es" ? "en" : "es";
-          const fallbackResponse = await fetch(`/api/success-cases/${slug}?locale=${fallbackLocale}`);
-          if (fallbackResponse.ok) {
-            const data = await fallbackResponse.json();
-            setCaseData(data);
-          }
         }
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
@@ -49,7 +42,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
     };
 
     loadCase();
-  }, [slug, i18n.language]);
+  }, [slug, locale]);
 
   if (loading) {
     return (
@@ -107,7 +100,7 @@ export default function SuccessCaseContent({ slug }: { slug: string }) {
                         )}
                         <p className="text-base font-medium text-white">
                           {t("successCases.by")} {" "}
-                          <Link href="/#" className="text-white hover:opacity-70">
+                          <Link href={localizedPath(locale, "/#success-cases")} className="text-white hover:opacity-70">
                             {caseData.author}
                           </Link>
                         </p>

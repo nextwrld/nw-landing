@@ -32,19 +32,4 @@ i18n
     },
   });
 
-// Guardar idioma en localStorage cuando cambie
-i18n.on('languageChanged', (lng) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('language', lng);
-  }
-});
-
-// Restore language from localStorage after hydration (client-side only)
-if (typeof window !== 'undefined') {
-  const savedLanguage = localStorage.getItem('language');
-  if (savedLanguage && savedLanguage !== i18n.language) {
-    i18n.changeLanguage(savedLanguage);
-  }
-}
-
 export default i18n;

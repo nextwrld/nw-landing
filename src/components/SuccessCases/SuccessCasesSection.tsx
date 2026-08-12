@@ -2,15 +2,12 @@
 import SectionTitle from "../Common/SectionTitle";
 import SingleSuccessCase from "./SingleSuccessCase";
 import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
+import { useLocale } from "@/hooks/useLocale";
 import type { SuccessCase } from "@/types/success-case";
 
-const SuccessCasesSection = ({ casesES, casesEN }: { casesES: SuccessCase[]; casesEN: SuccessCase[] }) => {
-  const { t, i18n } = useTranslation('common');
-
-  const cases = useMemo(() => {
-    return i18n.language === 'en' ? casesEN : casesES;
-  }, [i18n.language, casesES, casesEN]);
+const SuccessCasesSection = ({ cases }: { cases: SuccessCase[] }) => {
+  const locale = useLocale();
+  const { t } = useTranslation("common", { lng: locale });
 
   return (
     <section id="success-cases" className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
@@ -28,7 +25,7 @@ const SuccessCasesSection = ({ casesES, casesEN }: { casesES: SuccessCase[]; cas
         <div className="-mx-4 flex flex-wrap">
           {cases.slice(0, 3).map((successCase) => (
             <div key={successCase.slug} className="w-full px-4 md:w-1/2 lg:w-1/3">
-              <SingleSuccessCase successCase={successCase} />
+              <SingleSuccessCase successCase={successCase} locale={locale} />
             </div>
           ))}
         </div>

@@ -3,9 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { CogIcon, SparklesIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 const About = () => {
-  const { t } = useTranslation('common');
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
 
   const services = [
     {
@@ -91,7 +94,7 @@ const About = () => {
                   </p>
 
                   <Link
-                    href="/#success-cases"
+                    href={localizedHref(locale, "/#success-cases")}
                     className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white duration-300 hover:bg-primary/90"
                   >
                     {t('successCases.title')}

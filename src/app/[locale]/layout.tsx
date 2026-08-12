@@ -3,25 +3,35 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
-import "../styles/index.css";
-import "../styles/prism-vsc-dark-plus.css";
-import Providers from "./providers";
-import { cookies } from "next/headers";
+import Providers from "../providers";
+import { notFound } from "next/navigation";
+import { isLocale, locales, type Locale } from "@/i18n/config";
+import "@/styles/index.css";
+import "@/styles/prism-vsc-dark-plus.css";
 
-export default async function RootLayout({
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-  const cookieStore = await cookies();
-  const cookieLang = cookieStore.get("language")?.value;
-  const initialLang = cookieLang === "en" ? "en" : "es";
+  const { locale } = await params;
+
+  if (!isLocale(locale)) {
+    notFound();
+  }
+
   return (
-    <html suppressHydrationWarning className="!scroll-smooth" lang={initialLang}>
+    <html lang={locale} className="!scroll-smooth">
       <body>
         <GoogleTagManager />
         <GoogleAnalytics />
-        <Providers initialLanguage={initialLang}>
+        <Providers>
           <div className="isolate">
             <Header />
 

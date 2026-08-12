@@ -2,9 +2,10 @@
 import { Feature } from "@/types/feature";
 import { useTranslation } from "react-i18next";
 import { LightBulbIcon, CpuChipIcon, ServerStackIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import type { Locale } from "@/i18n/config";
 
-export const useFeaturesData = (): Feature[] => {
-  const { t } = useTranslation('common');
+export const useFeaturesData = (locale: Locale): Feature[] => {
+  const { t } = useTranslation('common', { lng: locale });
 
   return [
   {

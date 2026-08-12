@@ -3,9 +3,11 @@
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { CALENDAR_URL } from "@/constants/links";
+import { useLocale } from "@/hooks/useLocale";
 
 const Hero = () => {
-  const { t } = useTranslation("common");
+  const locale = useLocale();
+  const { t } = useTranslation("common", { lng: locale });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

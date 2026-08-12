@@ -2,15 +2,17 @@
 
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { useTranslation } from "react-i18next";
+import { useLocale } from "@/hooks/useLocale";
 
 const LegalNoticePage = () => {
-  const { t } = useTranslation();
+  const locale = useLocale();
+  const { t } = useTranslation(undefined, { lng: locale });
   const companyInfo: string[] = t("legalNotice.companyInfo", { returnObjects: true }) as string[];
   const usePoints: string[] = t("legalNotice.use", { returnObjects: true }) as string[];
 
   return (
     <main>
-      <Breadcrumb pageName={t("legalNotice.title", "Legal Notice")} />
+      <Breadcrumb pageName={t("legalNotice.title", "Legal Notice")} locale={locale} />
       <section className="relative z-10 bg-white py-16 dark:bg-dark">
         <div className="container">
           <div className="mx-auto max-w-3xl prose prose-lg dark:prose-invert">

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { CONTACT_EMAIL, SECONDARY_EMAIL } from "@/constants/links";
 import type { ContactSource } from "@/utils/contact";
+import { useLocale } from "@/hooks/useLocale";
 
 interface ContactProps {
   title?: string;
@@ -14,7 +15,8 @@ interface ContactProps {
 }
 
 const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source = "home" }: ContactProps) => {
-  const { t } = useTranslation('common');
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",

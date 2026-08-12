@@ -2,9 +2,11 @@
 
 import { useTranslation } from "react-i18next";
 import { UserGroupIcon } from "@heroicons/react/24/outline";
+import { useLocale } from "@/hooks/useLocale";
 
 const Audience = () => {
-  const { t } = useTranslation("common");
+  const locale = useLocale();
+  const { t } = useTranslation("common", { lng: locale });
   const items = t("diagnostico.audience.items", { returnObjects: true }) as string[];
 
   return (

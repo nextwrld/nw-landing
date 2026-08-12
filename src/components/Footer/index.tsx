@@ -3,9 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const locale = useLocale();
+  const { t } = useTranslation(undefined, { lng: locale });
+  const homeHref = localizedHref(locale, "/");
   return (
     <footer
       className="wow fadeInUp relative z-10 bg-[#090E34] pt-10 lg:pt-[50px]"
@@ -15,7 +19,7 @@ const Footer = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 mx-auto">
             <div className="mb-10 w-full text-center">
-              <Link href="/" className="mb-6 inline-block max-w-[160px]">
+              <Link href={homeHref} className="mb-6 inline-block max-w-[160px]">
                 <Image
                   src="/images/logo/blanco.svg"
                   alt="logo"
@@ -97,19 +101,19 @@ const Footer = () => {
               <div className="my-1">
                 <div className="-mx-3 flex flex-col sm:flex-row items-center justify-center sm:justify-start">
                   <Link
-                    href="/privacy-policy"
+                    href={localizedHref(locale, "/privacy-policy")}
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     {t('footer.privacy_policy', 'Privacy policy')}
                   </Link>
                   <Link
-                    href="/legal-notice"
+                    href={localizedHref(locale, "/legal-notice")}
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     {t('footer.legal_notice', 'Legal notice')}
                   </Link>
                   <Link
-                    href="/terms-of-service"
+                    href={localizedHref(locale, "/terms-of-service")}
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     {t('footer.terms_of_service', 'Terms of service')}

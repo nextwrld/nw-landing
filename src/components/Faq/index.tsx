@@ -2,6 +2,7 @@
 import { useTranslation } from "react-i18next";
 import SectionTitle from "../Common/SectionTitle";
 import SingleFaq from "./SingleFaq";
+import { useLocale } from "@/hooks/useLocale";
 
 interface FaqItem {
   question: string;
@@ -9,7 +10,8 @@ interface FaqItem {
 }
 
 const Faq = () => {
-  const { t } = useTranslation('common');
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
   const questions = t('faq.questions', { returnObjects: true }) as FaqItem[];
 
   return (

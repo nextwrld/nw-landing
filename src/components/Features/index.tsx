@@ -4,11 +4,13 @@ import SectionTitle from "../Common/SectionTitle";
 import SingleFeature from "./SingleFeature";
 import { useFeaturesData } from "./featuresData";
 import { useTranslation } from 'react-i18next';
+import { useLocale } from "@/hooks/useLocale";
 
 
 const Features = () => {
-  const { t } = useTranslation('common');
-  const featuresData = useFeaturesData();
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
+  const featuresData = useFeaturesData(locale);
   return (
     <section id="features" className="pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-[120px]">
       <div className="container">

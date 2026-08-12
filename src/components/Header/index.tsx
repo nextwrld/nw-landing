@@ -6,15 +6,19 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from "@/components/LanguageSelector";
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 import buildMenuData from "./menuData";
 import type { Menu } from "@/types/menu";
 
 const Header = () => {
-  const { t } = useTranslation('common');
-  const menuData = buildMenuData(t);
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
+  const menuData = buildMenuData(t, locale);
   const pathUrl = usePathname();
-  const isHomeLike = pathUrl === "/" || pathUrl === "/diagnostico";
+  const baseHome = `/${locale}`;
+  const isHomeLike = pathUrl === baseHome || pathUrl === `${baseHome}/diagnostico`;
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarToggleHandler = () => {
@@ -59,7 +63,7 @@ const Header = () => {
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-auto max-w-full px-4">
               <Link
-                href="/"
+                href={localizedHref(locale, "/")}
                 className={`navbar-logo ${sticky ? "py-2" : "py-5"} inline-flex items-center whitespace-nowrap`}
               >
                 {isHomeLike ? (
@@ -156,7 +160,7 @@ const Header = () => {
                               onClick={(e) => {
                                 navbarToggleHandler();
                                 // Handle smooth scroll for anchor links
-                                if (menuItem.path?.startsWith("/#")) {
+                                if (menuItem.path?.includes("#")) {
                                   // Navigate to home page with anchor
                                   // The browser will handle scrolling automatically
                                   return; // Let the default link behavior happen
@@ -172,9 +176,9 @@ const Header = () => {
                             <Link
                               onClick={(e) => {
                                 // Handle smooth scroll for anchor links
-                                if (menuItem.path?.startsWith("/#")) {
+                                if (menuItem.path?.includes("#")) {
                                   e.preventDefault();
-                                  const targetId = menuItem.path.substring(2);
+                                  const targetId = menuItem.path.split("#")[1];
                                   const element = document.getElementById(targetId);
                                   if (element) {
                                     element.scrollIntoView({ behavior: "smooth", block: "start" });

@@ -2,9 +2,12 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { ArrowPathIcon, SparklesIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 const CallToAction = () => {
-  const { t } = useTranslation('common');
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
 
   return (
     <section className="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">
@@ -71,7 +74,7 @@ const CallToAction = () => {
           {/* CTA Button */}
           <div className="text-center">
             <Link
-              href="/contact"
+              href={localizedHref(locale, "/contact")}
               className="inline-block rounded-lg border border-transparent bg-secondary px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#0BB489] hover:shadow-xl hover:scale-105"
             >
               {t('callToAction.cta')}

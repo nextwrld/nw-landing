@@ -2,9 +2,11 @@
 
 import { useTranslation } from "react-i18next";
 import Contact from "@/components/Contact";
+import { useLocale } from "@/hooks/useLocale";
 
 const DiagnosticoContact = () => {
-  const { t } = useTranslation("common");
+  const locale = useLocale();
+  const { t } = useTranslation("common", { lng: locale });
 
   return (
     <Contact

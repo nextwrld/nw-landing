@@ -4,9 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useLocale } from "@/hooks/useLocale";
+import { localizedHref } from "@/utils/i18n-url";
 
 const Hero = () => {
-  const { t } = useTranslation('common');
+  const locale = useLocale();
+  const { t } = useTranslation('common', { lng: locale });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -62,7 +65,7 @@ const Hero = () => {
                 <ul className="mb-10 flex flex-wrap items-center justify-center gap-5">
                   <li>
                     <Link
-                      href="/#contact"
+                      href={localizedHref(locale, "/#contact")}
                       className="inline-flex items-center justify-center rounded-md bg-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2"
                     >
                       {t('hero.primaryCTA')}

@@ -1,12 +1,20 @@
 import Link from "next/link";
+import { localizedHref } from "@/utils/i18n-url";
+import { defaultLocale, type Locale } from "@/i18n/config";
 
 const Breadcrumb = ({
   pageName,
   pageDescription,
+  locale = defaultLocale,
+  homeLabel,
 }: {
   pageName: string;
   pageDescription?: string;
+  locale?: Locale;
+  homeLabel?: string;
 }) => {
+  const label = homeLabel ?? (locale === "en" ? "Home" : "Inicio");
+
   return (
     <>
       <div className="dark:bg-dark relative z-10 overflow-hidden pb-[60px] pt-[120px] md:pt-[130px] lg:pt-[160px]">
@@ -25,10 +33,10 @@ const Breadcrumb = ({
                 <ul className="flex items-center justify-center gap-[10px]">
                   <li>
                     <Link
-                      href="/"
+                      href={localizedHref(locale, "/")}
                       className="text-dark flex items-center gap-[10px] text-base font-medium dark:text-white"
                     >
-                      Home
+                      {label}
                     </Link>
                   </li>
                   <li>
