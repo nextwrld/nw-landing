@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap') layer(base);
-
 @import 'tailwindcss';
 @plugin 'tailgrids/plugin';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+
   --color-inherit: inherit;
   --color-current: currentColor;
   --color-transparent: transparent;
@@ -357,7 +358,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .sticky-menu .navbar-logo {

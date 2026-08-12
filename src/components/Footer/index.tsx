@@ -24,7 +24,7 @@ const Footer = ({
               <Link href={homeHref} className="mb-6 inline-block max-w-[160px]">
                 <Image
                   src="/images/logo/blanco.svg"
-                  alt="logo"
+                  alt="Next Wrld"
                   width={90}
                   height={20}
                   className="max-w-full w-[70px] h-auto mx-auto"
@@ -146,7 +146,7 @@ const Footer = ({
         {/* shape-1 removed per design request */}
 
         <span className="absolute bottom-0 right-0 z-[-1] aspect-[31/22] w-full max-w-[372px]">
-          <Image src="/images/footer/shape-3.svg" alt="shape" fill />
+          <Image src="/images/footer/shape-3.svg" alt="" fill sizes="372px" />
         </span>
 
         <span className="absolute right-0 top-0 z-[-1]">

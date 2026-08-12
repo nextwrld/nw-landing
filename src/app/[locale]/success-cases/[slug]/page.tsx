@@ -111,7 +111,8 @@ export default async function SuccessCasePage({ params }: Props) {
                   >
                     <Image
                       src={successCase.coverImage}
-                      alt={dict.common.imageAlt}
+                      alt={successCase.title ?? ""}
+                      priority
                       width={1288}
                       height={500}
                       className="h-full w-full object-cover object-center"
@@ -123,7 +124,7 @@ export default async function SuccessCasePage({ params }: Props) {
                             <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
                               <Image
                                 src={successCase.authorImage}
-                                alt={dict.common.imageAlt}
+                                alt=""
                                 className="w-full"
                                 width={40}
                                 height={40}

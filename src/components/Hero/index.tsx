@@ -62,7 +62,9 @@ const Hero = ({
                 <div className="mt-16">
                   <Image
                     src="/images/hero/hero-image.jpg"
-                    alt="hero"
+                    alt=""
+                    priority
+                    sizes="(max-width: 845px) 100vw, 845px"
                     className="mx-auto max-w-full rounded-t-xl rounded-tr-xl"
                     width={845}
                     height={316}

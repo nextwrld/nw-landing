@@ -66,14 +66,14 @@ const Header = ({ menu }: { menu: Menu[] }) => {
                   <>
                     <Image
                       src={`${sticky ? "/images/logo/degradado.svg" : "/images/logo/blanco.svg"}`}
-                      alt="logo"
+                      alt="Next Wrld"
                         width={70}
                         height={15}
                       className="header-logo dark:hidden w-[70px] h-auto"
                     />
                     <Image
                       src={"/images/logo/blanco.svg"}
-                      alt="logo"
+                      alt="Next Wrld"
                       width={70}
                       height={15}
                       className="header-logo hidden dark:block w-[70px] h-auto"
@@ -83,14 +83,14 @@ const Header = ({ menu }: { menu: Menu[] }) => {
                   <>
                     <Image
                       src={`/images/logo/degradado.svg`}
-                      alt="logo"
+                      alt="Next Wrld"
                       width={120}
                       height={30}
                       className="header-logo dark:hidden w-[60px] h-auto"
                     />
                     <Image
                       src={`/images/logo/blanco.svg`}
-                      alt="logo"
+                      alt="Next Wrld"
                       width={60}
                       height={15}
                       className="header-logo hidden dark:block w-[60px] h-auto"

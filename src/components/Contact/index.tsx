@@ -25,20 +25,41 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [fieldErrors, setFieldErrors] = useState<{
+    fullName?: string;
+    email?: string;
+    message?: string;
+  }>({});
+
+  const validate = (data: typeof formData) => {
+    const errors: typeof fieldErrors = {};
+    if (!data.fullName.trim()) errors.fullName = copy.name;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.email = copy.email;
+    if (!data.message.trim()) errors.message = copy.message;
+    return errors;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!startedRef.current) {
       startedRef.current = true;
       trackEvent("contact_form_start", { form_source: source });
     }
+    const name = e.target.name;
+    setFieldErrors((prev) => (name in prev ? { ...prev, [name]: undefined } : prev));
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const errors = validate(formData);
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setSubmitStatus({ type: "error", message: copy.errorMessage });
+      return;
+    }
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
     trackEvent("contact_form_submit", { form_source: source });
@@ -163,6 +184,8 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
 
               {submitStatus.type && (
                 <div
+                  role="status"
+                  aria-live="polite"
                   className={`mb-6 rounded-lg p-4 ${submitStatus.type === "success"
                       ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
                       : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
@@ -199,9 +222,17 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
+                    autoComplete="name"
+                    aria-invalid={!!fieldErrors.fullName}
+                    aria-describedby={fieldErrors.fullName ? "fullName-error" : undefined}
                     placeholder={copy.name}
                     className="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   />
+                  {fieldErrors.fullName && (
+                    <p id="fullName-error" role="alert" className="mt-1 text-sm text-red-600">
+                      {fieldErrors.fullName}
+                    </p>
+                  )}
                 </div>
                 <div className="mb-[22px]">
                   <label
@@ -216,9 +247,17 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    autoComplete="email"
+                    aria-invalid={!!fieldErrors.email}
+                    aria-describedby={fieldErrors.email ? "email-error" : undefined}
                     placeholder="example@nextwrld.com"
                     className="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   />
+                  {fieldErrors.email && (
+                    <p id="email-error" role="alert" className="mt-1 text-sm text-red-600">
+                      {fieldErrors.email}
+                    </p>
+                  )}
                 </div>
                 <div className="mb-[22px]">
                   <label
@@ -228,10 +267,11 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
                     {copy.phone}
                   </label>
                   <input
-                    type="text"
+                    type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    autoComplete="tel"
                     placeholder="+885 1254 5211 552"
                     className="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   />
@@ -249,9 +289,16 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
                     onChange={handleChange}
                     required
                     rows={4}
+                    aria-invalid={!!fieldErrors.message}
+                    aria-describedby={fieldErrors.message ? "message-error" : undefined}
                     placeholder={copy.placeholder}
                     className="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   ></textarea>
+                  {fieldErrors.message && (
+                    <p id="message-error" role="alert" className="mt-1 text-sm text-red-600">
+                      {fieldErrors.message}
+                    </p>
+                  )}
                 </div>
                 <div className="mb-0 flex sm:block">
                   <button

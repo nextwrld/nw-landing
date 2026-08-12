@@ -30,12 +30,14 @@ const NotFound = () => {
                 src="/images/404.svg"
                 alt="404 not found illustration"
                 fill
+                sizes="357px"
                 className="mx-auto max-w-full dark:hidden"
               />
               <Image
                 src="/images/404-dark.svg"
                 alt="404 not found illustration"
                 fill
+                sizes="357px"
                 className="mx-auto hidden max-w-full dark:block"
               />
             </div>

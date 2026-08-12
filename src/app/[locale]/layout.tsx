@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { SITE_NAME, SITE_URL } from "../site";
+import { inter } from "../fonts";
 import { siteUrl } from "@/utils/seo";
 import "@/styles/index.css";
 import "@/styles/prism-vsc-dark-plus.css";
@@ -68,7 +69,7 @@ export default async function LocaleLayout({
   const dict = await getDictionary(l);
 
   return (
-    <html lang={locale} suppressHydrationWarning className="!scroll-smooth">
+    <html lang={locale} suppressHydrationWarning className={`${inter.variable} !scroll-smooth`}>
       <body>
         <script
           type="application/ld+json"

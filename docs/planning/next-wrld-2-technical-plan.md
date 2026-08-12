@@ -727,9 +727,20 @@ Documentar mercados, base legal, categorías y momento de ejecución antes de am
 - Estado accesible mediante `aria-live` cuando corresponda.
 - `source` validado.
 
+**Acceptance criteria:**
+
+- [x] Labels/ids conectados y `autocomplete` (`name`, `email`, `tel`).
+- [x] Errores por campo con `aria-invalid`/`aria-describedby`.
+- [x] Región de estado con `aria-live="polite"`.
+- [x] `source` validado (servidor) y enviado como `form_source`.
+
 ### UXTECH-002 Newsletter
 
 Eliminar temporalmente la newsletter sin handler. No crear infraestructura hasta que Insights tenga una estrategia real.
+
+**Acceptance criteria:**
+
+- [x] Newsletter sin handler eliminada (CONTENT); no se crea infraestructura.
 
 ### UXTECH-003 Imágenes
 
@@ -740,9 +751,21 @@ Eliminar temporalmente la newsletter sin handler. No crear infraestructura hasta
 - Optimizar assets pesados.
 - Migrar imágenes de casos a una sintaxis soportada.
 
+**Acceptance criteria:**
+
+- [x] Alts descriptivos o vacíos (decorativas) corregidos.
+- [x] `sizes` definido en imágenes con `fill`.
+- [x] LCP priorizado (`priority` en hero de home y cover de caso).
+- [x] Imágenes de casos migradas a `next/image`.
+
 ### UXTECH-004 Fuentes
 
 Mover Inter desde CSS remoto a `next/font` durante la pasada de performance. No bloquear Security ni SEO Foundation por este trabajo.
+
+**Acceptance criteria:**
+
+- [x] Inter self-hosted con `next/font` (sin `@import` remoto).
+- [x] `--font-sans` del theme y `body` usan la variable de la fuente.
 
 **Gate UXTECH:** formulario navegable/anunciado correctamente, newsletter falsa ausente y riesgos evidentes de imagen/fuente resueltos o registrados.
 
@@ -951,6 +974,6 @@ Checklist de seguridad:
 | CONTENT Pipeline | Implementada y desplegada | `content-foundation.md` + deploy Vercel + content tests + build | `.mdx`→`.md`; `next-mdx-remote`/`marked`/`remark-html` removidos; `remark-gfm` añadido (tablas reales); demo/Play de blogs removido |
 | CLIENT Boundaries | Implementada y desplegada | `client-boundaries-foundation.md` + deploy Vercel + inventory + build | Reducción heredada de I18N-006; 12 islas cliente con interacción justificada; NotFound cliente por ausencia de params en not-found |
 | DATA Analytics | Implementada y desplegada | `data-analytics-foundation.md` + deploy Vercel + eventos dataLayer + consentimiento | Estrategia GTM único (owner confirmado); eventos con contexto; banner de consentimiento EEA pendiente de contenido final |
-| UXTECH | Pendiente | accessibility/performance checks | - |
+| UXTECH | Implementada y desplegada | `uxtech-foundation.md` + deploy Vercel + a11y/performance checks | Formulario con errores por campo y aria-live; newsletter eliminada; alts/sizes/LCP corregidos; Inter con next/font |
 | CLEANUP | Pendiente | dependency/reference verification | - |
 | EXPERIENCE | Fuera de Foundation | Documento futuro | - |

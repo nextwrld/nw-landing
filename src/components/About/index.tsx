@@ -112,8 +112,9 @@ const About = ({
                     >
                       <Image
                         src="/images/about/about-image-01.jpg"
-                        alt="about image"
+                        alt=""
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
@@ -123,8 +124,9 @@ const About = ({
                     <div className="relative mb-4 sm:mb-8 sm:h-[220px] md:h-[346px] lg:mb-4 lg:h-[225px] xl:mb-8 xl:h-[310px]">
                       <Image
                         src="/images/about/about-image-02.jpg"
-                        alt="about image"
+                        alt=""
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
