@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Implementación local completada 2026-08-12.** Pendiente de cierre del gate: deployment a producción y activación manual de la regla WAF (owner: usuario). Este documento registra la evidencia antes de esos pasos.
+**Cerrada y desplegada 2026-08-12.** Implementación local verificada, deployment a producción completado (commit `486cbe8`, Vercel check `success`) y regla WAF activada por el owner con `429` confirmado. Detalles y evidencia de producción en [`#Verificación en producción`](#verificación-en-producción-y-waf).
 
 ## Objetivo
 
@@ -124,7 +124,7 @@ Aplicar `Fase 1 - Security First` del [`next-wrld-2-technical-plan.md`](../plann
 
 ## Control de abuso (deployment)
 
-Regla **Vercel WAF** acordada (pendiente de publicar por el owner):
+Regla **Vercel WAF** acordada y activada por el owner:
 
 ```text
 Name:   nw-contact-rate-limit
@@ -133,8 +133,26 @@ Then:   Rate Limit (key: IP, window: 10 min, limit: 10) → 429
 ```
 
 - Disponibilidad: WAF Rate Limiting está incluido en todos los planes; Hobby admite 1 regla.
-- Contadores por región (el límite es por región; documentado como límite conocido).
-- Verificación post-deployment: 11+ POST consecutivos al endpoint → confirmar `429` y evento en Vercel Firewall.
+- Contadores por región: el límite se aplica por región de ejecución. En la prueba, requests repetidas repartidas entre regiones (`gru1::iad1`, `gru1::h92tv`) no superaron el umbral por región; acumuladas en una sola región, el bloqueo apareció.
+- **Observación verificada:** la regla bloquea también `GET /api/contact` (endpoint sin handler GET en la app), lo que indica que la condición en el dashboard se aplica al path con todos los métodos. Sin impacto negativo: `GET /api/contact` no tiene función en la app.
+
+## Verificación en producción y WAF
+
+**Deployment:** push de `main` a `origin/main` (`8c89c69..486cbe8`, 2026-08-12); Vercel GitHub integration check `success`, inspector `https://vercel.com/gabriel-perez-federicos-projects/nw-landing/Ay7woC37vwAB6s7bmnukkw9hxQHY`.
+
+| Verificación | Resultado | Evidencia |
+| --- | --- | --- |
+| `/` `/diagnostico` `/contact` | 200 | `nextwrld.com` |
+| `/api/success-cases/crm?locale=es\|en` y sin locale | 200 | default `es` |
+| `?locale=` `../blogs` `../../` `foo` | 400 | rechazo antes de disco |
+| slug `..%2Fblogs` | 400 | rechazo antes de disco |
+| slug inexistente bien formado | 404 | `404` real |
+| POST `/api/contact` sin `source` | 400 | `Invalid source` |
+| POST email inválido / JSON malformado / campo inesperado | 400 | `Invalid email` / `Invalid request body` / `Unexpected fields in request` |
+| POST honeypot activo | 200 | `Message sent successfully` sin envío |
+| WAF rate limit (`/api/contact`, GET y POST) | 429 | `x-vercel-mitigated: deny`; `/` y `/api/success-cases` siguen `200` |
+
+> **Nota:** la verificación de rate limiting consumió la cuota de 10 requests/10 min de la IP de origen (186.22.17.207). Los envíos legítimos desde esa IP quedan limitados hasta que la ventana de 10 min se reinicie.
 
 ## Riesgos residuales registrados
 
@@ -145,7 +163,7 @@ Then:   Rate Limit (key: IP, window: 10 min, limit: 10) → 429
 | `form-data` (CRLF injection) vía axios | High | Mismo camino muerto (axios). CLEANUP. |
 | `js-yaml@3.x` (2) vía `gray-matter` | High | Solo frontmatter de archivos locales/trusted; preparación de contenido en servidor. Evaluar en fase CONTENT. |
 | `fast-xml-parser` (critical) vía `@types/nodemailer` | Critical | **Solo dev/types** (AWS SDK de tipos). Nunca bundle en runtime. Se retira si se sustituyen los tipos; no afecta producción. |
-| Regla WAF | - | Pendiente de activación manual en Vercel (owner: usuario). |
+| Regla WAF | - | Activa y verificada con `429` + `x-vercel-mitigated: deny`. Owner: usuario. |
 
 ## Gate de salida SEC — Estado
 
@@ -153,7 +171,7 @@ Then:   Rate Limit (key: IP, window: 10 min, limit: 10) → 429
 - [x] Next.js en `16.3.0`, 0 advisories aplicables de `next`; build OK.
 - [x] `/api/contact` endurecido (validación, honeypot, `source`, respuestas genéricas sin leakage).
 - [x] Formularios actualizados para enviar `source` y honeypot.
-- [ ] Deployment a producción de los cambios (pendiente: owner + push).
-- [ ] Regla WAF activa y verificada con `429` (pendiente: owner).
+- [x] Deployment a producción de los cambios (commit `486cbe8`, Vercel check `success`).
+- [x] Regla WAF activa y verificada con `429` (GET y POST `/api/contact`, `x-vercel-mitigated: deny`).
 
 La fase se considerará **cerrada** cuando deployment y WAF estén verificados; ese registro se agrega a esta sección y al [`next-wrld-2-technical-plan.md`](../planning/next-wrld-2-technical-plan.md).
