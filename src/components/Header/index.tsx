@@ -3,19 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
 import LanguageSelector from "@/components/LanguageSelector";
 import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
 import { useTheme } from "@/components/ThemeProvider";
 
-import buildMenuData from "./menuData";
 import type { Menu } from "@/types/menu";
 
-const Header = () => {
+const Header = ({ menu }: { menu: Menu[] }) => {
   const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
-  const menuData = buildMenuData(t, locale);
   const pathUrl = usePathname();
   const baseHome = `/${locale}`;
   const isHomeLike = pathUrl === baseHome || pathUrl === `${baseHome}/diagnostico`;
@@ -152,7 +148,7 @@ const Header = () => {
                     }`}
                 >
                   <ul className="block lg:ml-8 lg:flex lg:gap-x-8 xl:ml-14 xl:gap-x-12">
-                    {menuData.map((menuItem, index) =>
+                    {menu.map((menuItem, index) =>
                       menuItem.path ? (
                         <li key={index} className="group relative">
                           {!isHomeLike ? (

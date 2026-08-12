@@ -1,20 +1,15 @@
-"use client";
-
-import { useTranslation } from "react-i18next";
 import { UserGroupIcon } from "@heroicons/react/24/outline";
-import { useLocale } from "@/hooks/useLocale";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const Audience = () => {
-  const locale = useLocale();
-  const { t } = useTranslation("common", { lng: locale });
-  const items = t("diagnostico.audience.items", { returnObjects: true }) as string[];
+const Audience = ({ dict }: { dict: Dictionary["diagnostico"]["audience"] }) => {
+  const items = dict.items;
 
   return (
     <section className="bg-gray-1 pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]">
       <div className="container">
         <div className="mb-[60px] text-center">
           <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[45px]">
-            {t("diagnostico.audience.title")}
+            {dict.title}
           </h2>
         </div>
 

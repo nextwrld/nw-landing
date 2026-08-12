@@ -1,26 +1,17 @@
-"use client";
-import { useTranslation } from "react-i18next";
 import SectionTitle from "../Common/SectionTitle";
 import SingleFaq from "./SingleFaq";
-import { useLocale } from "@/hooks/useLocale";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-interface FaqItem {
-  question: string;
-  answer: string;
-}
-
-const Faq = () => {
-  const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
-  const questions = t('faq.questions', { returnObjects: true }) as FaqItem[];
+const Faq = ({ dict }: { dict: Dictionary["faq"] }) => {
+  const questions = dict.questions;
 
   return (
     <section id="faq" className="relative z-20 overflow-hidden bg-white pb-8 pt-20 dark:bg-dark lg:pb-[50px] lg:pt-[120px]">
       <div className="container">
         <SectionTitle
-          subtitle={t('faq.subtitle')}
-          title={t('faq.title')}
-          paragraph={t('faq.paragraph')}
+          subtitle={dict.subtitle}
+          title={dict.title}
+          paragraph={dict.paragraph}
           width="640px"
           center
         />

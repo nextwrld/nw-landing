@@ -1,14 +1,16 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslation } from 'react-i18next';
-import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const Footer = () => {
-  const locale = useLocale();
-  const { t } = useTranslation(undefined, { lng: locale });
+const Footer = ({
+  dict,
+  locale,
+}: {
+  dict: Dictionary["footer"];
+  locale: Locale;
+}) => {
   const homeHref = localizedHref(locale, "/");
   return (
     <footer
@@ -29,7 +31,7 @@ const Footer = () => {
                 />
               </Link>
               <p className="mb-8 max-w-[270px] text-base text-gray-7 mx-auto text-center">
-                {t('footer.frase', 'Software is a great art; it can always be improved.')}<br></br> &copy; {new Date().getFullYear()} Next Wrld
+                {dict.frase}<br></br> &copy; {new Date().getFullYear()} Next Wrld
               </p>
               <div className="-mx-3 flex items-center justify-center">
                 <Link
@@ -104,19 +106,19 @@ const Footer = () => {
                     href={localizedHref(locale, "/privacy-policy")}
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
-                    {t('footer.privacy_policy', 'Privacy policy')}
+                    {dict.privacy_policy}
                   </Link>
                   <Link
                     href={localizedHref(locale, "/legal-notice")}
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
-                    {t('footer.legal_notice', 'Legal notice')}
+                    {dict.legal_notice}
                   </Link>
                   <Link
                     href={localizedHref(locale, "/terms-of-service")}
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
-                    {t('footer.terms_of_service', 'Terms of service')}
+                    {dict.terms_of_service}
                   </Link>
                 </div>
               </div>
@@ -124,7 +126,7 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/3 lg:w-1/2">
               <div className="my-1 flex justify-center md:justify-end">
                 <p className="text-base text-gray-7">
-                  {t('footer.allRightsReserved', 'All rights reserved')} &nbsp;|&nbsp; {t('footer.developedBy', 'Developed by')}&nbsp;
+                  {dict.allRightsReserved} &nbsp;|&nbsp; {dict.developedBy}&nbsp;
                   <Link
                     href="#"
                     rel="nofollow noopner noreferrer"

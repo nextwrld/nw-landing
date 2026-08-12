@@ -32,7 +32,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   return (
     <main>
       <Breadcrumb pageName={dict.privacyPolicy.title} locale={l} />
-      <PrivacyPolicyContent />
+      <PrivacyPolicyContent dict={dict.privacyPolicy} />
     </main>
   );
 }

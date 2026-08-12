@@ -1,74 +1,91 @@
-"use client";
-
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { useTranslation } from "react-i18next";
-import { useLocale } from "@/hooks/useLocale";
+import { getDictionary } from "@/i18n/dictionaries";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-const TermsOfServicePage = () => {
-  const locale = useLocale();
-  const { t } = useTranslation(undefined, { lng: locale });
-  const acceptance: string[] = t("termsOfService.acceptance", { returnObjects: true }) as string[];
-  const usePoints: string[] = t("termsOfService.use", { returnObjects: true }) as string[];
-  const accounts: string[] = t("termsOfService.accounts", { returnObjects: true }) as string[];
-  const disclaimers: string[] = t("termsOfService.disclaimers", { returnObjects: true }) as string[];
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const l = isLocale(locale) ? locale : defaultLocale;
+  const dict = await getDictionary(l);
+  return {
+    title: dict.termsOfService.title,
+    description: dict.termsOfService.intro,
+  };
+}
+
+export default async function TermsOfServicePage({ params }: Props) {
+  const { locale } = await params;
+
+  if (!isLocale(locale)) {
+    notFound();
+  }
+
+  const l: Locale = locale;
+  const dict = await getDictionary(l);
+  const d = dict.termsOfService;
 
   return (
     <main>
-      <Breadcrumb pageName={t("termsOfService.title", "Terms of Service")} locale={locale} />
+      <Breadcrumb pageName={d.title} locale={l} />
       <section className="relative z-10 bg-white py-16 dark:bg-dark">
         <div className="container">
           <div className="mx-auto max-w-3xl prose prose-lg dark:prose-invert">
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t("termsOfService.updated")}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{d.updated}</p>
 
-            <h2>{t("termsOfService.title")}</h2>
-            <p>{t("termsOfService.intro")}</p>
+            <h2>{d.title}</h2>
+            <p>{d.intro}</p>
 
-            <h3>{t("termsOfService.acceptanceTitle")}</h3>
+            <h3>{d.acceptanceTitle}</h3>
             <ul>
-              {acceptance.map((item, idx) => (
+              {d.acceptance.map((item, idx) => (
                 <li key={`ac-${idx}`}>{item}</li>
               ))}
             </ul>
 
-            <h3>{t("termsOfService.useTitle")}</h3>
+            <h3>{d.useTitle}</h3>
             <ul>
-              {usePoints.map((item, idx) => (
+              {d.use.map((item, idx) => (
                 <li key={`us-${idx}`}>{item}</li>
               ))}
             </ul>
 
-            <h3>{t("termsOfService.accountsTitle")}</h3>
+            <h3>{d.accountsTitle}</h3>
             <ul>
-              {accounts.map((item, idx) => (
+              {d.accounts.map((item, idx) => (
                 <li key={`acnt-${idx}`}>{item}</li>
               ))}
             </ul>
 
-            <h3>{t("termsOfService.paymentsTitle")}</h3>
-            <p>{t("termsOfService.payments")}</p>
+            <h3>{d.paymentsTitle}</h3>
+            <p>{d.payments}</p>
 
-            <h3>{t("termsOfService.ipTitle")}</h3>
-            <p>{t("termsOfService.ip")}</p>
+            <h3>{d.ipTitle}</h3>
+            <p>{d.ip}</p>
 
-            <h3>{t("termsOfService.terminationTitle")}</h3>
-            <p>{t("termsOfService.termination")}</p>
+            <h3>{d.terminationTitle}</h3>
+            <p>{d.termination}</p>
 
-            <h3>{t("termsOfService.disclaimersTitle")}</h3>
+            <h3>{d.disclaimersTitle}</h3>
             <ul>
-              {disclaimers.map((item, idx) => (
+              {d.disclaimers.map((item, idx) => (
                 <li key={`ds-${idx}`}>{item}</li>
               ))}
             </ul>
 
-            <h3>{t("termsOfService.lawTitle")}</h3>
-            <p>{t("termsOfService.law")}</p>
+            <h3>{d.lawTitle}</h3>
+            <p>{d.law}</p>
 
-            <h3>{t("termsOfService.changesTitle")}</h3>
-            <p>{t("termsOfService.changes")}</p>
+            <h3>{d.changesTitle}</h3>
+            <p>{d.changes}</p>
 
-            <h3>{t("termsOfService.contactTitle")}</h3>
+            <h3>{d.contactTitle}</h3>
             <p>
-              {t("termsOfService.contact")} {" "}
+              {d.contact} {" "}
               <a href="mailto:privacy@nextwrld.com">privacy@nextwrld.com</a>.
             </p>
           </div>
@@ -76,6 +93,4 @@ const TermsOfServicePage = () => {
       </section>
     </main>
   );
-};
-
-export default TermsOfServicePage;
+}

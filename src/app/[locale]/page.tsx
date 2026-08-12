@@ -3,6 +3,7 @@ import SuccessCasesSection from "@/components/SuccessCases/SuccessCasesSection";
 import Clients from "@/components/Clients";
 import ScrollUp from "@/components/Common/ScrollUp";
 import Contact from "@/components/Contact";
+import { buildContactCopy } from "@/components/Contact/contactCopy";
 import Faq from "@/components/Faq";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
@@ -35,6 +36,7 @@ export default async function Home({ params }: Props) {
   }
 
   const l: Locale = locale;
+  const dict = await getDictionary(l);
   const cases = getAllSuccessCases(l, [
     "title",
     "date",
@@ -48,13 +50,13 @@ export default async function Home({ params }: Props) {
   return (
     <main>
       <ScrollUp />
-      <Hero />
-      <Features />
-      <About />
-      <Pricing />
-      <Faq />
-      <SuccessCasesSection cases={cases} />
-      <Contact />
+      <Hero dict={dict.hero} locale={l} />
+      <Features dict={dict.features} />
+      <About dict={dict} locale={l} />
+      <Pricing dict={dict.pricing} locale={l} />
+      <Faq dict={dict.faq} />
+      <SuccessCasesSection dict={dict.successCases} cases={cases} locale={l} />
+      <Contact copy={buildContactCopy(dict.contact)} source="home" />
       <Clients />
     </main>
   );

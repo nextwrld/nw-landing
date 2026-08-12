@@ -406,6 +406,12 @@ Puede guardar una preferencia auxiliar, pero debe navegar. Debe definir fallback
 
 Introducir `getDictionary(locale)` o una interfaz equivalente. El contenido estático no debe depender de `react-i18next` en cliente. Mantener traducción cliente solo donde exista una necesidad interactiva demostrada.
 
+**Acceptance criteria:**
+
+- [x] El contenido estático se renderiza en Server Components con diccionarios cargados en servidor.
+- [x] `react-i18next`/`i18next` no se usan en contenido estático (eliminados de dependencias).
+- [x] La traducción cliente se limita a islas con interacción real (formulario, menú, selector, tema, accordion, smooth scroll).
+
 **Gate I18N:** URLs deterministas, `<html lang>` correcto, selector navegable, redirects históricos probados, locales generados durante build y ninguna cookie decidiendo contenido indexable.
 
 ## Fase 3 - Rendering e indexabilidad
@@ -880,7 +886,7 @@ Checklist de seguridad:
 | --- | --- | --- | --- |
 | F0 Baseline | Implementada y desplegada | `pre-refactor-build.md` + checkout limpio `e526adb` + deployment Vercel success + smoke tests 200 | pnpm lint normalizado a `eslint src` (next lint eliminado en Next 16); build scripts de sharp/unrs-resolver aprobados vía `pnpm-workspace.yaml`; verificación en checkout limpio y deployment completados el 2026-08-12 |
 | SEC Security | Implementada y desplegada | `security-foundation.md` + commit `486cbe8` + deployment Vercel success + smoke prod 200/400/404 + WAF 429 (`x-vercel-mitigated: deny`) | Sin desviaciones; la regla WAF se verifica como aplicada al path `/api/contact` con todos los métodos (sin impacto) |
-| I18N Localization | Implementada y desplegada | `localization-foundation.md` + commits `3cd5ff9`/`b7d3b29` + deployment Vercel success + smoke prod (308/404/200, `lang`, determinismo con cookies y `Accept-Language`) | Las secciones estáticas siguen usando `react-i18next` determinista vía `lng` override; la migración completa a diccionarios en servidor se registra para CLIENT-001 (Fase 6) |
+| I18N Localization | Implementada y desplegada | `localization-foundation.md` + commits `3cd5ff9`/`b7d3b29` + deployment Vercel success + smoke prod (308/404/200, `lang`, determinismo con cookies y `Accept-Language`) | `I18N-006` cerrado: contenido estático migrado a Server Components con diccionarios en servidor; `react-i18next`/`i18next` eliminados de dependencias y del init global. Sin desviaciones pendientes |
 | SEO Rendering | Implementada y desplegada | `seo-rendering-foundation.md` + commits `322bb6c`/`b0380ff` + deployment Vercel success + raw HTML heroes/casos sin loading + API de casos 404 | Fecha canónica de `gym-access-os` = `2025-08-01`; normalización de headings internos de casos queda para trabajo de contenido |
 | META SEO | Pendiente | HTTP metadata/robots/sitemap | - |
 | CONTENT Pipeline | Pendiente | content tests + build | - |

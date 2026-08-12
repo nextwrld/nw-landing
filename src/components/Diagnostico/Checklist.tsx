@@ -1,20 +1,15 @@
-"use client";
-
-import { useTranslation } from "react-i18next";
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
-import { useLocale } from "@/hooks/useLocale";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const Checklist = () => {
-  const locale = useLocale();
-  const { t } = useTranslation("common", { lng: locale });
-  const items = t("diagnostico.review.items", { returnObjects: true }) as string[];
+const Checklist = ({ dict }: { dict: Dictionary["diagnostico"]["review"] }) => {
+  const items = dict.items;
 
   return (
     <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container">
         <div className="mb-[60px] text-center">
           <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[45px]">
-            {t("diagnostico.review.title")}
+            {dict.title}
           </h2>
         </div>
 

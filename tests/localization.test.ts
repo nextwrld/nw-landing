@@ -1,10 +1,20 @@
 import { describe, expect, it } from "vitest";
 import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
 import { defaultLocale, isLocale, locales } from "@/i18n/config";
 import { localizedHref, localizedPath, replaceLocale } from "@/utils/i18n-url";
 import { getDictionary } from "@/i18n/dictionaries";
 
 const require = createRequire(import.meta.url);
+
+describe("server-first localization (I18N-006)", () => {
+  it("does not depend on react-i18next or i18next at runtime", () => {
+    const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+    const deps = { ...pkg.dependencies, ...pkg.devDependencies };
+    expect(deps.i18next).toBeUndefined();
+    expect(deps["react-i18next"]).toBeUndefined();
+  });
+});
 
 describe("locale configuration", () => {
   it("exposes es and en with spanish as default", () => {

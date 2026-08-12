@@ -1,30 +1,32 @@
-'use client';
-import { useTranslation } from 'react-i18next';
 import { CogIcon, SparklesIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const About = () => {
-  const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
-
+const About = ({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) => {
   const services = [
     {
       icon: <CogIcon className="h-12 w-12" />,
-      name: t('services.service1.name'),
-      description: t('services.service1.description'),
+      name: dict.services.service1.name,
+      description: dict.services.service1.description,
     },
     {
       icon: <SparklesIcon className="h-12 w-12" />,
-      name: t('services.service2.name'),
-      description: t('services.service2.description'),
+      name: dict.services.service2.name,
+      description: dict.services.service2.description,
     },
     {
       icon: <ArrowPathIcon className="h-12 w-12" />,
-      name: t('services.service3.name'),
-      description: t('services.service3.description'),
+      name: dict.services.service3.name,
+      description: dict.services.service3.description,
     },
   ];
 
@@ -39,10 +41,10 @@ const About = () => {
           {/* Header */}
           <div className="mb-[60px] text-center">
             <span className="mb-2 block text-lg font-semibold text-primary">
-              {t('services.subtitle')}
+              {dict.services.subtitle}
             </span>
             <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[45px]">
-              {t('services.title')}
+              {dict.services.title}
             </h2>
           </div>
 
@@ -87,17 +89,17 @@ const About = () => {
               <div className="w-full px-4 lg:w-1/2">
                 <div className="mb-12 max-w-[540px] lg:mb-0">
                   <h2 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]">
-                    {t('about.title')}
+                    {dict.about.title}
                   </h2>
                   <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-                    {t('about.description')}
+                    {dict.about.description}
                   </p>
 
                   <Link
                     href={localizedHref(locale, "/#success-cases")}
                     className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white duration-300 hover:bg-primary/90"
                   >
-                    {t('successCases.title')}
+                    {dict.successCases.title}
                   </Link>
                 </div>
               </div>
@@ -133,7 +135,7 @@ const About = () => {
                           {new Date().getFullYear()}
                         </span>
                         <span className="block text-base font-medium text-white/70">
-                          {t('about.yourStrategicAlly')}
+                          {dict.about.yourStrategicAlly}
                         </span>
                       </div>
                       <div>

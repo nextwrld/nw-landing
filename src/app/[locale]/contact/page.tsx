@@ -1,5 +1,6 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import Contact from "@/components/Contact";
+import { buildContactCopy } from "@/components/Contact/contactCopy";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
@@ -32,7 +33,7 @@ const ContactPage = async ({ params }: Props) => {
     <>
       <Breadcrumb pageName={dict.menu.contact} locale={l} />
 
-      <Contact source="contact" />
+      <Contact copy={buildContactCopy(dict.contact)} source="contact" />
     </>
   );
 };

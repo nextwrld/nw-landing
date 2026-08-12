@@ -1,14 +1,16 @@
-"use client";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import { ArrowPathIcon, SparklesIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
-import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const CallToAction = () => {
-  const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
-
+const CallToAction = ({
+  dict,
+  locale,
+}: {
+  dict: Dictionary["callToAction"];
+  locale: Locale;
+}) => {
   return (
     <section className="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">
       <div className="container mx-auto px-4">
@@ -16,9 +18,9 @@ const CallToAction = () => {
           {/* Header */}
           <div className="mx-auto max-w-[700px] text-center mb-12">
             <h2 className="mb-4 text-3xl font-bold text-white md:text-[38px] md:leading-[1.44]">
-              <span>{t('callToAction.title')}</span>
+              <span>{dict.title}</span>
               <span className="block text-3xl font-normal md:text-[40px] mt-2">
-                {t('callToAction.subtitle')}
+                {dict.subtitle}
               </span>
             </h2>
           </div>
@@ -33,10 +35,10 @@ const CallToAction = () => {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                {t('callToAction.bulletPoints.bullet1.title')}
+                {dict.bulletPoints.bullet1.title}
               </h3>
               <p className="text-base leading-relaxed text-white/80">
-                {t('callToAction.bulletPoints.bullet1.description')}
+                {dict.bulletPoints.bullet1.description}
               </p>
             </div>
 
@@ -48,10 +50,10 @@ const CallToAction = () => {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                {t('callToAction.bulletPoints.bullet2.title')}
+                {dict.bulletPoints.bullet2.title}
               </h3>
               <p className="text-base leading-relaxed text-white/80">
-                {t('callToAction.bulletPoints.bullet2.description')}
+                {dict.bulletPoints.bullet2.description}
               </p>
             </div>
 
@@ -63,10 +65,10 @@ const CallToAction = () => {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                {t('callToAction.bulletPoints.bullet3.title')}
+                {dict.bulletPoints.bullet3.title}
               </h3>
               <p className="text-base leading-relaxed text-white/80">
-                {t('callToAction.bulletPoints.bullet3.description')}
+                {dict.bulletPoints.bullet3.description}
               </p>
             </div>
           </div>
@@ -77,7 +79,7 @@ const CallToAction = () => {
               href={localizedHref(locale, "/contact")}
               className="inline-block rounded-lg border border-transparent bg-secondary px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#0BB489] hover:shadow-xl hover:scale-105"
             >
-              {t('callToAction.cta')}
+              {dict.cta}
             </Link>
           </div>
         </div>

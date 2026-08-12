@@ -1,23 +1,17 @@
-'use client';
-
 import SectionTitle from "../Common/SectionTitle";
 import SingleFeature from "./SingleFeature";
-import { useFeaturesData } from "./featuresData";
-import { useTranslation } from 'react-i18next';
-import { useLocale } from "@/hooks/useLocale";
+import { buildFeaturesData } from "./featuresData";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-
-const Features = () => {
-  const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
-  const featuresData = useFeaturesData(locale);
+const Features = ({ dict }: { dict: Dictionary["features"] }) => {
+  const featuresData = buildFeaturesData(dict);
   return (
     <section id="features" className="pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-[120px]">
       <div className="container">
         <SectionTitle
-          subtitle={t('features.title')}
-          title={t('features.subtitle')}
-          paragraph={t('features.description')}
+          subtitle={dict.title}
+          title={dict.subtitle}
+          paragraph={dict.description}
         />
 
         <div className="-mx-4 mt-12 flex flex-wrap lg:mt-20">

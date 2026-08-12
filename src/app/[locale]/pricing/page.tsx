@@ -32,8 +32,8 @@ const PricingPage = async ({ params }: Props) => {
   return (
     <>
       <Breadcrumb pageName={dict.menu.pricing} locale={l} />
-      <Pricing />
-      <Faq />
+      <Pricing dict={dict.pricing} locale={l} />
+      <Faq dict={dict.faq} />
     </>
   );
 };

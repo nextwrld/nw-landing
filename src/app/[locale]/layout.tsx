@@ -3,9 +3,11 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
+import buildMenuData from "@/components/Header/menuData";
 import Providers from "../providers";
 import { notFound } from "next/navigation";
 import { isLocale, locales, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 import "@/styles/index.css";
 import "@/styles/prism-vsc-dark-plus.css";
 
@@ -26,6 +28,9 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  const l: Locale = locale;
+  const dict = await getDictionary(l);
+
   return (
     <html lang={locale} suppressHydrationWarning className="!scroll-smooth">
       <body>
@@ -33,11 +38,11 @@ export default async function LocaleLayout({
         <GoogleAnalytics />
         <Providers>
           <div className="isolate">
-            <Header />
+            <Header menu={buildMenuData(dict.menu, l)} />
 
             {children}
 
-            <Footer />
+            <Footer dict={dict.footer} locale={l} />
             <ScrollToTop />
           </div>
         </Providers>

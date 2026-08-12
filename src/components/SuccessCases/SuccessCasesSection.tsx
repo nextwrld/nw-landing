@@ -1,22 +1,26 @@
-"use client";
 import SectionTitle from "../Common/SectionTitle";
 import SingleSuccessCase from "./SingleSuccessCase";
-import { useTranslation } from "react-i18next";
-import { useLocale } from "@/hooks/useLocale";
 import type { SuccessCase } from "@/types/success-case";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const SuccessCasesSection = ({ cases }: { cases: SuccessCase[] }) => {
-  const locale = useLocale();
-  const { t } = useTranslation("common", { lng: locale });
-
+const SuccessCasesSection = ({
+  dict,
+  cases,
+  locale,
+}: {
+  dict: Dictionary["successCases"];
+  cases: SuccessCase[];
+  locale: Locale;
+}) => {
   return (
     <section id="success-cases" className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="mb-[60px]">
           <SectionTitle
-            subtitle={t('successCases.subtitle')}
-            title={t('successCases.title')}
-            paragraph={t('successCases.description')}
+            subtitle={dict.subtitle}
+            title={dict.title}
+            paragraph={dict.description}
             width="640px"
             center
           />

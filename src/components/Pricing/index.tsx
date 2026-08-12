@@ -1,18 +1,21 @@
-"use client";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import PlanCard from "@/components/PlanCard";
 import { CALENDAR_URL } from "@/constants/links";
-import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const Pricing = () => {
-  const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
+const Pricing = ({
+  dict,
+  locale,
+}: {
+  dict: Dictionary["pricing"];
+  locale: Locale;
+}) => {
   const contactHref = localizedHref(locale, "/#contact");
 
-  const plan1Features = t('pricing.plan1.features', { returnObjects: true }) as string[];
-  const plan2Features = t('pricing.plan2.features', { returnObjects: true }) as string[];
+  const plan1Features = dict.plan1.features;
+  const plan2Features = dict.plan2.features;
 
   return (
     <section
@@ -23,13 +26,13 @@ const Pricing = () => {
         {/* Header */}
         <div className="mb-[60px] text-center">
           <span className="mb-2 block text-lg font-semibold text-primary">
-            {t('pricing.subtitle')}
+            {dict.subtitle}
           </span>
           <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[45px]">
-            {t('pricing.title')}
+            {dict.title}
           </h2>
           <p className="mx-auto max-w-[600px] text-base text-body-color dark:text-dark-6">
-            {t('pricing.paragraph')}
+            {dict.paragraph}
           </p>
         </div>
 
@@ -37,34 +40,34 @@ const Pricing = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <PlanCard
             variant="default"
-            label={t('pricing.plan1.type')}
-            title={t('pricing.plan1.name')}
-            description={t('pricing.plan1.description')}
+            label={dict.plan1.type}
+            title={dict.plan1.name}
+            description={dict.plan1.description}
             features={plan1Features}
-            featuresTitle={t('pricing.includes')}
-            ctaLabel={t('pricing.plan1.cta')}
+            featuresTitle={dict.includes}
+            ctaLabel={dict.plan1.cta}
             ctaHref={contactHref}
           />
           <PlanCard
             variant="highlighted"
-            label={t('pricing.plan2.type')}
-            title={t('pricing.plan2.name')}
-            description={t('pricing.plan2.description')}
+            label={dict.plan2.type}
+            title={dict.plan2.name}
+            description={dict.plan2.description}
             features={plan2Features}
-            featuresTitle={t('pricing.includes')}
-            ctaLabel={t('pricing.plan2.cta')}
+            featuresTitle={dict.includes}
+            ctaLabel={dict.plan2.cta}
             ctaHref={CALENDAR_URL}
             ctaTarget="_blank"
-            badge={t('pricing.plan2.badge')}
+            badge={dict.plan2.badge}
           />
         </div>
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
           <p className="text-base text-body-color dark:text-dark-6">
-            {t('pricing.footerNote', 'Tienes un proyecto específico en mente?')}{' '}
+            {dict.footerNote}{" "}
             <Link href={contactHref} className="font-semibold text-primary hover:underline">
-              {t('pricing.contactUs')}
+              {dict.contactUs}
             </Link>
           </p>
         </div>

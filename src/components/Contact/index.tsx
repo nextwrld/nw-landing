@@ -1,22 +1,15 @@
 "use client";
 import { useState } from "react";
-import { useTranslation } from 'react-i18next';
 import { CONTACT_EMAIL, SECONDARY_EMAIL } from "@/constants/links";
 import type { ContactSource } from "@/utils/contact";
-import { useLocale } from "@/hooks/useLocale";
+import type { ContactCopy } from "./contactCopy";
 
 interface ContactProps {
-  title?: string;
-  subtitle?: string;
-  placeholder?: string;
-  buttonText?: string;
-  formTitle?: string;
+  copy: ContactCopy;
   source?: ContactSource;
 }
 
-const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source = "home" }: ContactProps) => {
-  const locale = useLocale();
-  const { t } = useTranslation('common', { lng: locale });
+const Contact = ({ copy, source = "home" }: ContactProps) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -57,13 +50,13 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
       if (response.ok) {
         setSubmitStatus({
           type: "success",
-          message: t("contact.successMessage", "¡Gracias por contactarnos! Te responderemos pronto."),
+          message: copy.successMessage,
         });
         setFormData({ fullName: "", email: "", phone: "", message: "", source, website: "" });
       } else {
         setSubmitStatus({
           type: "error",
-          message: data.error || "Failed to send message. Please try again.",
+          message: data.error || copy.errorMessage,
         });
       }
     } catch (error) {
@@ -72,7 +65,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
       }
       setSubmitStatus({
         type: "error",
-        message: t("contact.errorMessage", "Error de red. Comprueba tu conexión y vuelve a intentarlo."),
+        message: copy.errorMessage,
       });
     } finally {
       setIsSubmitting(false);
@@ -89,10 +82,10 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
             <div className="ud-contact-content-wrapper">
               <div className="ud-contact-title mb-12 lg:mb-[150px]">
                 <span className="mb-6 block text-base font-medium text-dark dark:text-white">
-                  {subtitle ?? t('contact.subtitle', 'Ponte en contacto con nosotros')}
+                  {copy.subtitle}
                 </span>
                 <h2 className="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white">
-                  {title ?? t('contact.title', 'Contáctanos')}
+                  {copy.title}
                 </h2>
               </div>
               <div className="mb-12 flex flex-wrap justify-between lg:mb-0">
@@ -110,7 +103,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                   </div>
                   <div>
                     <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                      {t('contact.location', 'Your location')}
+                      {copy.location}
                     </h3>
                     <div className="text-base text-body-color dark:text-dark-6">
                       <ul className="list-disc pl-5 space-y-1">
@@ -134,7 +127,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                   </div>
                   <div>
                     <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                      {t('contact.email', 'Correo Electrónico')}
+                      {copy.email}
                     </h3>
                     <p className="text-base text-body-color dark:text-dark-6">
                       {CONTACT_EMAIL}
@@ -154,7 +147,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
               "
             >
               <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
-                {formTitle ?? t('contact.sendMessage', 'Enviar Mensaje')}
+                {copy.formTitle}
               </h3>
 
               {submitStatus.type && (
@@ -187,7 +180,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     htmlFor="fullName"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    {t('contact.name', 'Nombre')}*
+                    {copy.name}*
                   </label>
                   <input
                     type="text"
@@ -195,7 +188,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    placeholder= {t('contact.name', 'Nombre')}
+                    placeholder={copy.name}
                     className="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   />
                 </div>
@@ -204,7 +197,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     htmlFor="email"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    {t('contact.email', 'Correo Electrónico')}*
+                    {copy.email}*
                   </label>
                   <input
                     type="email"
@@ -221,7 +214,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     htmlFor="phone"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    {t('contact.phone', 'Teléfono')}
+                    {copy.phone}
                   </label>
                   <input
                     type="text"
@@ -237,7 +230,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     htmlFor="message"
                     className="mb-4 block text-sm text-body-color dark:text-dark-6"
                   >
-                    {t('contact.message', 'Mensaje')}*
+                    {copy.message}*
                   </label>
                   <textarea
                     name="message"
@@ -245,7 +238,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     onChange={handleChange}
                     required
                     rows={4}
-                    placeholder={placeholder ?? t("contact.placeholder", "Escribe tu mensaje aquí")}
+                    placeholder={copy.placeholder}
                     className="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-dark placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-white"
                   ></textarea>
                 </div>
@@ -255,7 +248,7 @@ const Contact = ({ title, subtitle, placeholder, buttonText, formTitle, source =
                     disabled={isSubmitting}
                     className="w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? t("contact.sending", "Enviando...") : (buttonText ?? t("contact.send", "Enviar"))}
+                    {isSubmitting ? copy.sending : copy.buttonText}
                   </button>
                 </div>
               </form>
