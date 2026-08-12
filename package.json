@@ -2,11 +2,13 @@
   "name": "play-nextjs",
   "version": "2.2.2",
   "private": true,
+  "packageManager": "pnpm@11.20.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src || eslint src --ext .ts,.tsx"
+    "lint": "eslint src",
+    "test": "vitest run"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -57,7 +59,8 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.17",
     "typescript": "^5",
-    "typescript-eslint": "^8.65.0"
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=20"

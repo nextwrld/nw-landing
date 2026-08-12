@@ -48,18 +48,17 @@ Follow these steps to set up and run this template on your local machine:
 
 2. Once you've done that, navigate into the template directory using the **cd** command.
 
-3. Install the necessary dependencies by running the following commands:
+3. The project uses pnpm. Use the package manager version declared in `package.json` and install the dependencies with a frozen lockfile:
 
 ```bash
-    npm install --legacy-peer-deps
+    corepack enable
+    pnpm install --frozen-lockfile
 ```
-
-**Note:** As of right now React 19 causes peer dependencies issues with some packages, so the `legacy-peer-deps` flag is required.
 
 4. Now you're ready to start the project on your local server. Use the following command to get it up and running:
 
 ```bash
-    npm run dev
+    pnpm dev
 ```
 
 This will launch the template on [localhost:3000](http://localhost:3000).
@@ -68,7 +67,7 @@ Our comprehensive documentation includes all the guides you'll need for integrat
 
 ### Deployment on PaaS
 
-If your project is hosted on a GitHub repository, you can deploy it using free and user-friendly platforms like [Vercel](https://vercel.com/) or [Netlify](https://netlify.com/). Both provide generous free tiers for hosting Next.js projects.
+If your project is hosted on a GitHub repository, you can deploy it using free and user-friendly platforms like [Vercel](https://vercel.com/) or [Netlify](https://netlify.com/). Both provide generous free tiers for hosting Next.js projects. The single source of truth for dependencies is `pnpm-lock.yaml`, and deployments install with `pnpm install --frozen-lockfile`.
 
 ### License Information
 
