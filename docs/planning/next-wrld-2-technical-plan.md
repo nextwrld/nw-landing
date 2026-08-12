@@ -662,6 +662,12 @@ Las traducciones no justifican por sí solas hydration.
 
 Preferir `Server Section -> small Client Control`.
 
+**Acceptance criteria:**
+
+- [x] Contenido estático renderizado en servidor (Hero, Features, About, Pricing, Faq, Footer, Diagnóstico, Legal, casos).
+- [x] Cada `"use client"` restante tiene una necesidad de navegador/interacción identificable (inventario en `client-boundaries-foundation.md`).
+- [x] Islas cliente conservadas según CLIENT-002 (formulario, menú, tema, selector, accordion, scroll, analytics).
+
 **Gate CLIENT:** cada `"use client"` restante tiene una necesidad de navegador/interacción identificable.
 
 ## Fase 7 - Analytics y conversión
@@ -933,7 +939,7 @@ Checklist de seguridad:
 | SEO Rendering | Implementada y desplegada | `seo-rendering-foundation.md` + commits `322bb6c`/`b0380ff` + deployment Vercel success + raw HTML heroes/casos sin loading + API de casos 404 | Fecha canónica de `gym-access-os` = `2025-08-01`; normalización de headings internos de casos queda para trabajo de contenido |
 | META SEO | Implementada y desplegada | `seo-meta-foundation.md` + deploy Vercel + HTTP canonical/alternates/robots/sitemap | Structured data parcial (Organization/Article); WebSite/BreadcrumbList/FAQPage pendientes de contenido final |
 | CONTENT Pipeline | Implementada y desplegada | `content-foundation.md` + deploy Vercel + content tests + build | `.mdx`→`.md`; `next-mdx-remote`/`marked`/`remark-html` removidos; `remark-gfm` añadido (tablas reales); demo/Play de blogs removido |
-| CLIENT Boundaries | Pendiente | client inventory + build | - |
+| CLIENT Boundaries | Implementada y desplegada | `client-boundaries-foundation.md` + deploy Vercel + inventory + build | Reducción heredada de I18N-006; 12 islas cliente con interacción justificada; NotFound cliente por ausencia de params en not-found |
 | DATA Analytics | Pendiente | event verification | - |
 | UXTECH | Pendiente | accessibility/performance checks | - |
 | CLEANUP | Pendiente | dependency/reference verification | - |
