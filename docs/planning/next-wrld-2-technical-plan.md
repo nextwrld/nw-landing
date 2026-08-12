@@ -802,6 +802,13 @@ Antes de eliminar cada candidato:
 3. Eliminar una unidad coherente.
 4. Ejecutar lint/build/smoke tests.
 
+**Acceptance criteria:**
+
+- [x] Componentes muertos eliminados (Testimonials, Team, Loader, PreLoader, PricingBox, OfferList, Clients vacío).
+- [x] Dependencias muertas removidas (`stripe`, `axios`, `prismjs`, `@types/prismjs`, `dotenv`) con audit 66→33.
+- [x] Prism runtime/CSS, `schema.json` y tipos huérfanos eliminados.
+- [x] README reescrito representando el proyecto actual.
+
 **Gate CLEANUP:** dependencias y artefactos principales eliminados sin mezclar cambios no relacionados.
 
 ## Fase 10 - Frontera con Experience 2.0
@@ -975,5 +982,5 @@ Checklist de seguridad:
 | CLIENT Boundaries | Implementada y desplegada | `client-boundaries-foundation.md` + deploy Vercel + inventory + build | Reducción heredada de I18N-006; 12 islas cliente con interacción justificada; NotFound cliente por ausencia de params en not-found |
 | DATA Analytics | Implementada y desplegada | `data-analytics-foundation.md` + deploy Vercel + eventos dataLayer + consentimiento | Estrategia GTM único (owner confirmado); eventos con contexto; banner de consentimiento EEA pendiente de contenido final |
 | UXTECH | Implementada y desplegada | `uxtech-foundation.md` + deploy Vercel + a11y/performance checks | Formulario con errores por campo y aria-live; newsletter eliminada; alts/sizes/LCP corregidos; Inter con next/font |
-| CLEANUP | Pendiente | dependency/reference verification | - |
+| CLEANUP | Implementada y desplegada | `cleanup-foundation.md` + deploy Vercel + dependency/reference verification | Componentes muertos y deps removidas (audit 66→33); README reescrito; residuales de seguridad documentados |
 | EXPERIENCE | Fuera de Foundation | Documento futuro | - |

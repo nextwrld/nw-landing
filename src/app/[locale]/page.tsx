@@ -1,6 +1,5 @@
 import About from "@/components/About";
 import SuccessCasesSection from "@/components/SuccessCases/SuccessCasesSection";
-import Clients from "@/components/Clients";
 import ScrollUp from "@/components/Common/ScrollUp";
 import Contact from "@/components/Contact";
 import { buildContactCopy } from "@/components/Contact/contactCopy";
@@ -63,7 +62,6 @@ export default async function Home({ params }: Props) {
       <Faq dict={dict.faq} />
       <SuccessCasesSection dict={dict.successCases} cases={cases} locale={l} />
       <Contact copy={buildContactCopy(dict.contact)} source="home" />
-      <Clients />
     </main>
   );
 }

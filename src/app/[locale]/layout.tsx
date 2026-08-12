@@ -12,7 +12,6 @@ import { SITE_NAME, SITE_URL } from "../site";
 import { inter } from "../fonts";
 import { siteUrl } from "@/utils/seo";
 import "@/styles/index.css";
-import "@/styles/prism-vsc-dark-plus.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
