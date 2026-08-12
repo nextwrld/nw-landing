@@ -48,7 +48,7 @@ Capturar un baseline reproducible que permita comparar errores, warnings, rutas,
 | Next.js resuelto | `16.0.10` |
 | React resuelto | `react@19.2.3`, `react-dom@19.2.3` |
 | Variables requeridas disponibles | No requeridas para install/lint/test/build. |
-| Entorno local/CI | Local (worktree); deployment Vercel verificado el 2026-08-01. |
+| Entorno local/CI | Local (worktree); deployment Vercel verificado el 2026-08-12. |
 
 ## Instalación frozen
 

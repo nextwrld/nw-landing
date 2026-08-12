@@ -30,6 +30,7 @@
 - La página `[locale]/success-cases/[slug]` lee el caso en el Server Component, convierte Markdown a HTML (`markdownToHtml`) y renderiza en servidor con `<article>` semántico, imagen de portada, autor y fecha.
 - `generateMetadata` deriva del frontmatter; slug inexistente → `notFound()`; `generateStaticParams` por locale×slug.
 - Fecha renderizada con `parseISO` (evita el desplazamiento de zona horaria que mostraba `31 Jul 2025` para la fecha canónica).
+- **Encabezado semántico (cierre posterior):** el H1 de la página es el `title` del caso, con la `description` visible y la fecha en `<time>`. El breadcrumb dejó de emitir un H1 genérico (prop `hideHeading`) y se envuelve en `<nav aria-label="Breadcrumb">`. Los H1 residuales del Markdown (`chatbot` ES/EN, `gym-access-os` ES) se normalizaron a H2 (solo nivel, sin tocar copy), garantizando exactamente un H1 por página.
 
 ### SEO-004 — API interna removida
 - Eliminados `/api/success-cases/[slug]` y `SuccessCaseContent` (fetch cliente con fallback cruzado).
@@ -57,7 +58,7 @@
 
 ## Desviaciones
 
-- Ninguna para el gate SEO. La normalización de headings dentro del Markdown de los casos (niveles H1/H2 inconsistentes) queda registrada como trabajo de contenido, fuera del alcance de esta fase (no se reescribió copy).
+- Ninguna para el gate SEO. Los niveles de heading inconsistentes dentro del Markdown de los casos se normalizaron (H1→H2 solo en `chatbot` ES/EN y `gym-access-os` ES) al aplicar el encabezado semántico; no se reescribió copy.
 
 ## Gate SEO — Estado
 

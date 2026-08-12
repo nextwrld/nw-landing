@@ -7,11 +7,13 @@ const Breadcrumb = ({
   pageDescription,
   locale = defaultLocale,
   homeLabel,
+  hideHeading = false,
 }: {
   pageName: string;
   pageDescription?: string;
   locale?: Locale;
   homeLabel?: string;
+  hideHeading?: boolean;
 }) => {
   const label = homeLabel ?? (locale === "en" ? "Home" : "Inicio");
 
@@ -23,32 +25,40 @@ const Breadcrumb = ({
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4">
               <div className="text-center">
-                <h1 className="text-dark mb-4 text-3xl font-bold dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
-                  {pageName}
-                </h1>
-                <p className="text-body-color dark:text-dark-6 mb-5 text-base">
-                  {pageDescription}
-                </p>
-
-                <ul className="flex items-center justify-center gap-[10px]">
-                  <li>
-                    <Link
-                      href={localizedHref(locale, "/")}
-                      className="text-dark flex items-center gap-[10px] text-base font-medium dark:text-white"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                  <li>
-                    <p className="text-body-color flex items-center gap-[10px] text-base font-medium">
-                      <span className="text-body-color dark:text-dark-6">
-                        {" "}
-                        /{" "}
-                      </span>
+                {!hideHeading && (
+                  <>
+                    <h1 className="text-dark mb-4 text-3xl font-bold dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
                       {pageName}
-                    </p>
-                  </li>
-                </ul>
+                    </h1>
+                    {pageDescription && (
+                      <p className="text-body-color dark:text-dark-6 mb-5 text-base">
+                        {pageDescription}
+                      </p>
+                    )}
+                  </>
+                )}
+
+                <nav aria-label="Breadcrumb">
+                  <ul className="flex items-center justify-center gap-[10px]">
+                    <li>
+                      <Link
+                        href={localizedHref(locale, "/")}
+                        className="text-dark flex items-center gap-[10px] text-base font-medium dark:text-white"
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                    <li>
+                      <p className="text-body-color flex items-center gap-[10px] text-base font-medium">
+                        <span className="text-body-color dark:text-dark-6">
+                          {" "}
+                          /
+                        </span>
+                        {pageName}
+                      </p>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>

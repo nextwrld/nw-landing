@@ -25,7 +25,11 @@ export async function POST(request: NextRequest) {
 
   const parsed = parseContactPayload(body);
   if (!parsed.ok) {
-    return NextResponse.json({ error: parsed.reason }, { status: 400 });
+    console.error(`[contact] rejected payload: ${parsed.reason}`);
+    return NextResponse.json(
+      { error: "Invalid request" },
+      { status: 400 }
+    );
   }
 
   const { fullName, email, phone, message, source, website } = parsed.data;

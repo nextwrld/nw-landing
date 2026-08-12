@@ -115,9 +115,14 @@ describe("POST /api/contact", () => {
     [{ ...validWithoutSource }, "missing source"],
     [null, "null body"],
     [[1, 2], "array body"],
-  ])("returns 400 without sending for %s", async (payload, _label) => {
+  ])("returns 400 with a generic message without sending for %s", async (payload, _label) => {
     const res = await post(payload);
     expect(res.status).toBe(400);
+    const body = (await res.json()) as Record<string, unknown>;
+    expect(body.error).toBe("Invalid request");
+    expect(JSON.stringify(body)).not.toMatch(
+      /Invalid email|Invalid name|Invalid message|Invalid source|Unexpected fields|Invalid request payload/
+    );
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 

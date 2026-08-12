@@ -19,7 +19,7 @@ Aplicar `Fase 1 - Security First` del [`next-wrld-2-technical-plan.md`](../plann
 | Next.js | `16.0.10` → `16.3.0` |
 | React | `19.2.3` (sin cambio) |
 | @next/eslint-plugin-next / eslint-config-next | `16.2.12` → `16.3.0` |
-| Commit de implementación | Pendiente de registrar al commitear (estado actual sin commit) |
+| Commit de implementación | `486cbe8` |
 
 ## SEC-001 — Filesystem traversal (Critical)
 
@@ -80,6 +80,28 @@ Aplicar `Fase 1 - Security First` del [`next-wrld-2-technical-plan.md`](../plann
 - **Transitivos bajo `next` (`next>postcss`, `next>sharp`, `next>postcss>nanoid`): 0 restantes** tras la actualización.
 - El `critical` restante (`fast-xml-parser`) es **solo dev/types** vía `@types/nodemailer` → AWS SDK de tipos; no corre en runtime. Ver residuales.
 
+#### Evidencia reproducible (`pnpm audit --lockfile-only`, 2026-08-12, Next 16.3.0)
+
+```text
+66 vulnerabilities found
+Severity: 4 low | 32 moderate | 29 high | 1 critical
+Advisories con module_name == next: NINGUNO
+```
+
+| Módulo | # | low/mod/high/crit | Nota |
+| --- | ---: | --- | --- |
+| axios | 29 | 1/17/11/0 | Vía `PricingBox` huérfano (sin import en runtime); CLEANUP |
+| fast-xml-parser | 7 | 1/2/3/1 | Solo dev/types vía `@types/nodemailer`; no bundle en runtime |
+| nodemailer | 6 | 1/4/1/0 | Uso actual sin `raw`/files/URLs; upgrade mayor separado |
+| brace-expansion | 4 | 0/1/3/0 | Transitiva (tooling) |
+| picomatch | 4 | 0/2/2/0 | Transitiva (tooling) |
+| postcss | 4 | 0/2/2/0 | Bajo `next`; `>=8` patcheado en el árbol |
+| js-yaml | 3 | 0/1/2/0 | Vía `gray-matter`; frontmatter local/trusted |
+| qs | 2 | 1/1/0/0 | Vía `stripe`; CLEANUP |
+| flatted / nanoid / yaml / follow-redirects / form-data | 1–2 c/u | varias | Transitivas; la mayoría por paths muertos (axios/stripe) |
+
+**Conclusiones verificables:** (1) `next@16.3.0` no aparece en ningún advisory del audit actual. (2) El único `critical` (`GHSA-m7jm-9gc2-mpf2`, fast-xml-parser `>=5.3.5`) proviene de tipos de AWS SDK bajo `@types/nodemailer` (dev/types, nunca en el bundle de runtime). (3) Los paths de alto volumen (axios, form-data) son código muerto de starter pendiente de CLEANUP.
+
 ### Verificación local
 
 - `pnpm install --frozen-lockfile` → OK en lockfile actualizado.
@@ -111,12 +133,14 @@ Aplicar `Fase 1 - Security First` del [`next-wrld-2-technical-plan.md`](../plann
 
 | Caso | Status | Respuesta pública |
 | --- | --- | --- |
-| Faltante `source` | 400 | `Invalid source` |
-| Email inválido | 400 | `Invalid email` |
+| Faltante `source` | 400 | `Invalid request` (genérico) |
+| Email inválido | 400 | `Invalid request` (genérico) |
 | JSON malformado | 400 | `Invalid request body` |
-| Campos inesperados / largos / whitespace | 400 | Genérico |
+| Campos inesperados / largos / whitespace | 400 | `Invalid request` (genérico) |
 | Honeypot activo | 200 | `Message sent successfully` (sin envío) |
 | Envío válido (SMTP falla sin credenciales) | 500 | `Something went wrong. Please try again later.` — sin `details` |
+
+> **Errores públicos genéricos (SEC-003):** desde el cierre posterior se devuelve `Invalid request` para cualquier payload inválido; el motivo detallado (campo/schema) solo se registra en logs internos con prefijo `[contact]`, sin payload ni PII.
 
 ### Pruebas
 
@@ -134,7 +158,7 @@ Then:   Rate Limit (key: IP, window: 10 min, limit: 10) → 429
 
 - Disponibilidad: WAF Rate Limiting está incluido en todos los planes; Hobby admite 1 regla.
 - Contadores por región: el límite se aplica por región de ejecución. En la prueba, requests repetidas repartidas entre regiones (`gru1::iad1`, `gru1::h92tv`) no superaron el umbral por región; acumuladas en una sola región, el bloqueo apareció.
-- **Observación verificada:** la regla bloquea también `GET /api/contact` (endpoint sin handler GET en la app), lo que indica que la condición en el dashboard se aplica al path con todos los métodos. Sin impacto negativo: `GET /api/contact` no tiene función en la app.
+- **Observación verificada:** la regla bloqueó también `GET /api/contact` (endpoint sin handler GET en la app). Eso es inconsistente con el predicado documentado `POST AND Path == /api/contact`, por lo que **el predicado exacto activo en el dashboard no es verificable desde el repositorio**. Consecuencia práctica: sin impacto negativo, porque `GET /api/contact` no tiene función en la app. **Seguimiento del owner:** confirmar en el dashboard de Vercel el predicado exacto de `nw-contact-rate-limit` (métodos y condición) y, si la intención es solo POST, restringirlo; si la intención es todos los métodos sobre el path, actualizar esta documentación con la condición real.
 
 ## Verificación en producción y WAF
 
@@ -147,8 +171,8 @@ Then:   Rate Limit (key: IP, window: 10 min, limit: 10) → 429
 | `?locale=` `../blogs` `../../` `foo` | 400 | rechazo antes de disco |
 | slug `..%2Fblogs` | 400 | rechazo antes de disco |
 | slug inexistente bien formado | 404 | `404` real |
-| POST `/api/contact` sin `source` | 400 | `Invalid source` |
-| POST email inválido / JSON malformado / campo inesperado | 400 | `Invalid email` / `Invalid request body` / `Unexpected fields in request` |
+| POST `/api/contact` sin `source` | 400 | `Invalid request` (genérico) |
+| POST email inválido / JSON malformado / campo inesperado | 400 | `Invalid request` / `Invalid request body` |
 | POST honeypot activo | 200 | `Message sent successfully` sin envío |
 | WAF rate limit (`/api/contact`, GET y POST) | 429 | `x-vercel-mitigated: deny`; `/` y `/api/success-cases` siguen `200` |
 
