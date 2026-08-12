@@ -7,6 +7,8 @@ import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { buildPageMetadata, siteUrl } from "@/utils/seo";
+import { SITE_NAME } from "../../../site";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -15,16 +17,20 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const l = isLocale(locale) ? locale : defaultLocale;
-  const successCase = getSuccessCaseBySlug(slug, l, ["title", "description"]);
+  const successCase = getSuccessCaseBySlug(slug, l, ["title", "description", "coverImage"]);
 
   if (!successCase) {
-    return { title: "Success Case | Next Wrld" };
+    return { title: "Success Case" };
   }
 
-  return {
-    title: `${successCase.title} | Next Wrld`,
-    description: successCase.description,
-  };
+  return buildPageMetadata({
+    locale: l,
+    path: `/success-cases/${slug}`,
+    title: successCase.title ?? "Success Case",
+    description: successCase.description ?? "",
+    image: successCase.coverImage ?? undefined,
+    type: "article",
+  });
 }
 
 export default async function SuccessCasePage({ params }: Props) {
@@ -52,8 +58,24 @@ export default async function SuccessCasePage({ params }: Props) {
   const dict = await getDictionary(l);
   const content = await markdownToHtml(successCase.content || "");
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: successCase.title,
+    description: successCase.description,
+    datePublished: successCase.date,
+    author: { "@type": "Organization", name: successCase.author ?? SITE_NAME },
+    publisher: { "@type": "Organization", name: SITE_NAME },
+    mainEntityOfPage: siteUrl(`/${l}/success-cases/${slug}`),
+    ...(successCase.coverImage ? { image: siteUrl(successCase.coverImage) } : {}),
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Breadcrumb pageName={dict.successCases.detailsTitle} locale={l} hideHeading />
 
       <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">

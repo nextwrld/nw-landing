@@ -485,9 +485,19 @@ Configurar `metadataBase`, title template, site name, descripción por defecto, 
 
 Eliminar referencias públicas a Play, boilerplate, `Your Site Name` y `Your Author Name`.
 
+**Acceptance criteria:**
+
+- [x] `metadataBase`, title template (`%s | Next Wrld`), site name, OG/Twitter defaults configurados en el root layout.
+- [x] Sin identidad Play ni placeholders de boilerplate en metadata.
+
 ### META-002 Metadata por ruta
 
 Toda página indexable debe incluir title, description, canonical, Open Graph y Twitter. Casos e insights deben derivarlos de frontmatter.
+
+**Acceptance criteria:**
+
+- [x] Cada página indexable publica title, description, canonical, OG y Twitter.
+- [x] Los casos derivan title/description/OG del frontmatter (imagen del cover).
 
 ### META-003 Canonicals
 
@@ -495,17 +505,35 @@ Cada URL indexable debe ser autocanónica y absoluta.
 
 Las URLs localizadas que reciben redirects históricos deben publicar canonical de su URL localizada, nunca de la URL anterior.
 
+**Acceptance criteria:**
+
+- [x] Canonical autocanónico y absoluto verificado por HTTP en las rutas publicables.
+
 ### META-004 Alternates de idioma
 
 Contenido equivalente debe publicar alternates recíprocos ES/EN. La ausencia de equivalente debe tratarse explícitamente, no inventarse.
+
+**Acceptance criteria:**
+
+- [x] Alternates recíprocos `es`/`en` publicados en cada URL localizada (sin inventar equivalencias inexistentes).
 
 ### META-005 Robots
 
 Crear `robots.ts`. No indexar temporalmente rutas heredadas que todavía no representen a Next Wrld.
 
+**Acceptance criteria:**
+
+- [x] `/robots.txt` publica Allow `/`, Disallow `/api/`, Host y Sitemap.
+- [x] Rutas retiradas (demo/Play) no son indexables (404 reales, fuera del sitemap).
+
 ### META-006 Sitemap
 
 Crear `sitemap.ts` con páginas publicables y sus variantes de idioma. Excluir demos, errores, rutas obsoletas y contenido Play.
+
+**Acceptance criteria:**
+
+- [x] `/sitemap.xml` incluye rutas publicables × idioma con alternates recíprocos.
+- [x] Sin demos, errores, rutas obsoletas ni contenido Play.
 
 ### META-007 Structured data
 
@@ -517,6 +545,8 @@ Agregar después de estabilizar contenido:
 - `Article` para casos e insights.
 
 Usar `FAQPage` solo si el contenido visible final y las políticas aplicables lo justifican.
+
+**Estado:** `Organization` y `Article` implementados. `WebSite`, `BreadcrumbList` y `FAQPage` quedan pendientes de contenido final; no se inventan equivalencias.
 
 **Gate META:** canonical, hreflang, robots y sitemap verificables por HTTP; metadata sin identidad Play.
 
@@ -888,7 +918,7 @@ Checklist de seguridad:
 | SEC Security | Implementada y desplegada | `security-foundation.md` + commit `486cbe8` + deployment Vercel success + smoke prod 200/400/404 + WAF 429 (`x-vercel-mitigated: deny`) | Errores públicos del contacto unificados en `Invalid request` (SEC-003); audit reproducible confirma 0 advisories aplicables a `next@16.3.0`. Pendiente del owner: confirmar el predicado exacto de la regla WAF (`POST` documentado, pero se observó 429 también en `GET`) |
 | I18N Localization | Implementada y desplegada | `localization-foundation.md` + commits `3cd5ff9`/`b7d3b29` + deployment Vercel success + smoke prod (308/404/200, `lang`, determinismo con cookies y `Accept-Language`) | `I18N-006` cerrado: contenido estático migrado a Server Components con diccionarios en servidor; `react-i18next`/`i18next` eliminados de dependencias y del init global. Sin desviaciones pendientes |
 | SEO Rendering | Implementada y desplegada | `seo-rendering-foundation.md` + commits `322bb6c`/`b0380ff` + deployment Vercel success + raw HTML heroes/casos sin loading + API de casos 404 | Fecha canónica de `gym-access-os` = `2025-08-01`; normalización de headings internos de casos queda para trabajo de contenido |
-| META SEO | Pendiente | HTTP metadata/robots/sitemap | - |
+| META SEO | Implementada y desplegada | `seo-meta-foundation.md` + deploy Vercel + HTTP canonical/alternates/robots/sitemap | Structured data parcial (Organization/Article); WebSite/BreadcrumbList/FAQPage pendientes de contenido final |
 | CONTENT Pipeline | Pendiente | content tests + build | - |
 | CLIENT Boundaries | Pendiente | client inventory + build | - |
 | DATA Analytics | Pendiente | event verification | - |

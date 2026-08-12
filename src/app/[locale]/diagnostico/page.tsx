@@ -8,6 +8,8 @@ import DiagnosticoContact from "@/components/Diagnostico/ContactWrapper";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
+import { buildPageMetadata } from "@/utils/seo";
+import { OG_DEFAULT_IMAGE } from "../../site";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -17,10 +19,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const l = isLocale(locale) ? locale : defaultLocale;
   const dict = await getDictionary(l);
-  return {
+  return buildPageMetadata({
+    locale: l,
+    path: "/diagnostico",
     title: dict.seo.diagnostico.title,
     description: dict.seo.diagnostico.description,
-  };
+    image: OG_DEFAULT_IMAGE,
+  });
 }
 
 const DiagnosticoPage = async ({ params }: Props) => {

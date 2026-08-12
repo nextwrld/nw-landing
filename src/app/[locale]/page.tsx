@@ -13,6 +13,8 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { buildPageMetadata } from "@/utils/seo";
+import { OG_DEFAULT_IMAGE } from "../site";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,10 +24,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const l = isLocale(locale) ? locale : defaultLocale;
   const dict = await getDictionary(l);
-  return {
+  return buildPageMetadata({
+    locale: l,
+    path: "/",
     title: dict.seo.home.title,
     description: dict.seo.home.description,
-  };
+    image: OG_DEFAULT_IMAGE,
+    absoluteTitle: true,
+  });
 }
 
 export default async function Home({ params }: Props) {

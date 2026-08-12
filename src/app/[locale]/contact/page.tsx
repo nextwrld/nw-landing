@@ -5,6 +5,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { buildPageMetadata } from "@/utils/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -14,9 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const l = isLocale(locale) ? locale : defaultLocale;
   const dict = await getDictionary(l);
-  return {
-    title: `${dict.menu.contact} | Next Wrld`,
-  };
+  return buildPageMetadata({
+    locale: l,
+    path: "/contact",
+    title: dict.menu.contact,
+    description: dict.contact.subtitle,
+  });
 }
 
 const ContactPage = async ({ params }: Props) => {
