@@ -1,18 +1,12 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
 import { CALENDAR_URL } from "@/constants/links";
 import { useLocale } from "@/hooks/useLocale";
 
 const Hero = () => {
   const locale = useLocale();
   const { t } = useTranslation("common", { lng: locale });
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -20,20 +14,6 @@ const Hero = () => {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  if (!mounted) {
-    return (
-      <section className="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]">
-        <div className="container">
-          <div className="mx-auto max-w-[780px] text-center">
-            <h1 className="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
-              Loading...
-            </h1>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]">
