@@ -5,9 +5,7 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import Providers from "../providers";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { isLocale, locales, type Locale } from "@/i18n/config";
-import { themeInitScript } from "@/lib/theme";
 import "@/styles/index.css";
 import "@/styles/prism-vsc-dark-plus.css";
 
@@ -31,7 +29,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning className="!scroll-smooth">
       <body>
-        <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <GoogleTagManager />
         <GoogleAnalytics />
         <Providers>

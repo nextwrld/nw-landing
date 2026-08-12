@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type PropsWithChildren } from "react";
+import { createContext, useContext, useLayoutEffect, useState, type PropsWithChildren } from "react";
 import { THEME_STORAGE_KEY, type Theme } from "@/lib/theme";
 
 type ThemeContextValue = {
@@ -20,20 +20,22 @@ function applyTheme(theme: Theme) {
   el.style.colorScheme = theme;
 }
 
-export function ThemeProvider({ children }: PropsWithChildren) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
+function readStoredTheme(): Theme {
+  try {
     const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
     return stored === "dark" ? "dark" : "light";
-  });
+  } catch {
+    return "light";
+  }
+}
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored === "light" || stored === "dark") {
-      setThemeState(stored);
-    }
+export function ThemeProvider({ children }: PropsWithChildren) {
+  const [theme, setThemeState] = useState<Theme>("light");
+
+  useLayoutEffect(() => {
+    const stored = readStoredTheme();
+    setThemeState(stored);
+    applyTheme(stored);
   }, []);
 
   const setTheme = (next: Theme) => {
