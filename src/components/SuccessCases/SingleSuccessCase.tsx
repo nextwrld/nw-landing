@@ -6,7 +6,7 @@ import { localizedPath } from "@/utils/i18n-url";
 import type { Locale } from "@/i18n/config";
 
 const SingleSuccessCase = ({ successCase, locale }: { successCase: SuccessCase; locale: Locale }) => {
-  const { title, coverImage, excerpt, date, slug } = successCase;
+  const { title, coverImage, description, date, slug } = successCase;
   const href = localizedPath(locale, `/success-cases/${slug}`);
 
   return (
@@ -42,7 +42,7 @@ const SingleSuccessCase = ({ successCase, locale }: { successCase: SuccessCase; 
             {title}
           </Link>
         </h3>
-        <p className="text-base text-body-color dark:text-dark-6">{excerpt}</p>
+        <p className="text-base text-body-color dark:text-dark-6">{description}</p>
       </div>
     </div>
   );

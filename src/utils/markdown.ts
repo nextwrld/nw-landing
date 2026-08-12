@@ -5,6 +5,7 @@ import type { Blog } from "@/types/blog";
 import type { SuccessCase } from "@/types/success-case";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { InvalidContentPathError, isValidSlug } from "@/utils/validate";
+import { validateSuccessCaseFrontmatter } from "@/utils/frontmatter";
 
 const contentRoot = join(process.cwd(), "markdown");
 const successCasesDirectory = join(contentRoot, "success-cases");
@@ -76,6 +77,8 @@ export function getSuccessCaseBySlug(
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
+
+  validateSuccessCaseFrontmatter(slug, locale, data, fullPath);
 
   const items: SuccessCaseResult = {};
 

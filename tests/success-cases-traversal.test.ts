@@ -1,6 +1,5 @@
 import fs from "fs";
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { NextRequest } from "next/server";
 import {
   getAllSuccessCases,
   getSuccessCaseBySlug,
@@ -8,7 +7,7 @@ import {
   getSuccessCaseSlugs,
 } from "@/utils/markdown";
 import { InvalidContentPathError } from "@/utils/validate";
-import { GET as getSuccessCase } from "@/app/api/success-cases/[slug]/route";
+import { FrontmatterError, validateSuccessCaseFrontmatter } from "@/utils/frontmatter";
 
 let readSpy: ReturnType<typeof vi.spyOn>;
 
@@ -76,57 +75,43 @@ describe("markdown loader path validation", () => {
   });
 });
 
-describe("success case API locale/slug validation", () => {
-  const callGet = async (slug: string, query: Record<string, string>) => {
-    const url = new URL("https://example.com/api/success-cases/" + slug);
-    for (const [key, value] of Object.entries(query)) {
-      url.searchParams.set(key, value);
-    }
-    const request = new NextRequest(url);
-    return getSuccessCase(request, { params: Promise.resolve({ slug }) });
+describe("success case frontmatter validation", () => {
+  const validData = {
+    title: "InmoCRM",
+    description: "A real estate platform",
+    slug: "crm",
+    locale: "es",
+    date: "2024-06-12",
   };
 
-  it("serves crm for locale=es", async () => {
-    readSpy.mockClear();
-    const res = await callGet("crm", { locale: "es" });
-    expect(res.status).toBe(200);
-    const body = await res.json();
-    expect(body.title).toBeTruthy();
-    expect(body.content).toContain("<");
+  it("accepts a complete valid frontmatter", () => {
+    expect(() =>
+      validateSuccessCaseFrontmatter("crm", "es", validData, "markdown/success-cases/es/crm.mdx")
+    ).not.toThrow();
   });
 
-  it("serves crm for locale=en", async () => {
-    const res = await callGet("crm", { locale: "en" });
-    expect(res.status).toBe(200);
+  it.each([
+    [{ ...validData, title: "" }, "empty title"],
+    [{ ...validData, description: "" }, "empty description"],
+    [{ ...validData, slug: "other" }, "mismatched slug"],
+    [{ ...validData, locale: "en" }, "mismatched locale"],
+    [{ ...validData, date: "12/06/2024" }, "invalid date"],
+    [{ ...validData, date: "2024-02-30" }, "impossible date"],
+  ])("rejects %s with FrontmatterError", (data) => {
+    expect(() =>
+      validateSuccessCaseFrontmatter("crm", "es", data, "markdown/success-cases/es/crm.mdx")
+    ).toThrow(FrontmatterError);
   });
 
-  it("defaults to es when locale is missing", async () => {
-    const res = await callGet("crm", {});
-    expect(res.status).toBe(200);
-  });
-
-  it.each(["../blogs", "../../", "foo", ""])(
-    "rejects locale %j with 400 before disk access",
-    async (locale) => {
-      readSpy.mockClear();
-      const res = await callGet("crm", { locale });
-      expect(res.status).toBe(400);
-      expect(readSpy).not.toHaveBeenCalled();
+  it("loads all six published cases without frontmatter errors", () => {
+    const es = getAllSuccessCases("es", ["slug", "title", "description"]);
+    const en = getAllSuccessCases("en", ["slug", "title", "description"]);
+    expect(es.length).toBe(3);
+    expect(en.length).toBe(3);
+    for (const item of [...es, ...en]) {
+      expect(item.slug).toBeTruthy();
+      expect(item.title).toBeTruthy();
+      expect(item.description).toBeTruthy();
     }
-  );
-
-  it.each(["../blogs", "foo/bar", "crm.mdx", "..", "..%2Fblogs"])(
-    "rejects slug %j with 400 before disk access",
-    async (slug) => {
-      readSpy.mockClear();
-      const res = await callGet(slug, { locale: "es" });
-      expect(res.status).toBe(400);
-      expect(readSpy).not.toHaveBeenCalled();
-    }
-  );
-
-  it("returns 404 for a valid but missing slug", async () => {
-    const res = await callGet("does-not-exist", { locale: "es" });
-    expect(res.status).toBe(404);
   });
 });

@@ -38,7 +38,7 @@ export default async function Home({ params }: Props) {
   const cases = getAllSuccessCases(l, [
     "title",
     "date",
-    "excerpt",
+    "description",
     "coverImage",
     "slug",
     "author",
