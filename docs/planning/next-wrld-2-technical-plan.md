@@ -330,9 +330,51 @@ Antes de mover rutas, crear un inventario de todas las URLs públicas actuales y
 
 Las rutas heredadas en cuarentena deben recibir una decisión `REDIRECT`, `TEMPORARY NOINDEX`, `REMOVE` o `KEEP`; no pueden desaparecer accidentalmente. Los redirects deben preservar path parameters, query strings cuando corresponda y autoridad SEO.
 
+#### Matriz de URLs históricas (aprobada 2026-08-12)
+
+| URL histórica | Decisión | Destino | HTTP | Query | Motivo |
+| --- | --- | --- | --- | --- | --- |
+| `/` | `REDIRECT` | `/es` | 308 | Preservar | Locale por defecto determinista |
+| `/diagnostico` | `REDIRECT` | `/es/diagnostico` | 308 | Preservar | Página comercial vigente |
+| `/contact` | `REDIRECT` | `/es/contact` | 308 | Preservar | Formulario vigente |
+| `/pricing` | `REDIRECT` | `/es/pricing` | 308 | Preservar | Contenido comercial conservado |
+| `/privacy-policy` | `REDIRECT` | `/es/privacy-policy` | 308 | Preservar | Página legal vigente |
+| `/legal-notice` | `REDIRECT` | `/es/legal-notice` | 308 | Preservar | Página legal vigente |
+| `/terms-of-service` | `REDIRECT` | `/es/terms-of-service` | 308 | Preservar | Página legal vigente |
+| `/success-cases/:slug` | `REDIRECT` | `/es/success-cases/:slug` | 308 | Preservar | Casos disponibles en ES/EN |
+| `/about` | `REMOVE` | Ninguno | 404 real | N/A | Contenido demo y equipo placeholder |
+| `/blogs` | `REMOVE` | Ninguno | 404 real | N/A | Listado Play/demo sin estrategia editorial |
+| `/blogs/:slug` | `REMOVE` | Ninguno | 404 real | N/A | Artículos demo; no se duplican en EN |
+| `/error` | `REMOVE` | Ninguno | 404 real | N/A | Falso 404 servido como página normal |
+
+**Rutas publicables** (creadas en ambos idiomas):
+
+```text
+/es
+/en
+/{locale}/diagnostico
+/{locale}/contact
+/{locale}/pricing
+/{locale}/privacy-policy
+/{locale}/legal-notice
+/{locale}/terms-of-service
+/{locale}/success-cases/:slug
+```
+
+No se crean: `/{locale}/about`, `/{locale}/blogs`, `/{locale}/blogs/:slug`, `/{locale}/error`.
+
+**Reglas de implementación:**
+- Redirects explícitos en `next.config.js`; sin wildcard que capture `/api` ni `/images`.
+- Los redirects históricos siempre apuntan a español; `/en/...` se accede por navegación y selector.
+- Los redirects dinámicos preservan `:slug` y query strings.
+- Las rutas retiradas desaparecen del árbol App Router y devuelven el 404 nativo.
+- Eliminar links internos hacia `/about`, `/blogs` y `/error`.
+- El selector de idioma vuelve al home del locale destino cuando no existe equivalente.
+- No conservar cookie ni `localStorage` como fuente del idioma.
+
 **Acceptance criteria:**
 
-- [ ] Existe una matriz origen/destino/status para todas las rutas de la auditoría.
+- [x] Existe una matriz origen/destino/status para todas las rutas de la auditoría.
 - [ ] `/` redirige a `/es` sin leer cookies o headers.
 - [ ] Cada ruta pública migrada tiene redirect probado.
 - [ ] Links internos dejan de apuntar a URLs históricas.
