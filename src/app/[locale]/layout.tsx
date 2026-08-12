@@ -27,7 +27,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className="!scroll-smooth">
+    <html lang={locale} suppressHydrationWarning className="!scroll-smooth">
       <body>
         <GoogleTagManager />
         <GoogleAnalytics />

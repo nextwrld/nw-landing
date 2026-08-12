@@ -15,7 +15,7 @@
 ## Implementación
 
 - **Topología `[locale]`**: todas las páginas públicas bajo `src/app/[locale]/`. `[locale]/layout.tsx` es el root layout: valida el locale (`notFound()` si es desconocido), renderiza `<html lang>` desde params y `generateStaticParams()` devuelve exactamente `["es","en"]`. No hay `src/app/layout.tsx` superior. APIs (`/api/...`) y metadata routes quedan fuera del segmento.
-- **Sin dependencias request-bound**: eliminados `cookies()` (layout, home, privacy), `headers()` (home), `localStorage` y listener `languageChanged` de `i18n.ts`, `changeLanguage` en `Providers` y `document.cookie` del selector. No queda `suppressHydrationWarning`.
+- **Sin dependencias request-bound**: eliminados `cookies()` (layout, home, privacy), `headers()` (home), `localStorage` y listener `languageChanged` de `i18n.ts`, `changeLanguage` en `Providers` y `document.cookie` del selector. `suppressHydrationWarning` solo existe en `<html>` para reconciliar la clase de tema/`color-scheme` que `next-themes` aplica en cliente (requisito documentado del provider); no oculta diferencias de idioma porque `lang` proviene de `params.locale` de forma determinista.
 - **Copy determinista por URL**: `useLocale()` lee el primer segmento de `usePathname()`; los componentes clientes llaman `useTranslation(ns, { lng: locale })` para que SSR y cliente rendericen el mismo idioma. `SuccessCaseContent` ya no tiene fallback cruzado ES/EN (el locale de la URL manda).
 - **Diccionarios en servidor**: `getDictionary(locale)` en `src/i18n/dictionaries.ts`, usado en `generateMetadata` de home, diagnóstico, contacto, pricing, privacidad y casos. La migración de las secciones estáticas a props de diccionario en servidor (retirar `react-i18next` en cliente) queda registrada para Fase 6 (`CLIENT-001`) según ADR-002.
 - **Redirects históricos**: matriz en `next.config.js` con `permanent: true` (308). Sin wildcard que capture `/api` ni `/images`. Query strings preservadas automáticamente.
@@ -58,7 +58,7 @@
 - [x] `/es` siempre entrega español; `/en` siempre inglés (SSG, verificado en producción).
 - [x] Cookies y `Accept-Language` no cambian el body de esas URLs.
 - [x] `<html lang="es">` / `<html lang="en">` coinciden con la URL.
-- [x] No se usa `suppressHydrationWarning`.
+- [x] No se usa `suppressHydrationWarning` para ocultar diferencias de idioma (solo en `<html>` para el atributo de tema de `next-themes`).
 - [x] `generateStaticParams()` genera exactamente los locales soportados.
 - [x] La tabla de build registra `/es` y `/en` como estáticos (SSG).
 - [x] `/` redirige a `/es` sin leer cookies o headers.
