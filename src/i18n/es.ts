@@ -276,17 +276,7 @@ export const commonES = {
       }
     ]
   },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Últimas noticias y artículos",
-    "readMore": "Leer Más",
-    "publishedOn": "Publicado el",
-    "by": "por",
-    "categories": "Categorías",
-    "tags": "Etiquetas",
-    "relatedPosts": "Publicaciones Relacionadas",
-    "share": "Compartir"
-  },
+
   "successCases": {
     "title": "Casos de Éxito",
     "subtitle": "Nuestros Proyectos",

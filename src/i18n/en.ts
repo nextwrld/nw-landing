@@ -278,17 +278,7 @@ export const commonEN = {
       }
     ]
   },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Latest news and articles",
-    "readMore": "Read More",
-    "publishedOn": "Published on",
-    "by": "by",
-    "categories": "Categories",
-    "tags": "Tags",
-    "relatedPosts": "Related Posts",
-    "share": "Share"
-  },
+
   "successCases": {
     "title": "Success Stories",
     "subtitle": "Our Projects",

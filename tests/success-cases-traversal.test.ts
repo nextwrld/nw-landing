@@ -3,7 +3,6 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import {
   getAllSuccessCases,
   getSuccessCaseBySlug,
-  getPostBySlug,
   getSuccessCaseSlugs,
 } from "@/utils/markdown";
 import { InvalidContentPathError } from "@/utils/validate";
@@ -64,14 +63,6 @@ describe("markdown loader path validation", () => {
       expect(item.slug).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
       expect(item.title).toBeTruthy();
     }
-  });
-
-  it("rejects blog slugs before disk access", () => {
-    readSpy.mockClear();
-    expect(() => getPostBySlug("../blogs/contact-form", [])).toThrow(
-      InvalidContentPathError
-    );
-    expect(readSpy).not.toHaveBeenCalled();
   });
 });
 

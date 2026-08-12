@@ -581,10 +581,10 @@ No activar validación obligatoria hasta migrar todos los casos o proporcionar u
 
 **Acceptance criteria:**
 
-- [ ] Los seis casos actuales conservan los campos obligatorios normalizados en `SEO-002A`.
-- [ ] Slug y locale del frontmatter coinciden con su URL y ubicación.
-- [ ] Divergencias de fecha entre idiomas quedan resueltas o documentadas.
-- [ ] El build falla con un mensaje accionable ante frontmatter inválido.
+- [x] Los seis casos actuales conservan los campos obligatorios normalizados en `SEO-002A`.
+- [x] Slug y locale del frontmatter coinciden con su URL y ubicación.
+- [x] Divergencias de fecha entre idiomas quedan resueltas o documentadas.
+- [x] El build falla con un mensaje accionable ante frontmatter inválido.
 
 ### CONTENT-002 Markdown deliberado
 
@@ -593,6 +593,13 @@ No activar validación obligatoria hasta migrar todos los casos o proporcionar u
 - Remover dependencias MDX no utilizadas.
 - Agregar GFM solo si tablas u otra sintaxis son un requisito real.
 - No habilitar HTML arbitrario para resolver imágenes existentes.
+
+**Acceptance criteria:**
+
+- [x] Fuentes de casos en `.md` (sin `.mdx`) y cargadas con validación.
+- [x] Dependencias MDX no utilizadas removidas (`next-mdx-remote`, `marked`, `remark-html`).
+- [x] GFM añadido (`remark-gfm`) porque el contenido real usa tablas.
+- [x] Sin HTML arbitrario: salida sanitizada con `rehype-sanitize`.
 
 ### CONTENT-003 Semántica de contenido
 
@@ -618,6 +625,12 @@ KEEP | REFACTOR | REDIRECT | REMOVE | TEMPORARY NOINDEX
 ```
 
 No escribir el nuevo copy de Experience 2.0 durante esta fase.
+
+**Acceptance criteria:**
+
+- [x] Decisión por ruta registrada (matriz de URLs: `/about`, `/blogs`, `/blogs/:slug`, `/error` → `REMOVE`; `/pricing` → `REDIRECT` con contenido real).
+- [x] Demo/Play removido del árbol: `markdown/blogs/*`, loaders de blog, `src/components/Blog/` y sección `blog` del diccionario.
+- [x] Contenido real preservado sin reescribir copy.
 
 **Gate CONTENT:** pipeline consistente y validado; demo/Play fuera del índice; contenido real preservado.
 
@@ -919,7 +932,7 @@ Checklist de seguridad:
 | I18N Localization | Implementada y desplegada | `localization-foundation.md` + commits `3cd5ff9`/`b7d3b29` + deployment Vercel success + smoke prod (308/404/200, `lang`, determinismo con cookies y `Accept-Language`) | `I18N-006` cerrado: contenido estático migrado a Server Components con diccionarios en servidor; `react-i18next`/`i18next` eliminados de dependencias y del init global. Sin desviaciones pendientes |
 | SEO Rendering | Implementada y desplegada | `seo-rendering-foundation.md` + commits `322bb6c`/`b0380ff` + deployment Vercel success + raw HTML heroes/casos sin loading + API de casos 404 | Fecha canónica de `gym-access-os` = `2025-08-01`; normalización de headings internos de casos queda para trabajo de contenido |
 | META SEO | Implementada y desplegada | `seo-meta-foundation.md` + deploy Vercel + HTTP canonical/alternates/robots/sitemap | Structured data parcial (Organization/Article); WebSite/BreadcrumbList/FAQPage pendientes de contenido final |
-| CONTENT Pipeline | Pendiente | content tests + build | - |
+| CONTENT Pipeline | Implementada y desplegada | `content-foundation.md` + deploy Vercel + content tests + build | `.mdx`→`.md`; `next-mdx-remote`/`marked`/`remark-html` removidos; `remark-gfm` añadido (tablas reales); demo/Play de blogs removido |
 | CLIENT Boundaries | Pendiente | client inventory + build | - |
 | DATA Analytics | Pendiente | event verification | - |
 | UXTECH | Pendiente | accessibility/performance checks | - |
