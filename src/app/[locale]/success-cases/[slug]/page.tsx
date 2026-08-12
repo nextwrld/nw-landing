@@ -6,6 +6,7 @@ import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
+import CaseViewTracker from "@/components/SuccessCases/CaseViewTracker";
 import type { Metadata } from "next";
 import { buildPageMetadata, siteUrl } from "@/utils/seo";
 import { SITE_NAME } from "../../../site";
@@ -76,6 +77,7 @@ export default async function SuccessCasePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      <CaseViewTracker slug={slug} locale={locale} />
       <Breadcrumb pageName={dict.successCases.detailsTitle} locale={l} hideHeading />
 
       <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">

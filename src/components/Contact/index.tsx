@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CONTACT_EMAIL, SECONDARY_EMAIL } from "@/constants/links";
 import type { ContactSource } from "@/utils/contact";
+import { trackEvent } from "@/utils/analytics";
 import type { ContactCopy } from "./contactCopy";
 
 interface ContactProps {
@@ -10,6 +11,7 @@ interface ContactProps {
 }
 
 const Contact = ({ copy, source = "home" }: ContactProps) => {
+  const startedRef = useRef(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -25,6 +27,10 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
   }>({ type: null, message: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent("contact_form_start", { form_source: source });
+    }
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -35,6 +41,7 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
+    trackEvent("contact_form_submit", { form_source: source });
 
     try {
       const response = await fetch("/api/contact", {
@@ -48,12 +55,15 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
       const data = await response.json();
 
       if (response.ok) {
+        trackEvent("contact_form_success", { form_source: source });
         setSubmitStatus({
           type: "success",
           message: copy.successMessage,
         });
         setFormData({ fullName: "", email: "", phone: "", message: "", source, website: "" });
+        startedRef.current = false;
       } else {
+        trackEvent("contact_form_error", { form_source: source });
         setSubmitStatus({
           type: "error",
           message: data.error || copy.errorMessage,
@@ -63,6 +73,7 @@ const Contact = ({ copy, source = "home" }: ContactProps) => {
       if (process.env.NODE_ENV !== "production") {
         console.error("Network error:", error);
       }
+      trackEvent("contact_form_error", { form_source: source });
       setSubmitStatus({
         type: "error",
         message: copy.errorMessage,

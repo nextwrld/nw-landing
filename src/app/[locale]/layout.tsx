@@ -1,5 +1,4 @@
 import Footer from "@/components/Footer";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -76,7 +75,6 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <GoogleTagManager />
-        <GoogleAnalytics />
         <Providers>
           <div className="isolate">
             <Header menu={buildMenuData(dict.menu, l)} />

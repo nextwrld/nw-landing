@@ -1,5 +1,7 @@
 import Link from "next/link";
+import TrackedLink from "@/components/Common/TrackedLink";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import type { EventName, EventParams } from "@/utils/analytics";
 
 interface PlanCardProps {
   variant: "default" | "highlighted";
@@ -14,6 +16,7 @@ interface PlanCardProps {
   sectionId?: string;
   className?: string;
   featuresTitle?: string;
+  ctaTrack?: { event: EventName; params?: EventParams };
 }
 
 const PlanCard = ({
@@ -29,6 +32,7 @@ const PlanCard = ({
   sectionId,
   className = "",
   featuresTitle,
+  ctaTrack,
 }: PlanCardProps) => {
   const isHighlighted = variant === "highlighted";
 
@@ -74,14 +78,27 @@ const PlanCard = ({
         </ul>
       </div>
 
-      <Link
-        href={ctaHref}
-        target={ctaTarget}
-        rel={ctaTarget === "_blank" ? "noopener noreferrer" : undefined}
-        className="block w-full rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
-      >
-        {ctaLabel}
-      </Link>
+      {ctaTrack ? (
+        <TrackedLink
+          href={ctaHref}
+          target={ctaTarget}
+          rel={ctaTarget === "_blank" ? "noopener noreferrer" : undefined}
+          event={ctaTrack.event}
+          params={ctaTrack.params}
+          className="block w-full rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
+        >
+          {ctaLabel}
+        </TrackedLink>
+      ) : (
+        <Link
+          href={ctaHref}
+          target={ctaTarget}
+          rel={ctaTarget === "_blank" ? "noopener noreferrer" : undefined}
+          className="block w-full rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
+        >
+          {ctaLabel}
+        </Link>
+      )}
     </div>
   );
 };

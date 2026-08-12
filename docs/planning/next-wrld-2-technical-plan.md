@@ -676,6 +676,11 @@ Preferir `Server Section -> small Client Control`.
 
 Verificar el contenedor externo y elegir un owner. Preferencia: GTM administra GA4 y futuras etiquetas si el contenedor tiene ownership y gobierno claros. No cargar ambos sin una razón documentada.
 
+**Acceptance criteria:**
+
+- [x] Estrategia única elegida por el owner: GTM único (eliminado el GA4 directo del layout).
+- [x] No se cargan ambos gestores sin razón.
+
 ### DATA-002 Eventos estables
 
 ```text
@@ -704,6 +709,11 @@ No usar el copy visible como identificador de evento.
 ### DATA-003 Consentimiento
 
 Documentar mercados, base legal, categorías y momento de ejecución antes de ampliar tracking.
+
+**Acceptance criteria:**
+
+- [x] Política de consentimiento registrada (`analytics-consent.md`).
+- [x] Eventos verificables en `dataLayer` (DATA-002) con contexto y sin copy como identificador.
 
 **Gate DATA:** una sola estrategia de carga, eventos verificables y política de consentimiento documentada.
 
@@ -940,7 +950,7 @@ Checklist de seguridad:
 | META SEO | Implementada y desplegada | `seo-meta-foundation.md` + deploy Vercel + HTTP canonical/alternates/robots/sitemap | Structured data parcial (Organization/Article); WebSite/BreadcrumbList/FAQPage pendientes de contenido final |
 | CONTENT Pipeline | Implementada y desplegada | `content-foundation.md` + deploy Vercel + content tests + build | `.mdx`→`.md`; `next-mdx-remote`/`marked`/`remark-html` removidos; `remark-gfm` añadido (tablas reales); demo/Play de blogs removido |
 | CLIENT Boundaries | Implementada y desplegada | `client-boundaries-foundation.md` + deploy Vercel + inventory + build | Reducción heredada de I18N-006; 12 islas cliente con interacción justificada; NotFound cliente por ausencia de params en not-found |
-| DATA Analytics | Pendiente | event verification | - |
+| DATA Analytics | Implementada y desplegada | `data-analytics-foundation.md` + deploy Vercel + eventos dataLayer + consentimiento | Estrategia GTM único (owner confirmado); eventos con contexto; banner de consentimiento EEA pendiente de contenido final |
 | UXTECH | Pendiente | accessibility/performance checks | - |
 | CLEANUP | Pendiente | dependency/reference verification | - |
 | EXPERIENCE | Fuera de Foundation | Documento futuro | - |

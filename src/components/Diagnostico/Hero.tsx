@@ -1,6 +1,7 @@
 "use client";
 
 import { CALENDAR_URL } from "@/constants/links";
+import { trackEvent } from "@/utils/analytics";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 const Hero = ({ dict }: { dict: Dictionary["diagnostico"]["hero"] }) => {
@@ -27,6 +28,7 @@ const Hero = ({ dict }: { dict: Dictionary["diagnostico"]["hero"] }) => {
                 href={CALENDAR_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("diagnosis_cta_click", { cta_location: "hero" })}
                 className="inline-flex items-center justify-center rounded-md bg-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2"
               >
                 {dict.primaryCTA}

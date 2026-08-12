@@ -59,6 +59,7 @@ const Pricing = ({
             ctaHref={CALENDAR_URL}
             ctaTarget="_blank"
             badge={dict.plan2.badge}
+            ctaTrack={{ event: "calendar_booking_click", params: { cta_location: "pricing" } }}
           />
         </div>
 

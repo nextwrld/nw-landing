@@ -25,6 +25,7 @@ const Modelo = ({ dict }: { dict: Dictionary["diagnostico"]["model"] }) => {
             ctaLabel={dict.plan1.cta}
             ctaHref={CALENDAR_URL}
             ctaTarget="_blank"
+            ctaTrack={{ event: "calendar_booking_click", params: { cta_location: "modelo" } }}
           />
           <PlanCard
             variant="highlighted"
@@ -35,6 +36,7 @@ const Modelo = ({ dict }: { dict: Dictionary["diagnostico"]["model"] }) => {
             ctaLabel={dict.plan2.cta}
             ctaHref={CALENDAR_URL}
             ctaTarget="_blank"
+            ctaTrack={{ event: "calendar_booking_click", params: { cta_location: "modelo" } }}
           />
         </div>
       </div>
