@@ -58,10 +58,18 @@ Follow these steps to set up and run this template on your local machine:
 4. Now you're ready to start the project on your local server. Use the following command to get it up and running:
 
 ```bash
-    pnpm dev
+pnpm dev
 ```
 
 This will launch the template on [localhost:3000](http://localhost:3000).
+
+### Validation commands
+
+```bash
+pnpm lint    # eslint src
+pnpm test    # vitest run (tests/**/*.test.ts)
+pnpm build   # next build (production)
+```
 
 Our comprehensive documentation includes all the guides you'll need for integrating various features.
 

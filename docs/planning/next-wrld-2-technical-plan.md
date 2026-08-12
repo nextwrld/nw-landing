@@ -836,7 +836,7 @@ Checklist de seguridad:
 
 | Fase | Estado | Evidencia de cierre | Desviaciones |
 | --- | --- | --- | --- |
-| F0 Baseline | Implementada (worktree; pendiente commit/deploy) | `pre-refactor-build.md` | pnpm lint normalizado a `eslint src` (next lint eliminado en Next 16); build scripts de sharp/unrs-resolver aprobados vía `pnpm-workspace.yaml` |
+| F0 Baseline | Implementada y desplegada | `pre-refactor-build.md` + checkout limpio `e526adb` + deployment Vercel success + smoke tests 200 | pnpm lint normalizado a `eslint src` (next lint eliminado en Next 16); build scripts de sharp/unrs-resolver aprobados vía `pnpm-workspace.yaml`; verificación en checkout limpio y deployment completados el 2026-08-12 |
 | SEC Security | Pendiente | PR/deploy/tests | - |
 | I18N Localization | Pendiente | build + HTTP smoke tests | - |
 | SEO Rendering | Pendiente | raw HTML + build route table | - |

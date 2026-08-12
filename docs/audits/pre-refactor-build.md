@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Ejecutado el 2026-08-12 en el worktree local de `main` (worktree limpio de cambios no relacionados, salvo `docs/` sin trackear).**
+**Ejecutado el 2026-08-12 en el worktree local de `main` (worktree limpio de cambios no relacionados, salvo `docs/` sin trackear). Verificación en checkout limpio y deployment el mismo día sobre `e526adb` (ver sección "Verificación en checkout limpio").**
 
 Este archivo registra el baseline reproducible de F0 antes de cualquier modificación de arquitectura o seguridad.
 
@@ -185,6 +185,51 @@ Comando ejecutado: `pnpm start` (producción) y `curl` local.
 | Locale traversal reproducible | ⛔ (no probado en F0) | Probe informativo `?locale=blog` devolvió 404 sin exposición; la prueba de regresión SEC-001 es responsabilidad de Fase 1. No se incluye contenido sensible en este documento. |
 | Contact route carga | ✅ | `/contact` HTTP `200`. No se envió email (sin autorización/configuración de prueba). |
 
+## Verificación en checkout limpio
+
+**Fecha/hora UTC:** 2026-08-12T17:16Z
+**Commit verificado:** `e526adb9718ce595268f899c8fcea49a69a8b7d8` (`chore: standardize pnpm project setup`)
+**Método:** extracción desechable vía `git archive HEAD` en directorio temporal — sin `.git`, sin `node_modules`, sin link de virtual store previo y sin artefactos generados.
+**Entorno:** macOS (Darwin) arm64 · Node `v24.18.0` · pnpm `11.20.0` (fijado en `package.json`).
+
+| Paso | Comando | Resultado |
+| --- | --- | --- |
+| Instalación | `pnpm install --frozen-lockfile` | ✅ exit `0` · `Done in 3.4s using pnpm v11.20.0` · scripts de `sharp@0.34.5` y `unrs-resolver@1.11.1` ejecutados vía `onlyBuiltDependencies` (sin necesidad de `approve-builds` manual) · `node_modules` construido desde cero |
+| Lint | `pnpm lint` | ✅ exit `0` · `$ eslint src` sin errores ni warnings |
+| Tests | `pnpm test` | ✅ exit `0` · Vitest `4.1.10` · 1 archivo / 1 prueba pasando |
+| Build | `pnpm build` | ✅ exit `0` · Next `16.0.10` (Turbopack) · 17/17 páginas generadas · todas `ƒ` Dynamic · warning no bloqueante de `baseline-browser-mapping` |
+
+### Prueba de detección de fallos (reinicio canónico)
+
+- Se creó `tests/failproof.tmp.test.ts` con una aserción intencionalmente fallida (`expect(123 + 1).toBe(456)`).
+- `pnpm test` → ❌ `AssertionError: expected 124 to be 456` · `Test Files  1 failed | 1 passed (2)` · **exit `1`**.
+- El archivo temporal se eliminó tras capturar el resultado; el suite vuelve a pasar con exit `0`.
+- **Resultado:** el runner detecta fallos y `pnpm test` devuelve non-zero ante una prueba fallida. ✅
+
+### Confirmación en checkout limpio
+
+- [x] `pnpm install --frozen-lockfile` funciona en checkout limpio.
+- [x] `pnpm lint` funciona.
+- [x] `pnpm test` existe y funciona en checkout limpio.
+- [x] `pnpm test` devuelve non-zero ante una prueba fallida.
+- [x] `pnpm build` funciona.
+- [x] No se modificaron archivos rastreados durante la verificación.
+
+## Deployment
+
+**Fecha/hora UTC:** 2026-08-12T17:18Z
+**Revisión desplegada:** `e526adb9718ce595268f899c8fcea49a69a8b7d8` (push de `main` a `origin/main`; fast-forward `ef78878..e526adb`).
+**Plataforma:** Vercel (integración de GitHub, auto-detección por lockfile + `vercel.json`).
+
+| Verificación | Resultado | Evidencia |
+| --- | --- | --- |
+| Estado del deployment | ✅ Completado | GitHub Status Check: `context=Vercel`, `state=success`, `description=Deployment has completed`, inspector `https://vercel.com/gabriel-perez-federicos-projects/nw-landing/B9mS4Zoh6iCkwkDibJ8GvGCK4Bqy` |
+| Comando de instalación | Configurado | `vercel.json` → `"installCommand": "pnpm install --frozen-lockfile"` |
+| Smoke tests en producción | ✅ | `/` 200 · `/contact` 200 · `/diagnostico` 200 · `/success-cases/crm` 200 · `robots.txt` 404 (esperado: META fase 4) |
+| Headers Vercel | ✅ | `server: Vercel`, `x-vercel-id: gru1::…` en `nextwrld.com` |
+
+> **Límite registrado:** la captura del log de build completo (salida exacta de pnpm en el entorno Vercel) requiere `VERCEL_TOKEN` y el CLI de Vercel, no disponibles en este entorno. La evidencia de deployment se cierra con: deployment `success` verificado, producción respondiendo 200 y `vercel.json` con instalación frozen. El propietario mantiene acceso al inspector para auditoría manual.
+
 ## Dependencias y seguridad
 
 Ejecutado sobre el lockfile oficial después del baseline. No se aplicaron fixes automáticos.
@@ -213,21 +258,23 @@ pnpm outdated
 
 ## Conclusión del baseline
 
-- Instalación frozen: ✅ exit 0 en worktree local con lockfile sincronizado.
-- Lint: ✅ `eslint src` sin errores ni warnings.
-- Tests: ✅ Vitest canónico, fallo non-zero verificado, 1.ª prueba pasando.
-- Build: ✅ Next 16.0.10 producción exitoso; 17 páginas generadas, todas `ƒ` Dynamic.
+- Instalación frozen: ✅ exit 0 en worktree local con lockfile sincronizado y en checkout limpio (`e526adb`).
+- Lint: ✅ `eslint src` sin errores ni warnings (local y checkout limpio).
+- Tests: ✅ Vitest canónico, fallo non-zero verificado, 1.ª prueba pasando (local y checkout limpio).
+- Build: ✅ Next 16.0.10 producción exitoso; 17 páginas generadas, todas `ƒ` Dynamic (local y checkout limpio).
 - Rutas dinámicas/estáticas confirmadas: todas dinámicas por `cookies()` en root layout (coincide con auditoría).
+- Deployment: ✅ `e526adb` desplegado en producción por Vercel (status success); smoke tests 200.
 - Riesgos que bloquean SEC: ninguno; los advisories se atienden en Fase 1.
 - Aprobación para iniciar Fase 1: ✅.
 
 ## Gate de salida F0
 
-- [x] Instalación frozen reproducible.
+- [x] Instalación frozen reproducible (worktree + checkout limpio).
 - [x] Lint ejecutado y resultado registrado.
 - [x] Test runner y comando canónico establecidos.
-- [x] Tests ejecutados y resultado registrado.
+- [x] Tests ejecutados y resultado registrado (incluye verificación de fallo → exit 1).
 - [x] Build ejecutado y resultado registrado.
 - [x] Tabla de rutas preservada.
 - [x] Errores/warnings clasificados.
+- [x] Deployment con `pnpm install --frozen-lockfile` verificado (status success + smoke tests; log de build sujeto a `VERCEL_TOKEN`).
 - [x] Baseline aprobado sin bloqueos de instalación, lint, tests o build.
