@@ -1,12 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   contentByLocale,
-  getSectionPage,
-  sectionKeyForSlug,
-  sectionPagePath,
+  navAnchorPath,
   validateContentParity,
 } from "@/content/homepage";
-import { SECTION_PAGE_KEYS } from "@/content/homepage/types";
 import { buildApprovedNav } from "@/components/Header/menuData";
 import {
   DEFAULT_APPROVALS,
@@ -16,67 +13,41 @@ import {
 const esContent = contentByLocale.es;
 const enContent = contentByLocale.en;
 
-describe("section page content domain (SECTION-PAGE-001)", () => {
-  it("defines the four section page keys with the approved slugs", () => {
-    expect(SECTION_PAGE_KEYS).toEqual(["services", "method", "cases", "about"]);
-    expect(sectionPagePath("es", "services")).toBe("/servicios");
-    expect(sectionPagePath("es", "method")).toBe("/metodo");
-    expect(sectionPagePath("es", "cases")).toBe("/casos");
-    expect(sectionPagePath("es", "about")).toBe("/nosotros");
-    expect(sectionPagePath("en", "services")).toBe("/services");
-    expect(sectionPagePath("en", "method")).toBe("/method");
-    expect(sectionPagePath("en", "cases")).toBe("/cases");
-    expect(sectionPagePath("en", "about")).toBe("/about");
+describe("one-page nav anchors (SECTION-PAGE-001)", () => {
+  it("points every approved nav item at a real in-page anchor on the homepage", () => {
+    expect(navAnchorPath(esContent, "services")).toBe("/#servicios");
+    expect(navAnchorPath(esContent, "method")).toBe("/#metodo");
+    expect(navAnchorPath(esContent, "cases")).toBe("/#casos");
+    expect(navAnchorPath(esContent, "about")).toBe("/#nosotros");
+    expect(navAnchorPath(enContent, "services")).toBe("/#services");
+    expect(navAnchorPath(enContent, "method")).toBe("/#method");
+    expect(navAnchorPath(enContent, "cases")).toBe("/#cases");
+    expect(navAnchorPath(enContent, "about")).toBe("/#about");
   });
 
-  it("resolves localized slugs to section page keys", () => {
-    expect(sectionKeyForSlug("es", "servicios")).toBe("services");
-    expect(sectionKeyForSlug("es", "nosotros")).toBe("about");
-    expect(sectionKeyForSlug("en", "services")).toBe("services");
-    expect(sectionKeyForSlug("en", "about")).toBe("about");
-    expect(sectionKeyForSlug("es", "services")).toBeUndefined();
-    expect(sectionKeyForSlug("es", undefined)).toBeUndefined();
-  });
-
-  it("keeps ES/EN section pages structurally identical", () => {
-    expect(Object.keys(esContent.sectionPages).sort()).toEqual(
-      Object.keys(enContent.sectionPages).sort()
-    );
-    for (const key of SECTION_PAGE_KEYS) {
-      const es = esContent.sectionPages[key];
-      const en = enContent.sectionPages[key];
-      expect(Object.keys(es).sort()).toEqual(["eyebrow", "heading", "seo"]);
-      expect(Object.keys(es.seo).sort()).toEqual(["description", "title"]);
-      expect(es.eyebrow.length).toBeGreaterThan(0);
-      expect(es.heading.length).toBeGreaterThan(0);
-      expect(en.eyebrow.length).toBeGreaterThan(0);
-      expect(en.heading.length).toBeGreaterThan(0);
-      expect(es.seo.title.length).toBeGreaterThan(0);
-      expect(es.seo.description.length).toBeGreaterThan(0);
-      expect(en.seo.title.length).toBeGreaterThan(0);
-      expect(en.seo.description.length).toBeGreaterThan(0);
-    }
-  });
-
-  it("gives every section page its own SEO copy, never the homepage title", () => {
+  it("keeps ES/EN nav anchor structure identical", () => {
+    expect(esContent.nav.items.length).toBe(enContent.nav.items.length);
+    expect(
+      esContent.nav.items.map((item) => item.id).sort()
+    ).toEqual(enContent.nav.items.map((item) => item.id).sort());
     for (const content of [esContent, enContent]) {
-      for (const key of SECTION_PAGE_KEYS) {
-        expect(content.sectionPages[key].seo.title).not.toBe(content.seo.title);
-        expect(content.sectionPages[key].seo.description).not.toBe(
-          content.seo.description
-        );
+      for (const item of content.nav.items) {
+        if (item.approved) {
+          expect(item.destination).toMatch(/^\/#/);
+        }
       }
     }
-    expect(getSectionPage("es", "services").heading.length).toBeGreaterThan(0);
   });
 
-  it("passes content parity including the section pages", () => {
+  it("passes content parity without any sub-page domain", () => {
     expect(validateContentParity()).toEqual([]);
+    expect("sectionPages" in esContent).toBe(false);
+    expect("sectionPages" in enContent).toBe(false);
   });
 });
 
-describe("approved navigation with real destinations (SECTION-PAGE-002)", () => {
-  it("approves the four real section routes and withholds Insights", () => {
+describe("approved navigation with real in-page anchors (SECTION-PAGE-002)", () => {
+  it("approves the four sections and withholds Insights", () => {
     for (const content of [esContent, enContent]) {
       const approved = content.nav.items.filter((item) => item.approved);
       expect(approved.map((item) => item.id)).toEqual([
@@ -86,9 +57,7 @@ describe("approved navigation with real destinations (SECTION-PAGE-002)", () => 
         "about",
       ]);
       for (const item of approved) {
-        expect(item.destination).toMatch(
-          new RegExp(`^/[a-z]+/${sectionPagePath(content.locale, item.id as "services").replace("/", "")}`)
-        );
+        expect(item.destination).toMatch(/^\/#/);
       }
       const insights = content.nav.items.find((item) => item.id === "insights");
       expect(insights?.approved).toBe(false);
@@ -96,22 +65,33 @@ describe("approved navigation with real destinations (SECTION-PAGE-002)", () => 
     }
   });
 
-  it("yields exactly the four approved nav items", () => {
-    expect(buildApprovedNav(esContent).map((item) => item.title)).toEqual([
+  it("yields exactly the four approved localized nav items", () => {
+    const esNav = buildApprovedNav(esContent);
+    expect(esNav.map((item) => item.title)).toEqual([
       "Servicios",
       "Método",
       "Casos",
       "Nosotros",
     ]);
-    expect(buildApprovedNav(enContent).map((item) => item.title)).toEqual([
+    expect(esNav.map((item) => item.path)).toEqual([
+      "/es/#servicios",
+      "/es/#metodo",
+      "/es/#casos",
+      "/es/#nosotros",
+    ]);
+    const enNav = buildApprovedNav(enContent);
+    expect(enNav.map((item) => item.title)).toEqual([
       "Services",
       "Method",
       "Cases",
       "About",
     ]);
-    for (const item of buildApprovedNav(esContent)) {
-      expect(item.path).toBeTruthy();
-    }
+    expect(enNav.map((item) => item.path)).toEqual([
+      "/en/#services",
+      "/en/#method",
+      "/en/#cases",
+      "/en/#about",
+    ]);
   });
 
   it("keeps the release gate fail-closed while global navigation approval stays pending", () => {

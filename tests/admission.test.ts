@@ -102,7 +102,7 @@ function expectBlocked(
 }
 
 describe("navigation admission (ADMISSION-NAV)", () => {
-  it("approves only real section routes and withholds speculative destinations", () => {
+  it("approves only real in-page anchors and withholds speculative destinations", () => {
     for (const content of [esContent, enContent]) {
       for (const item of content.nav.items) {
         if (item.id === "insights") {
@@ -110,7 +110,7 @@ describe("navigation admission (ADMISSION-NAV)", () => {
           expect(item.destination).toBeNull();
         } else {
           expect(item.approved).toBe(true);
-          expect(item.destination).toMatch(/^\/[a-z]+\//);
+          expect(item.destination).toMatch(/^\/#/);
         }
       }
       expect(buildApprovedNav(content)).toHaveLength(4);

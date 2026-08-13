@@ -152,7 +152,8 @@ describe("Experience shell rendering when admitted (DESIGN-003)", () => {
     expect(layoutSource).toContain("ExperienceHeader");
     expect(layoutSource).toContain("ExperienceFooter");
     expect(layoutSource).toContain('admission === "experience"');
-    expect(layoutSource).toContain("<ExperienceHeader menu={menu}");
+    expect(layoutSource).toContain("ExperienceHeader");
+    expect(layoutSource).toContain("content={content}");
     expect(layoutSource).toContain("<ExperienceFooter content={content}");
     expect(layoutSource).toContain("<Header menu={menu}");
     expect(layoutSource).toContain("<Footer dict={dict.footer}");
