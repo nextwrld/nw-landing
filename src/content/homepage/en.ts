@@ -12,19 +12,19 @@ export const homepageEN: HomepageContent = {
       {
         id: "services",
         label: "Services",
-        destination: "/en/services",
+        destination: "/#services",
         approved: true,
       },
       {
         id: "method",
         label: "Method",
-        destination: "/en/method",
+        destination: "/#method",
         approved: true,
       },
       {
         id: "cases",
         label: "Cases",
-        destination: "/en/cases",
+        destination: "/#cases",
         approved: true,
       },
       {
@@ -36,48 +36,10 @@ export const homepageEN: HomepageContent = {
       {
         id: "about",
         label: "About",
-        destination: "/en/about",
+        destination: "/#about",
         approved: true,
       },
     ],
-  },
-  sectionPages: {
-    services: {
-      seo: {
-        title: "Custom software, management systems, and automation | Next Wrld",
-        description:
-          "Custom software, management systems, and automations for operations that need to centralize processes, connect tools, and reduce manual work.",
-      },
-      eyebrow: "SERVICES",
-      heading: "Custom software, management systems, and automation for your operation.",
-    },
-    method: {
-      seo: {
-        title: "How we work | Next Wrld",
-        description:
-          "Discover, Shape, Build, Launch, and Evolve: we understand the problem before deciding what to build and bring real software into your operation.",
-      },
-      eyebrow: "METHOD",
-      heading: "How we work: from understanding the problem to building something that works.",
-    },
-    cases: {
-      seo: {
-        title: "Cases and real work | Next Wrld",
-        description:
-          "AION and Next Wrld's real work: cases where we first understand the operation and then build the solution.",
-      },
-      eyebrow: "CASES",
-      heading: "Cases and real work.",
-    },
-    about: {
-      seo: {
-        title: "About | Next Wrld",
-        description:
-          "We don't start with software; we start with what the business needs to achieve. Judgment, product, quality, and evolution.",
-      },
-      eyebrow: "ABOUT",
-      heading: "Why Next Wrld.",
-    },
   },
   hero: {
     id: "hero",
@@ -88,7 +50,7 @@ export const homepageEN: HomepageContent = {
     secondaryLine: "Less administrative work. More control over your operation.",
     primaryCta: "Analyze my operation",
     secondaryCta: "See cases",
-    secondaryCtaHref: "/en/cases",
+    secondaryCtaHref: "#evidence",
     microcopy: "Free diagnosis · 30–45 minutes",
   },
   problem: {

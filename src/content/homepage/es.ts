@@ -12,19 +12,19 @@ export const homepageES: HomepageContent = {
       {
         id: "services",
         label: "Servicios",
-        destination: "/es/servicios",
+        destination: "/#servicios",
         approved: true,
       },
       {
         id: "method",
         label: "Método",
-        destination: "/es/metodo",
+        destination: "/#metodo",
         approved: true,
       },
       {
         id: "cases",
         label: "Casos",
-        destination: "/es/casos",
+        destination: "/#casos",
         approved: true,
       },
       {
@@ -36,48 +36,10 @@ export const homepageES: HomepageContent = {
       {
         id: "about",
         label: "Nosotros",
-        destination: "/es/nosotros",
+        destination: "/#nosotros",
         approved: true,
       },
     ],
-  },
-  sectionPages: {
-    services: {
-      seo: {
-        title: "Servicios de software a medida | Next Wrld",
-        description:
-          "Software a medida, sistemas de gestión y automatizaciones para operaciones que necesitan centralizar procesos, conectar herramientas y reducir trabajo manual.",
-      },
-      eyebrow: "SERVICIOS",
-      heading: "Software a medida, sistemas de gestión y automatización para tu operación.",
-    },
-    method: {
-      seo: {
-        title: "Cómo trabajamos | Next Wrld",
-        description:
-          "Discover, Shape, Build, Launch y Evolve: entendemos el problema antes de decidir qué construir y llevamos software real a tu operación.",
-      },
-      eyebrow: "MÉTODO",
-      heading: "Cómo trabajamos: de entender el problema a construir algo que funciona.",
-    },
-    cases: {
-      seo: {
-        title: "Casos y trabajo real | Next Wrld",
-        description:
-          "AION y el trabajo real de Next Wrld: casos donde primero entendemos la operación y después construimos la solución.",
-      },
-      eyebrow: "CASOS",
-      heading: "Casos y trabajo real.",
-    },
-    about: {
-      seo: {
-        title: "Nosotros | Next Wrld",
-        description:
-          "No empezamos por el software, sino por lo que necesita conseguir el negocio. Criterio, producto, calidad y evolución.",
-      },
-      eyebrow: "NOSOTROS",
-      heading: "Por qué Next Wrld.",
-    },
   },
   hero: {
     id: "hero",
@@ -88,7 +50,7 @@ export const homepageES: HomepageContent = {
     secondaryLine: "Menos trabajo administrativo. Más control sobre tu operación.",
     primaryCta: "Analizar mi operación",
     secondaryCta: "Ver casos",
-    secondaryCtaHref: "/es/casos",
+    secondaryCtaHref: "#evidence",
     microcopy: "Diagnóstico gratuito · 30–45 minutos",
   },
   problem: {

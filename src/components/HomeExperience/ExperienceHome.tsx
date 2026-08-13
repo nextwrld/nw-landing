@@ -13,6 +13,14 @@ import ChapterDivider from "./ChapterDivider";
 import type { Locale } from "@/i18n/config";
 import type { HomepageContent } from "@/content/homepage/types";
 
+function navAnchorId(content: HomepageContent, navId: string): string | undefined {
+  const item = content.nav.items.find((entry) => entry.id === navId);
+  if (!item?.approved || !item.destination) {
+    return undefined;
+  }
+  return item.destination.replace(/^\/?#/, "");
+}
+
 const HomeExperience = ({
   locale,
   content,
@@ -20,19 +28,32 @@ const HomeExperience = ({
   locale: Locale;
   content: HomepageContent;
 }) => {
+  const servicesAnchor = navAnchorId(content, "services");
+  const methodAnchor = navAnchorId(content, "method");
+  const casesAnchor = navAnchorId(content, "cases");
+  const aboutAnchor = navAnchorId(content, "about");
+
   return (
     <main id="main-content">
       <Hero content={content.hero} locale={locale} />
       <Problem content={content.problem} />
       <Impact content={content.impact} />
       <BetterWay content={content.betterWay} />
-      <Capabilities content={content.capabilities} />
+      <div id={servicesAnchor}>
+        <Capabilities content={content.capabilities} />
+      </div>
       <ChapterDivider />
-      <Method content={content.method} />
+      <div id={methodAnchor}>
+        <Method content={content.method} />
+      </div>
       <ChapterDivider />
-      <Differentiation content={content.differentiation} />
+      <div id={aboutAnchor}>
+        <Differentiation content={content.differentiation} />
+      </div>
       <ChapterDivider />
-      <EvidenceSection content={content.evidence} />
+      <div id={casesAnchor}>
+        <EvidenceSection content={content.evidence} />
+      </div>
       <ChapterDivider />
       <Diagnosis content={content.diagnosis} locale={locale} />
       <ChapterDivider />

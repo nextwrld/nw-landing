@@ -51,7 +51,12 @@ export function buildApprovedNav(content: HomepageContent): Menu[] {
   let id = 1;
   for (const item of content.nav.items) {
     if (item.approved && item.destination) {
-      items.push({ id: id++, title: item.label, path: item.destination, newTab: false });
+      items.push({
+        id: id++,
+        title: item.label,
+        path: localizedHref(content.locale, item.destination),
+        newTab: false,
+      });
     }
   }
   return items;

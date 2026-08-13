@@ -72,16 +72,6 @@ export interface NavItem {
   approved: boolean;
 }
 
-export const SECTION_PAGE_KEYS = ["services", "method", "cases", "about"] as const;
-
-export type SectionPageKey = (typeof SECTION_PAGE_KEYS)[number];
-
-export interface SectionPageMeta {
-  seo: SeoCopy;
-  eyebrow: string;
-  heading: string;
-}
-
 export interface SeoCopy {
   title: string;
   description: string;
@@ -251,7 +241,6 @@ export interface HomepageContent {
   locale: HomepageLocale;
   seo: SeoCopy;
   nav: { items: NavItem[] };
-  sectionPages: Record<SectionPageKey, SectionPageMeta>;
   hero: HomepageHero;
   problem: HomepageProblem;
   impact: HomepageImpact;

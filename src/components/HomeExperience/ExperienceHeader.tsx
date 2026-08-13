@@ -6,14 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import LanguageSelector from "@/components/LanguageSelector";
 import TrackedLink from "@/components/Common/TrackedLink";
 import { useLocale } from "@/hooks/useLocale";
-import { localizedHref, localizedPath } from "@/utils/i18n-url";
+import { localizedHref } from "@/utils/i18n-url";
 import { nextMenuState, shellA11yCopy } from "@/components/Header/menuData";
-import { sectionPagePath } from "@/content/homepage";
-import type { SectionPageKey } from "@/content/homepage/types";
+import { navAnchorPath } from "@/content/homepage";
+import type { HomepageContent } from "@/content/homepage/types";
 
 import type { Menu } from "@/types/menu";
 
-const SCROLLSPY_BY_SECTION: Record<string, SectionPageKey> = {
+const SCROLLSPY_BY_SECTION: Record<string, string> = {
   capabilities: "services",
   method: "method",
   evidence: "cases",
@@ -22,9 +22,11 @@ const SCROLLSPY_BY_SECTION: Record<string, SectionPageKey> = {
 
 const ExperienceHeader = ({
   menu,
+  content,
   diagnosisCta,
 }: {
   menu: Menu[];
+  content: HomepageContent;
   diagnosisCta?: { label: string; href: string };
 }) => {
   const locale = useLocale();
@@ -76,13 +78,16 @@ const ExperienceHeader = ({
           return;
         }
         const key = SCROLLSPY_BY_SECTION[visible.target.id];
-        setActiveNavPath(localizedPath(locale, sectionPagePath(locale, key)));
+        const destination = navAnchorPath(content, key);
+        if (destination) {
+          setActiveNavPath(localizedHref(locale, destination));
+        }
       },
       { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
     );
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
-  }, [locale]);
+  }, [locale, content]);
 
   const handleAnchorClick = (href: string) => {
     const targetId = href.split("#")[1];

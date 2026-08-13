@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllSuccessCases } from "@/utils/markdown";
-import { locales, type Locale } from "@/i18n/config";
-import { sectionPagePath } from "@/content/homepage";
-import { SECTION_PAGE_KEYS } from "@/content/homepage/types";
+import { locales } from "@/i18n/config";
 import { SITE_URL } from "./site";
 
 type Freq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
@@ -17,7 +15,7 @@ const staticPaths: { path: string; priority: number; changeFrequency: Freq }[] =
   { path: "/terms-of-service", priority: 0.3, changeFrequency: "yearly" },
 ];
 
-function alternates(locale: Locale, path: string): { languages: Record<string, string> } {
+function alternates(locale: (typeof locales)[number], path: string): { languages: Record<string, string> } {
   const languages: Record<string, string> = {};
   for (const loc of locales) {
     languages[loc] = `${SITE_URL}/${loc}${path === "/" ? "" : path}`;
@@ -48,22 +46,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "yearly",
         priority: 0.8,
         alternates: alternates(locale, path),
-      });
-    }
-  }
-
-  for (const key of SECTION_PAGE_KEYS) {
-    const languages: Record<string, string> = {};
-    for (const loc of locales) {
-      languages[loc] = `${SITE_URL}/${loc}${sectionPagePath(loc, key)}`;
-    }
-    for (const locale of locales) {
-      entries.push({
-        url: `${SITE_URL}/${locale}${sectionPagePath(locale, key)}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.7,
-        alternates: { languages },
       });
     }
   }

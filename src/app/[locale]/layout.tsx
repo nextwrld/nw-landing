@@ -96,7 +96,11 @@ export default async function LocaleLayout({
           <div className="isolate">
             {admission === "experience" ? (
               <>
-                <ExperienceHeader menu={menu} diagnosisCta={diagnosisCta} />
+                <ExperienceHeader
+                  menu={menu}
+                  content={content}
+                  diagnosisCta={diagnosisCta}
+                />
 
                 {children}
 
