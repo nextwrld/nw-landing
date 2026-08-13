@@ -98,6 +98,48 @@ export interface HomepageBetterWay extends HomepageSection {
   closing: string;
 }
 
+export interface CapabilityItem {
+  id: string;
+  title: string;
+  body: string;
+  includes: string[];
+  linkLabel: string;
+}
+
+export interface HomepageCapabilities extends HomepageSection {
+  eyebrow: string;
+  supporting: string;
+  items: CapabilityItem[];
+  aiTransversal: { heading: string; body: string };
+}
+
+export interface MethodStage {
+  id: string;
+  name: string;
+  label: string;
+  headline: string;
+  copy: string;
+  output: string;
+}
+
+export interface HomepageMethod extends HomepageSection {
+  eyebrow: string;
+  body: string;
+  stages: MethodStage[];
+  microcopy: string;
+}
+
+export interface DifferentiationPillar {
+  id: string;
+  title: string;
+  body: string;
+}
+
+export interface HomepageDifferentiation extends HomepageSection {
+  pillars: DifferentiationPillar[];
+  optionalStatement: string;
+}
+
 export interface HomepageHero {
   id: "hero";
   eyebrow: string;
@@ -123,9 +165,9 @@ export interface HomepageContent {
   problem: HomepageProblem;
   impact: HomepageImpact;
   betterWay: HomepageBetterWay;
-  capabilities: HomepageSection;
-  method: HomepageSection;
-  differentiation: HomepageSection;
+  capabilities: HomepageCapabilities;
+  method: HomepageMethod;
+  differentiation: HomepageDifferentiation;
   evidence: HomepageEvidence;
   faq: { entries: FaqEntry[] };
   diagnosis: HomepageSection;

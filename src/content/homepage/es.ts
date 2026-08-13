@@ -120,16 +120,135 @@ export const homepageES: HomepageContent = {
   },
   capabilities: {
     id: "capabilities",
+    eyebrow: "QUÉ PODEMOS CONSTRUIR",
     heading: "Tecnología diseñada alrededor de tu operación.",
+    supporting:
+      "Algunas empresas necesitan reemplazar un proceso. Otras conectar cinco herramientas. Otras construir un sistema completo. Diseñamos la solución alrededor del problema, no al revés.",
+    items: [
+      {
+        id: "custom-software",
+        title: "Software a medida",
+        body: "Diseñamos y desarrollamos sistemas para operaciones que no encajan bien dentro de herramientas genéricas.",
+        includes: [
+          "plataformas internas",
+          "portales",
+          "backoffices",
+          "productos digitales",
+          "sistemas específicos",
+        ],
+        linkLabel: "Explorar software a medida",
+      },
+      {
+        id: "management-systems",
+        title: "Sistemas de gestión",
+        body: "Centralizamos procesos, información y reporting para que la operación pueda gestionarse desde un lugar más claro.",
+        includes: [
+          "operaciones",
+          "clientes",
+          "administración",
+          "inventario",
+          "reporting",
+          "workflows",
+        ],
+        linkLabel: "Explorar sistemas de gestión",
+      },
+      {
+        id: "automation-and-integrations",
+        title: "Automatización e integraciones",
+        body: "Conectamos las herramientas que ya utilizas y automatizamos tareas que no necesitan intervención humana constante.",
+        includes: [
+          "sincronización",
+          "workflows",
+          "notificaciones",
+          "procesamiento",
+          "integraciones",
+          "automatizaciones administrativas",
+        ],
+        linkLabel: "Explorar automatización",
+      },
+    ],
+    aiTransversal: {
+      heading: "¿Dónde entra la IA?",
+      body: "La incorporamos cuando puede aportar valor concreto al proceso: analizar, clasificar, asistir, buscar información o automatizar decisiones.",
+    },
   },
   method: {
     id: "method",
+    eyebrow: "CÓMO TRABAJAMOS",
     heading:
       "De entender el problema a construir algo que funciona dentro de tu operación.",
+    body: "Nuestro proceso evita empezar por features. Primero entendemos, después decidimos qué vale la pena construir.",
+    stages: [
+      {
+        id: "discover",
+        name: "Discover",
+        label: "Entender",
+        headline: "¿Qué está pasando realmente?",
+        copy: "Entendemos cómo funciona hoy la operación, qué quiere conseguir el negocio, dónde existe fricción y qué depende de trabajo manual.",
+        output: "Resultado: problema y contexto claros.",
+      },
+      {
+        id: "shape",
+        name: "Shape",
+        label: "Decidir",
+        headline: "¿Qué vale la pena resolver?",
+        copy: "Convertimos lo aprendido en prioridades, alcance y una dirección concreta antes de invertir en desarrollo.",
+        output: "Resultado: solución y roadmap inicial.",
+      },
+      {
+        id: "build",
+        name: "Build",
+        label: "Construir",
+        headline: "Convertimos la dirección en producto.",
+        copy: "Diseñamos y desarrollamos el sistema, sus integraciones y automatizaciones alrededor del alcance acordado.",
+        output: "Resultado: software listo para entrar en operación.",
+      },
+      {
+        id: "launch",
+        name: "Launch",
+        label: "Integrar",
+        headline: "El software empieza a convivir con el negocio.",
+        copy: "Implementamos, conectamos datos y herramientas, acompañamos usuarios y llevamos la solución a la operación real.",
+        output: "Resultado: sistema en uso.",
+      },
+      {
+        id: "evolve",
+        name: "Evolve",
+        label: "Mejorar",
+        headline: "Lo que funciona hoy puede necesitar cambiar mañana.",
+        copy: "Medimos, aprendemos y evolucionamos el sistema a medida que cambian usuarios, procesos y necesidades del negocio.",
+        output: "Resultado: una solución que puede crecer con la operación.",
+      },
+    ],
+    microcopy:
+      "El proceso puede adaptarse al tamaño y complejidad de cada proyecto. No todos necesitan empezar desde cero.",
   },
   differentiation: {
     id: "differentiation",
     heading: "Diferentes operaciones. El mismo principio: entender antes de construir.",
+    pillars: [
+      {
+        id: "criterio-antes-que-codigo",
+        title: "Criterio antes que código",
+        body: "Entender qué no deberíamos construir puede ser tan importante como decidir qué sí.",
+      },
+      {
+        id: "negocio-y-tecnologia",
+        title: "Negocio + tecnología",
+        body: "Conectamos objetivos operativos con decisiones de producto, diseño e ingeniería.",
+      },
+      {
+        id: "calidad-mas-alla-de-que-funcione",
+        title: "Calidad más allá de que “funcione”",
+        body: "Producto, experiencia, arquitectura y operación forman parte de la misma solución.",
+      },
+      {
+        id: "pensado-para-evolucionar",
+        title: "Pensado para evolucionar",
+        body: "Construimos considerando qué ocurrirá cuando entren más usuarios, procesos y necesidades.",
+      },
+    ],
+    optionalStatement: "No somos una fábrica de features.",
   },
   evidence: {
     id: "evidence",
