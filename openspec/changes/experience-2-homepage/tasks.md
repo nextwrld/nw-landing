@@ -23,7 +23,7 @@ Delivery strategy: auto-chain. Tracker `experience-2-homepage` is draft/no-merge
 Contracts→1; shell→1/3; problem→2; method→2; evidence→2/3; diagnosis→2/3; observability→1/3; admission→1/3/4/5.
 
 ## Strict TDD tasks
-- [ ] 1.1 RED: parity, IDs, approvals/destinations, evidence, missing meaning; 1.2 GREEN: implement contracts/preflight in both ES and EN, `tsx` scripts, lockfile if changed; fail-closed release/Foundation draft.
+- [x] 1.1 RED: parity, IDs, approvals/destinations, evidence, missing meaning; 1.2 GREEN: implement contracts/preflight in both ES and EN, `tsx` scripts, lockfile if changed; fail-closed release/Foundation draft; 1.3 REFACTOR: centralized IDs/validators, canonical/hreflang/schema, event locations, and islands.
 - [ ] 2.1 RED: locale, focus, zoom, contrast, non-color cues; 2.2 GREEN: ES/EN Header/Footer/layout/CSS composed.
 - [ ] 3.1 RED: ES/EN H1, friction/impact/order, scripts-off/reduced-motion; 3.2 GREEN: ES/EN problem content composed.
 - [ ] 4.1 RED: services, useful-AI boundary, five-stage outcomes; 4.2 GREEN: ES/EN method composed.
