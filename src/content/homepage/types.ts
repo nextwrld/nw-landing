@@ -16,7 +16,7 @@ export const APPROVAL_KEYS = [
 
 export type ApprovalKey = (typeof APPROVAL_KEYS)[number];
 
-export type PublicationStatus = "draft" | "release";
+export type PublicationStatus = "draft" | "preview" | "release";
 
 export type ApprovalStatus = "pending" | "approved";
 

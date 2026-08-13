@@ -278,6 +278,36 @@ describe("FAQ admission (ADMISSION-FAQ)", () => {
   });
 });
 
+describe("preview admission (ADMISSION-PREVIEW)", () => {
+  it("returns preview status only when the preview flag is set", () => {
+    delete process.env.EXPERIENCE_PREVIEW;
+    expect(getPublicationConfig().status).toBe("draft");
+
+    process.env.EXPERIENCE_PREVIEW = "true";
+    const config = getPublicationConfig();
+    expect(config.status).toBe("preview");
+    delete process.env.EXPERIENCE_PREVIEW;
+  });
+
+  it("composes the Experience in preview without requiring approvals", () => {
+    expect(
+      admitPublication({ status: "preview", approvals: DEFAULT_APPROVALS }),
+    ).toBe("experience");
+  });
+
+  it("keeps release fail-closed even when the preview flag is present", () => {
+    process.env.EXPERIENCE_PREVIEW = "true";
+    let thrown: unknown;
+    try {
+      admitPublication({ status: "release", approvals: DEFAULT_APPROVALS });
+    } catch (error) {
+      thrown = error;
+    }
+    expect(thrown).toBeInstanceOf(PublicationBlockedError);
+    delete process.env.EXPERIENCE_PREVIEW;
+  });
+});
+
 describe("build admission (ADMISSION-BUILD)", () => {
   it("routes the ordinary build through the fail-closed preflight before next build", () => {
     expect(pkg.scripts.build).toBe(

@@ -41,7 +41,11 @@ export function buildApprovals(
 
 export function getPublicationConfig(): PublicationConfig {
   const status: PublicationConfig["status"] =
-    process.env.EXPERIENCE_PUBLICATION_STATUS === "release" ? "release" : "draft";
+    process.env.EXPERIENCE_PREVIEW === "true"
+      ? "preview"
+      : process.env.EXPERIENCE_PUBLICATION_STATUS === "release"
+        ? "release"
+        : "draft";
   return { status, approvals: { ...DEFAULT_APPROVALS } };
 }
 
@@ -239,6 +243,13 @@ export function validateRelease(config: PublicationConfig): string[] {
 export function admitPublication(
   config: PublicationConfig = getPublicationConfig()
 ): "foundation" | "experience" {
+  if (config.status === "preview") {
+    const problems = validateDraft(config);
+    if (problems.length > 0) {
+      throw new PublicationBlockedError(problems);
+    }
+    return "experience";
+  }
   if (config.status === "draft") {
     const problems = validateDraft(config);
     if (problems.length > 0) {
