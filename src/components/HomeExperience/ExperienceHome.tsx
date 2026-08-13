@@ -22,7 +22,7 @@ const HomeExperience = ({
 }) => {
   return (
     <main id="main-content">
-      <Hero content={content.hero} />
+      <Hero content={content.hero} locale={locale} />
       <Problem content={content.problem} />
       <Impact content={content.impact} />
       <BetterWay content={content.betterWay} />
@@ -30,8 +30,12 @@ const HomeExperience = ({
       <Method content={content.method} />
       <Differentiation content={content.differentiation} />
       <section id={content.evidence.id} className="homepage-evidence">
-        <h2>{content.evidence.heading}</h2>
-        <AIONProductShowcase content={content.evidence} />
+        <div className="experience-container homepage-evidence-head">
+          <h2 className="exp-h2">{content.evidence.heading}</h2>
+        </div>
+        <div className="aion-band">
+          <AIONProductShowcase content={content.evidence} />
+        </div>
         <CaseEvidence content={content.evidence} />
       </section>
       <Diagnosis content={content.diagnosis} locale={locale} />
