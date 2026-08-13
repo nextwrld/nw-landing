@@ -9,6 +9,13 @@ export const commonES = {
       "description": "Diagnosticamos tu operación para encontrar fugas de tiempo, procesos rotos y oportunidades de escalar sin aumentar tu equipo."
     }
   },
+  "experienceFooter": {
+    "services": "Servicios",
+    "company": "Empresa",
+    "contact": "Contacto",
+    "diagnosis": "Diagnóstico operativo",
+    "whatsapp": "WhatsApp"
+  },
   "menu": {
     "home": "Inicio",
     "about": "Acerca de",

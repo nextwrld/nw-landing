@@ -2,6 +2,8 @@ import Footer from "@/components/Footer";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
+import ExperienceHeader from "@/components/HomeExperience/ExperienceHeader";
+import ExperienceFooter from "@/components/HomeExperience/ExperienceFooter";
 import buildMenuData, { buildApprovedNav } from "@/components/Header/menuData";
 import Providers from "../providers";
 import { notFound } from "next/navigation";
@@ -92,11 +94,23 @@ export default async function LocaleLayout({
         <GoogleTagManager />
         <Providers>
           <div className="isolate">
-            <Header menu={menu} diagnosisCta={diagnosisCta} />
+            {admission === "experience" ? (
+              <>
+                <ExperienceHeader menu={menu} diagnosisCta={diagnosisCta} />
 
-            {children}
+                {children}
 
-            <Footer dict={dict.footer} locale={l} />
+                <ExperienceFooter content={content} dict={dict} locale={l} />
+              </>
+            ) : (
+              <>
+                <Header menu={menu} diagnosisCta={diagnosisCta} />
+
+                {children}
+
+                <Footer dict={dict.footer} locale={l} />
+              </>
+            )}
             <ScrollToTop />
           </div>
         </Providers>

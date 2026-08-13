@@ -9,6 +9,13 @@ export const commonEN = {
       "description": "We diagnose your operation to find time leaks, broken processes, and opportunities to scale without increasing your team."
     }
   },
+  "experienceFooter": {
+    "services": "Services",
+    "company": "Company",
+    "contact": "Contact",
+    "diagnosis": "Operational diagnosis",
+    "whatsapp": "WhatsApp"
+  },
   "menu": {
     "home": "Home",
     "about": "About",
