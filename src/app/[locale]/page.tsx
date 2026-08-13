@@ -72,7 +72,7 @@ export default async function Home({ params }: Props) {
   ]);
 
   return (
-    <main>
+    <main id="main-content">
       <ScrollUp />
       <Hero dict={dict.hero} locale={l} />
       <Features dict={dict.features} />

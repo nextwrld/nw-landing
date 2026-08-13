@@ -2,12 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LanguageSelector from "@/components/LanguageSelector";
 import TrackedLink from "@/components/Common/TrackedLink";
 import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
 import { useTheme } from "@/components/ThemeProvider";
+import { nextMenuState, shellA11yCopy } from "@/components/Header/menuData";
 
 import type { Menu } from "@/types/menu";
 
@@ -19,14 +20,32 @@ const Header = ({
   diagnosisCta?: { label: string; href: string };
 }) => {
   const locale = useLocale();
+  const a11yCopy = shellA11yCopy(locale);
   const pathUrl = usePathname();
   const baseHome = `/${locale}`;
   const isHomeLike = pathUrl === baseHome || pathUrl === `${baseHome}/diagnostico`;
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const togglerRef = useRef<HTMLButtonElement>(null);
   const navbarToggleHandler = () => {
     setNavbarOpen(!navbarOpen);
   };
+
+  const closeMenu = () => {
+    setNavbarOpen(false);
+    togglerRef.current?.focus();
+  };
+
+  useEffect(() => {
+    if (!navbarOpen) return;
+    const onDocumentKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (nextMenuState(true, event.key) === false) {
+        closeMenu();
+      }
+    };
+    window.addEventListener("keydown", onDocumentKeyDown);
+    return () => window.removeEventListener("keydown", onDocumentKeyDown);
+  }, [navbarOpen]);
 
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
@@ -56,6 +75,9 @@ const Header = ({
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        {a11yCopy.skipToContent}
+      </a>
       <header
         className={`ud-header left-0 top-0 z-40 flex w-full items-center ${sticky
           ? "shadow-nav fixed z-[999] border-b border-stroke bg-white/80 backdrop-blur-[5px] dark:border-dark-3/20 dark:bg-dark/10"
@@ -122,7 +144,10 @@ const Header = ({
                 <button
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
-                  aria-label="Mobile Menu"
+                  ref={togglerRef}
+                  aria-label={a11yCopy.menuToggle}
+                  aria-expanded={navbarOpen}
+                  aria-controls="navbarCollapse"
                   className="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                 >
                   <span
@@ -184,7 +209,13 @@ const Header = ({
                                   const targetId = menuItem.path.split("#")[1];
                                   const element = document.getElementById(targetId);
                                   if (element) {
-                                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                                    const reduceMotion = window.matchMedia(
+                                      "(prefers-reduced-motion: reduce)"
+                                    ).matches;
+                                    element.scrollIntoView({
+                                      behavior: reduceMotion ? "auto" : "smooth",
+                                      block: "start",
+                                    });
                                   }
                                 }
                               }}
@@ -207,6 +238,7 @@ const Header = ({
                             <button
                               onClick={() => handleSubmenu(index)}
                               aria-expanded={openIndex === index}
+                              aria-haspopup="true"
                               className={`ud-menu-scroll flex items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary lg:inline-flex lg:px-0 lg:py-6`}
                             >
                               {menuItem.title}
@@ -231,6 +263,7 @@ const Header = ({
                             <button
                               onClick={() => handleSubmenu(index)}
                               aria-expanded={openIndex === index}
+                              aria-haspopup="true"
                               className={`ud-menu-scroll flex items-center justify-between py-2 text-base lg:inline-flex lg:px-0 lg:py-6 ${sticky
                                 ? "text-dark group-hover:text-primary dark:text-white dark:group-hover:text-primary"
                                 : "text-white"
@@ -257,7 +290,7 @@ const Header = ({
                           )}
 
                           <div
-                            className={`submenu relative left-0 top-full w-[250px] rounded-sm bg-white p-4 transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${openIndex === index ? "!-left-[25px]" : "hidden"
+                            className={`submenu relative left-0 top-full w-[250px] rounded-sm bg-white p-4 transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full lg:focus-within:visible lg:focus-within:top-full ${openIndex === index ? "!-left-[25px]" : "hidden"
                               }`}
                           >
                             {menuItem?.submenu?.map((submenuItem: Menu, i) => (

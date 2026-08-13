@@ -22,7 +22,7 @@ const HomeExperience = async ({ locale }: { locale: Locale }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema(content)) }}
       />
-      <main>
+      <main id="main-content">
         <section id={content.hero.id}>
           <p>{content.hero.eyebrow}</p>
           <h1>{content.hero.h1}</h1>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { localizedHref } from "@/utils/i18n-url";
+import { socialLinkLabel } from "@/components/Header/menuData";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 
@@ -35,7 +36,7 @@ const Footer = ({
               </p>
               <div className="-mx-3 flex items-center justify-center">
                 <Link
-                  aria-label="social link X"
+                  aria-label={socialLinkLabel(locale, "X")}
                   href="https://x.com/NextWrld30538"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -53,7 +54,7 @@ const Footer = ({
                   </svg>
                 </Link>
                 <Link
-                  aria-label="social link Instagram"
+                  aria-label={socialLinkLabel(locale, "Instagram")}
                   href="https://www.instagram.com/nextwrldsystems/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -73,7 +74,7 @@ const Footer = ({
                   </svg>
                 </Link>
                 <Link
-                  aria-label="social link LinkedIn"
+                  aria-label={socialLinkLabel(locale, "LinkedIn")}
                   href="https://www.linkedin.com/company/next-wrld/"
                   target="_blank"
                   rel="noopener noreferrer"

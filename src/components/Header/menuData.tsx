@@ -57,4 +57,30 @@ export function buildApprovedNav(content: HomepageContent): Menu[] {
   return items;
 }
 
+export type ShellA11yCopy = {
+  menuToggle: string;
+  skipToContent: string;
+};
+
+export function shellA11yCopy(locale: Locale): ShellA11yCopy {
+  return locale === "es"
+    ? { menuToggle: "Abrir menú", skipToContent: "Saltar al contenido principal" }
+    : { menuToggle: "Open menu", skipToContent: "Skip to main content" };
+}
+
+export function nextMenuState(current: boolean, key: string): boolean | null {
+  if (key === "Escape") return false;
+  if (key === "Enter" || key === " ") return !current;
+  return null;
+}
+
+const SOCIAL_NETWORKS = ["X", "Instagram", "LinkedIn"] as const;
+
+export type SocialNetwork = (typeof SOCIAL_NETWORKS)[number];
+
+export function socialLinkLabel(locale: Locale, network: SocialNetwork): string {
+  const name = locale === "es" ? "Enlace social" : "Social link";
+  return `${name} ${network}`;
+}
+
 export default buildMenuData;
