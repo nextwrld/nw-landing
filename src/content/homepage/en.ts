@@ -12,20 +12,20 @@ export const homepageEN: HomepageContent = {
       {
         id: "services",
         label: "Services",
-        destination: null,
-        approved: false,
+        destination: "/en/services",
+        approved: true,
       },
       {
         id: "method",
         label: "Method",
-        destination: null,
-        approved: false,
+        destination: "/en/method",
+        approved: true,
       },
       {
         id: "cases",
         label: "Cases",
-        destination: null,
-        approved: false,
+        destination: "/en/cases",
+        approved: true,
       },
       {
         id: "insights",
@@ -36,24 +36,64 @@ export const homepageEN: HomepageContent = {
       {
         id: "about",
         label: "About",
-        destination: null,
-        approved: false,
+        destination: "/en/about",
+        approved: true,
       },
     ],
   },
+  sectionPages: {
+    services: {
+      seo: {
+        title: "Custom software, management systems, and automation | Next Wrld",
+        description:
+          "Custom software, management systems, and automations for operations that need to centralize processes, connect tools, and reduce manual work.",
+      },
+      eyebrow: "SERVICES",
+      heading: "Custom software, management systems, and automation for your operation.",
+    },
+    method: {
+      seo: {
+        title: "How we work | Next Wrld",
+        description:
+          "Discover, Shape, Build, Launch, and Evolve: we understand the problem before deciding what to build and bring real software into your operation.",
+      },
+      eyebrow: "METHOD",
+      heading: "How we work: from understanding the problem to building something that works.",
+    },
+    cases: {
+      seo: {
+        title: "Cases and real work | Next Wrld",
+        description:
+          "AION and Next Wrld's real work: cases where we first understand the operation and then build the solution.",
+      },
+      eyebrow: "CASES",
+      heading: "Cases and real work.",
+    },
+    about: {
+      seo: {
+        title: "About | Next Wrld",
+        description:
+          "We don't start with software; we start with what the business needs to achieve. Judgment, product, quality, and evolution.",
+      },
+      eyebrow: "ABOUT",
+      heading: "Why Next Wrld.",
+    },
+  },
   hero: {
     id: "hero",
-    eyebrow: "SOFTWARE FOR OPERATIONS THAT ARE GROWING",
+    eyebrow: "01 · SOFTWARE FOR OPERATIONS THAT ARE GROWING",
     h1: "Your company shouldn't grow by multiplying manual work.",
     supporting:
       "We build software for companies that need to centralize processes, connect tools, and automate the work that today depends on spreadsheets, messages, and manual tasks.",
     secondaryLine: "Less administrative work. More control over your operation.",
     primaryCta: "Analyze my operation",
     secondaryCta: "See cases",
+    secondaryCtaHref: "/en/cases",
     microcopy: "Free diagnosis · 30–45 minutes",
   },
   problem: {
     id: "problem",
+    eyebrow: "02 · WHEN THE OPERATION FALLS BEHIND",
     heading: "Your company may have grown faster than the way it operates.",
     intro:
       "What worked with ten clients, a small team, or a few operations can become a limitation as the business grows.",
@@ -92,6 +132,7 @@ export const homepageEN: HomepageContent = {
   },
   impact: {
     id: "impact",
+    eyebrow: "03 · THE COST OF STAYING THE SAME",
     heading:
       "The problem isn't that your operation doesn't work. It's that keeping it running costs more and more.",
     costPairs: [
@@ -104,6 +145,7 @@ export const homepageEN: HomepageContent = {
   },
   betterWay: {
     id: "betterWay",
+    eyebrow: "04 · A BETTER WAY TO OPERATE",
     heading: "Growing shouldn't mean doing more manual work.",
     intro:
       "When processes start to outgrow the tools that support them, the answer isn't always another application. Sometimes you need to connect what already exists, automate parts of the process, or build software around how your business works.",
@@ -119,7 +161,7 @@ export const homepageEN: HomepageContent = {
   },
   capabilities: {
     id: "capabilities",
-    eyebrow: "WHAT WE CAN BUILD",
+    eyebrow: "05 · WHAT WE CAN BUILD",
     heading: "Technology designed around your operation.",
     supporting:
       "Some companies need to replace one process. Others need to connect five tools. Others need a complete system. We design the solution around the problem, not the other way around.",
@@ -173,7 +215,7 @@ export const homepageEN: HomepageContent = {
   },
   method: {
     id: "method",
-    eyebrow: "HOW WE WORK",
+    eyebrow: "06 · HOW WE WORK",
     heading: "From understanding the problem to building something that works inside your operation.",
     body: "Our process avoids starting with features. First we understand, then we decide what is worth building.",
     stages: [
@@ -223,6 +265,7 @@ export const homepageEN: HomepageContent = {
   },
   differentiation: {
     id: "differentiation",
+    eyebrow: "07 · WHY NEXT WRLD",
     heading: "Different operations. The same principle: understand before building.",
     pillars: [
       {
@@ -250,6 +293,7 @@ export const homepageEN: HomepageContent = {
   },
   evidence: {
     id: "evidence",
+    eyebrow: "08 · REAL WORK",
     heading: "We also build our own products.",
     showcase: {
       id: "aion",
@@ -298,6 +342,7 @@ export const homepageEN: HomepageContent = {
   },
   faq: {
     id: "faq",
+    eyebrow: "10 · FREQUENTLY ASKED QUESTIONS",
     heading: "Frequently asked questions",
     entries: [
       {
@@ -353,6 +398,7 @@ export const homepageEN: HomepageContent = {
   },
   diagnosis: {
     id: "diagnosis",
+    eyebrow: "09 · OPERATIONAL DIAGNOSIS",
     heading: "Before deciding what to build, let's understand what is slowing your operation down.",
     offer: {
       duration: "30–45 minutes",

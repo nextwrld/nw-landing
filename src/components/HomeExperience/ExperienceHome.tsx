@@ -5,8 +5,7 @@ import BetterWay from "./BetterWay";
 import Capabilities from "./Capabilities";
 import Method from "./Method";
 import Differentiation from "./Differentiation";
-import AIONProductShowcase from "./AIONProductShowcase";
-import CaseEvidence from "./CaseEvidence";
+import EvidenceSection from "./EvidenceSection";
 import Diagnosis from "./Diagnosis";
 import Faq from "./FAQ";
 import FinalCTA from "./FinalCTA";
@@ -29,15 +28,7 @@ const HomeExperience = ({
       <Capabilities content={content.capabilities} />
       <Method content={content.method} />
       <Differentiation content={content.differentiation} />
-      <section id={content.evidence.id} className="homepage-evidence">
-        <div className="experience-container homepage-evidence-head">
-          <h2 className="exp-h2">{content.evidence.heading}</h2>
-        </div>
-        <div className="aion-band">
-          <AIONProductShowcase content={content.evidence} />
-        </div>
-        <CaseEvidence content={content.evidence} />
-      </section>
+      <EvidenceSection content={content.evidence} />
       <Diagnosis content={content.diagnosis} locale={locale} />
       <Faq content={content.faq} />
       <FinalCTA content={content.finalCta} locale={locale} />

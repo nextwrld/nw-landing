@@ -33,6 +33,10 @@ const componentPaths = {
     import.meta.url
   ),
   caseEvidence: new URL("../src/components/HomeExperience/CaseEvidence.tsx", import.meta.url),
+  evidenceSection: new URL(
+    "../src/components/HomeExperience/EvidenceSection.tsx",
+    import.meta.url
+  ),
 };
 
 function readComponent(name: keyof typeof componentPaths): string {
@@ -83,7 +87,7 @@ describe("AION product showcase with allowlisted claims (EVIDENCE-01)", () => {
     expect(readComponent("aionProductShowcase")).toContain("showcase.asset");
     expect(readComponent("aionProductShowcase")).toContain("manifestEntryFor");
     expect(readComponent("aionProductShowcase")).toContain("/images/experience/");
-    expect(experienceHomeSource).toContain('from "./AIONProductShowcase"');
+    expect(readComponent("evidenceSection")).toContain('from "./AIONProductShowcase"');
   });
 });
 
@@ -119,7 +123,7 @@ describe("JFHP and automation support evidence (EVIDENCE-02)", () => {
   it("composes the case-evidence cards component", () => {
     expect(readComponent("caseEvidence")).toContain("content.items.map");
     expect(readComponent("caseEvidence")).toContain("resolveEntryLink");
-    expect(experienceHomeSource).toContain('from "./CaseEvidence"');
+    expect(readComponent("evidenceSection")).toContain('from "./CaseEvidence"');
   });
 });
 

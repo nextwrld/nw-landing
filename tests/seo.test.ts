@@ -10,6 +10,7 @@ import * as privacyModule from "@/app/[locale]/privacy-policy/page";
 import * as legalModule from "@/app/[locale]/legal-notice/page";
 import * as termsModule from "@/app/[locale]/terms-of-service/page";
 import * as caseModule from "@/app/[locale]/success-cases/[slug]/page";
+import * as sectionPageModule from "@/app/[locale]/[...section]/page";
 
 type MetaFn = (p: { params: Promise<Record<string, string>> }) => Promise<Record<string, unknown>>;
 
@@ -44,9 +45,25 @@ describe("sitemap", () => {
     expect(urls).toContain("https://nextwrld.com/en/success-cases/gym-access-os");
   });
 
+  it("publishes the four section pages in both locales", () => {
+    const urls = sitemap().map((e) => e.url);
+    for (const url of [
+      "https://nextwrld.com/es/servicios",
+      "https://nextwrld.com/es/metodo",
+      "https://nextwrld.com/es/casos",
+      "https://nextwrld.com/es/nosotros",
+      "https://nextwrld.com/en/services",
+      "https://nextwrld.com/en/method",
+      "https://nextwrld.com/en/cases",
+      "https://nextwrld.com/en/about",
+    ]) {
+      expect(urls).toContain(url);
+    }
+  });
+
   it("never lists demo, blog or error routes", () => {
     const urls = sitemap().map((e) => e.url);
-    for (const forbidden of ["/about", "/blogs", "/error", "/fr"]) {
+    for (const forbidden of ["/blogs", "/error", "/fr", "/es/about"]) {
       expect(urls.some((u) => u.includes(forbidden))).toBe(false);
     }
   });
@@ -80,6 +97,40 @@ describe("page metadata (META-002/003/004)", () => {
     }) as Record<string, unknown>;
     expect((meta.openGraph as { locale: string }).locale).toBe("en_US");
   });
+});
+
+describe("section page metadata (META-005)", () => {
+  it.each([
+    { locale: "es", section: ["servicios"], canonical: "https://nextwrld.com/es/servicios" },
+    { locale: "en", section: ["services"], canonical: "https://nextwrld.com/en/services" },
+    { locale: "es", section: ["metodo"], canonical: "https://nextwrld.com/es/metodo" },
+    { locale: "en", section: ["method"], canonical: "https://nextwrld.com/en/method" },
+    { locale: "es", section: ["casos"], canonical: "https://nextwrld.com/es/casos" },
+    { locale: "en", section: ["cases"], canonical: "https://nextwrld.com/en/cases" },
+    { locale: "es", section: ["nosotros"], canonical: "https://nextwrld.com/es/nosotros" },
+    { locale: "en", section: ["about"], canonical: "https://nextwrld.com/en/about" },
+  ])(
+    "publishes the $canonical canonical with reciprocal hreflang",
+    async ({ locale, section, canonical }) => {
+      const meta = await sectionPageModule.generateMetadata({
+        params: Promise.resolve({ locale, section }),
+      }) as {
+        title: { absolute: string };
+        description: string;
+        alternates: { canonical: string; languages: Record<string, string> };
+        openGraph: { title?: string; locale?: string };
+        twitter: { card: string };
+      };
+      expect(meta.alternates.canonical).toBe(canonical);
+      expect(meta.alternates.languages.es).toMatch(/^https:\/\/nextwrld\.com\/es\//);
+      expect(meta.alternates.languages.en).toMatch(/^https:\/\/nextwrld\.com\/en\//);
+      expect(meta.title.absolute.length).toBeGreaterThan(0);
+      expect(meta.description.length).toBeGreaterThan(0);
+      expect(meta.openGraph.title).toBeTruthy();
+      expect(meta.openGraph.locale).toBe(locale === "es" ? "es_ES" : "en_US");
+      expect(meta.twitter.card).toBe("summary_large_image");
+    }
+  );
 });
 
 describe("seo helpers", () => {

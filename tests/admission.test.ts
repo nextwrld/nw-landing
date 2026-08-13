@@ -102,13 +102,21 @@ function expectBlocked(
 }
 
 describe("navigation admission (ADMISSION-NAV)", () => {
-  it("withholds every unapproved navigation destination so no speculative link is published", () => {
+  it("approves only real section routes and withholds speculative destinations", () => {
     for (const content of [esContent, enContent]) {
       for (const item of content.nav.items) {
-        expect(item.approved).toBe(false);
-        expect(item.destination).toBeNull();
+        if (item.id === "insights") {
+          expect(item.approved).toBe(false);
+          expect(item.destination).toBeNull();
+        } else {
+          expect(item.approved).toBe(true);
+          expect(item.destination).toMatch(/^\/[a-z]+\//);
+        }
       }
-      expect(buildApprovedNav(content)).toHaveLength(0);
+      expect(buildApprovedNav(content)).toHaveLength(4);
+      expect(
+        buildApprovedNav(content).some((item) => item.title === "Insights")
+      ).toBe(false);
     }
   });
 
@@ -347,8 +355,7 @@ describe("build admission (ADMISSION-BUILD)", () => {
       "<Capabilities",
       "<Method",
       "<Differentiation",
-      "<AIONProductShowcase",
-      "<CaseEvidence",
+      "<EvidenceSection",
       "<Diagnosis",
       "<Faq",
       "<FinalCTA",

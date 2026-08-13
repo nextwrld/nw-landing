@@ -72,6 +72,16 @@ export interface NavItem {
   approved: boolean;
 }
 
+export const SECTION_PAGE_KEYS = ["services", "method", "cases", "about"] as const;
+
+export type SectionPageKey = (typeof SECTION_PAGE_KEYS)[number];
+
+export interface SectionPageMeta {
+  seo: SeoCopy;
+  eyebrow: string;
+  heading: string;
+}
+
 export interface SeoCopy {
   title: string;
   description: string;
@@ -89,6 +99,7 @@ export interface ProblemCard {
 }
 
 export interface HomepageProblem extends HomepageSection {
+  eyebrow: string;
   intro: string;
   cards: ProblemCard[];
 }
@@ -99,6 +110,7 @@ export interface ImpactCostPair {
 }
 
 export interface HomepageImpact extends HomepageSection {
+  eyebrow: string;
   costPairs: ImpactCostPair[];
   closing: string;
 }
@@ -109,6 +121,7 @@ export interface BeforeAfterItem {
 }
 
 export interface HomepageBetterWay extends HomepageSection {
+  eyebrow: string;
   intro: string;
   beforeAfter: BeforeAfterItem[];
   closing: string;
@@ -152,6 +165,7 @@ export interface DifferentiationPillar {
 }
 
 export interface HomepageDifferentiation extends HomepageSection {
+  eyebrow: string;
   pillars: DifferentiationPillar[];
   optionalStatement: string;
 }
@@ -164,11 +178,13 @@ export interface HomepageHero {
   secondaryLine: string;
   primaryCta: string;
   secondaryCta: string;
+  secondaryCtaHref: string;
   microcopy: string;
 }
 
 export interface HomepageEvidence {
   id: string;
+  eyebrow: string;
   heading: string;
   showcase: AionShowcase;
   items: EvidenceEntry[];
@@ -215,13 +231,14 @@ export interface DiagnosisWhatsApp {
 }
 
 export interface HomepageDiagnosis extends HomepageSection {
+  eyebrow: string;
   offer: DiagnosisOffer;
   context: DiagnosisContextCopy;
   whatsapp: DiagnosisWhatsApp;
   calendar: { available: boolean; availabilityClaim: string | null };
 }
 
-export type HomepageFaq = HomepageSection & { entries: FaqEntry[] };
+export type HomepageFaq = HomepageSection & { eyebrow: string; entries: FaqEntry[] };
 
 export interface HomepageFinalCta extends HomepageSection {
   primaryCta: string;
@@ -234,6 +251,7 @@ export interface HomepageContent {
   locale: HomepageLocale;
   seo: SeoCopy;
   nav: { items: NavItem[] };
+  sectionPages: Record<SectionPageKey, SectionPageMeta>;
   hero: HomepageHero;
   problem: HomepageProblem;
   impact: HomepageImpact;

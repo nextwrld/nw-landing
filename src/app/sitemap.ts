@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getAllSuccessCases } from "@/utils/markdown";
 import { locales, type Locale } from "@/i18n/config";
+import { sectionPagePath } from "@/content/homepage";
+import { SECTION_PAGE_KEYS } from "@/content/homepage/types";
 import { SITE_URL } from "./site";
 
 type Freq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
@@ -46,6 +48,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "yearly",
         priority: 0.8,
         alternates: alternates(locale, path),
+      });
+    }
+  }
+
+  for (const key of SECTION_PAGE_KEYS) {
+    const languages: Record<string, string> = {};
+    for (const loc of locales) {
+      languages[loc] = `${SITE_URL}/${loc}${sectionPagePath(loc, key)}`;
+    }
+    for (const locale of locales) {
+      entries.push({
+        url: `${SITE_URL}/${locale}${sectionPagePath(locale, key)}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: { languages },
       });
     }
   }

@@ -47,4 +47,28 @@ test.describe("homepage experience — preview composition", () => {
       expect(href).not.toMatch(/cal\.com|savvycal|calendly/i);
     }
   });
+
+  test("serves every section sub-page with its own H1, reused slice, and Experience chrome", async ({
+    page,
+  }) => {
+    const cases = [
+      { path: "/es/servicios", h1: /Software a medida, sistemas de gestión y automatización/, slice: ".capability-grid" },
+      { path: "/es/metodo", h1: /Cómo trabajamos/, slice: ".method-stages" },
+      { path: "/es/casos", h1: /Casos y trabajo real/, slice: ".aion-band" },
+      { path: "/es/nosotros", h1: /Por qué Next Wrld/, slice: ".differentiation-list" },
+      { path: "/en/services", h1: /Custom software, management systems, and automation/, slice: ".capability-grid" },
+      { path: "/en/method", h1: /How we work/, slice: ".method-stages" },
+      { path: "/en/cases", h1: /Cases and real work/, slice: ".aion-band" },
+      { path: "/en/about", h1: /Why Next Wrld/, slice: ".differentiation-list" },
+    ];
+    for (const c of cases) {
+      await page.goto(c.path);
+      await expect(page.locator("header.experience-header")).toHaveCount(1);
+      await expect(page.locator("footer.experience-footer")).toHaveCount(1);
+      await expect(
+        page.getByRole("heading", { level: 1, name: c.h1 })
+      ).toHaveCount(1);
+      await expect(page.locator(c.slice)).toHaveCount(1);
+    }
+  });
 });

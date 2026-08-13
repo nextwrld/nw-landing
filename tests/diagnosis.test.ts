@@ -304,12 +304,13 @@ describe("FAQ assistive-technology and no-enhancement fallback (DIAGNOSIS-08)", 
 
 describe("diagnosis section composition (DIAGNOSIS-09)", () => {
   it("composes Diagnosis, FAQ, and FinalCTA into the Experience homepage in order", () => {
-    const evidence = experienceHomeSource.indexOf("<section");
+    const evidence = experienceHomeSource.indexOf("<EvidenceSection");
     const diagnosis = experienceHomeSource.indexOf("<Diagnosis");
     const faq = experienceHomeSource.indexOf("<Faq");
     const finalCta = experienceHomeSource.indexOf("<FinalCTA");
     expect(evidence).toBeGreaterThanOrEqual(0);
     expect(diagnosis).toBeGreaterThanOrEqual(0);
+    expect(evidence).toBeLessThan(diagnosis);
     expect(diagnosis).toBeLessThan(faq);
     expect(faq).toBeLessThan(finalCta);
   });

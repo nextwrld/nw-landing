@@ -27,7 +27,7 @@ const Hero = ({
             {content.primaryCta}
           </TrackedLink>
           <TrackedLink
-            href="#evidence"
+            href={content.secondaryCtaHref}
             event="case_view"
             params={{ locale }}
             className="exp-btn exp-btn-secondary exp-btn-lg"

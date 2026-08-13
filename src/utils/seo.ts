@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL } from "@/app/site";
 import { locales, type Locale } from "@/i18n/config";
-import { getHomepageContent } from "@/content/homepage";
-import type { HomepageContent } from "@/content/homepage/types";
+import { getHomepageContent, sectionPagePath } from "@/content/homepage";
+import type { HomepageContent, SectionPageKey } from "@/content/homepage/types";
 
 const ogLocale = (locale: Locale): string => (locale === "es" ? "es_ES" : "en_US");
 
@@ -71,6 +71,39 @@ export function buildHomepageMetadata(opts: {
     image: opts.image,
     absoluteTitle: true,
   });
+}
+
+export function buildSectionPageMetadata(opts: {
+  locale: Locale;
+  key: SectionPageKey;
+  title: string;
+  description: string;
+  image?: string;
+}): Metadata {
+  const languages: Record<string, string> = {};
+  for (const loc of locales) {
+    languages[loc] = localeUrl(loc, sectionPagePath(loc, opts.key));
+  }
+  const url = languages[opts.locale];
+  return {
+    title: { absolute: opts.title },
+    description: opts.description,
+    alternates: { canonical: url, languages },
+    openGraph: {
+      title: opts.title,
+      description: opts.description,
+      url,
+      siteName: SITE_NAME,
+      locale: ogLocale(opts.locale),
+      type: "website",
+      images: opts.image ? [{ url: siteUrl(opts.image) }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: opts.title,
+      description: opts.description,
+    },
+  };
 }
 
 export function homepageSchema(content: HomepageContent): Record<string, unknown>[] {
