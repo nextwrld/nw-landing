@@ -55,15 +55,67 @@ export const homepageEN: HomepageContent = {
   problem: {
     id: "problem",
     heading: "Your company may have grown faster than the way it operates.",
+    intro:
+      "What worked with ten clients, a small team, or a few operations can become a limitation as the business grows.",
+    cards: [
+      {
+        id: "excel-system",
+        title: "Excel became the system",
+        body: "Critical information lives in spreadsheets that grow more complex, harder to maintain, and dependent on the person who created them.",
+      },
+      {
+        id: "whatsapp-process",
+        title: "WhatsApp is part of the process",
+        body: "Orders, decisions, and important information end up scattered across chats and people.",
+      },
+      {
+        id: "disconnected-tools",
+        title: "The tools aren't connected",
+        body: "The team copies information from one system to another just to keep the operation running.",
+      },
+      {
+        id: "repetitive-tasks",
+        title: "Too many repetitive tasks",
+        body: "Administrative processes consume hours every week even though they always follow the same rules.",
+      },
+      {
+        id: "indispensable-people",
+        title: "Some people can't be missing",
+        body: "Part of the operation depends on knowledge that exists only in someone's head.",
+      },
+      {
+        id: "slow-reporting",
+        title: "Getting information costs too much",
+        body: "A simple answer requires searching, consolidating, and validating data from different places.",
+      },
+    ],
   },
   impact: {
     id: "impact",
     heading:
       "The problem isn't that your operation doesn't work. It's that keeping it running costs more and more.",
+    costPairs: [
+      { cause: "More clients", effect: "More administration" },
+      { cause: "More people", effect: "More coordination" },
+      { cause: "More tools", effect: "More scattered information" },
+      { cause: "More volume", effect: "More room for error" },
+    ],
+    closing: "Growth starts increasing complexity faster than the ability to manage it.",
   },
   betterWay: {
     id: "betterWay",
     heading: "Growing shouldn't mean doing more manual work.",
+    intro:
+      "When processes start to outgrow the tools that support them, the answer isn't always another application. Sometimes you need to connect what already exists, automate parts of the process, or build software around how your business works.",
+    beforeAfter: [
+      { before: "Manual processes", after: "Defined processes" },
+      { before: "Scattered information", after: "Centralized information" },
+      { before: "Isolated tools", after: "Connected systems" },
+      { before: "Dependency on people", after: "Automation" },
+      { before: "Manual reporting", after: "Available data" },
+    ],
+    closing:
+      "We don't start by deciding which technology to use. We start by understanding what needs to change.",
   },
   capabilities: {
     id: "capabilities",

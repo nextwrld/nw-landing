@@ -57,7 +57,7 @@ export default async function Home({ params }: Props) {
   const admission = admitPublication(getPublicationConfig());
 
   if (admission === "experience") {
-    return <ExperienceHome locale={l} />;
+    return <ExperienceHome locale={l} content={getHomepageContent(l)} />;
   }
 
   const dict = await getDictionary(l);

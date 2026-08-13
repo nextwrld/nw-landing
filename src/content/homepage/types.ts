@@ -66,6 +66,38 @@ export interface HomepageSection {
   heading: string;
 }
 
+export interface ProblemCard {
+  id: string;
+  title: string;
+  body: string;
+}
+
+export interface HomepageProblem extends HomepageSection {
+  intro: string;
+  cards: ProblemCard[];
+}
+
+export interface ImpactCostPair {
+  cause: string;
+  effect: string;
+}
+
+export interface HomepageImpact extends HomepageSection {
+  costPairs: ImpactCostPair[];
+  closing: string;
+}
+
+export interface BeforeAfterItem {
+  before: string;
+  after: string;
+}
+
+export interface HomepageBetterWay extends HomepageSection {
+  intro: string;
+  beforeAfter: BeforeAfterItem[];
+  closing: string;
+}
+
 export interface HomepageHero {
   id: "hero";
   eyebrow: string;
@@ -88,9 +120,9 @@ export interface HomepageContent {
   seo: SeoCopy;
   nav: { items: NavItem[] };
   hero: HomepageHero;
-  problem: HomepageSection;
-  impact: HomepageSection;
-  betterWay: HomepageSection;
+  problem: HomepageProblem;
+  impact: HomepageImpact;
+  betterWay: HomepageBetterWay;
   capabilities: HomepageSection;
   method: HomepageSection;
   differentiation: HomepageSection;

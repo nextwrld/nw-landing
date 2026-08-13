@@ -55,15 +55,68 @@ export const homepageES: HomepageContent = {
   problem: {
     id: "problem",
     heading: "Tu empresa puede haber crecido más rápido que su forma de operar.",
+    intro:
+      "Lo que funcionaba con diez clientes, un equipo pequeño o pocas operaciones puede convertirse en una limitación cuando el negocio crece.",
+    cards: [
+      {
+        id: "excel-system",
+        title: "Excel se convirtió en el sistema",
+        body: "Información crítica vive en hojas cada vez más complejas, difíciles de mantener y dependientes de quien las creó.",
+      },
+      {
+        id: "whatsapp-process",
+        title: "WhatsApp forma parte del proceso",
+        body: "Pedidos, decisiones e información importante quedan repartidos entre chats y personas.",
+      },
+      {
+        id: "disconnected-tools",
+        title: "Las herramientas no están conectadas",
+        body: "El equipo copia información de un sistema a otro para mantener la operación funcionando.",
+      },
+      {
+        id: "repetitive-tasks",
+        title: "Demasiadas tareas repetitivas",
+        body: "Procesos administrativos consumen horas cada semana aunque sigan siempre las mismas reglas.",
+      },
+      {
+        id: "indispensable-people",
+        title: "Hay personas que no pueden faltar",
+        body: "Parte de la operación depende de conocimiento que existe únicamente en la cabeza de alguien.",
+      },
+      {
+        id: "slow-reporting",
+        title: "Obtener información cuesta demasiado",
+        body: "Una respuesta simple requiere buscar, consolidar y validar datos desde diferentes lugares.",
+      },
+    ],
   },
   impact: {
     id: "impact",
     heading:
       "El problema no es que tu operación no funcione. Es que cada vez cuesta más mantenerla funcionando.",
+    costPairs: [
+      { cause: "Más clientes", effect: "Más administración" },
+      { cause: "Más personas", effect: "Más coordinación" },
+      { cause: "Más herramientas", effect: "Más información dispersa" },
+      { cause: "Más volumen", effect: "Más posibilidades de error" },
+    ],
+    closing:
+      "El crecimiento empieza a aumentar la complejidad más rápido que la capacidad de gestionarla.",
   },
   betterWay: {
     id: "betterWay",
     heading: "Crecer no debería significar hacer más trabajo manual.",
+    intro:
+      "Cuando los procesos empiezan a superar las herramientas que los sostienen, la respuesta no siempre es comprar otra aplicación. A veces necesitas conectar lo que ya existe, automatizar partes del proceso o construir software alrededor de cómo funciona tu negocio.",
+    beforeAfter: [
+      { before: "Procesos manuales", after: "Procesos definidos" },
+      { before: "Información dispersa", after: "Información centralizada" },
+      { before: "Herramientas aisladas", after: "Sistemas conectados" },
+      { before: "Dependencia de personas", after: "Automatización" },
+      { before: "Reporting manual", after: "Datos disponibles" },
+    ],
+    closing:
+      "No empezamos decidiendo qué tecnología usar. Empezamos entendiendo qué necesita cambiar.",
   },
   capabilities: {
     id: "capabilities",
