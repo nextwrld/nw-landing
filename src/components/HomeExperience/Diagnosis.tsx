@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import TrackedLink from "@/components/Common/TrackedLink";
 import type { Locale } from "@/i18n/config";
 import type { HomepageDiagnosis } from "@/content/homepage/types";
-import { trackEvent } from "@/utils/analytics";
+import { formEventParams, trackEvent } from "@/utils/analytics";
 import {
   resolveDiagnosisFeedback,
   submitDiagnosisContext,
@@ -39,7 +39,7 @@ const Diagnosis = ({
   const handleChange = (field: keyof typeof EMPTY_CONTEXT, value: string | boolean) => {
     if (!startedRef.current) {
       startedRef.current = true;
-      trackEvent("contact_form_start", { form_source: DIAGNOSIS_FORM_SOURCE, locale });
+      trackEvent("contact_form_start", formEventParams(DIAGNOSIS_FORM_SOURCE, locale));
     }
     setContext((prev) => ({ ...prev, [field]: value }));
     setFieldErrors((prev) => (field in prev ? { ...prev, [field]: undefined } : prev));
@@ -54,15 +54,15 @@ const Diagnosis = ({
       return;
     }
     setState("submitting");
-    trackEvent("contact_form_submit", { form_source: DIAGNOSIS_FORM_SOURCE, locale });
+    trackEvent("contact_form_submit", formEventParams(DIAGNOSIS_FORM_SOURCE, locale));
     const result = await submitDiagnosisContext(context);
     if (result.ok) {
-      trackEvent("contact_form_success", { form_source: DIAGNOSIS_FORM_SOURCE, locale });
+      trackEvent("contact_form_success", formEventParams(DIAGNOSIS_FORM_SOURCE, locale));
       setState("contextAccepted");
       setContext(EMPTY_CONTEXT);
       setFieldErrors({});
     } else {
-      trackEvent("contact_form_error", { form_source: DIAGNOSIS_FORM_SOURCE, locale });
+      trackEvent("contact_form_error", formEventParams(DIAGNOSIS_FORM_SOURCE, locale));
       setState(result.kind === "rejected" ? "submitError" : "handoffError");
     }
   };

@@ -1,7 +1,7 @@
 "use client";
 
 import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
-import { trackEvent, type EventName, type EventParams } from "@/utils/analytics";
+import { shouldTrackActivation, trackEvent, type EventName, type EventParams } from "@/utils/analytics";
 
 type TrackedLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   event: EventName;
@@ -18,7 +18,9 @@ const TrackedLink = ({
   ...rest
 }: TrackedLinkProps) => {
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    trackEvent(event, params);
+    if (shouldTrackActivation(event, href)) {
+      trackEvent(event, params);
+    }
     onClick?.(e);
   };
 
