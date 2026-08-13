@@ -7,13 +7,16 @@ import Faq from "@/components/Faq";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
 import Pricing from "@/components/Pricing";
+import ExperienceHome from "@/components/HomeExperience/ExperienceHome";
 import { getAllSuccessCases } from "@/utils/markdown";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { buildPageMetadata } from "@/utils/seo";
+import { buildHomepageMetadata, buildPageMetadata } from "@/utils/seo";
 import { OG_DEFAULT_IMAGE } from "../site";
+import { admitPublication, getPublicationConfig } from "@/content/homepage/publication";
+import { getHomepageContent } from "@/content/homepage";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,6 +25,16 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const l = isLocale(locale) ? locale : defaultLocale;
+  const admission = admitPublication(getPublicationConfig());
+
+  if (admission === "experience") {
+    return buildHomepageMetadata({
+      locale: l,
+      seo: getHomepageContent(l).seo,
+      image: OG_DEFAULT_IMAGE,
+    });
+  }
+
   const dict = await getDictionary(l);
   return buildPageMetadata({
     locale: l,
@@ -41,6 +54,12 @@ export default async function Home({ params }: Props) {
   }
 
   const l: Locale = locale;
+  const admission = admitPublication(getPublicationConfig());
+
+  if (admission === "experience") {
+    return <ExperienceHome locale={l} />;
+  }
+
   const dict = await getDictionary(l);
   const cases = getAllSuccessCases(l, [
     "title",

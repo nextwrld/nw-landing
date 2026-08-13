@@ -128,8 +128,8 @@ const Footer = ({
                 <p className="text-base text-gray-7">
                   {dict.allRightsReserved} &nbsp;|&nbsp; {dict.developedBy}&nbsp;
                   <Link
-                    href="#"
-                    rel="nofollow noopner noreferrer"
+                    href={homeHref}
+                    rel="noopener noreferrer"
                     target="_blank"
                     className="text-gray-1 hover:underline"
                   >

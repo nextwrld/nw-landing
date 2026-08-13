@@ -2,6 +2,7 @@ import type { Menu } from "@/types/menu";
 import { localizedHref } from "@/utils/i18n-url";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import type { HomepageContent } from "@/content/homepage/types";
 
 const buildMenuData = (
   menu: Dictionary["menu"],
@@ -44,5 +45,16 @@ const buildMenuData = (
     newTab: false,
   },
 ];
+
+export function buildApprovedNav(content: HomepageContent): Menu[] {
+  const items: Menu[] = [];
+  let id = 1;
+  for (const item of content.nav.items) {
+    if (item.approved && item.destination) {
+      items.push({ id: id++, title: item.label, path: item.destination, newTab: false });
+    }
+  }
+  return items;
+}
 
 export default buildMenuData;

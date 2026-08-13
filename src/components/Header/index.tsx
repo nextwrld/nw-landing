@@ -4,13 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import LanguageSelector from "@/components/LanguageSelector";
+import TrackedLink from "@/components/Common/TrackedLink";
 import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
 import { useTheme } from "@/components/ThemeProvider";
 
 import type { Menu } from "@/types/menu";
 
-const Header = ({ menu }: { menu: Menu[] }) => {
+const Header = ({
+  menu,
+  diagnosisCta,
+}: {
+  menu: Menu[];
+  diagnosisCta?: { label: string; href: string };
+}) => {
   const locale = useLocale();
   const pathUrl = usePathname();
   const baseHome = `/${locale}`;
@@ -269,6 +276,18 @@ const Header = ({ menu }: { menu: Menu[] }) => {
                         </li>
                       ),
                     )}
+                    {diagnosisCta ? (
+                      <li className="flex items-center py-2 lg:py-6">
+                        <TrackedLink
+                          href={diagnosisCta.href}
+                          event="diagnosis_cta_click"
+                          params={{ cta_location: "header", locale }}
+                          className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white"
+                        >
+                          {diagnosisCta.label}
+                        </TrackedLink>
+                      </li>
+                    ) : null}
                     <li className="flex items-center py-2 lg:hidden">
                       <LanguageSelector />
                     </li>

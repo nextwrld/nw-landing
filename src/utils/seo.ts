@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL } from "@/app/site";
 import { locales, type Locale } from "@/i18n/config";
+import type { HomepageContent } from "@/content/homepage/types";
 
 const ogLocale = (locale: Locale): string => (locale === "es" ? "es_ES" : "en_US");
 
@@ -53,4 +54,36 @@ export function buildPageMetadata(opts: {
       description: opts.description,
     },
   };
+}
+
+export function buildHomepageMetadata(opts: {
+  locale: Locale;
+  seo: { title: string; description: string };
+  image?: string;
+}): Metadata {
+  return buildPageMetadata({
+    locale: opts.locale,
+    path: "/",
+    title: opts.seo.title,
+    description: opts.seo.description,
+    image: opts.image,
+    absoluteTitle: true,
+  });
+}
+
+export function homepageSchema(content: HomepageContent): Record<string, unknown>[] {
+  const schema: Record<string, unknown>[] = [];
+  const approvedFaqs = content.faq.entries.filter((entry) => entry.approved);
+  if (approvedFaqs.length > 0) {
+    schema.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: approvedFaqs.map((entry) => ({
+        "@type": "Question",
+        name: entry.question,
+        acceptedAnswer: { "@type": "Answer", text: entry.answer },
+      })),
+    });
+  }
+  return schema;
 }
