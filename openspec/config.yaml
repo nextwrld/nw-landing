@@ -1,0 +1,43 @@
+schema: spec-driven
+
+context: |
+  Project: nw-landing
+  Stack: Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, pnpm 11.
+  Architecture: Locale-prefixed server-rendered/static pages with focused client islands.
+  Content: Local dictionaries and Markdown/frontmatter success cases.
+  Quality: ESLint, strict TypeScript, Vitest, and Playwright.
+  Foundation is complete; Experience 2.0 is the next change boundary.
+
+strict_tdd: true
+
+testing:
+  runner: pnpm test
+  unit: pnpm test
+  integration: pnpm test
+  e2e: pnpm test:e2e
+  coverage: unavailable (no coverage script/provider configured)
+  lint: pnpm lint
+  typecheck: pnpm exec tsc --noEmit
+  formatter: pnpm exec prettier --check .
+
+rules:
+  proposal:
+    - Keep Foundation and Experience 2.0 scope separate.
+    - Include rollback and deployment impact for risky changes.
+  specs:
+    - Use Given/When/Then scenarios and RFC 2119 keywords.
+    - Preserve locale parity for Spanish and English.
+  design:
+    - Start from existing ADRs and document deviations explicitly.
+    - Keep Server Components as the default and justify client islands.
+  tasks:
+    - Group tasks by reviewable work unit and keep them independently verifiable.
+  apply:
+    tdd: true
+    test_command: pnpm test
+  verify:
+    test_command: pnpm test
+    build_command: pnpm build
+    coverage_threshold: 0
+  archive:
+    - Preserve the OpenSpec audit trail.
