@@ -182,7 +182,7 @@ describe("draft retention and fail-closed release admission (PUBLICATION-001)", 
     }
   });
 
-  it("fails closed on unsupported evidence even with every approval granted", () => {
+  it("fails closed on placeholder evidence even with every approval granted", () => {
     let thrown: unknown;
     try {
       admitPublication({ status: "release", approvals: buildApprovals() });
@@ -191,7 +191,7 @@ describe("draft retention and fail-closed release admission (PUBLICATION-001)", 
     }
     expect(thrown).toBeInstanceOf(PublicationBlockedError);
     const blocked = thrown as PublicationBlockedError;
-    expect(blocked.problems.some((problem) => /InmoCRM.*MVP/i.test(problem))).toBe(true);
+    expect(blocked.problems.some((problem) => /not approved/i.test(problem))).toBe(true);
   });
 
   it("defaults the publication status to draft", async () => {
@@ -202,7 +202,7 @@ describe("draft retention and fail-closed release admission (PUBLICATION-001)", 
 });
 
 describe("InmoCRM evidence stays MVP-safe (EVIDENCE-001)", () => {
-  it("flags the current InmoCRM markdown as not MVP-safe in both locales", () => {
+  it("treats the rewritten InmoCRM markdown as MVP-safe in both locales", () => {
     const esDoc = readFileSync(
       new URL("../markdown/success-cases/es/crm.md", import.meta.url),
       "utf8"
@@ -211,8 +211,8 @@ describe("InmoCRM evidence stays MVP-safe (EVIDENCE-001)", () => {
       new URL("../markdown/success-cases/en/crm.md", import.meta.url),
       "utf8"
     );
-    expect(isCrmMvpSafe(esDoc).length).toBeGreaterThan(0);
-    expect(isCrmMvpSafe(enDoc).length).toBeGreaterThan(0);
+    expect(isCrmMvpSafe(esDoc)).toEqual([]);
+    expect(isCrmMvpSafe(enDoc)).toEqual([]);
   });
 
   it("accepts research and design copy without unsupported claims", () => {

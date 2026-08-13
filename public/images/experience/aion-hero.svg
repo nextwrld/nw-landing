@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img">
+  <rect width="640" height="360" fill="#f3f4f6"/>
+  <rect x="1" y="1" width="638" height="358" fill="none" stroke="#d1d5db" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="320" y="168" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#9ca3af" text-anchor="middle" dominant-baseline="middle">PLACEHOLDER</text>
+  <text x="320" y="204" font-family="system-ui, sans-serif" font-size="18" fill="#9ca3af" text-anchor="middle" dominant-baseline="middle">AION · approved=false</text>
+</svg>

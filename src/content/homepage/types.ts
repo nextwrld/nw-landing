@@ -42,6 +42,22 @@ export interface EvidenceEntry {
   approved: boolean;
 }
 
+export interface AionCapability {
+  id: string;
+  label: string;
+}
+
+export interface AionShowcase {
+  id: "aion";
+  heading: string;
+  role: string;
+  summary: string;
+  statusNote: string;
+  asset: string;
+  capabilities: AionCapability[];
+  approved: boolean;
+}
+
 export interface FaqEntry {
   id: string;
   question: string;
@@ -154,6 +170,7 @@ export interface HomepageHero {
 export interface HomepageEvidence {
   id: string;
   heading: string;
+  showcase: AionShowcase;
   items: EvidenceEntry[];
 }
 

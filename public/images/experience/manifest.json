@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-13",
+  "entries": [
+    {
+      "id": "aion-hero",
+      "filename": "aion-hero.svg",
+      "alt": "",
+      "status": "placeholder",
+      "approved": false
+    },
+    {
+      "id": "jfhp-support",
+      "filename": "jfhp-support.svg",
+      "alt": "",
+      "status": "placeholder",
+      "approved": false
+    },
+    {
+      "id": "automation-support",
+      "filename": "automation-support.svg",
+      "alt": "",
+      "status": "placeholder",
+      "approved": false
+    },
+    {
+      "id": "inmocrm-mvp",
+      "filename": "inmocrm-mvp.svg",
+      "alt": "",
+      "status": "placeholder",
+      "approved": false
+    }
+  ]
+}
