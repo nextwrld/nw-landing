@@ -6,10 +6,19 @@ import { useEffect, useRef, useState } from "react";
 import LanguageSelector from "@/components/LanguageSelector";
 import TrackedLink from "@/components/Common/TrackedLink";
 import { useLocale } from "@/hooks/useLocale";
-import { localizedHref } from "@/utils/i18n-url";
+import { localizedHref, localizedPath } from "@/utils/i18n-url";
 import { nextMenuState, shellA11yCopy } from "@/components/Header/menuData";
+import { sectionPagePath } from "@/content/homepage";
+import type { SectionPageKey } from "@/content/homepage/types";
 
 import type { Menu } from "@/types/menu";
+
+const SCROLLSPY_BY_SECTION: Record<string, SectionPageKey> = {
+  capabilities: "services",
+  method: "method",
+  evidence: "cases",
+  differentiation: "about",
+};
 
 const ExperienceHeader = ({
   menu,
@@ -24,6 +33,7 @@ const ExperienceHeader = ({
   const navLabel = locale === "es" ? "Navegación principal" : "Main navigation";
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
+  const [activeNavPath, setActiveNavPath] = useState<string | null>(null);
   const togglerRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = () => {
@@ -48,6 +58,31 @@ const ExperienceHeader = ({
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const sectionIds = Object.keys(SCROLLSPY_BY_SECTION);
+    const targets = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((element): element is HTMLElement => element !== null);
+    if (typeof IntersectionObserver === "undefined" || targets.length === 0) {
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (!visible) {
+          return;
+        }
+        const key = SCROLLSPY_BY_SECTION[visible.target.id];
+        setActiveNavPath(localizedPath(locale, sectionPagePath(locale, key)));
+      },
+      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+    );
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, [locale]);
 
   const handleAnchorClick = (href: string) => {
     const targetId = href.split("#")[1];
@@ -95,8 +130,11 @@ const ExperienceHeader = ({
                     handleAnchorClick(item.path);
                   }
                 }}
+                aria-current={pathUrl === item.path ? "page" : undefined}
                 className={`experience-nav-link ${
-                  pathUrl === item.path ? "experience-nav-active" : ""
+                  pathUrl === item.path || activeNavPath === item.path
+                    ? "experience-nav-active"
+                    : ""
                 }`}
               >
                 {item.title}

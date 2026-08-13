@@ -3,6 +3,9 @@ import type { HomepageImpact } from "@/content/homepage/types";
 const Impact = ({ content }: { content: HomepageImpact }) => (
   <section id={content.id} className="impact-section experience-section">
     <div className="experience-container">
+      <p className="experience-eyebrow experience-eyebrow-dark">
+        {content.eyebrow}
+      </p>
       <h2 className="exp-h2">{content.heading}</h2>
       <ul className="impact-list">
         {content.costPairs.map((pair, index) => (

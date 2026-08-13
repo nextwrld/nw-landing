@@ -71,4 +71,28 @@ test.describe("homepage experience — preview composition", () => {
       await expect(page.locator(c.slice)).toHaveCount(1);
     }
   });
+
+  test("highlights the matching nav item while scrolling through homepage sections", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    const methodLink = page
+      .locator("nav.experience-nav-desktop a")
+      .filter({ hasText: "Método" });
+    await page.locator("#method").scrollIntoViewIfNeeded();
+    await expect(methodLink).toHaveClass(/experience-nav-active/);
+  });
+
+  test("shows chapter dividers and numbered editorial eyebrows on the homepage", async ({
+    page,
+  }) => {
+    await page.goto("/es");
+    await expect(page.locator(".chapter-divider")).toHaveCount(5);
+    await expect(
+      page.getByText("05 · QUÉ PODEMOS CONSTRUIR")
+    ).toHaveCount(1);
+    await expect(
+      page.getByText("10 · PREGUNTAS FRECUENTES")
+    ).toHaveCount(1);
+  });
 });

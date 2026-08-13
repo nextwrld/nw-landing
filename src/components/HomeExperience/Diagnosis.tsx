@@ -77,6 +77,7 @@ const Diagnosis = ({
     <section id={content.id} className="diagnosis-section experience-section">
       <div className="experience-container diagnosis-grid">
         <div className="diagnosis-copy">
+          <p className="experience-eyebrow">{content.eyebrow}</p>
           <h2 className="exp-h2">{content.heading}</h2>
           <ul className="diagnosis-offer">
             <li>

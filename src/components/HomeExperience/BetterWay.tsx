@@ -4,6 +4,9 @@ const BetterWay = ({ content }: { content: HomepageBetterWay }) => (
   <section id={content.id} className="chapter-transition better-way-section">
     <div className="experience-container">
       <div className="better-way-head">
+        <p className="experience-eyebrow experience-eyebrow-dark">
+          {content.eyebrow}
+        </p>
         <h2 className="exp-h2 experience-text-dark">{content.heading}</h2>
         <p className="exp-lead exp-lead-dark">{content.intro}</p>
       </div>

@@ -624,6 +624,32 @@ body {
   color: var(--color-exp-ink);
 }
 
+/* Fine line + subtle gradient transition between consecutive light chapters */
+.chapter-divider {
+  position: relative;
+  height: clamp(2.5rem, 5vw, 4rem);
+  background: linear-gradient(
+    180deg,
+    var(--color-exp-surface-alt) 0%,
+    var(--color-exp-surface) 100%
+  );
+}
+
+.chapter-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-exp-line-strong),
+    transparent
+  );
+}
+
 /* Editorial typography */
 .experience-eyebrow {
   display: inline-block;
@@ -1425,6 +1451,11 @@ body {
     var(--color-exp-dark);
   color: var(--color-exp-dark-text);
   padding-block: clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--color-exp-dark-line);
+  border-bottom: 1px solid var(--color-exp-dark-line);
+  box-shadow: 0 32px 64px -40px rgb(0 0 0 / 0.55);
+  position: relative;
+  z-index: 1;
 }
 
 .aion-showcase {
@@ -1580,7 +1611,7 @@ body {
    Differentiation
    ============================================================ */
 .differentiation-section {
-  background: var(--color-exp-surface);
+  background: var(--color-exp-surface-alt);
   color: var(--color-exp-ink);
 }
 

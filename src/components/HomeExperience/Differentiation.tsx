@@ -8,6 +8,7 @@ const Differentiation = ({
   <section id={content.id} className="differentiation-section experience-section">
     <div className="experience-container">
       <div className="exp-section-head">
+        <p className="experience-eyebrow">{content.eyebrow}</p>
         <h2 className="exp-h2">{content.heading}</h2>
       </div>
       <ul className="differentiation-list">
