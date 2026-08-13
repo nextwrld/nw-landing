@@ -27,7 +27,7 @@ Contracts→1; shell→1/3; problem→2; method→2; evidence→2/3; diagnosis�
 - [x] 2.1 RED: locale, focus, zoom, contrast, non-color cues; 2.2 GREEN: ES/EN Header/Footer/layout/CSS composed.
 - [x] 3.1 RED: ES/EN H1, friction/impact/order, scripts-off/reduced-motion; 3.2 GREEN: ES/EN problem content composed.
 - [x] 4.1 RED: services, useful-AI boundary, five-stage outcomes; 4.2 GREEN: ES/EN method composed.
-- [ ] 5.1 RED: approved AION/JFHP/automation/InmoCRM-MVP evidence and CRM withholding; 5.2 GREEN: ES/EN safe evidence composed.
+- [x] 5.1 RED: approved AION/JFHP/automation/InmoCRM-MVP evidence and CRM withholding; 5.2 GREEN: ES/EN safe evidence composed.
 - [ ] 6.1 RED: offer duration/cost/focus/non-obligation/conditional deliverables; field errors; contact/calendar/external recovery, WhatsApp, confirmed booking, privacy/legal blockers, FAQ assistive-tech/no-enhancement. 6.2 GREEN: ES/EN diagnosis/FAQ/CTA and strict union.
 - [ ] 7.1 RED: privacy events, consent/analytics failure, withheld schema/events, invalid canonical/hreflang, intentional external activation, language-switch context. 7.2 GREEN: ES/EN metadata/schema/observability.
 - [ ] 8.1 RED: navigation/evidence/diagnosis/FAQ/build blockers and ordinary/Vercel/direct builds. 8.2 GREEN/REFACTOR: ES/EN `src/app/[locale]/page.tsx`; complete Experience only, else Foundation/withholding.
