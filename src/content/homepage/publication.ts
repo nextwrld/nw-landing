@@ -1,4 +1,5 @@
 import { getSuccessCaseBySlug } from "@/utils/markdown";
+import { validateMetadataLocales } from "@/utils/seo";
 import { contentByLocale, validateContentParity } from "./index";
 import { loadEvidenceManifest, manifestEntryFor } from "./manifest";
 import type { EvidenceManifest } from "./manifest";
@@ -231,6 +232,7 @@ export function validateRelease(config: PublicationConfig): string[] {
   problems.push(...validateEvidenceApproval(contentByLocale.en.evidence.items, manifest));
   problems.push(...validateEvidenceEntries(contentByLocale.es.evidence.items, verifiedCapabilities));
   problems.push(...validateEvidenceEntries(contentByLocale.en.evidence.items, verifiedCapabilities));
+  problems.push(...validateMetadataLocales());
   return problems;
 }
 

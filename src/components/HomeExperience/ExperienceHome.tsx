@@ -10,7 +10,6 @@ import CaseEvidence from "./CaseEvidence";
 import Diagnosis from "./Diagnosis";
 import Faq from "./FAQ";
 import FinalCTA from "./FinalCTA";
-import { homepageSchema } from "@/utils/seo";
 import type { Locale } from "@/i18n/config";
 import type { HomepageContent } from "@/content/homepage/types";
 
@@ -22,29 +21,23 @@ const HomeExperience = ({
   content: HomepageContent;
 }) => {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema(content)) }}
-      />
-      <main id="main-content">
-        <Hero content={content.hero} />
-        <Problem content={content.problem} />
-        <Impact content={content.impact} />
-        <BetterWay content={content.betterWay} />
-        <Capabilities content={content.capabilities} />
-        <Method content={content.method} />
-        <Differentiation content={content.differentiation} />
-        <section id={content.evidence.id} className="homepage-evidence">
-          <h2>{content.evidence.heading}</h2>
-          <AIONProductShowcase content={content.evidence} />
-          <CaseEvidence content={content.evidence} />
-        </section>
-        <Diagnosis content={content.diagnosis} locale={locale} />
-        <Faq content={content.faq} />
-        <FinalCTA content={content.finalCta} locale={locale} />
-      </main>
-    </>
+    <main id="main-content">
+      <Hero content={content.hero} />
+      <Problem content={content.problem} />
+      <Impact content={content.impact} />
+      <BetterWay content={content.betterWay} />
+      <Capabilities content={content.capabilities} />
+      <Method content={content.method} />
+      <Differentiation content={content.differentiation} />
+      <section id={content.evidence.id} className="homepage-evidence">
+        <h2>{content.evidence.heading}</h2>
+        <AIONProductShowcase content={content.evidence} />
+        <CaseEvidence content={content.evidence} />
+      </section>
+      <Diagnosis content={content.diagnosis} locale={locale} />
+      <Faq content={content.faq} />
+      <FinalCTA content={content.finalCta} locale={locale} />
+    </main>
   );
 };
 

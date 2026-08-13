@@ -13,7 +13,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { buildHomepageMetadata, buildPageMetadata } from "@/utils/seo";
+import { buildHomepageMetadata, buildPageMetadata, homepageSchema } from "@/utils/seo";
 import { OG_DEFAULT_IMAGE } from "../site";
 import { admitPublication, getPublicationConfig } from "@/content/homepage/publication";
 import { getHomepageContent } from "@/content/homepage";
@@ -57,7 +57,15 @@ export default async function Home({ params }: Props) {
   const admission = admitPublication(getPublicationConfig());
 
   if (admission === "experience") {
-    return <ExperienceHome locale={l} content={getHomepageContent(l)} />;
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema(getHomepageContent(l))) }}
+        />
+        <ExperienceHome locale={l} content={getHomepageContent(l)} />
+      </>
+    );
   }
 
   const dict = await getDictionary(l);
