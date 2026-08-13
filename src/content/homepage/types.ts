@@ -174,6 +174,62 @@ export interface HomepageEvidence {
   items: EvidenceEntry[];
 }
 
+export interface DiagnosisOffer {
+  duration: string;
+  cost: string;
+  focus: string;
+  nonObligation: string;
+  deliverables: { lines: string[]; approved: boolean };
+}
+
+export interface DiagnosisFieldCopy {
+  label: string;
+  placeholder: string;
+  required: string;
+}
+
+export interface DiagnosisContextCopy {
+  fields: {
+    fullName: DiagnosisFieldCopy;
+    company: DiagnosisFieldCopy;
+    email: DiagnosisFieldCopy;
+    operationArea: DiagnosisFieldCopy;
+  };
+  privacy: { consent: string; required: string; note: string | null };
+  submitLabel: string;
+  submittingLabel: string;
+  statusSubmitting: string;
+  statusAccepted: string;
+  statusSubmitError: string;
+  statusHandoffError: string;
+  retryLabel: string;
+  alternative: { label: string; href: string };
+}
+
+export interface DiagnosisWhatsApp {
+  enabled: boolean;
+  destination: string | null;
+  message: string;
+  label: string;
+  leaveSiteNote: string;
+}
+
+export interface HomepageDiagnosis extends HomepageSection {
+  offer: DiagnosisOffer;
+  context: DiagnosisContextCopy;
+  whatsapp: DiagnosisWhatsApp;
+  calendar: { available: boolean; availabilityClaim: string | null };
+}
+
+export type HomepageFaq = HomepageSection & { entries: FaqEntry[] };
+
+export interface HomepageFinalCta extends HomepageSection {
+  primaryCta: string;
+  primaryCtaHref: string;
+  microcopy: string;
+  secondaryCta: { label: string; destination: string | null; leaveSiteNote: string };
+}
+
 export interface HomepageContent {
   locale: HomepageLocale;
   seo: SeoCopy;
@@ -186,7 +242,7 @@ export interface HomepageContent {
   method: HomepageMethod;
   differentiation: HomepageDifferentiation;
   evidence: HomepageEvidence;
-  faq: { entries: FaqEntry[] };
-  diagnosis: HomepageSection;
-  finalCta: HomepageSection;
+  faq: HomepageFaq;
+  diagnosis: HomepageDiagnosis;
+  finalCta: HomepageFinalCta;
 }

@@ -297,6 +297,8 @@ export const homepageEN: HomepageContent = {
     ],
   },
   faq: {
+    id: "faq",
+    heading: "Frequently asked questions",
     entries: [
       {
         id: "how-do-i-know",
@@ -334,13 +336,6 @@ export const homepageEN: HomepageContent = {
         approved: true,
       },
       {
-        id: "ownership",
-        question: "Does the software belong to my company?",
-        answer:
-          "Yes. In custom software projects, the product developed for your company remains under the ownership conditions agreed from the start of the project.",
-        approved: false,
-      },
-      {
         id: "post-launch",
         question: "What happens after launch?",
         answer:
@@ -359,9 +354,73 @@ export const homepageEN: HomepageContent = {
   diagnosis: {
     id: "diagnosis",
     heading: "Before deciding what to build, let's understand what is slowing your operation down.",
+    offer: {
+      duration: "30–45 minutes",
+      cost: "Free",
+      focus:
+        "A conversation focused on one concrete process of your operation, not a services demo.",
+      nonObligation: "No obligation to hire.",
+      deliverables: { lines: [], approved: false },
+    },
+    context: {
+      fields: {
+        fullName: {
+          label: "Full name",
+          placeholder: "Your name",
+          required: "Enter your name.",
+        },
+        company: {
+          label: "Company",
+          placeholder: "Your company name",
+          required: "Enter your company name.",
+        },
+        email: {
+          label: "Email",
+          placeholder: "you@company.com",
+          required: "Enter a valid email.",
+        },
+        operationArea: {
+          label: "Operation area to improve",
+          placeholder: "For example: sales, orders, inventory, administration",
+          required: "Enter the area you want to improve.",
+        },
+      },
+      privacy: {
+        consent: "I agree that Next Wrld uses my data to contact me about the diagnosis.",
+        required: "You must accept the use of your data to continue.",
+        note: null,
+      },
+      submitLabel: "Continue",
+      submittingLabel: "Sending…",
+      statusSubmitting: "Sending your information…",
+      statusAccepted:
+        "We received your information. Our team will contact you to move the diagnosis forward.",
+      statusSubmitError: "Review the highlighted fields and try again.",
+      statusHandoffError:
+        "We could not process your request right now. Please try again later.",
+      retryLabel: "Try again",
+      alternative: { label: "Or contact us directly", href: "/en/contact" },
+    },
+    whatsapp: {
+      enabled: false,
+      destination: null,
+      message:
+        "I arrived from Next Wrld and want to discuss a process in my company that we want to improve.",
+      label: "Continue on WhatsApp",
+      leaveSiteNote: "Activating this link takes you off the site to open WhatsApp.",
+    },
+    calendar: { available: false, availabilityClaim: null },
   },
   finalCta: {
     id: "finalCta",
     heading: "Your operation already works. Let's make it easier to grow.",
+    primaryCta: "Analyze my operation",
+    primaryCtaHref: "#diagnosis",
+    microcopy: "Free diagnosis · 30–45 minutes · no obligation.",
+    secondaryCta: {
+      label: "Continue on WhatsApp",
+      destination: null,
+      leaveSiteNote: "Activating this link takes you off the site.",
+    },
   },
 };

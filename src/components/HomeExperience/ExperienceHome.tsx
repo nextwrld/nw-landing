@@ -7,6 +7,9 @@ import Method from "./Method";
 import Differentiation from "./Differentiation";
 import AIONProductShowcase from "./AIONProductShowcase";
 import CaseEvidence from "./CaseEvidence";
+import Diagnosis from "./Diagnosis";
+import Faq from "./FAQ";
+import FinalCTA from "./FinalCTA";
 import { homepageSchema } from "@/utils/seo";
 import type { Locale } from "@/i18n/config";
 import type { HomepageContent } from "@/content/homepage/types";
@@ -18,8 +21,6 @@ const HomeExperience = ({
   locale: Locale;
   content: HomepageContent;
 }) => {
-  const sections = [content.diagnosis, content.finalCta];
-
   return (
     <>
       <script
@@ -39,11 +40,9 @@ const HomeExperience = ({
           <AIONProductShowcase content={content.evidence} />
           <CaseEvidence content={content.evidence} />
         </section>
-        {sections.map((section) => (
-          <section key={section.id} id={section.id}>
-            <h2>{section.heading}</h2>
-          </section>
-        ))}
+        <Diagnosis content={content.diagnosis} locale={locale} />
+        <Faq content={content.faq} />
+        <FinalCTA content={content.finalCta} locale={locale} />
       </main>
     </>
   );

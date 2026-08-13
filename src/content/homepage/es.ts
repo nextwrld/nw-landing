@@ -299,6 +299,8 @@ export const homepageES: HomepageContent = {
     ],
   },
   faq: {
+    id: "faq",
+    heading: "Preguntas frecuentes",
     entries: [
       {
         id: "how-do-i-know",
@@ -336,13 +338,6 @@ export const homepageES: HomepageContent = {
         approved: true,
       },
       {
-        id: "ownership",
-        question: "¿El software pertenece a mi empresa?",
-        answer:
-          "Sí. En proyectos de software a medida, el producto desarrollado para tu empresa queda bajo las condiciones de propiedad acordadas desde el inicio del proyecto.",
-        approved: false,
-      },
-      {
         id: "post-launch",
         question: "¿Qué ocurre después del lanzamiento?",
         answer:
@@ -361,9 +356,73 @@ export const homepageES: HomepageContent = {
   diagnosis: {
     id: "diagnosis",
     heading: "Antes de decidir qué construir, entendamos qué está frenando tu operación.",
+    offer: {
+      duration: "30–45 minutos",
+      cost: "Gratuito",
+      focus:
+        "Una conversación enfocada en un proceso concreto de tu operación, no una demo de servicios.",
+      nonObligation: "Sin compromiso de contratar.",
+      deliverables: { lines: [], approved: false },
+    },
+    context: {
+      fields: {
+        fullName: {
+          label: "Nombre completo",
+          placeholder: "Tu nombre",
+          required: "Indica tu nombre.",
+        },
+        company: {
+          label: "Empresa",
+          placeholder: "Nombre de tu empresa",
+          required: "Indica el nombre de tu empresa.",
+        },
+        email: {
+          label: "Correo electrónico",
+          placeholder: "tucorreo@empresa.com",
+          required: "Indica un correo válido.",
+        },
+        operationArea: {
+          label: "Área de la operación a mejorar",
+          placeholder: "Por ejemplo: ventas, pedidos, inventario, administración",
+          required: "Indica qué área quieres mejorar.",
+        },
+      },
+      privacy: {
+        consent: "Acepto que Next Wrld use mis datos para contactarme sobre el diagnóstico.",
+        required: "Debes aceptar el uso de tus datos para continuar.",
+        note: null,
+      },
+      submitLabel: "Continuar",
+      submittingLabel: "Enviando…",
+      statusSubmitting: "Enviando tu información…",
+      statusAccepted:
+        "Recibimos tu información. Nuestro equipo te contactará para avanzar con el diagnóstico.",
+      statusSubmitError: "Revisa los campos marcados e inténtalo de nuevo.",
+      statusHandoffError:
+        "No pudimos procesar tu solicitud en este momento. Inténtalo de nuevo más tarde.",
+      retryLabel: "Intentar de nuevo",
+      alternative: { label: "O contáctanos directamente", href: "/es/contact" },
+    },
+    whatsapp: {
+      enabled: false,
+      destination: null,
+      message:
+        "Llegué desde Next Wrld y quiero hablar sobre un proceso de mi empresa que queremos mejorar.",
+      label: "Continuar por WhatsApp",
+      leaveSiteNote: "Al activar este enlace saldrás del sitio para abrir WhatsApp.",
+    },
+    calendar: { available: false, availabilityClaim: null },
   },
   finalCta: {
     id: "finalCta",
     heading: "Tu operación ya funciona. Hagamos que sea más fácil hacerla crecer.",
+    primaryCta: "Analizar mi operación",
+    primaryCtaHref: "#diagnosis",
+    microcopy: "Diagnóstico gratuito · 30–45 minutos · sin compromiso.",
+    secondaryCta: {
+      label: "Continuar por WhatsApp",
+      destination: null,
+      leaveSiteNote: "Al activar este enlace saldrás del sitio.",
+    },
   },
 };
