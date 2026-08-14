@@ -151,7 +151,7 @@ describe("Experience shell rendering when admitted (DESIGN-003)", () => {
   it("renders the Experience header and footer only in the experience branch", () => {
     expect(layoutSource).toContain("ExperienceHeader");
     expect(layoutSource).toContain("ExperienceFooter");
-    expect(layoutSource).toContain('admission === "experience"');
+    expect(layoutSource).toContain('admission.composition !== "foundation"');
     expect(layoutSource).toContain("ExperienceHeader");
     expect(layoutSource).toContain("content={content}");
     expect(layoutSource).toContain("<ExperienceFooter content={content}");

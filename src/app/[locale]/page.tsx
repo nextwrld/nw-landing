@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const l = isLocale(locale) ? locale : defaultLocale;
   const admission = admitPublication(getPublicationConfig());
 
-  if (admission === "experience") {
+  if (admission.composition !== "foundation") {
     return buildHomepageMetadata({
       locale: l,
       seo: getHomepageContent(l).seo,
@@ -56,7 +56,7 @@ export default async function Home({ params }: Props) {
   const l: Locale = locale;
   const admission = admitPublication(getPublicationConfig());
 
-  if (admission === "experience") {
+  if (admission.composition !== "foundation") {
     return (
       <>
         <script

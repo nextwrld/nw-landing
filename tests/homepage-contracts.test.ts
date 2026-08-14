@@ -69,6 +69,22 @@ describe("ES/EN homepage content parity (HOMEPAGE-001)", () => {
     expect(enContent.hero.h1.toLowerCase()).toContain("manual work");
   });
 
+  it("composes exactly the six mandated V3 sections in both locales", () => {
+    for (const content of [esContent, enContent]) {
+      expect(content.hero.h1.trim().length).toBeGreaterThan(0);
+      for (const key of [
+        "problem",
+        "capabilities",
+        "method",
+        "evidence",
+        "diagnosis",
+      ] as const) {
+        expect(content[key].id.length).toBeGreaterThan(0);
+        expect(content[key].heading.trim().length).toBeGreaterThan(0);
+      }
+    }
+  });
+
   it("flags a missing locale as a parity problem", () => {
     expect(validateContentParity({ es: esContent })).not.toEqual([]);
   });
@@ -150,7 +166,7 @@ describe("metadata and tracking contract (OBSERVABILITY-001)", () => {
 
 describe("draft retention and fail-closed release admission (PUBLICATION-001)", () => {
   it("keeps the Foundation composition in draft status", () => {
-    expect(admitPublication({ status: "draft", approvals: DEFAULT_APPROVALS })).toBe("foundation");
+    expect(admitPublication({ status: "draft", approvals: DEFAULT_APPROVALS })).toEqual({ composition: "foundation" });
     expect(() =>
       validateDraft({ status: "draft", approvals: DEFAULT_APPROVALS })
     ).not.toThrow();

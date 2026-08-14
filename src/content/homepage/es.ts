@@ -12,19 +12,39 @@ export const homepageES: HomepageContent = {
       {
         id: "services",
         label: "Servicios",
-        destination: "/#servicios",
+        destination: null,
         approved: true,
+        children: [
+          {
+            id: "software-a-medida",
+            label: "Software a medida",
+            destination: "/servicios/software-a-medida",
+            approved: true,
+          },
+          {
+            id: "sistemas-de-gestion",
+            label: "Sistemas de gestión",
+            destination: "/servicios/sistemas-de-gestion",
+            approved: true,
+          },
+          {
+            id: "automatizacion",
+            label: "Automatización",
+            destination: "/servicios/automatizacion",
+            approved: true,
+          },
+        ],
       },
       {
         id: "method",
         label: "Método",
-        destination: "/#metodo",
+        destination: "/como-trabajamos",
         approved: true,
       },
       {
         id: "cases",
         label: "Casos",
-        destination: "/#casos",
+        destination: "/casos",
         approved: true,
       },
       {
@@ -36,7 +56,7 @@ export const homepageES: HomepageContent = {
       {
         id: "about",
         label: "Nosotros",
-        destination: "/#nosotros",
+        destination: "/nosotros",
         approved: true,
       },
     ],
@@ -50,7 +70,7 @@ export const homepageES: HomepageContent = {
     secondaryLine: "Menos trabajo administrativo. Más control sobre tu operación.",
     primaryCta: "Analizar mi operación",
     secondaryCta: "Ver casos",
-    secondaryCtaHref: "#evidence",
+    secondaryCtaHref: "/como-trabajamos",
     microcopy: "Diagnóstico gratuito · 30–45 minutos",
   },
   problem: {
@@ -425,7 +445,7 @@ export const homepageES: HomepageContent = {
     id: "finalCta",
     heading: "Tu operación ya funciona. Hagamos que sea más fácil hacerla crecer.",
     primaryCta: "Analizar mi operación",
-    primaryCtaHref: "#diagnosis",
+    primaryCtaHref: "/diagnostico",
     microcopy: "Diagnóstico gratuito · 30–45 minutos · sin compromiso.",
     secondaryCta: {
       label: "Continuar por WhatsApp",

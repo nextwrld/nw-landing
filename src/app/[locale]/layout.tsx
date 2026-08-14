@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import ExperienceHeader from "@/components/HomeExperience/ExperienceHeader";
 import ExperienceFooter from "@/components/HomeExperience/ExperienceFooter";
-import buildMenuData, { buildApprovedNav } from "@/components/Header/menuData";
+import buildMenuData, { buildApprovedNavV3 } from "@/components/Header/menuData";
 import Providers from "../providers";
 import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
@@ -78,11 +78,13 @@ export default async function LocaleLayout({
   const dict = await getDictionary(l);
   const admission = admitPublication(getPublicationConfig());
   const content = getHomepageContent(l);
-  const menu = admission === "experience" ? buildApprovedNav(content) : buildMenuData(dict.menu, l);
-  const diagnosisCta =
-    admission === "experience"
-      ? { label: content.hero.primaryCta, href: localizedHref(l, "/#diagnosis") }
-      : undefined;
+  const experienceAdmitted = admission.composition !== "foundation";
+  const menu = experienceAdmitted
+    ? buildApprovedNavV3(content)
+    : buildMenuData(dict.menu, l);
+  const diagnosisCta = experienceAdmitted
+    ? { label: content.hero.primaryCta, href: localizedHref(l, "/diagnostico") }
+    : undefined;
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${inter.variable}`}>
@@ -94,7 +96,7 @@ export default async function LocaleLayout({
         <GoogleTagManager />
         <Providers>
           <div className="isolate">
-            {admission === "experience" ? (
+            {experienceAdmitted ? (
               <>
                 <ExperienceHeader
                   menu={menu}

@@ -1,5 +1,6 @@
 import { getSuccessCaseBySlug } from "@/utils/markdown";
 import { validateMetadataLocales } from "@/utils/seo";
+import { publishedRoutes, routeFromDestination } from "@/content/sections";
 import { contentByLocale, validateContentParity } from "./index";
 import { loadEvidenceManifest, manifestEntryFor } from "./manifest";
 import type { EvidenceManifest } from "./manifest";
@@ -8,6 +9,7 @@ import type {
   ApprovalKey,
   ApprovalStatus,
   EvidenceEntry,
+  HomepageContent,
   PublicationConfig,
   VerifiedCapabilities,
 } from "./types";
@@ -220,12 +222,94 @@ export function validateDraft(config: PublicationConfig): string[] {
   return validateContentParity();
 }
 
+/**
+ * Every approved nav/footer/CTA destination of a locale must resolve to a
+ * registered section route (no anchors, no speculative paths). EN stays
+ * fail-closed while its registry is empty: approved EN destinations that
+ * have no published route are reported, which is what keeps release
+ * blocked until EN content is approved.
+ */
+export function validateRouteExistence(
+  locale: (typeof HOMEPAGE_LOCALES)[number],
+  content: HomepageContent = contentByLocale[locale]
+): string[] {
+  const problems: string[] = [];
+  const published = publishedRoutes(locale);
+  const destinations = navDestinations(content);
+  for (const destination of destinations) {
+    const route = routeFromDestination(destination);
+    if (route === null) {
+      problems.push(`Route problem: destination ${destination} is an anchor or an unknown route`);
+      continue;
+    }
+    if (!published.includes(route)) {
+      problems.push(`Route problem: destination ${destination} is not a published route for ${locale}`);
+    }
+  }
+  return problems;
+}
+
+/**
+ * No approved nav/CTA destination may point at a route whose content is not
+ * approved (the "never link to empty content" rule). Withheld routes such as
+ * /es/insights fail any release that links to them.
+ */
+export function validateNoEmptyContent(
+  locale: (typeof HOMEPAGE_LOCALES)[number],
+  content: HomepageContent = contentByLocale[locale]
+): string[] {
+  const problems: string[] = [];
+  const published = publishedRoutes(locale);
+  for (const item of flattenNav(content)) {
+    if (!item.approved || !item.destination) {
+      continue;
+    }
+    const route = routeFromDestination(item.destination);
+    if (route === null) {
+      problems.push(`Destination ${item.destination} is an anchor or an unknown route`);
+      continue;
+    }
+    if (!published.includes(route)) {
+      problems.push(`Destination ${item.destination} links to route ${route} which is not approved for ${locale}`);
+    }
+  }
+  return problems;
+}
+
+function flattenNav(content: HomepageContent): HomepageContent["nav"]["items"] {
+  return content.nav.items.flatMap((item) =>
+    item.children && item.children.length > 0 ? item.children : [item]
+  );
+}
+
+function navDestinations(content: HomepageContent): string[] {
+  const destinations: string[] = [];
+  for (const item of content.nav.items) {
+    if (item.children && item.children.length > 0) {
+      for (const child of item.children) {
+        if (child.destination) destinations.push(child.destination);
+      }
+    } else if (item.destination) {
+      destinations.push(item.destination);
+    }
+  }
+  const ctaDestinations = [content.hero.secondaryCtaHref, content.finalCta.primaryCtaHref];
+  for (const destination of ctaDestinations) {
+    if (destination) destinations.push(destination);
+  }
+  return destinations;
+}
+
 export function validateRelease(config: PublicationConfig): string[] {
   const problems = validateContentParity();
   for (const key of APPROVAL_KEYS) {
     if (config.approvals[key] !== "approved") {
       problems.push(`Approval pending: ${key}`);
     }
+  }
+  for (const locale of HOMEPAGE_LOCALES) {
+    problems.push(...validateRouteExistence(locale));
+    problems.push(...validateNoEmptyContent(locale));
   }
   problems.push(...validateEvidence());
   const manifest = loadEvidenceManifest();
@@ -240,26 +324,38 @@ export function validateRelease(config: PublicationConfig): string[] {
   return problems;
 }
 
+export type AdmissionComposition =
+  | { composition: "foundation" }
+  | { composition: "v3-skeleton"; content: HomepageContent }
+  | { composition: "v3-release"; content: HomepageContent };
+
+/**
+ * V3 admission union. Draft and preview keep the Foundation composition
+ * while the V3 skeleton is incomplete; `skeletonComplete: true` admits the
+ * complete skeleton (Fase 1 gate); release stays fail-closed on approvals,
+ * evidence, metadata, and route/no-empty-content checks.
+ */
 export function admitPublication(
-  config: PublicationConfig = getPublicationConfig()
-): "foundation" | "experience" {
-  if (config.status === "preview") {
+  config: PublicationConfig = getPublicationConfig(),
+  options: { skeletonComplete?: boolean } = {}
+): AdmissionComposition {
+  if (config.status === "release") {
+    const problems = validateRelease(config);
+    if (problems.length > 0) {
+      throw new PublicationBlockedError(problems);
+    }
+    return { composition: "v3-release", content: contentByLocale.es };
+  }
+  if (options.skeletonComplete) {
     const problems = validateDraft(config);
     if (problems.length > 0) {
       throw new PublicationBlockedError(problems);
     }
-    return "experience";
+    return { composition: "v3-skeleton", content: contentByLocale.es };
   }
-  if (config.status === "draft") {
-    const problems = validateDraft(config);
-    if (problems.length > 0) {
-      throw new PublicationBlockedError(problems);
-    }
-    return "foundation";
-  }
-  const problems = validateRelease(config);
+  const problems = validateDraft(config);
   if (problems.length > 0) {
     throw new PublicationBlockedError(problems);
   }
-  return "experience";
+  return { composition: "foundation" };
 }

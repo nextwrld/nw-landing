@@ -10,7 +10,7 @@ import {
   getPublicationConfig,
   validateRelease,
 } from "@/content/homepage/publication";
-import { buildApprovedNav } from "@/components/Header/menuData";
+import { buildApprovedNav, buildApprovedNavV3 } from "@/components/Header/menuData";
 import {
   loadEvidenceGate,
   resolveEntryLink,
@@ -102,22 +102,36 @@ function expectBlocked(
 }
 
 describe("navigation admission (ADMISSION-NAV)", () => {
-  it("approves only real in-page anchors and withholds speculative destinations", () => {
+  it("approves only real registered routes and withholds speculative destinations", () => {
     for (const content of [esContent, enContent]) {
-      for (const item of content.nav.items) {
+      const items = content.nav.items.flatMap((item) =>
+        item.children && item.children.length > 0 ? item.children : [item]
+      );
+      for (const item of items) {
         if (item.id === "insights") {
           expect(item.approved).toBe(false);
           expect(item.destination).toBeNull();
         } else {
           expect(item.approved).toBe(true);
-          expect(item.destination).toMatch(/^\/#/);
+          expect(item.destination).toMatch(/^\/[a-z]/);
+          expect(item.destination).not.toContain("#");
         }
       }
-      expect(buildApprovedNav(content)).toHaveLength(4);
+      expect(buildApprovedNavV3(content)).toHaveLength(4);
       expect(
-        buildApprovedNav(content).some((item) => item.title === "Insights")
+        buildApprovedNavV3(content).some((item) => item.title === "Insights")
       ).toBe(false);
     }
+  });
+
+  it("emits the V3 services submenu from the registry-driven nav builder", () => {
+    const nav = buildApprovedNavV3(esContent);
+    const services = nav.find((item) => item.title === "Servicios");
+    expect(services?.submenu?.map((child) => child.title)).toEqual([
+      "Software a medida",
+      "Sistemas de gestión",
+      "Automatización",
+    ]);
   });
 
   it("publishes a navigation item only when approved with an approved destination", () => {
@@ -161,9 +175,8 @@ describe("navigation admission (ADMISSION-NAV)", () => {
   });
 
   it("switches the shell nav to the approved Experience surface only when admitted", () => {
-    expect(layoutSource).toContain(
-      'admission === "experience" ? buildApprovedNav(content)',
-    );
+    expect(layoutSource).toContain("experienceAdmitted");
+    expect(layoutSource).toContain("buildApprovedNavV3(content)");
   });
 });
 
@@ -297,10 +310,21 @@ describe("preview admission (ADMISSION-PREVIEW)", () => {
     delete process.env.EXPERIENCE_PREVIEW;
   });
 
-  it("composes the Experience in preview without requiring approvals", () => {
+  it("keeps the Foundation composition in preview while the V3 skeleton is incomplete", () => {
     expect(
       admitPublication({ status: "preview", approvals: DEFAULT_APPROVALS }),
-    ).toBe("experience");
+    ).toEqual({ composition: "foundation" });
+  });
+
+  it("admits the complete V3 skeleton in preview when the skeleton is complete", () => {
+    const admission = admitPublication(
+      { status: "preview", approvals: DEFAULT_APPROVALS },
+      { skeletonComplete: true }
+    );
+    expect(admission).toEqual({
+      composition: "v3-skeleton",
+      content: expect.any(Object),
+    });
   });
 
   it("keeps release fail-closed even when the preview flag is present", () => {
@@ -346,7 +370,7 @@ describe("build admission (ADMISSION-BUILD)", () => {
   });
 
   it("composes the complete Experience only when admission passes", () => {
-    expect(pageSource).toContain('admission === "experience"');
+    expect(pageSource).toContain('admission.composition !== "foundation"');
     for (const section of [
       "<Hero",
       "<Problem",
@@ -368,7 +392,7 @@ describe("build admission (ADMISSION-BUILD)", () => {
     expect(getPublicationConfig().status).toBe("draft");
     expect(
       admitPublication({ status: "draft", approvals: DEFAULT_APPROVALS }),
-    ).toBe("foundation");
+    ).toEqual({ composition: "foundation" });
     let thrown: unknown;
     try {
       admitPublication({ status: "release", approvals: DEFAULT_APPROVALS });

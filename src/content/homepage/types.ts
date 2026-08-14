@@ -70,6 +70,8 @@ export interface NavItem {
   label: string;
   destination: string | null;
   approved: boolean;
+  /** V3 submenu children (e.g. the three services); children carry their own destinations. */
+  children?: NavItem[];
 }
 
 export interface SeoCopy {
