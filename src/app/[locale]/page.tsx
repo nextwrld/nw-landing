@@ -15,7 +15,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { buildHomepageMetadata, buildPageMetadata, homepageSchema } from "@/utils/seo";
 import { OG_DEFAULT_IMAGE } from "../site";
-import { admitPublication, getPublicationConfig } from "@/content/homepage/publication";
+import { admitPublication, getPublicationConfig, isV3SkeletonReady } from "@/content/homepage/publication";
 import { getHomepageContent } from "@/content/homepage";
 
 type Props = {
@@ -25,7 +25,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const l = isLocale(locale) ? locale : defaultLocale;
-  const admission = admitPublication(getPublicationConfig());
+  const admission = admitPublication(getPublicationConfig(), {
+    skeletonComplete: isV3SkeletonReady(),
+  });
 
   if (admission.composition !== "foundation") {
     return buildHomepageMetadata({
@@ -54,7 +56,9 @@ export default async function Home({ params }: Props) {
   }
 
   const l: Locale = locale;
-  const admission = admitPublication(getPublicationConfig());
+  const admission = admitPublication(getPublicationConfig(), {
+    skeletonComplete: isV3SkeletonReady(),
+  });
 
   if (admission.composition !== "foundation") {
     return (

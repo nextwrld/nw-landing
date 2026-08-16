@@ -19,9 +19,9 @@ const cssSource = readFileSync(
 );
 
 describe("chapter differentiation on the homepage (CHAPTER-001)", () => {
-  it("places a chapter divider between consecutive light chapters", () => {
+  it("keeps the chapter rhythm without divider wrappers in the V3 composition", () => {
     expect(cssSource).toContain(".chapter-divider");
-    expect(experienceHomeSource).toContain("<ChapterDivider");
+    expect(experienceHomeSource).not.toContain("<ChapterDivider");
   });
 
   it("numbers the editorial chapter eyebrows", () => {
@@ -76,13 +76,11 @@ describe("chapter differentiation on the homepage (CHAPTER-001)", () => {
     ).toMatch(/\.method-section\s*{[^}]*var\(--color-exp-surface\)/s);
   });
 
-  it("adds scrollspy to the Experience header without gating content", () => {
-    expect(experienceHeaderSource).toContain("IntersectionObserver");
-    expect(experienceHeaderSource).toContain("experience-nav-active");
-    expect(experienceHeaderSource).toContain("setActiveNavPath");
-    expect(experienceHeaderSource).toContain(
-      "pathUrl === item.path || activeNavPath === item.path"
-    );
+  it("keeps the header nav route-based without scrollspy machinery", () => {
+    expect(experienceHeaderSource).not.toContain("IntersectionObserver");
+    expect(experienceHeaderSource).not.toContain("setActiveNavPath");
+    expect(experienceHeaderSource).not.toContain("handleAnchorClick");
+    expect(experienceHeaderSource).toContain("experience-nav-submenu");
   });
 
   it("sharpens the AION dark band contrast against light chapters", () => {

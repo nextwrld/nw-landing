@@ -8,18 +8,15 @@ import TrackedLink from "@/components/Common/TrackedLink";
 import { useLocale } from "@/hooks/useLocale";
 import { localizedHref } from "@/utils/i18n-url";
 import { nextMenuState, shellA11yCopy } from "@/components/Header/menuData";
-import { navAnchorPath } from "@/content/homepage";
 import type { HomepageContent } from "@/content/homepage/types";
 
 import type { Menu } from "@/types/menu";
 
-const SCROLLSPY_BY_SECTION: Record<string, string> = {
-  capabilities: "services",
-  method: "method",
-  evidence: "cases",
-  differentiation: "about",
-};
-
+/**
+ * V3 shell header. Navigation is route-based (no anchors, no scrollspy):
+ * top-level items render as links and submenu items (services ×3) render as a
+ * dropdown on desktop and a nested list on mobile.
+ */
 const ExperienceHeader = ({
   menu,
   content,
@@ -35,7 +32,6 @@ const ExperienceHeader = ({
   const navLabel = locale === "es" ? "Navegación principal" : "Main navigation";
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
-  const [activeNavPath, setActiveNavPath] = useState<string | null>(null);
   const togglerRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = () => {
@@ -61,49 +57,6 @@ const ExperienceHeader = ({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const sectionIds = Object.keys(SCROLLSPY_BY_SECTION);
-    const targets = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((element): element is HTMLElement => element !== null);
-    if (typeof IntersectionObserver === "undefined" || targets.length === 0) {
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (!visible) {
-          return;
-        }
-        const key = SCROLLSPY_BY_SECTION[visible.target.id];
-        const destination = navAnchorPath(content, key);
-        if (destination) {
-          setActiveNavPath(localizedHref(locale, destination));
-        }
-      },
-      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-    );
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
-  }, [locale, content]);
-
-  const handleAnchorClick = (href: string) => {
-    const targetId = href.split("#")[1];
-    if (!targetId) return;
-    const element = document.getElementById(targetId);
-    if (element) {
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      element.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "start",
-      });
-    }
-  };
-
   return (
     <>
       <a href="#main-content" className="skip-link">
@@ -126,24 +79,32 @@ const ExperienceHeader = ({
 
           <nav className="experience-nav-desktop" aria-label={navLabel}>
             {menu.map((item) => (
-              <Link
-                key={item.id}
-                href={item.path ?? "#"}
-                onClick={(e) => {
-                  if (item.path?.includes("#")) {
-                    e.preventDefault();
-                    handleAnchorClick(item.path);
-                  }
-                }}
-                aria-current={pathUrl === item.path ? "page" : undefined}
-                className={`experience-nav-link ${
-                  pathUrl === item.path || activeNavPath === item.path
-                    ? "experience-nav-active"
-                    : ""
-                }`}
-              >
-                {item.title}
-              </Link>
+              <div key={item.id} className="experience-nav-item">
+                {item.path ? (
+                  <Link
+                    href={item.path}
+                    aria-current={pathUrl === item.path ? "page" : undefined}
+                    className={`experience-nav-link ${
+                      pathUrl === item.path ? "experience-nav-active" : ""
+                    }`}
+                  >
+                    {item.title}
+                  </Link>
+                ) : (
+                  <span className="experience-nav-link" aria-haspopup="true">
+                    {item.title}
+                  </span>
+                )}
+                {item.submenu && item.submenu.length > 0 ? (
+                  <ul className="experience-nav-submenu">
+                    {item.submenu.map((child) => (
+                      <li key={child.id}>
+                        <Link href={child.path ?? "#"}>{child.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
             ))}
           </nav>
 
@@ -190,17 +151,24 @@ const ExperienceHeader = ({
           <ul className="experience-mobile-nav">
             {menu.map((item) => (
               <li key={item.id}>
-                <Link
-                  href={item.path ?? "#"}
-                  onClick={() => {
-                    if (item.path?.includes("#")) {
-                      handleAnchorClick(item.path);
-                    }
-                    closeMenu();
-                  }}
-                >
-                  {item.title}
-                </Link>
+                {item.path ? (
+                  <Link href={item.path} onClick={closeMenu}>
+                    {item.title}
+                  </Link>
+                ) : (
+                  <span className="experience-mobile-parent">{item.title}</span>
+                )}
+                {item.submenu && item.submenu.length > 0 ? (
+                  <ul className="experience-mobile-submenu">
+                    {item.submenu.map((child) => (
+                      <li key={child.id}>
+                        <Link href={child.path ?? "#"} onClick={closeMenu}>
+                          {child.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </li>
             ))}
           </ul>

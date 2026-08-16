@@ -218,6 +218,21 @@ export function validateEvidenceEntries(
   return problems;
 }
 
+/**
+ * The V3 skeleton is complete when the ES content contract is sound and every
+ * approved ES nav/CTA destination resolves to a published, content-complete
+ * section route (EN stays withheld until approved copy exists).
+ */
+export function isV3SkeletonReady(): boolean {
+  if (validateContentParity().length > 0) {
+    return false;
+  }
+  if (validateRouteExistence("es").length > 0 || validateNoEmptyContent("es").length > 0) {
+    return false;
+  }
+  return true;
+}
+
 export function validateDraft(config: PublicationConfig): string[] {
   return validateContentParity();
 }

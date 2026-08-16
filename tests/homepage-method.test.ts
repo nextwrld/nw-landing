@@ -174,24 +174,23 @@ describe("five-stage method with outcomes (METHOD-003)", () => {
 });
 
 describe("method section composition and visual (METHOD-004)", () => {
-  it("composes dedicated Capabilities, Method, and Differentiation components", () => {
+  it("composes ServicesOverview, MethodSection, and EvidenceSection components", () => {
     expect(existsSync(componentPaths.capabilities)).toBe(true);
     expect(existsSync(componentPaths.method)).toBe(true);
-    expect(existsSync(componentPaths.differentiation)).toBe(true);
-    expect(experienceHomeSource).toContain('from "./Capabilities"');
-    expect(experienceHomeSource).toContain('from "./Method"');
-    expect(experienceHomeSource).toContain('from "./Differentiation"');
+    expect(experienceHomeSource).toContain('from "./ServicesOverview"');
+    expect(experienceHomeSource).toContain('from "./MethodSection"');
+    expect(experienceHomeSource).toContain('from "./EvidenceSection"');
+    expect(experienceHomeSource).not.toContain('from "./Capabilities"');
+    expect(experienceHomeSource).not.toContain('from "./Differentiation"');
   });
 
-  it("orders capabilities before method before differentiation after better-way", () => {
-    const betterWay = experienceHomeSource.indexOf("<BetterWay");
-    const capabilities = experienceHomeSource.indexOf("<Capabilities");
-    const method = experienceHomeSource.indexOf("<Method");
-    const differentiation = experienceHomeSource.indexOf("<Differentiation");
-    expect(betterWay).toBeGreaterThanOrEqual(0);
-    expect(betterWay).toBeLessThan(capabilities);
-    expect(capabilities).toBeLessThan(method);
-    expect(method).toBeLessThan(differentiation);
+  it("orders services before method before evidence in the V3 composition", () => {
+    const services = experienceHomeSource.indexOf("<ServicesOverview");
+    const method = experienceHomeSource.indexOf("<MethodSection");
+    const evidence = experienceHomeSource.indexOf("<EvidenceSection");
+    expect(services).toBeGreaterThanOrEqual(0);
+    expect(services).toBeLessThan(method);
+    expect(method).toBeLessThan(evidence);
   });
 
   it("keeps the new sections server components (no use client)", () => {

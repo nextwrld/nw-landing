@@ -373,18 +373,16 @@ describe("build admission (ADMISSION-BUILD)", () => {
     expect(pageSource).toContain('admission.composition !== "foundation"');
     for (const section of [
       "<Hero",
-      "<Problem",
-      "<Impact",
-      "<BetterWay",
-      "<Capabilities",
-      "<Method",
-      "<Differentiation",
+      "<ProblemTransformation",
+      "<ServicesOverview",
+      "<MethodSection",
       "<EvidenceSection",
-      "<Diagnosis",
-      "<Faq",
-      "<FinalCTA",
+      "<DiagnosisOffer",
     ]) {
       expect(experienceHomeSource).toContain(section);
+    }
+    for (const retired of ["<Faq", "<FinalCTA", "<Impact", "<BetterWay", "<ChapterDivider"]) {
+      expect(experienceHomeSource).not.toContain(retired);
     }
   });
 

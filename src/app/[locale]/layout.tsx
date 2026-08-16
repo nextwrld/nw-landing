@@ -14,7 +14,7 @@ import { SITE_NAME, SITE_URL } from "../site";
 import { inter } from "../fonts";
 import { siteUrl } from "@/utils/seo";
 import { localizedHref } from "@/utils/i18n-url";
-import { admitPublication, getPublicationConfig } from "@/content/homepage/publication";
+import { admitPublication, getPublicationConfig, isV3SkeletonReady } from "@/content/homepage/publication";
 import { getHomepageContent } from "@/content/homepage";
 import "@/styles/index.css";
 
@@ -76,7 +76,9 @@ export default async function LocaleLayout({
 
   const l: Locale = locale;
   const dict = await getDictionary(l);
-  const admission = admitPublication(getPublicationConfig());
+  const admission = admitPublication(getPublicationConfig(), {
+    skeletonComplete: isV3SkeletonReady(),
+  });
   const content = getHomepageContent(l);
   const experienceAdmitted = admission.composition !== "foundation";
   const menu = experienceAdmitted

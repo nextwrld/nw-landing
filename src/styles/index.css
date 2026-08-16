@@ -2371,3 +2371,275 @@ body {
     transform: scaleX(1);
   }
 }
+/* ============================================================
+   Homepage V3 — Fase 1 skeleton (visual polish in Fase 3)
+   ============================================================ */
+
+/* Section 02 — Problema → Transformación */
+.problem-transformation .exp-h2,
+.services-overview .exp-h2,
+.method-section .exp-h2,
+.diagnosis-offer .exp-h2 {
+  margin-block-end: 1rem;
+}
+
+.problem-list {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  max-width: 64ch;
+}
+
+.problem-list-item {
+  border-top: 1px solid var(--color-exp-line-strong);
+  padding-block: 1.25rem;
+}
+
+.problem-list-number {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-exp-accent);
+}
+
+.problem-list-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.35rem 0 0.4rem;
+}
+
+.problem-list-body {
+  margin: 0;
+  color: var(--color-exp-ink-soft);
+  line-height: 1.55;
+}
+
+.transformation {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  max-width: 48ch;
+}
+
+.transformation-pair {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.transformation-from {
+  color: var(--color-exp-ink-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.transformation-arrow {
+  color: var(--color-exp-accent);
+}
+
+.transformation-to {
+  font-weight: 600;
+}
+
+/* Section 03 — Qué resolvemos */
+.services-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.service-card {
+  border: 1px solid var(--color-exp-line-strong);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.service-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.service-card-body {
+  margin: 0;
+  color: var(--color-exp-ink-soft);
+  line-height: 1.55;
+}
+
+.service-card-link {
+  margin-top: auto;
+  color: var(--color-exp-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.service-card-link:hover {
+  text-decoration: underline;
+}
+
+/* Section 04 — Cómo trabajamos (framework line) */
+.method-stage-index {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-exp-accent);
+  font-weight: 600;
+}
+
+/* Section 06 — Diagnóstico offer */
+.diagnosis-offer-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  color: var(--color-exp-ink-soft);
+}
+
+/* Header submenu (services ×3) */
+.experience-nav-item {
+  position: relative;
+}
+
+.experience-nav-submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 15rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  background: var(--color-exp-dark);
+  color: var(--color-exp-dark-text);
+  border-radius: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.experience-nav-item:hover .experience-nav-submenu,
+.experience-nav-item:focus-within .experience-nav-submenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.experience-nav-submenu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-exp-dark-text);
+  text-decoration: none;
+}
+
+.experience-nav-submenu a:hover {
+  color: var(--color-exp-accent-soft);
+}
+
+.experience-mobile-submenu {
+  list-style: none;
+  margin: 0.25rem 0 0.5rem 1rem;
+  padding: 0;
+}
+
+.experience-mobile-submenu a {
+  padding-block: 0.25rem;
+  font-size: 0.9375rem;
+}
+
+/* Section sub-pages (SectionPageShell) */
+.section-page {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.section-page__inner {
+  max-width: 68ch;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section-page__heading {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+  margin: 0 0 1rem;
+}
+
+.section-page__intro {
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--color-exp-ink-soft);
+  margin: 0 0 2.5rem;
+  max-width: 56ch;
+}
+
+.section-page__block {
+  margin-block-end: 2.25rem;
+}
+
+.section-page__block-heading {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.section-page__block-body {
+  margin: 0;
+  color: var(--color-exp-ink-soft);
+  line-height: 1.6;
+}
+
+.section-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.section-page__list-item a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-exp-line-strong);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.section-page__list-item a:hover {
+  border-color: var(--color-exp-accent);
+}
+
+.section-page__list-title {
+  font-weight: 600;
+}
+
+.section-page__list-description {
+  color: var(--color-exp-ink-soft);
+  font-size: 0.9375rem;
+}
+
+.section-page__markdown {
+  line-height: 1.7;
+}
+
+.section-page__markdown h2 {
+  font-size: 1.35rem;
+  margin: 2rem 0 0.5rem;
+}
+
+.section-page__markdown p {
+  margin: 0 0 1rem;
+}

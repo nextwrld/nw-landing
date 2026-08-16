@@ -90,10 +90,16 @@ export interface ProblemCard {
   body: string;
 }
 
+export interface TransformationPair {
+  from: string;
+  to: string;
+}
+
 export interface HomepageProblem extends HomepageSection {
   eyebrow: string;
   intro: string;
   cards: ProblemCard[];
+  transformation: TransformationPair[];
 }
 
 export interface ImpactCostPair {

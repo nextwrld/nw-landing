@@ -303,15 +303,22 @@ describe("FAQ assistive-technology and no-enhancement fallback (DIAGNOSIS-08)", 
 });
 
 describe("diagnosis section composition (DIAGNOSIS-09)", () => {
-  it("composes Diagnosis, FAQ, and FinalCTA into the Experience homepage in order", () => {
-    const evidence = experienceHomeSource.indexOf("<EvidenceSection");
-    const diagnosis = experienceHomeSource.indexOf("<Diagnosis");
-    const faq = experienceHomeSource.indexOf("<Faq");
-    const finalCta = experienceHomeSource.indexOf("<FinalCTA");
-    expect(evidence).toBeGreaterThanOrEqual(0);
-    expect(diagnosis).toBeGreaterThanOrEqual(0);
-    expect(evidence).toBeLessThan(diagnosis);
-    expect(diagnosis).toBeLessThan(faq);
-    expect(faq).toBeLessThan(finalCta);
+    it("composes the offer-only DiagnosisOffer on the homepage after evidence", () => {
+      const evidence = experienceHomeSource.indexOf("<EvidenceSection");
+      const offer = experienceHomeSource.indexOf("<DiagnosisOffer");
+      expect(evidence).toBeGreaterThanOrEqual(0);
+      expect(offer).toBeGreaterThanOrEqual(0);
+      expect(evidence).toBeLessThan(offer);
+      for (const retired of ["<Diagnosis ", "<Faq", "<FinalCTA"]) {
+        expect(experienceHomeSource).not.toContain(retired);
+      }
+    });
+
+    it("hosts the context-first Diagnosis form on the rebuilt /diagnostico page", () => {
+      const pageSource = readFileSync(
+        new URL("../src/app/[locale]/diagnostico/page.tsx", import.meta.url),
+        "utf-8"
+      );
+      expect(pageSource).toContain('<Diagnosis content={getHomepageContent(l).diagnosis}');
+    });
   });
-});

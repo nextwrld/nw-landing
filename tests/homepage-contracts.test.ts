@@ -139,7 +139,10 @@ describe("metadata and tracking contract (OBSERVABILITY-001)", () => {
       "whatsapp_click",
       "calendar_click",
       "service_view",
+      "service_click",
       "case_view",
+      "case_click",
+      "method_click",
       "insight_view",
       "contact_form_start",
       "contact_form_submit",
@@ -147,7 +150,7 @@ describe("metadata and tracking contract (OBSERVABILITY-001)", () => {
       "contact_form_error",
       "language_change",
     ];
-    expect(EVENT_NAMES).toHaveLength(11);
+    expect(EVENT_NAMES).toHaveLength(14);
     for (const event of required) {
       expect(EVENT_NAMES).toContain(event);
     }

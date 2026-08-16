@@ -85,26 +85,31 @@ describe("impact and better-way cost narrative (PROBLEM-002)", () => {
 });
 
 describe("problem narrative composition order (PROBLEM-003)", () => {
-  it("composes the dedicated Hero, Problem, Impact, and BetterWay components", () => {
+  it("composes the dedicated V3 section components", () => {
     expect(existsSync(componentPaths.hero)).toBe(true);
     expect(existsSync(componentPaths.problem)).toBe(true);
-    expect(existsSync(componentPaths.impact)).toBe(true);
-    expect(existsSync(componentPaths.betterWay)).toBe(true);
     expect(experienceHomeSource).toContain('from "./Hero"');
-    expect(experienceHomeSource).toContain('from "./Problem"');
-    expect(experienceHomeSource).toContain('from "./Impact"');
-    expect(experienceHomeSource).toContain('from "./BetterWay"');
+    expect(experienceHomeSource).toContain('from "./ProblemTransformation"');
+    expect(experienceHomeSource).toContain('from "./ServicesOverview"');
+    expect(experienceHomeSource).toContain('from "./MethodSection"');
+    expect(experienceHomeSource).toContain('from "./DiagnosisOffer"');
+    expect(experienceHomeSource).not.toContain('from "./Impact"');
+    expect(experienceHomeSource).not.toContain('from "./BetterWay"');
   });
 
-  it("orders hero before problem before impact before better-way", () => {
+  it("orders the six V3 sections in the entry-door composition", () => {
     const hero = experienceHomeSource.indexOf("<Hero");
-    const problem = experienceHomeSource.indexOf("<Problem");
-    const impact = experienceHomeSource.indexOf("<Impact");
-    const betterWay = experienceHomeSource.indexOf("<BetterWay");
+    const problem = experienceHomeSource.indexOf("<ProblemTransformation");
+    const services = experienceHomeSource.indexOf("<ServicesOverview");
+    const method = experienceHomeSource.indexOf("<MethodSection");
+    const evidence = experienceHomeSource.indexOf("<EvidenceSection");
+    const offer = experienceHomeSource.indexOf("<DiagnosisOffer");
     expect(hero).toBeGreaterThanOrEqual(0);
     expect(hero).toBeLessThan(problem);
-    expect(problem).toBeLessThan(impact);
-    expect(impact).toBeLessThan(betterWay);
+    expect(problem).toBeLessThan(services);
+    expect(services).toBeLessThan(method);
+    expect(method).toBeLessThan(evidence);
+    expect(evidence).toBeLessThan(offer);
   });
 
   it("renders the Experience H1 through the composed Hero component", () => {

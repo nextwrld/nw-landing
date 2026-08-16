@@ -79,7 +79,13 @@ export const homepageES: HomepageContent = {
     heading: "Tu empresa puede haber crecido más rápido que su forma de operar.",
     intro:
       "Lo que funcionaba con diez clientes, un equipo pequeño o pocas operaciones puede convertirse en una limitación cuando el negocio crece.",
-    cards: [
+            transformation: [
+          { from: "Manual", to: "Automatizado" },
+          { from: "Disperso", to: "Centralizado" },
+          { from: "Desconectado", to: "Integrado" },
+          { from: "Dependiente", to: "Repetible" },
+        ],
+cards: [
       {
         id: "excel-system",
         title: "Excel se convirtió en el sistema",

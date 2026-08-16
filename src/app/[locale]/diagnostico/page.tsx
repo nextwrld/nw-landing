@@ -4,7 +4,8 @@ import Audience from "@/components/Diagnostico/Audience";
 import Checklist from "@/components/Diagnostico/Checklist";
 import Outcomes from "@/components/Diagnostico/Outcomes";
 import Modelo from "@/components/Diagnostico/Modelo";
-import DiagnosticoContact from "@/components/Diagnostico/ContactWrapper";
+import Diagnosis from "@/components/HomeExperience/Diagnosis";
+import { getHomepageContent } from "@/content/homepage";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { notFound } from "next/navigation";
@@ -46,7 +47,7 @@ const DiagnosticoPage = async ({ params }: Props) => {
       <Outcomes dict={dict.diagnostico.outcomes} />
       <Modelo dict={dict.diagnostico.model} />
       <div id="contacto-diagnostico">
-        <DiagnosticoContact dict={dict} />
+        <Diagnosis content={getHomepageContent(l).diagnosis} locale={l} />
       </div>
     </>
   );
