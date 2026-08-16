@@ -47,6 +47,24 @@ test("serves EN section pages after the Fase 2 approval flip", async ({ page }) 
   );
 });
 
+test("translates section slugs when switching language on a section page", async ({
+  page,
+}) => {
+  await page.goto("/es/como-trabajamos");
+  await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+    /Cómo trabajamos/i
+  );
+  await page.getByRole("button", { name: "Switch to English" }).first().click();
+  await expect(page).toHaveURL(/\/en\/how-we-work/);
+  await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+    /How we work/i
+  );
+
+  await page.goto("/es/servicios/software-a-medida");
+  await page.getByRole("button", { name: "Switch to English" }).first().click();
+  await expect(page).toHaveURL(/\/en\/services\/custom-software/);
+});
+
 test("keeps insights withheld in both locales", async ({ page }) => {
   await page.goto("/en/insights");
   // The route 404s — no insights content heading renders until approved.

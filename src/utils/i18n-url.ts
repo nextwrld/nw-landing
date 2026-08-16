@@ -1,4 +1,5 @@
-import { defaultLocale, type Locale } from "@/i18n/config";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
+import { routeForSlug, servicePrefix, slugForRoute } from "@/content/sections";
 
 export function localizedPath(locale: Locale, path: string): string {
   if (!path.startsWith("/")) {
@@ -15,6 +16,35 @@ export function localizedHref(locale: Locale, path: string): string {
     return `/${locale}/${path.slice(1)}`;
   }
   return localizedPath(locale, path);
+}
+
+/**
+ * Translates a locale-prefixed pathname into the target locale, mapping every
+ * V3 section slug through the per-locale slug table. Service prefixes
+ * (servicios|services) and section slugs translate; case slugs and non-section
+ * segments (contact, pricing, legal pages) stay unchanged.
+ * Example: /es/servicios/software-a-medida -> /en/services/custom-software.
+ */
+export function translatePathname(pathname: string, targetLocale: Locale): string {
+  const segments = pathname.split("/").filter(Boolean);
+  const sourceLocale: Locale =
+    segments.length > 0 && isLocale(segments[0]) ? segments[0] : defaultLocale;
+  const rest = segments.slice(1);
+
+  const translated = rest.map((segment, index) => {
+    if (index === 0 && segment === servicePrefix(sourceLocale)) {
+      return servicePrefix(targetLocale);
+    }
+    const route = routeForSlug(segment, sourceLocale);
+    if (route !== null) {
+      return slugForRoute(route, targetLocale);
+    }
+    return segment;
+  });
+
+  return translated.length > 0
+    ? `/${targetLocale}/${translated.join("/")}`
+    : `/${targetLocale}`;
 }
 
 export function replaceLocale(pathname: string, nextLocale: Locale): string {

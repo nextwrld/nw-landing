@@ -87,3 +87,41 @@ describe("localized destinations and services (EN-SLUGS-003)", () => {
     expect(serviceRoutes("es")).toEqual(["software-a-medida", "sistemas-de-gestion", "automatizacion"]);
   });
 });
+
+describe("pathname translation across locales (EN-SLUGS-004)", () => {
+  it("translates flat section slugs both ways", async () => {
+    const { translatePathname } = await import("@/utils/i18n-url");
+    expect(translatePathname("/es/como-trabajamos", "en")).toBe("/en/how-we-work");
+    expect(translatePathname("/en/how-we-work", "es")).toBe("/es/como-trabajamos");
+    expect(translatePathname("/es/nosotros", "en")).toBe("/en/about-us");
+    expect(translatePathname("/es/diagnostico", "en")).toBe("/en/diagnosis");
+  });
+
+  it("translates service prefix and slugs both ways", async () => {
+    const { translatePathname } = await import("@/utils/i18n-url");
+    expect(translatePathname("/es/servicios/software-a-medida", "en")).toBe(
+      "/en/services/custom-software"
+    );
+    expect(translatePathname("/en/services/custom-software", "es")).toBe(
+      "/es/servicios/software-a-medida"
+    );
+    expect(translatePathname("/es/servicios/automatizacion", "en")).toBe(
+      "/en/services/automation"
+    );
+  });
+
+  it("translates the cases section and keeps case slugs", async () => {
+    const { translatePathname } = await import("@/utils/i18n-url");
+    expect(translatePathname("/es/casos", "en")).toBe("/en/cases");
+    expect(translatePathname("/es/casos/crm", "en")).toBe("/en/cases/crm");
+    expect(translatePathname("/en/cases/gym-access-os", "es")).toBe("/es/casos/gym-access-os");
+  });
+
+  it("keeps non-section segments and the homepage unchanged", async () => {
+    const { translatePathname } = await import("@/utils/i18n-url");
+    expect(translatePathname("/es", "en")).toBe("/en");
+    expect(translatePathname("/es/contact", "en")).toBe("/en/contact");
+    expect(translatePathname("/es/pricing", "en")).toBe("/en/pricing");
+    expect(translatePathname("/es/legal-notice", "en")).toBe("/en/legal-notice");
+  });
+});
