@@ -33,7 +33,7 @@ export const sectionsEN: SectionContent[] = [
         body: "When critical processes depend on spreadsheets, messages, and manual tasks that generic tools don't solve.",
       },
     ],
-    approved: false,
+    approved: true,
   },
   {
     route: "sistemas-de-gestion",
@@ -62,7 +62,7 @@ export const sectionsEN: SectionContent[] = [
         body: "Getting an answer no longer requires searching, consolidating, and validating data in different places.",
       },
     ],
-    approved: false,
+    approved: true,
   },
   {
     route: "automatizacion",
@@ -91,7 +91,7 @@ export const sectionsEN: SectionContent[] = [
         body: "We incorporate artificial intelligence only when it improves a concrete task: classifying, assisting, or automating decisions.",
       },
     ],
-    approved: false,
+    approved: true,
   },
   {
     route: "como-trabajamos",
@@ -130,7 +130,7 @@ export const sectionsEN: SectionContent[] = [
         body: "We measure, learn, and evolve the system alongside the operation.",
       },
     ],
-    approved: false,
+    approved: true,
   },
   {
     route: "casos",
@@ -154,8 +154,12 @@ export const sectionsEN: SectionContent[] = [
         body: "If you recognize similar friction, the operational diagnosis is the first step to understand what to build.",
       },
     ],
-    cases: [],
-    approved: false,
+    cases: [
+          { slug: "gym-access-os", approved: true },
+          { slug: "chatbot", approved: true },
+          { slug: "crm", approved: true },
+        ],
+    approved: true,
   },
   {
     route: "insights",
@@ -203,7 +207,7 @@ export const sectionsEN: SectionContent[] = [
         body: "Product, experience, architecture, and operations are part of the same solution.",
       },
     ],
-    approved: false,
+    approved: true,
   },
   {
     route: "diagnostico",
@@ -227,6 +231,6 @@ export const sectionsEN: SectionContent[] = [
         body: "Complete the context form and we will schedule the conversation.",
       },
     ],
-    approved: false,
+    approved: true,
   },
 ];

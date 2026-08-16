@@ -66,12 +66,12 @@ test.describe("homepage v3 — entry-door skeleton", () => {
     ).toBeVisible();
   });
 
-  test("withholds EN section pages while EN content is unapproved", async ({
+  test("serves EN section pages after the Fase 2 approval flip", async ({
     page,
   }) => {
     await page.goto("/en/como-trabajamos");
-    await expect(page.getByRole("heading", { level: 1 }).first()).not.toContainText(
-      /How we work/
+    await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+      /How we work/i
     );
   });
 });

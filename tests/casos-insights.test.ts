@@ -32,8 +32,8 @@ describe("cases registry (CASOS-001)", () => {
     expect(casos.heading.trim().length).toBeGreaterThan(0);
   });
 
-  it("registers no approved case slugs for EN while EN content is unapproved", () => {
-    expect(approvedCaseSlugs("en")).toEqual([]);
+  it("registers the approved case slugs for EN after the flip", () => {
+    expect(approvedCaseSlugs("en")).toEqual(CASE_SLUGS);
   });
 
   it("keeps casos inside the published ES route set", () => {
@@ -44,7 +44,7 @@ describe("cases registry (CASOS-001)", () => {
 
 describe("casos page modules (CASOS-002)", () => {
   it("derives listing static params from the published registry", () => {
-    expect(sectionStaticParams("casos")).toEqual([{ locale: "es" }]);
+    expect(sectionStaticParams("casos")).toEqual([{ locale: "es" }, { locale: "en" }]);
     expect(casosListingSource).toContain("sectionStaticParams");
     expect(casosListingSource).toContain("dynamicParams = false");
     expect(casosListingSource).toContain("notFound()");
@@ -56,9 +56,10 @@ describe("casos page modules (CASOS-002)", () => {
       "@/app/[locale]/casos/[slug]/page"
     );
     const params = generateStaticParams();
-    expect(params).toEqual(
-      CASE_SLUGS.map((slug) => ({ locale: "es", slug }))
-    );
+    expect(params).toEqual([
+      ...CASE_SLUGS.map((slug) => ({ locale: "es", slug })),
+      ...CASE_SLUGS.map((slug) => ({ locale: "en", slug })),
+    ]);
     expect(casosDetailSource).toContain("dynamicParams = false");
     expect(casosDetailSource).toContain("notFound()");
   });
@@ -93,6 +94,6 @@ describe("sitemap cases URLs (CASOS-003)", () => {
       expect(urls).toContain(`https://nextwrld.com/es/casos/${slug}`);
       expect(urls).not.toContain(`https://nextwrld.com/es/success-cases/${slug}`);
     }
-    expect(urls).not.toContain("https://nextwrld.com/en/casos/crm");
+    expect(urls).toContain("https://nextwrld.com/en/casos/crm");
   });
 });

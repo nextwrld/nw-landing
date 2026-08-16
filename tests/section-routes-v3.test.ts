@@ -143,14 +143,23 @@ describe("no empty destinations (SECTION-PAGE-V3-004)", () => {
 });
 
 describe("EN registry withheld until approved (SECTION-PAGE-V3-005)", () => {
-  it("publishes no EN routes while EN content is unapproved", () => {
-    expect(publishedRoutes("en")).toEqual([]);
+  it("publishes the seven EN routes after the Fase 2 approval flip", () => {
+    expect(publishedRoutes("en")).toEqual([
+      "software-a-medida",
+      "sistemas-de-gestion",
+      "automatizacion",
+      "como-trabajamos",
+      "casos",
+      "nosotros",
+      "diagnostico",
+    ]);
   });
 
-  it("holds every EN section entry registered but unapproved", () => {
-    expect(sectionsByLocale.en.length).toBeGreaterThan(0);
-    for (const entry of sectionsByLocale.en) {
-      expect(entry.approved).toBe(false);
+  it("keeps insights unapproved and unpublished in both locales", () => {
+    for (const locale of ["es", "en"] as const) {
+      expect(publishedRoutes(locale)).not.toContain("insights");
+      const entry = sectionsByLocale[locale].find((e) => e.route === "insights");
+      expect(entry?.approved).toBe(false);
     }
   });
 });
@@ -249,9 +258,12 @@ describe("route admission gate (ADMISSION-ROUTES)", () => {
     });
   });
 
-  it("fails the release gate on missing or empty destinations", () => {
+  it("keeps release fail-closed now that EN routes publish", () => {
+    // EN now publishes, so route/destination problems are gone; the release
+    // gate still fails closed on evidence and remaining approval problems.
     const problems = validateRelease({ status: "release", approvals: buildApprovals() });
-    expect(problems.some((problem) => /destination|route/i.test(problem))).toBe(true);
+    expect(problems.some((problem) => /destination|route/i.test(problem))).toBe(false);
+    expect(problems.length).toBeGreaterThan(0);
     expect(() =>
       admitPublication({ status: "release", approvals: buildApprovals() })
     ).toThrow(PublicationBlockedError);

@@ -56,8 +56,8 @@ describe("institutional page modules (INSTITUCIONAL-002)", () => {
   it("derives static params only for published locales", () => {
     expect(comoTrabajamosSource).toContain("sectionStaticParams");
     expect(nosotrosSource).toContain("sectionStaticParams");
-    expect(sectionStaticParams("como-trabajamos")).toEqual([{ locale: "es" }]);
-    expect(sectionStaticParams("nosotros")).toEqual([{ locale: "es" }]);
+    expect(sectionStaticParams("como-trabajamos")).toEqual([{ locale: "es" }, { locale: "en" }]);
+    expect(sectionStaticParams("nosotros")).toEqual([{ locale: "es" }, { locale: "en" }]);
   });
 
   it("guards unapproved locales with notFound and renders server-first", () => {
@@ -68,9 +68,9 @@ describe("institutional page modules (INSTITUCIONAL-002)", () => {
     expect(shellSource).not.toContain('"use client"');
   });
 
-  it("withholds EN content for institutional routes", () => {
-    expect(sectionPageContent("como-trabajamos", "en")).toBeNull();
-    expect(sectionPageContent("nosotros", "en")).toBeNull();
+  it("serves EN content for institutional routes after the flip", () => {
+    expect(sectionPageContent("como-trabajamos", "en")?.approved).toBe(true);
+    expect(sectionPageContent("nosotros", "en")?.approved).toBe(true);
   });
 });
 

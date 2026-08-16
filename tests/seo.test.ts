@@ -53,17 +53,14 @@ describe("sitemap", () => {
     expect(urls).toContain("https://nextwrld.com/es/como-trabajamos");
     expect(urls).toContain("https://nextwrld.com/es/casos");
     expect(urls).toContain("https://nextwrld.com/es/nosotros");
-    // Unapproved or withheld locales never appear.
+    // Insights stays unapproved in both locales; EN section routes publish.
     expect(urls).not.toContain("https://nextwrld.com/es/insights");
+    expect(urls).not.toContain("https://nextwrld.com/en/insights");
     expect(urls).not.toContain("https://nextwrld.com/es/metodo");
-    for (const url of [
-      "https://nextwrld.com/en/servicios/software-a-medida",
-      "https://nextwrld.com/en/como-trabajamos",
-      "https://nextwrld.com/en/casos",
-      "https://nextwrld.com/en/nosotros",
-    ]) {
-      expect(urls).not.toContain(url);
-    }
+    expect(urls).toContain("https://nextwrld.com/en/servicios/software-a-medida");
+    expect(urls).toContain("https://nextwrld.com/en/como-trabajamos");
+    expect(urls).toContain("https://nextwrld.com/en/casos");
+    expect(urls).toContain("https://nextwrld.com/en/nosotros");
   });
 
   it("never lists demo, blog or error routes", () => {

@@ -37,10 +37,13 @@ describe("success case page semantics", () => {
     }
   );
 
-  it("withholds EN case details while EN content is unapproved", async () => {
-    await expect(
-      SuccessCasePage({ params: Promise.resolve({ locale: "en", slug: "crm" }) })
-    ).rejects.toThrow(/404/);
+  it("renders EN case details after the Fase 2 approval flip", async () => {
+    const element = await SuccessCasePage({
+      params: Promise.resolve({ locale: "en", slug: "crm" }),
+    });
+    const html = decodeHtml(renderToString(element));
+    expect(html).toMatch(/<h1[ >]/);
+    expect(html).toContain("InmoCRM");
   });
 
   it("renders a descriptive H1 equal to the case title", async () => {

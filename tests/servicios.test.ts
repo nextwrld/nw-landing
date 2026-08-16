@@ -43,9 +43,9 @@ describe("service route registry (SERVICIOS-001)", () => {
     }
   });
 
-  it("publishes no EN service routes while EN content is unapproved", async () => {
+  it("publishes the three EN service routes after the flip", async () => {
     const { serviceRoutes } = await import("@/content/sections");
-    expect(serviceRoutes("en")).toEqual([]);
+    expect(serviceRoutes("en")).toEqual(SERVICE_SLUGS);
   });
 
   it("validates the ES section content without problems", () => {
@@ -124,11 +124,12 @@ describe("sitemap includes published section routes (SERVICIOS-004)", () => {
   it("withholds unapproved and EN section routes from the sitemap", () => {
     const urls = sitemap().map((e) => e.url);
     expect(urls).not.toContain("https://nextwrld.com/es/insights");
+    expect(urls).not.toContain("https://nextwrld.com/en/insights");
     for (const slug of SERVICE_SLUGS) {
-      expect(urls).not.toContain(`https://nextwrld.com/en/servicios/${slug}`);
+      expect(urls).toContain(`https://nextwrld.com/en/servicios/${slug}`);
     }
-    expect(urls).not.toContain("https://nextwrld.com/en/como-trabajamos");
-    expect(urls).not.toContain("https://nextwrld.com/en/casos");
-    expect(urls).not.toContain("https://nextwrld.com/en/nosotros");
+    expect(urls).toContain("https://nextwrld.com/en/como-trabajamos");
+    expect(urls).toContain("https://nextwrld.com/en/casos");
+    expect(urls).toContain("https://nextwrld.com/en/nosotros");
   });
 });

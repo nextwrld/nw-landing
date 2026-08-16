@@ -2,7 +2,9 @@ import { test, expect, type ConsoleMessage } from "@playwright/test";
 
 const REACT_RENDERING_WARNINGS = /script tag while rendering|never executed|hydrat|did not match/i;
 
-test("navigating between locales keeps a clean console and deterministic theme", async ({ page }) => {
+test("navigating between locales keeps a clean console and serves the V3 composition", async ({
+  page,
+}) => {
   const consoleIssues: string[] = [];
   page.on("console", (msg: ConsoleMessage) => {
     if (msg.type() === "error" || msg.type() === "warning") {
@@ -12,23 +14,41 @@ test("navigating between locales keeps a clean console and deterministic theme",
 
   await page.goto("/es");
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(page.locator("h1").first()).toContainText("BIENVENIDO AL NUEVO ESTÁNDAR OPERATIVO");
+  await expect(page.locator("h1").first()).toContainText(
+    "Tu empresa no debería crecer multiplicando trabajo manual"
+  );
 
   await page.getByRole("button", { name: "Switch to English" }).first().click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator("h1").first()).toContainText("WELCOME TO THE NEW OPERATIONAL STANDARD");
+  await expect(page.locator("h1").first()).toContainText(
+    "Your company shouldn't grow by multiplying manual work"
+  );
 
   await page.getByRole("button", { name: "Cambiar a Español" }).first().click();
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 
-  const htmlClass = (await page.locator("html").getAttribute("class")) ?? "";
-  expect(htmlClass).toMatch(/\b(light|dark)\b/);
-
-  await page.getByRole("button", { name: "theme toggler" }).click();
-  await page.reload();
-  const storedTheme = await page.evaluate(() => window.localStorage.getItem("theme"));
-  const reloadedClass = (await page.locator("html").getAttribute("class")) ?? "";
-  expect(reloadedClass).toContain(storedTheme ?? "light");
-
   expect(consoleIssues.filter((m) => REACT_RENDERING_WARNINGS.test(m))).toEqual([]);
+});
+
+test("serves EN section pages after the Fase 2 approval flip", async ({ page }) => {
+  await page.goto("/en/como-trabajamos");
+  await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+    /How we work/i
+  );
+
+  await page.goto("/en/servicios/software-a-medida");
+  await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+    /custom software/i
+  );
+
+  await page.goto("/en/casos");
+  await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+    /real work|real cases/i
+  );
+});
+
+test("keeps insights withheld in both locales", async ({ page }) => {
+  await page.goto("/en/insights");
+  // The route 404s — no insights content heading renders until approved.
+  await expect(page.getByRole("heading", { name: /insights/i })).toHaveCount(0);
 });
