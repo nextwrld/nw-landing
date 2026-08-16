@@ -3,25 +3,25 @@ import { buildPageMetadata, localeUrl } from "@/utils/seo";
 import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
 import * as homeModule from "@/app/[locale]/page";
-import * as diagnosticoModule from "@/app/[locale]/diagnostico/page";
+import * as diagnosticoModule from "@/app/[locale]/[...slugs]/page";
 import * as contactModule from "@/app/[locale]/contact/page";
 import * as pricingModule from "@/app/[locale]/pricing/page";
 import * as privacyModule from "@/app/[locale]/privacy-policy/page";
 import * as legalModule from "@/app/[locale]/legal-notice/page";
 import * as termsModule from "@/app/[locale]/terms-of-service/page";
-import * as caseModule from "@/app/[locale]/casos/[slug]/page";
+import * as caseModule from "@/app/[locale]/[...slugs]/page";
 
-type MetaFn = (p: { params: Promise<Record<string, string>> }) => Promise<Record<string, unknown>>;
+type MetaFn = (p: { params: Promise<Record<string, string | string[]>> }) => Promise<Record<string, unknown>>;
 
-const publicPages: { name: string; generate: MetaFn; params: Record<string, string> }[] = [
+const publicPages: { name: string; generate: MetaFn; params: Record<string, string | string[]> }[] = [
   { name: "home", generate: homeModule.generateMetadata as MetaFn, params: { locale: "es" } },
-  { name: "diagnostico", generate: diagnosticoModule.generateMetadata as MetaFn, params: { locale: "es" } },
+  { name: "diagnostico", generate: diagnosticoModule.generateMetadata as unknown as MetaFn, params: { locale: "es", slugs: ["diagnostico"] } },
   { name: "contact", generate: contactModule.generateMetadata as MetaFn, params: { locale: "es" } },
   { name: "pricing", generate: pricingModule.generateMetadata as MetaFn, params: { locale: "es" } },
   { name: "privacy-policy", generate: privacyModule.generateMetadata as MetaFn, params: { locale: "es" } },
   { name: "legal-notice", generate: legalModule.generateMetadata as MetaFn, params: { locale: "es" } },
   { name: "terms-of-service", generate: termsModule.generateMetadata as MetaFn, params: { locale: "es" } },
-  { name: "success-cases", generate: caseModule.generateMetadata as MetaFn, params: { locale: "es", slug: "crm" } },
+  { name: "success-cases", generate: caseModule.generateMetadata as unknown as MetaFn, params: { locale: "es", slugs: ["casos", "crm"] } },
 ];
 
 describe("robots", () => {
@@ -57,10 +57,10 @@ describe("sitemap", () => {
     expect(urls).not.toContain("https://nextwrld.com/es/insights");
     expect(urls).not.toContain("https://nextwrld.com/en/insights");
     expect(urls).not.toContain("https://nextwrld.com/es/metodo");
-    expect(urls).toContain("https://nextwrld.com/en/servicios/software-a-medida");
-    expect(urls).toContain("https://nextwrld.com/en/como-trabajamos");
-    expect(urls).toContain("https://nextwrld.com/en/casos");
-    expect(urls).toContain("https://nextwrld.com/en/nosotros");
+    expect(urls).toContain("https://nextwrld.com/en/services/custom-software");
+    expect(urls).toContain("https://nextwrld.com/en/how-we-work");
+    expect(urls).toContain("https://nextwrld.com/en/cases");
+    expect(urls).toContain("https://nextwrld.com/en/about-us");
   });
 
   it("never lists demo, blog or error routes", () => {

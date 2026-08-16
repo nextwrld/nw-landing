@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { renderToString } from "react-dom/server";
 import { getAllSuccessCases } from "@/utils/markdown";
-import SuccessCasePage from "@/app/[locale]/casos/[slug]/page";
+import SuccessCasePage from "@/app/[locale]/[...slugs]/page";
 
 const decodeHtml = (html: string) =>
   html
@@ -23,7 +23,7 @@ describe("success case page semantics", () => {
           throw new Error(`case ${locale} has no slug`);
         }
         const element = await SuccessCasePage({
-          params: Promise.resolve({ locale, slug: c.slug }),
+          params: Promise.resolve({ locale, slugs: ["casos", c.slug] }),
         });
         const html = decodeHtml(renderToString(element));
 
@@ -39,7 +39,7 @@ describe("success case page semantics", () => {
 
   it("renders EN case details after the Fase 2 approval flip", async () => {
     const element = await SuccessCasePage({
-      params: Promise.resolve({ locale: "en", slug: "crm" }),
+      params: Promise.resolve({ locale: "en", slugs: ["cases", "crm"] }),
     });
     const html = decodeHtml(renderToString(element));
     expect(html).toMatch(/<h1[ >]/);
@@ -48,7 +48,7 @@ describe("success case page semantics", () => {
 
   it("renders a descriptive H1 equal to the case title", async () => {
     const element = await SuccessCasePage({
-      params: Promise.resolve({ locale: "es", slug: "crm" }),
+      params: Promise.resolve({ locale: "es", slugs: ["casos", "crm"] }),
     });
     const html = decodeHtml(renderToString(element));
     expect(html).toMatch(/<h1[^>]*>InmoCRM[^<]*/);

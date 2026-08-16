@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/i18n/config";
-import { approvedCaseSlugs, publishedRoutes } from "@/content/sections";
-import { isServiceRoute } from "@/content/sections";
+import { approvedCaseSlugs, publishedRoutes, routeForSlug, servicePrefix, slugForRoute } from "@/content/sections";
+import { SERVICE_ROUTES } from "@/content/sections/types";
 import { SITE_URL } from "./site";
 
 type Freq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
@@ -24,8 +24,11 @@ function alternates(locale: (typeof locales)[number], path: string): { languages
   return { languages };
 }
 
-function sectionPath(route: string): string {
-  return isServiceRoute(route) ? `/servicios/${route}` : `/${route}`;
+function sectionPath(locale: (typeof locales)[number], slug: string): string {
+  const route = routeForSlug(slug, locale);
+  return route !== null && (SERVICE_ROUTES as readonly string[]).includes(route)
+    ? `/${servicePrefix(locale)}/${slug}`
+    : `/${slug}`;
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -44,9 +47,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Published V3 section routes (ES skeleton; EN withheld until approved).
     // `diagnostico` is already covered by staticPaths, so it is skipped here.
-    for (const route of publishedRoutes(locale)) {
-      if (route === "diagnostico") continue;
-      const path = sectionPath(route);
+    for (const slug of publishedRoutes(locale)) {
+      if (routeForSlug(slug, locale) === "diagnostico") continue;
+      const path = sectionPath(locale, slug);
       entries.push({
         url: `${SITE_URL}/${locale}${path}`,
         lastModified: new Date(),

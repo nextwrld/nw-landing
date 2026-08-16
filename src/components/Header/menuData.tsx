@@ -83,7 +83,7 @@ export function buildApprovedNavV3(content: HomepageContent): Menu[] {
         if (!child.approved || !child.destination) {
           continue;
         }
-        const route = routeFromDestination(child.destination);
+        const route = routeFromDestination(child.destination, content.locale);
         if (route === null) {
           continue;
         }
@@ -107,7 +107,7 @@ export function buildApprovedNavV3(content: HomepageContent): Menu[] {
     if (!item.destination) {
       continue;
     }
-    const route = routeFromDestination(item.destination);
+    const route = routeFromDestination(item.destination, content.locale);
     if (route === null) {
       continue;
     }

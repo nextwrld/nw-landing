@@ -20,7 +20,7 @@ function sourceOf(path: string): string {
   }
 }
 
-const pageSource = sourceOf("../src/app/[locale]/servicios/[slug]/page.tsx");
+const pageSource = sourceOf("../src/app/[locale]/[...slugs]/page.tsx");
 const shellSource = sourceOf("../src/components/HomeExperience/SectionPageShell.tsx");
 
 describe("service route registry (SERVICIOS-001)", () => {
@@ -43,9 +43,9 @@ describe("service route registry (SERVICIOS-001)", () => {
     }
   });
 
-  it("publishes the three EN service routes after the flip", async () => {
+  it("publishes the three EN service routes with localized slugs", async () => {
     const { serviceRoutes } = await import("@/content/sections");
-    expect(serviceRoutes("en")).toEqual(SERVICE_SLUGS);
+    expect(serviceRoutes("en")).toEqual(["custom-software", "management-systems", "automation"]);
   });
 
   it("validates the ES section content without problems", () => {
@@ -63,7 +63,7 @@ describe("service route page module (SERVICIOS-002)", () => {
   it("derives static params from the published service registry", () => {
     expect(pageSource).toContain("serviceRoutes");
     expect(pageSource).toContain("generateStaticParams");
-    expect(pageSource).toContain("dynamicParams = false");
+    expect(pageSource).toContain("notFound()");
   });
 
   it("guards unknown slugs and unapproved locales with notFound", () => {
@@ -125,11 +125,11 @@ describe("sitemap includes published section routes (SERVICIOS-004)", () => {
     const urls = sitemap().map((e) => e.url);
     expect(urls).not.toContain("https://nextwrld.com/es/insights");
     expect(urls).not.toContain("https://nextwrld.com/en/insights");
-    for (const slug of SERVICE_SLUGS) {
-      expect(urls).toContain(`https://nextwrld.com/en/servicios/${slug}`);
+    for (const slug of ["custom-software", "management-systems", "automation"]) {
+      expect(urls).toContain(`https://nextwrld.com/en/services/${slug}`);
     }
-    expect(urls).toContain("https://nextwrld.com/en/como-trabajamos");
-    expect(urls).toContain("https://nextwrld.com/en/casos");
-    expect(urls).toContain("https://nextwrld.com/en/nosotros");
+    expect(urls).toContain("https://nextwrld.com/en/how-we-work");
+    expect(urls).toContain("https://nextwrld.com/en/cases");
+    expect(urls).toContain("https://nextwrld.com/en/about-us");
   });
 });

@@ -18,9 +18,9 @@ function sourceOf(path: string): string {
   }
 }
 
-const casosListingSource = sourceOf("../src/app/[locale]/casos/page.tsx");
-const casosDetailSource = sourceOf("../src/app/[locale]/casos/[slug]/page.tsx");
-const insightsSource = sourceOf("../src/app/[locale]/insights/page.tsx");
+const casosListingSource = sourceOf("../src/app/[locale]/[...slugs]/page.tsx");
+const casosDetailSource = sourceOf("../src/app/[locale]/[...slugs]/page.tsx");
+const insightsSource = sourceOf("../src/app/[locale]/[...slugs]/page.tsx");
 const redirectSource = sourceOf("../src/app/[locale]/success-cases/[slug]/page.tsx");
 
 describe("cases registry (CASOS-001)", () => {
@@ -45,23 +45,22 @@ describe("cases registry (CASOS-001)", () => {
 describe("casos page modules (CASOS-002)", () => {
   it("derives listing static params from the published registry", () => {
     expect(sectionStaticParams("casos")).toEqual([{ locale: "es" }, { locale: "en" }]);
-    expect(casosListingSource).toContain("sectionStaticParams");
-    expect(casosListingSource).toContain("dynamicParams = false");
+    expect(casosListingSource).toContain("routeForSlug");
     expect(casosListingSource).toContain("notFound()");
     expect(casosListingSource).toContain("SectionPageShell");
   });
 
   it("derives detail static params for every ES approved case", async () => {
     const { generateStaticParams } = await import(
-      "@/app/[locale]/casos/[slug]/page"
+      "@/app/[locale]/[...slugs]/page"
     );
     const params = generateStaticParams();
-    expect(params).toEqual([
-      ...CASE_SLUGS.map((slug) => ({ locale: "es", slug })),
-      ...CASE_SLUGS.map((slug) => ({ locale: "en", slug })),
-    ]);
-    expect(casosDetailSource).toContain("dynamicParams = false");
+    for (const caseSlug of CASE_SLUGS) {
+      expect(params).toContainEqual({ locale: "es", slugs: ["casos", caseSlug] });
+      expect(params).toContainEqual({ locale: "en", slugs: ["cases", caseSlug] });
+    }
     expect(casosDetailSource).toContain("notFound()");
+    expect(casosDetailSource).toContain("markdownToHtml");
   });
 
   it("redirects legacy success-case URLs permanently to /casos/[slug]", () => {
@@ -78,11 +77,11 @@ describe("insights withholding (INSIGHTS-001)", () => {
     expect(sectionStaticParams("insights")).toEqual([]);
   });
 
-  it("keeps the insights page module server-first and gated", () => {
-    expect(insightsSource).toContain("sectionStaticParams");
-    expect(insightsSource).toContain("dynamicParams = false");
+  it("keeps the insights route gated and server-first", () => {
+    expect(insightsSource).toContain("routeForSlug");
     expect(insightsSource).toContain("notFound()");
     expect(insightsSource).not.toContain('"use client"');
+    expect(sectionStaticParams("insights")).toEqual([]);
   });
 });
 

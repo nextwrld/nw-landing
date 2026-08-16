@@ -134,7 +134,7 @@ describe("no empty destinations (SECTION-PAGE-V3-004)", () => {
 
   it("keeps every approved nav destination content-complete in the registry", () => {
     for (const destination of destinationsOf(esContent)) {
-      const route = routeFromDestination(destination);
+      const route = routeFromDestination(destination, "es");
       expect(route).not.toBeNull();
       const entry = getSectionContent(route!, "es");
       expect(entry.approved).toBe(true);
@@ -145,13 +145,13 @@ describe("no empty destinations (SECTION-PAGE-V3-004)", () => {
 describe("EN registry withheld until approved (SECTION-PAGE-V3-005)", () => {
   it("publishes the seven EN routes after the Fase 2 approval flip", () => {
     expect(publishedRoutes("en")).toEqual([
-      "software-a-medida",
-      "sistemas-de-gestion",
-      "automatizacion",
-      "como-trabajamos",
-      "casos",
-      "nosotros",
-      "diagnostico",
+      "custom-software",
+      "management-systems",
+      "automation",
+      "how-we-work",
+      "cases",
+      "about-us",
+      "diagnosis",
     ]);
   });
 

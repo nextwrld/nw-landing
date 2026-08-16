@@ -1,6 +1,6 @@
 import { getSuccessCaseBySlug } from "@/utils/markdown";
 import { validateMetadataLocales } from "@/utils/seo";
-import { publishedRoutes, routeFromDestination } from "@/content/sections";
+import { publishedCanonicalRoutes, routeFromDestination } from "@/content/sections";
 import { contentByLocale, validateContentParity } from "./index";
 import { loadEvidenceManifest, manifestEntryFor } from "./manifest";
 import type { EvidenceManifest } from "./manifest";
@@ -249,10 +249,10 @@ export function validateRouteExistence(
   content: HomepageContent = contentByLocale[locale]
 ): string[] {
   const problems: string[] = [];
-  const published = publishedRoutes(locale);
+  const published = publishedCanonicalRoutes(locale);
   const destinations = navDestinations(content);
   for (const destination of destinations) {
-    const route = routeFromDestination(destination);
+    const route = routeFromDestination(destination, locale);
     if (route === null) {
       problems.push(`Route problem: destination ${destination} is an anchor or an unknown route`);
       continue;
@@ -274,12 +274,12 @@ export function validateNoEmptyContent(
   content: HomepageContent = contentByLocale[locale]
 ): string[] {
   const problems: string[] = [];
-  const published = publishedRoutes(locale);
+  const published = publishedCanonicalRoutes(locale);
   for (const item of flattenNav(content)) {
     if (!item.approved || !item.destination) {
       continue;
     }
-    const route = routeFromDestination(item.destination);
+    const route = routeFromDestination(item.destination, locale);
     if (route === null) {
       problems.push(`Destination ${item.destination} is an anchor or an unknown route`);
       continue;

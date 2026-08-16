@@ -19,8 +19,7 @@ function sourceOf(path: string): string {
   }
 }
 
-const comoTrabajamosSource = sourceOf("../src/app/[locale]/como-trabajamos/page.tsx");
-const nosotrosSource = sourceOf("../src/app/[locale]/nosotros/page.tsx");
+const sectionPageSource = sourceOf("../src/app/[locale]/[...slugs]/page.tsx");
 const shellSource = sourceOf("../src/components/HomeExperience/SectionPageShell.tsx");
 
 describe("institutional route registry (INSTITUCIONAL-001)", () => {
@@ -54,17 +53,14 @@ describe("institutional route registry (INSTITUCIONAL-001)", () => {
 
 describe("institutional page modules (INSTITUCIONAL-002)", () => {
   it("derives static params only for published locales", () => {
-    expect(comoTrabajamosSource).toContain("sectionStaticParams");
-    expect(nosotrosSource).toContain("sectionStaticParams");
+    expect(sectionPageSource).toContain("routeForSlug");
     expect(sectionStaticParams("como-trabajamos")).toEqual([{ locale: "es" }, { locale: "en" }]);
     expect(sectionStaticParams("nosotros")).toEqual([{ locale: "es" }, { locale: "en" }]);
   });
 
   it("guards unapproved locales with notFound and renders server-first", () => {
-    expect(comoTrabajamosSource).toContain("notFound()");
-    expect(nosotrosSource).toContain("notFound()");
-    expect(comoTrabajamosSource).toContain("SectionPageShell");
-    expect(nosotrosSource).toContain("SectionPageShell");
+    expect(sectionPageSource).toContain("notFound()");
+    expect(sectionPageSource).toContain("SectionPageShell");
     expect(shellSource).not.toContain('"use client"');
   });
 

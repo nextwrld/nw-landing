@@ -1,5 +1,6 @@
 import TrackedLink from "@/components/Common/TrackedLink";
 import { localizedHref } from "@/utils/i18n-url";
+import { slugForRoute } from "@/content/sections";
 import type { Locale } from "@/i18n/config";
 import type { HomepageMethod } from "@/content/homepage/types";
 
@@ -33,7 +34,7 @@ const MethodSection = ({
       </ol>
 
       <TrackedLink
-        href={localizedHref(locale, "/como-trabajamos")}
+        href={localizedHref(locale, `/${slugForRoute("como-trabajamos", locale)}`)}
         event="method_click"
         params={{ cta_location: "method_section", locale }}
         className="exp-btn exp-btn-secondary"

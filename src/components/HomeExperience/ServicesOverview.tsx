@@ -1,5 +1,7 @@
 import TrackedLink from "@/components/Common/TrackedLink";
 import { localizedHref } from "@/utils/i18n-url";
+import { servicePrefix, slugForRoute } from "@/content/sections";
+import { SERVICE_ROUTES } from "@/content/sections/types";
 import type { Locale } from "@/i18n/config";
 import type { HomepageCapabilities } from "@/content/homepage/types";
 
@@ -30,14 +32,15 @@ const ServicesOverview = ({
 
       <div className="services-grid">
         {content.items.map((item) => {
-          const slug = SERVICE_SLUG_BY_ITEM[item.id];
+          const route = SERVICE_SLUG_BY_ITEM[item.id];
+          const slug = route ? slugForRoute(route as (typeof SERVICE_ROUTES)[number], locale) : null;
           return (
             <article key={item.id} className="service-card">
               <h3 className="service-card-title">{item.title}</h3>
               <p className="service-card-body">{item.body}</p>
               {slug ? (
                 <TrackedLink
-                  href={localizedHref(locale, `/servicios/${slug}`)}
+                  href={localizedHref(locale, `/${servicePrefix(locale)}/${slug}`)}
                   event="service_click"
                   params={{ cta_location: "services_section", locale }}
                   className="service-card-link"

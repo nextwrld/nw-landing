@@ -31,17 +31,17 @@ test("navigating between locales keeps a clean console and serves the V3 composi
 });
 
 test("serves EN section pages after the Fase 2 approval flip", async ({ page }) => {
-  await page.goto("/en/como-trabajamos");
+  await page.goto("/en/how-we-work");
   await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
     /How we work/i
   );
 
-  await page.goto("/en/servicios/software-a-medida");
+  await page.goto("/en/services/custom-software");
   await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
     /custom software/i
   );
 
-  await page.goto("/en/casos");
+  await page.goto("/en/cases");
   await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
     /real work|real cases/i
   );

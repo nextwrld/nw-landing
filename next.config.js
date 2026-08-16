@@ -13,6 +13,7 @@ const nextConfig = {
       { source: "/legal-notice", destination: "/es/legal-notice", permanent: true },
       { source: "/terms-of-service", destination: "/es/terms-of-service", permanent: true },
       { source: "/success-cases/:slug", destination: "/es/success-cases/:slug", permanent: true },
+      { source: "/en/diagnostico", destination: "/en/diagnosis", permanent: true },
     ];
   },
 };

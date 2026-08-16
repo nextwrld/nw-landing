@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { renderToString } from "react-dom/server";
 import { getHomepageContent } from "@/content/homepage";
-import DiagnosticoPage from "@/app/[locale]/diagnostico/page";
+import DiagnosticoPage from "@/app/[locale]/[...slugs]/page";
 
 function sourceOf(path: string): string {
   try {
@@ -12,18 +12,22 @@ function sourceOf(path: string): string {
   }
 }
 
-const pageSource = sourceOf("../src/app/[locale]/diagnostico/page.tsx");
+const pageSource = sourceOf("../src/app/[locale]/[...slugs]/page.tsx");
 
 describe("diagnostico page composition (DIAGNOSTICO-V3-001)", () => {
   it("hosts the context-first Diagnosis form component", () => {
-    expect(pageSource).toContain("Diagnosis");
-    expect(pageSource).toContain("getHomepageContent(l).diagnosis");
-    expect(pageSource).not.toContain("DiagnosticoContact");
+    const experienceSource = readFileSync(
+      new URL("../src/components/HomeExperience/DiagnosisExperience.tsx", import.meta.url),
+      "utf-8"
+    );
+    expect(experienceSource).toContain("Diagnosis");
+    expect(experienceSource).toContain("getHomepageContent(locale).diagnosis");
+    expect(experienceSource).not.toContain("DiagnosticoContact");
   });
 
   it("renders the offer sections server-first with the form", async () => {
     const element = await DiagnosticoPage({
-      params: Promise.resolve({ locale: "es" }),
+      params: Promise.resolve({ locale: "es", slugs: ["diagnostico"] }),
     });
     const html = renderToString(element);
     expect(html.length).toBeGreaterThan(0);

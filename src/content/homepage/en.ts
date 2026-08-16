@@ -18,19 +18,19 @@ export const homepageEN: HomepageContent = {
           {
             id: "software-a-medida",
             label: "Custom software",
-            destination: "/servicios/software-a-medida",
+            destination: "/services/custom-software",
             approved: true,
           },
           {
             id: "sistemas-de-gestion",
             label: "Management systems",
-            destination: "/servicios/sistemas-de-gestion",
+            destination: "/services/management-systems",
             approved: true,
           },
           {
             id: "automatizacion",
             label: "Automation",
-            destination: "/servicios/automatizacion",
+            destination: "/services/automation",
             approved: true,
           },
         ],
@@ -38,13 +38,13 @@ export const homepageEN: HomepageContent = {
       {
         id: "method",
         label: "Method",
-        destination: "/como-trabajamos",
+        destination: "/how-we-work",
         approved: true,
       },
       {
         id: "cases",
         label: "Cases",
-        destination: "/casos",
+        destination: "/cases",
         approved: true,
       },
       {
@@ -56,7 +56,7 @@ export const homepageEN: HomepageContent = {
       {
         id: "about",
         label: "About",
-        destination: "/nosotros",
+        destination: "/about-us",
         approved: true,
       },
     ],
@@ -70,7 +70,7 @@ export const homepageEN: HomepageContent = {
     secondaryLine: "Less administration. More control over your operation.",
     primaryCta: "Analyze my operation",
     secondaryCta: "How we work",
-    secondaryCtaHref: "/como-trabajamos",
+    secondaryCtaHref: "/how-we-work",
     microcopy: "Free diagnosis · 30–45 minutes",
   },
   problem: {
@@ -442,7 +442,7 @@ export const homepageEN: HomepageContent = {
     id: "finalCta",
     heading: "Your operation already works. Let's make it easier to grow.",
     primaryCta: "Analyze my operation",
-    primaryCtaHref: "/diagnostico",
+    primaryCtaHref: "/diagnosis",
     microcopy: "Free diagnosis · 30–45 minutes · no obligation.",
     secondaryCta: {
       label: "Continue on WhatsApp",

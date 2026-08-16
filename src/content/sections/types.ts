@@ -32,6 +32,40 @@ export const SERVICE_ROUTES = [
 
 export type ServiceRoute = (typeof SERVICE_ROUTES)[number];
 
+/**
+ * URL slug per locale for every canonical route. ES slugs equal the canonical
+ * route ids; EN slugs are localized (e.g. /en/services/custom-software,
+ * /en/how-we-work, /en/cases, /en/about-us, /en/diagnosis).
+ */
+export const SECTION_SLUGS: Record<SectionLocale, Record<SectionRoute, string>> = {
+  es: {
+    "software-a-medida": "software-a-medida",
+    "sistemas-de-gestion": "sistemas-de-gestion",
+    automatizacion: "automatizacion",
+    "como-trabajamos": "como-trabajamos",
+    casos: "casos",
+    insights: "insights",
+    nosotros: "nosotros",
+    diagnostico: "diagnostico",
+  },
+  en: {
+    "software-a-medida": "custom-software",
+    "sistemas-de-gestion": "management-systems",
+    automatizacion: "automation",
+    "como-trabajamos": "how-we-work",
+    casos: "cases",
+    insights: "insights",
+    nosotros: "about-us",
+    diagnostico: "diagnosis",
+  },
+};
+
+/** Locale-relative path prefix for service routes. */
+export const SERVICE_PREFIXES: Record<SectionLocale, string> = {
+  es: "servicios",
+  en: "services",
+};
+
 export type SectionRoute = (typeof SECTION_ROUTES)[number];
 
 export interface SectionBlock {

@@ -2,12 +2,19 @@ import type { Locale } from "@/i18n/config";
 import { sectionsEN } from "./en";
 import { sectionsES } from "./es";
 import type { SectionContent, SectionRoute, ServiceRoute } from "./types";
-import { SECTION_LOCALES, SECTION_ROUTES, SERVICE_ROUTES } from "./types";
+import {
+  SECTION_LOCALES,
+  SECTION_ROUTES,
+  SECTION_SLUGS,
+  SERVICE_PREFIXES,
+  SERVICE_ROUTES,
+} from "./types";
 
 /**
- * V3 section-page registry. One typed content entry per route per locale;
- * drives route generation, nav, footer, sitemap, and the publication gate so
- * withholding is atomic (locale-parity gate).
+ * V3 section-page registry. One typed content entry per canonical route per
+ * locale; URL slugs are localized per locale (e.g. "como-trabajamos" for ES,
+ * "how-we-work" for EN). The registry drives route generation, nav, footer,
+ * sitemap, and the publication gate so withholding is atomic.
  */
 export const sectionsByLocale: Record<Locale, SectionContent[]> = {
   es: sectionsES,
@@ -24,24 +31,41 @@ export function isSectionContentComplete(entry: SectionContent): boolean {
   );
 }
 
+/** Localized URL slug for a canonical route in a locale. */
+export function slugForRoute(route: SectionRoute, locale: Locale): string {
+  return SECTION_SLUGS[locale][route];
+}
+
+/** Canonical route for a localized slug in a locale, or null when unregistered. */
+export function routeForSlug(slug: string, locale: Locale): SectionRoute | null {
+  const entries = Object.entries(SECTION_SLUGS[locale]) as [SectionRoute, string][];
+  const match = entries.find(([, candidate]) => candidate === slug);
+  return match ? match[0] : null;
+}
+
 /**
- * Routes that are registered AND approved AND content-complete for a locale.
- * ES returns the Fase 1 skeleton routes (minus `insights`, which stays
- * approved:false); EN returns `[]` until Fase 2 approval flips the registry.
+ * Routes (localized slugs) that are registered AND approved AND content-complete
+ * for a locale. ES returns the published skeleton slugs; EN returns the
+ * localized English slugs once Fase 2 approval flips the registry.
  */
-export function publishedRoutes(locale: Locale): SectionRoute[] {
+export function publishedCanonicalRoutes(locale: Locale): SectionRoute[] {
   const entries = sectionsByLocale[locale] ?? [];
   return entries.filter(isSectionContentComplete).map((entry) => entry.route);
 }
 
+export function publishedRoutes(locale: Locale): string[] {
+  return publishedCanonicalRoutes(locale).map((route) => slugForRoute(route, locale));
+}
+
 /**
- * Returns the typed content for a route, throwing when the entry is missing or
- * unapproved (callers render `notFound()` in that case).
+ * Returns the typed content for a localized slug, throwing when the entry is
+ * missing or unapproved (callers render `notFound()` in that case).
  */
-export function getSectionContent(
-  route: SectionRoute,
-  locale: Locale
-): SectionContent {
+export function getSectionContent(slug: string, locale: Locale): SectionContent {
+  const route = routeForSlug(slug, locale);
+  if (!route) {
+    throw new Error(`No section route registered for slug ${slug} in ${locale}`);
+  }
   const entry = (sectionsByLocale[locale] ?? []).find(
     (candidate) => candidate.route === route
   );
@@ -81,10 +105,14 @@ export function validateSectionContent(locale: Locale): string[] {
 }
 
 /**
- * Maps a locale-relative destination ("/servicios/software-a-medida") to its
- * registered route id ("software-a-medida"). Anchor destinations yield null.
+ * Maps a locale-relative destination ("/servicios/software-a-medida" for ES,
+ * "/services/custom-software" for EN) to its canonical route id. Anchor
+ * destinations and unknown slugs yield null.
  */
-export function routeFromDestination(destination: string): SectionRoute | null {
+export function routeFromDestination(
+  destination: string,
+  locale: Locale
+): SectionRoute | null {
   if (destination.includes("#")) {
     return null;
   }
@@ -92,10 +120,7 @@ export function routeFromDestination(destination: string): SectionRoute | null {
   if (segments.length === 0) {
     return null;
   }
-  const route = segments[segments.length - 1];
-  return (SECTION_ROUTES as readonly string[]).includes(route)
-    ? (route as SectionRoute)
-    : null;
+  return routeForSlug(segments[segments.length - 1], locale);
 }
 
 export function isRegisteredRoute(route: string, locale: Locale): boolean {
@@ -111,18 +136,21 @@ export function approvedCaseSlugs(locale: Locale): string[] {
     .map((entryCase) => entryCase.slug);
 }
 
-export function isServiceRoute(route: string): route is ServiceRoute {
-  return (SERVICE_ROUTES as readonly string[]).includes(route);
+/** Locale-relative prefix for service routes ("servicios" | "services"). */
+export function servicePrefix(locale: Locale): string {
+  return SERVICE_PREFIXES[locale];
 }
 
-/**
- * Published service route slugs for a locale, rendered under
- * `/servicios/[slug]`. EN returns `[]` until approved content exists.
- */
-export function serviceRoutes(locale: Locale): ServiceRoute[] {
-  return (publishedRoutes(locale) as readonly string[])
-    .filter((route) => (SERVICE_ROUTES as readonly string[]).includes(route))
-    .map((route) => route as ServiceRoute);
+export function isServiceSlug(slug: string, locale: Locale): boolean {
+  return serviceRoutes(locale).includes(slug);
+}
+
+/** Published service route slugs for a locale (localized). */
+export function serviceRoutes(locale: Locale): string[] {
+  const published = publishedRoutes(locale);
+  return SERVICE_ROUTES.map((route) => slugForRoute(route, locale)).filter(
+    (slug) => published.includes(slug)
+  );
 }
 
 export { SECTION_LOCALES };

@@ -2,21 +2,22 @@ import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import {
   getSectionContent,
+  routeForSlug,
   publishedRoutes,
   sectionsByLocale,
   validateSectionContent,
 } from "@/content/sections";
-import { SECTION_ROUTES } from "@/content/sections/types";
+import { SECTION_ROUTES, type SectionRoute } from "@/content/sections/types";
 import { sectionStaticParams } from "@/utils/sectionPage";
 
 const EN_PUBLISHED = [
-  "software-a-medida",
-  "sistemas-de-gestion",
-  "automatizacion",
-  "como-trabajamos",
-  "casos",
-  "nosotros",
-  "diagnostico",
+  "custom-software",
+  "management-systems",
+  "automation",
+  "how-we-work",
+  "cases",
+  "about-us",
+  "diagnosis",
 ];
 
 describe("EN registry flip (EN-SECTIONS-001)", () => {
@@ -50,20 +51,24 @@ describe("EN registry flip (EN-SECTIONS-001)", () => {
     expect(sectionStaticParams("insights")).toEqual([]);
   });
 
-  it("keeps ES and EN section route sets symmetric except insights", () => {
-    const es = publishedRoutes("es").filter((r) => r !== "insights");
-    const en = publishedRoutes("en").filter((r) => r !== "insights");
+  it("keeps ES and EN canonical route sets symmetric except insights", () => {
+    const es = publishedRoutes("es")
+      .map((slug) => routeForSlug(slug, "es"))
+      .filter((r): r is SectionRoute => r !== null && r !== "insights");
+    const en = publishedRoutes("en")
+      .map((slug) => routeForSlug(slug, "en"))
+      .filter((r): r is SectionRoute => r !== null && r !== "insights");
     expect(es).toEqual(en);
   });
 });
 
 describe("EN section page modules (EN-SECTIONS-002)", () => {
-  it("serves EN content through the shared section page modules", () => {
-    const comoTrabajamosSource = readFileSync(
-      new URL("../src/app/[locale]/como-trabajamos/page.tsx", import.meta.url),
+  it("serves EN content through the localized section page module", () => {
+    const sectionPageSource = readFileSync(
+      new URL("../src/app/[locale]/[...slugs]/page.tsx", import.meta.url),
       "utf-8"
     );
-    expect(comoTrabajamosSource).toContain('sectionStaticParams("como-trabajamos")');
-    expect(comoTrabajamosSource).toContain("sectionPageMetadata");
+    expect(sectionPageSource).toContain("routeForSlug");
+    expect(sectionPageSource).toContain("getSectionContent");
   });
 });

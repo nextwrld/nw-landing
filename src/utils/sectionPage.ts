@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
-import { getSectionContent, publishedRoutes } from "@/content/sections";
+import { publishedRoutes, routeForSlug, slugForRoute } from "@/content/sections";
+import { getSectionContent } from "@/content/sections";
 import type { SectionContent, SectionRoute } from "@/content/sections/types";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/utils/seo";
 
 /**
- * Shared helpers for fixed-segment V3 section pages (como-trabajamos, nosotros,
- * casos, insights). Dynamic segment pages (servicios/[slug]) use their own
- * derivation; both converge on the same publication registry so withholding is
- * atomic across routes, nav, sitemap, and metadata.
+ * Shared helpers for V3 section pages. Dynamic segment pages
+ * ([locale]/[section] and [locale]/[servicePrefix]/[serviceSlug]) use these;
+ * all converge on the localized publication registry so withholding and slug
+ * localization stay atomic across routes, nav, sitemap, and metadata.
  */
 
-export function sectionStaticParams(
-  route: SectionRoute
-): { locale: Locale }[] {
+export function sectionStaticParams(route: SectionRoute): { locale: Locale }[] {
   return locales
-    .filter((locale) => publishedRoutes(locale).includes(route))
+    .filter((locale) => publishedRoutes(locale).includes(slugForRoute(route, locale)))
     .map((locale) => ({ locale }));
 }
 
@@ -24,18 +23,19 @@ export async function sectionPageMetadata(
   locale: string
 ): Promise<Metadata> {
   const l: Locale = isLocale(locale) ? locale : locales[0];
-  if (!publishedRoutes(l).includes(route)) {
+  const slug = slugForRoute(route, l);
+  if (!publishedRoutes(l).includes(slug)) {
     return { title: "Next Wrld" };
   }
   let content: SectionContent;
   try {
-    content = getSectionContent(route, l);
+    content = getSectionContent(slug, l);
   } catch {
     return { title: "Next Wrld" };
   }
   return buildPageMetadata({
     locale: l,
-    path: `/${route}`,
+    path: `/${slug}`,
     title: content.seo.title,
     description: content.seo.description,
   });
@@ -45,12 +45,18 @@ export function sectionPageContent(
   route: SectionRoute,
   locale: string
 ): SectionContent | null {
-  if (!isLocale(locale) || !publishedRoutes(locale).includes(route)) {
+  if (!isLocale(locale)) {
+    return null;
+  }
+  const slug = slugForRoute(route, locale);
+  if (!publishedRoutes(locale).includes(slug)) {
     return null;
   }
   try {
-    return getSectionContent(route, locale);
+    return getSectionContent(slug, locale);
   } catch {
     return null;
   }
 }
+
+export { routeForSlug };

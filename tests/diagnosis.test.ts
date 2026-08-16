@@ -314,11 +314,18 @@ describe("diagnosis section composition (DIAGNOSIS-09)", () => {
       }
     });
 
-    it("hosts the context-first Diagnosis form on the rebuilt /diagnostico page", () => {
-      const pageSource = readFileSync(
-        new URL("../src/app/[locale]/diagnostico/page.tsx", import.meta.url),
+    it("hosts the context-first Diagnosis form in the diagnosis experience", () => {
+      const experienceSource = readFileSync(
+        new URL("../src/components/HomeExperience/DiagnosisExperience.tsx", import.meta.url),
         "utf-8"
       );
-      expect(pageSource).toContain('<Diagnosis content={getHomepageContent(l).diagnosis}');
+      expect(experienceSource).toContain("Diagnosis");
+      expect(experienceSource).toContain("getHomepageContent(locale).diagnosis");
+      const sectionPageSource = readFileSync(
+        new URL("../src/app/[locale]/[...slugs]/page.tsx", import.meta.url),
+        "utf-8"
+      );
+      expect(sectionPageSource).toContain("DiagnosisExperience");
+      expect(sectionPageSource).toContain('route === "diagnostico"');
     });
   });

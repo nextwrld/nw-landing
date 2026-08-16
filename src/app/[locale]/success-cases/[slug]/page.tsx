@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { localizedHref } from "@/utils/i18n-url";
+import { slugForRoute } from "@/content/sections";
 import { getAllSuccessCases } from "@/utils/markdown";
 
 type Props = {
@@ -28,5 +29,5 @@ export default async function SuccessCaseRedirect({ params }: Props) {
     notFound();
   }
   const l: Locale = locale;
-  redirect(localizedHref(l, `/casos/${slug}`), "replace");
+  redirect(localizedHref(l, `/${slugForRoute("casos", l)}/${slug}`), "replace");
 }

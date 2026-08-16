@@ -15,6 +15,7 @@ import { inter } from "../fonts";
 import { siteUrl } from "@/utils/seo";
 import { localizedHref } from "@/utils/i18n-url";
 import { admitPublication, getPublicationConfig, isV3SkeletonReady } from "@/content/homepage/publication";
+import { slugForRoute } from "@/content/sections";
 import { getHomepageContent } from "@/content/homepage";
 import "@/styles/index.css";
 
@@ -85,7 +86,7 @@ export default async function LocaleLayout({
     ? buildApprovedNavV3(content)
     : buildMenuData(dict.menu, l);
   const diagnosisCta = experienceAdmitted
-    ? { label: content.hero.primaryCta, href: localizedHref(l, "/diagnostico") }
+    ? { label: content.hero.primaryCta, href: localizedHref(l, `/${slugForRoute("diagnostico", l)}`) }
     : undefined;
 
   return (
