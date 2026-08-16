@@ -35,9 +35,12 @@ describe("ES/EN problem H1 and narrative (PROBLEM-001)", () => {
     expect(enContent.problem.intro).not.toBe(esContent.problem.intro);
   });
 
-  it("lists the six recognized friction signals in both locales", () => {
-    expect(esContent.problem.cards).toHaveLength(6);
-    expect(enContent.problem.cards).toHaveLength(6);
+  it("lists the four recognized friction signals in both locales", () => {
+    expect(esContent.problem.cards).toHaveLength(4);
+    expect(enContent.problem.cards).toHaveLength(4);
+    expect(esContent.problem.cards.map((card) => card.id)).toEqual(
+      enContent.problem.cards.map((card) => card.id)
+    );
   });
 
   it("covers the same friction ids with titled, explained cards in both locales", () => {

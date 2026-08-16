@@ -99,7 +99,9 @@ export interface HomepageProblem extends HomepageSection {
   eyebrow: string;
   intro: string;
   cards: ProblemCard[];
+  statement: string;
   transformation: TransformationPair[];
+  closing: string;
 }
 
 export interface ImpactCostPair {

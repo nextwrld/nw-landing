@@ -45,10 +45,12 @@ function readComponent(name: keyof typeof componentPaths): string {
 
 describe("AION product showcase with allowlisted claims (EVIDENCE-01)", () => {
   it("composes an AION showcase in both locales with a manifest-listed asset", () => {
-    expect(esContent.evidence.showcase.heading).toBe("AION");
-    expect(enContent.evidence.showcase.heading).toBe("AION");
-    expect(manifestEntryFor(loadEvidenceManifest(), esContent.evidence.showcase.asset)).toBeDefined();
-    expect(manifestEntryFor(loadEvidenceManifest(), enContent.evidence.showcase.asset)).toBeDefined();
+    expect(esContent.evidence.showcase.heading).toBe("AION Wellness");
+    expect(enContent.evidence.showcase.heading).toBe("AION Wellness");
+    expect(esContent.evidence.showcase.role).toContain("PRODUCT BY NEXT WRLD");
+    const manifest = loadEvidenceManifest();
+    expect(manifestEntryFor(manifest, esContent.evidence.showcase.asset)).toBeTruthy();
+    expect(manifestEntryFor(manifest, enContent.evidence.showcase.asset)).toBeTruthy();
   });
 
   it("keeps the AION showcase fail-closed while its asset is a placeholder", () => {

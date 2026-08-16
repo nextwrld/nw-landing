@@ -66,57 +66,51 @@ export const homepageES: HomepageContent = {
     eyebrow: "01 · SOFTWARE PARA OPERACIONES QUE ESTÁN CRECIENDO",
     h1: "Tu empresa no debería crecer multiplicando trabajo manual.",
     supporting:
-      "Diseñamos software para empresas que necesitan centralizar procesos, conectar herramientas y automatizar el trabajo que hoy depende de planillas, mensajes y tareas manuales.",
-    secondaryLine: "Menos trabajo administrativo. Más control sobre tu operación.",
+      "Diseñamos software para centralizar procesos, conectar herramientas y automatizar el trabajo que hoy depende de planillas, mensajes y tareas manuales.",
+    secondaryLine: "Menos administración. Más control sobre tu operación.",
     primaryCta: "Analizar mi operación",
-    secondaryCta: "Ver casos",
+    secondaryCta: "Cómo trabajamos",
     secondaryCtaHref: "/como-trabajamos",
     microcopy: "Diagnóstico gratuito · 30–45 minutos",
   },
   problem: {
     id: "problem",
     eyebrow: "02 · CUANDO LA OPERACIÓN SE QUEDA ATRÁS",
-    heading: "Tu empresa puede haber crecido más rápido que su forma de operar.",
+    heading: "Tu empresa puede haber crecido más rápido que la forma en que la gestionas.",
     intro:
-      "Lo que funcionaba con diez clientes, un equipo pequeño o pocas operaciones puede convertirse en una limitación cuando el negocio crece.",
-            transformation: [
-          { from: "Manual", to: "Automatizado" },
-          { from: "Disperso", to: "Centralizado" },
-          { from: "Desconectado", to: "Integrado" },
-          { from: "Dependiente", to: "Repetible" },
-        ],
-cards: [
+      "Lo que funcionaba con un equipo pequeño puede convertirse en una limitación a medida que aumentan los clientes, las personas y la complejidad.",
+    cards: [
       {
-        id: "excel-system",
-        title: "Excel se convirtió en el sistema",
-        body: "Información crítica vive en hojas cada vez más complejas, difíciles de mantener y dependientes de quien las creó.",
+        id: "planillas-sistema",
+        title: "Planillas que se volvieron sistemas",
+        body: "Información crítica termina dependiendo de archivos cada vez más difíciles de mantener.",
       },
       {
-        id: "whatsapp-process",
-        title: "WhatsApp forma parte del proceso",
-        body: "Pedidos, decisiones e información importante quedan repartidos entre chats y personas.",
+        id: "whatsapp-procesos",
+        title: "Procesos que viven en WhatsApp",
+        body: "Decisiones, pedidos e información operativa quedan repartidos entre chats y personas.",
       },
       {
-        id: "disconnected-tools",
-        title: "Las herramientas no están conectadas",
-        body: "El equipo copia información de un sistema a otro para mantener la operación funcionando.",
+        id: "herramientas-desconectadas",
+        title: "Herramientas desconectadas",
+        body: "El equipo mueve información manualmente de un sistema a otro para mantener todo funcionando.",
       },
       {
-        id: "repetitive-tasks",
-        title: "Demasiadas tareas repetitivas",
-        body: "Procesos administrativos consumen horas cada semana aunque sigan siempre las mismas reglas.",
-      },
-      {
-        id: "indispensable-people",
-        title: "Hay personas que no pueden faltar",
-        body: "Parte de la operación depende de conocimiento que existe únicamente en la cabeza de alguien.",
-      },
-      {
-        id: "slow-reporting",
-        title: "Obtener información cuesta demasiado",
-        body: "Una respuesta simple requiere buscar, consolidar y validar datos desde diferentes lugares.",
+        id: "personas-clave",
+        title: "Personas que no pueden faltar",
+        body: "Parte de la operación depende de conocimiento que todavía no existe dentro de un proceso o sistema.",
       },
     ],
+    statement:
+      "Más crecimiento no debería significar más administración.",
+    transformation: [
+      { from: "Manual", to: "Automatizado" },
+      { from: "Disperso", to: "Centralizado" },
+      { from: "Desconectado", to: "Integrado" },
+      { from: "Dependiente", to: "Repetible" },
+    ],
+    closing:
+      "La tecnología debe reducir complejidad, no agregar otra herramienta que administrar.",
   },
   impact: {
     id: "impact",
@@ -153,12 +147,12 @@ cards: [
     eyebrow: "03 · QUÉ RESOLVEMOS",
     heading: "Tecnología diseñada alrededor de tu operación.",
     supporting:
-      "Algunas empresas necesitan reemplazar un proceso. Otras conectar cinco herramientas. Otras construir un sistema completo. Diseñamos la solución alrededor del problema, no al revés.",
+      "A veces necesitas construir. Otras veces conectar, centralizar o automatizar lo que ya existe. La solución depende del problema.",
     items: [
       {
         id: "custom-software",
         title: "Software a medida",
-        body: "Diseñamos y desarrollamos sistemas para operaciones que no encajan bien dentro de herramientas genéricas.",
+        body: "Sistemas construidos alrededor de procesos que una herramienta genérica no resuelve bien.",
         includes: [
           "plataformas internas",
           "portales",
@@ -171,7 +165,7 @@ cards: [
       {
         id: "management-systems",
         title: "Sistemas de gestión",
-        body: "Centralizamos procesos, información y reporting para que la operación pueda gestionarse desde un lugar más claro.",
+        body: "Centralizamos información y procesos para que la operación pueda gestionarse desde un lugar más claro.",
         includes: [
           "operaciones",
           "clientes",
@@ -185,7 +179,7 @@ cards: [
       {
         id: "automation-and-integrations",
         title: "Automatización e integraciones",
-        body: "Conectamos las herramientas que ya utilizas y automatizamos tareas que no necesitan intervención humana constante.",
+        body: "Conectamos herramientas y eliminamos tareas que no necesitan intervención manual constante.",
         includes: [
           "sincronización",
           "workflows",
@@ -199,22 +193,21 @@ cards: [
     ],
     aiTransversal: {
       heading: "¿Dónde entra la IA?",
-      body: "La incorporamos cuando puede aportar valor concreto al proceso: analizar, clasificar, asistir, buscar información o automatizar decisiones.",
+      body: "La IA forma parte de la solución cuando mejora una tarea concreta, no como argumento de venta por sí solo.",
     },
   },
   method: {
     id: "method",
     eyebrow: "04 · CÓMO TRABAJAMOS",
-    heading:
-      "De entender el problema a construir algo que funciona dentro de tu operación.",
-    body: "Nuestro proceso evita empezar por features. Primero entendemos, después decidimos qué vale la pena construir.",
+    heading: "Entender antes de construir.",
+    body: "Nuestro proceso evita empezar por features. Primero entendemos el problema y después decidimos qué vale la pena construir.",
     stages: [
       {
         id: "discover",
         name: "Discover",
         label: "Entender",
         headline: "¿Qué está pasando realmente?",
-        copy: "Entendemos cómo funciona hoy la operación, qué quiere conseguir el negocio, dónde existe fricción y qué depende de trabajo manual.",
+        copy: "Cómo funciona hoy.",
         output: "Resultado: problema y contexto claros.",
       },
       {
@@ -222,7 +215,7 @@ cards: [
         name: "Shape",
         label: "Decidir",
         headline: "¿Qué vale la pena resolver?",
-        copy: "Convertimos lo aprendido en prioridades, alcance y una dirección concreta antes de invertir en desarrollo.",
+        copy: "Qué vale la pena resolver.",
         output: "Resultado: solución y roadmap inicial.",
       },
       {
@@ -230,7 +223,7 @@ cards: [
         name: "Build",
         label: "Construir",
         headline: "Convertimos la dirección en producto.",
-        copy: "Diseñamos y desarrollamos el sistema, sus integraciones y automatizaciones alrededor del alcance acordado.",
+        copy: "Convertir la dirección en producto.",
         output: "Resultado: software listo para entrar en operación.",
       },
       {
@@ -238,7 +231,7 @@ cards: [
         name: "Launch",
         label: "Integrar",
         headline: "El software empieza a convivir con el negocio.",
-        copy: "Implementamos, conectamos datos y herramientas, acompañamos usuarios y llevamos la solución a la operación real.",
+        copy: "Llevarlo a la operación real.",
         output: "Resultado: sistema en uso.",
       },
       {
@@ -246,12 +239,11 @@ cards: [
         name: "Evolve",
         label: "Mejorar",
         headline: "Lo que funciona hoy puede necesitar cambiar mañana.",
-        copy: "Medimos, aprendemos y evolucionamos el sistema a medida que cambian usuarios, procesos y necesidades del negocio.",
+        copy: "Adaptarlo a medida que el negocio cambia.",
         output: "Resultado: una solución que puede crecer con la operación.",
       },
     ],
-    microcopy:
-      "El proceso puede adaptarse al tamaño y complejidad de cada proyecto. No todos necesitan empezar desde cero.",
+    microcopy: "Conocer nuestro proceso",
   },
   differentiation: {
     id: "differentiation",
@@ -284,13 +276,13 @@ cards: [
   evidence: {
     id: "evidence",
     eyebrow: "05 · TRABAJO REAL",
-    heading: "También construimos nuestros propios productos.",
+    heading: "Construimos para operaciones reales. También para nosotros.",
     showcase: {
       id: "aion",
-      heading: "AION",
-      role: "Producto propio de Next Wrld",
+      heading: "AION Wellness",
+      role: "A PRODUCT BY NEXT WRLD",
       summary:
-        "AION es el producto propio de Next Wrld. Estamos definiendo sus capacidades verificadas y resultados; esta sección se actualiza cuando esos datos estén aprobados.",
+        "AION centraliza membresías, planes, pagos, socios y cierres de caja dentro de una plataforma creada para simplificar la gestión de centros deportivos y fitness.",
       statusNote: "Visuales de ejemplo · capacidades y resultados pendientes de validación.",
       asset: "aion-hero.svg",
       capabilities: [],
@@ -304,7 +296,7 @@ cards: [
         claimId: "jfhp",
         asset: "jfhp-support.svg",
         destination: null,
-        claim: "Visual de ejemplo · caso pendiente de aprobación.",
+        claim: "De procesos administrativos distribuidos a una plataforma centralizada.",
         approved: false,
       },
       {
@@ -314,7 +306,7 @@ cards: [
         claimId: "automation",
         asset: "automation-support.svg",
         destination: null,
-        claim: "Visual de ejemplo · caso pendiente de aprobación.",
+        claim: "De procesos administrativos distribuidos a una plataforma centralizada.",
         approved: false,
       },
       {
@@ -325,7 +317,7 @@ cards: [
         asset: "inmocrm-mvp.svg",
         destination: null,
         claim:
-          "InmoCRM: MVP en desarrollo basado en investigación aplicada en ingeniería de software.",
+          "De investigación operativa a un MVP PropTech.",
         approved: false,
       },
     ],
@@ -395,7 +387,7 @@ cards: [
       cost: "Gratuito",
       focus:
         "Una conversación enfocada en un proceso concreto de tu operación, no una demo de servicios.",
-      nonObligation: "Sin compromiso de contratar.",
+      nonObligation: "Sin obligación de contratar.",
       deliverables: { lines: [], approved: false },
     },
     context: {

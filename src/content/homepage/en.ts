@@ -66,57 +66,51 @@ export const homepageEN: HomepageContent = {
     eyebrow: "01 · SOFTWARE FOR OPERATIONS THAT ARE GROWING",
     h1: "Your company shouldn't grow by multiplying manual work.",
     supporting:
-      "We build software for companies that need to centralize processes, connect tools, and automate the work that today depends on spreadsheets, messages, and manual tasks.",
-    secondaryLine: "Less administrative work. More control over your operation.",
+      "We design software to centralize processes, connect tools, and automate the work that today depends on spreadsheets, messages, and manual tasks.",
+    secondaryLine: "Less administration. More control over your operation.",
     primaryCta: "Analyze my operation",
-    secondaryCta: "See cases",
+    secondaryCta: "How we work",
     secondaryCtaHref: "/como-trabajamos",
     microcopy: "Free diagnosis · 30–45 minutes",
   },
   problem: {
     id: "problem",
     eyebrow: "02 · WHEN THE OPERATION FALLS BEHIND",
-    heading: "Your company may have grown faster than the way it operates.",
+    heading: "Your company may have grown faster than the way you manage it.",
     intro:
-      "What worked with ten clients, a small team, or a few operations can become a limitation as the business grows.",
-            transformation: [
-          { from: "Manual", to: "Automated" },
-          { from: "Dispersed", to: "Centralized" },
-          { from: "Disconnected", to: "Integrated" },
-          { from: "Dependent", to: "Repeatable" },
-        ],
-cards: [
+      "What worked with a small team can become a limitation as clients, people, and complexity grow.",
+    cards: [
       {
-        id: "excel-system",
-        title: "Excel became the system",
-        body: "Critical information lives in spreadsheets that grow more complex, harder to maintain, and dependent on the person who created them.",
+        id: "planillas-sistema",
+        title: "Spreadsheets that became the system",
+        body: "Critical information ends up depending on files that get harder and harder to maintain.",
       },
       {
-        id: "whatsapp-process",
-        title: "WhatsApp is part of the process",
-        body: "Orders, decisions, and important information end up scattered across chats and people.",
+        id: "whatsapp-procesos",
+        title: "Processes living in WhatsApp",
+        body: "Decisions, orders, and operational information are scattered across chats and people.",
       },
       {
-        id: "disconnected-tools",
-        title: "The tools aren't connected",
-        body: "The team copies information from one system to another just to keep the operation running.",
+        id: "herramientas-desconectadas",
+        title: "Disconnected tools",
+        body: "The team moves information between systems by hand to keep everything working.",
       },
       {
-        id: "repetitive-tasks",
-        title: "Too many repetitive tasks",
-        body: "Administrative processes consume hours every week even though they always follow the same rules.",
-      },
-      {
-        id: "indispensable-people",
-        title: "Some people can't be missing",
-        body: "Part of the operation depends on knowledge that exists only in someone's head.",
-      },
-      {
-        id: "slow-reporting",
-        title: "Getting information costs too much",
-        body: "A simple answer requires searching, consolidating, and validating data from different places.",
+        id: "personas-clave",
+        title: "People who cannot be missing",
+        body: "Part of the operation depends on knowledge that does not yet exist inside a process or system.",
       },
     ],
+    statement:
+      "More growth should not mean more administration.",
+    transformation: [
+      { from: "Manual", to: "Automated" },
+      { from: "Dispersed", to: "Centralized" },
+      { from: "Disconnected", to: "Integrated" },
+      { from: "Dependent", to: "Repeatable" },
+    ],
+    closing:
+      "Technology should reduce complexity, not add another tool to manage.",
   },
   impact: {
     id: "impact",
@@ -152,12 +146,12 @@ cards: [
     eyebrow: "03 · WHAT WE SOLVE",
     heading: "Technology designed around your operation.",
     supporting:
-      "Some companies need to replace one process. Others need to connect five tools. Others need a complete system. We design the solution around the problem, not the other way around.",
+      "Sometimes you need to build. Other times connect, centralize, or automate what already exists. The solution depends on the problem.",
     items: [
       {
         id: "custom-software",
         title: "Custom software",
-        body: "We design and build systems for operations that don't fit well inside generic tools.",
+        body: "Systems built around processes a generic tool does not solve well.",
         includes: [
           "internal platforms",
           "portals",
@@ -170,7 +164,7 @@ cards: [
       {
         id: "management-systems",
         title: "Management systems",
-        body: "We centralize processes, information, and reporting so the operation can be managed from a clearer place.",
+        body: "We centralize information and processes so the operation can be managed from a clearer place.",
         includes: [
           "operations",
           "customers",
@@ -184,7 +178,7 @@ cards: [
       {
         id: "automation-and-integrations",
         title: "Automation and integrations",
-        body: "We connect the tools you already use and automate tasks that don't need constant human intervention.",
+        body: "We connect tools and remove tasks that do not need constant manual intervention.",
         includes: [
           "synchronization",
           "workflows",
@@ -198,7 +192,7 @@ cards: [
     ],
     aiTransversal: {
       heading: "Where does AI come in?",
-      body: "We incorporate it when it can add concrete value to a process: analyzing, classifying, assisting, searching for information, or automating decisions.",
+      body: "AI is part of the solution when it improves a concrete task, not as a selling point on its own.",
     },
   },
   method: {
@@ -212,7 +206,7 @@ cards: [
         name: "Discover",
         label: "Understand",
         headline: "What is really happening?",
-        copy: "We understand how the operation works today, what the business wants to achieve, where friction exists, and what depends on manual work.",
+        copy: "How it works today.",
         output: "Outcome: clear problem and context.",
       },
       {
@@ -220,7 +214,7 @@ cards: [
         name: "Shape",
         label: "Decide",
         headline: "What is worth solving?",
-        copy: "We turn what we learned into priorities, scope, and a concrete direction before investing in development.",
+        copy: "What is worth solving.",
         output: "Outcome: initial solution and roadmap.",
       },
       {
@@ -228,7 +222,7 @@ cards: [
         name: "Build",
         label: "Build",
         headline: "We turn the direction into a product.",
-        copy: "We design and develop the system, its integrations, and automations around the agreed scope.",
+        copy: "Turning the direction into a product.",
         output: "Outcome: software ready to enter operation.",
       },
       {
@@ -236,7 +230,7 @@ cards: [
         name: "Launch",
         label: "Integrate",
         headline: "The software starts working alongside the business.",
-        copy: "We implement, connect data and tools, support users, and bring the solution into real operation.",
+        copy: "Taking it into the real operation.",
         output: "Outcome: system in use.",
       },
       {
@@ -244,12 +238,11 @@ cards: [
         name: "Evolve",
         label: "Improve",
         headline: "What works today may need to change tomorrow.",
-        copy: "We measure, learn, and evolve the system as users, processes, and business needs change.",
+        copy: "Adapting it as the business changes.",
         output: "Outcome: a solution that can grow with the operation.",
       },
     ],
-    microcopy:
-      "The process can adapt to the size and complexity of each project. Not everyone needs to start from scratch.",
+    microcopy: "Learn about our process",
   },
   differentiation: {
     id: "differentiation",
@@ -282,13 +275,13 @@ cards: [
   evidence: {
     id: "evidence",
     eyebrow: "05 · REAL WORK",
-    heading: "We also build our own products.",
+    heading: "We build for real operations. Also for ourselves.",
     showcase: {
       id: "aion",
-      heading: "AION",
-      role: "Next Wrld's own product",
+      heading: "AION Wellness",
+      role: "A PRODUCT BY NEXT WRLD",
       summary:
-        "AION is Next Wrld's own product. We are defining its verified capabilities and results; this section will be updated once that data is approved.",
+        "AION centralizes memberships, plans, payments, members, and daily closing within one platform built to simplify the management of fitness and sports businesses.",
       statusNote: "Placeholder visuals · verified capabilities and results pending validation.",
       asset: "aion-hero.svg",
       capabilities: [],
@@ -302,7 +295,7 @@ cards: [
         claimId: "jfhp",
         asset: "jfhp-support.svg",
         destination: null,
-        claim: "Placeholder visual · case pending approval.",
+        claim: "From distributed administrative processes to a centralized platform.",
         approved: false,
       },
       {
@@ -312,7 +305,7 @@ cards: [
         claimId: "automation",
         asset: "automation-support.svg",
         destination: null,
-        claim: "Placeholder visual · case pending approval.",
+        claim: "From distributed administrative processes to a centralized platform.",
         approved: false,
       },
       {
@@ -323,7 +316,7 @@ cards: [
         asset: "inmocrm-mvp.svg",
         destination: null,
         claim:
-          "InmoCRM: an MVP in development based on applied software-engineering research.",
+          "From operational research to a PropTech MVP.",
         approved: false,
       },
     ],

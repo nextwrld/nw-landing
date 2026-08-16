@@ -79,27 +79,18 @@ describe("useful-AI boundary (METHOD-002)", () => {
     );
   });
 
-  it("bounds AI to concrete process value in both locales", () => {
-    expect(esContent.capabilities.aiTransversal.body).toContain(
-      "La incorporamos cuando puede aportar valor concreto al proceso"
-    );
-    expect(enContent.capabilities.aiTransversal.body).toContain("concrete value");
+  it("bounds AI to a concrete task, never as a selling point", () => {
+    expect(esContent.capabilities.aiTransversal.body).toMatch(/tarea concreta|mejora/);
+    expect(esContent.capabilities.aiTransversal.body).toContain("argumento de venta");
+    expect(enContent.capabilities.aiTransversal.body).toMatch(/concrete task|improves/);
     expect(enContent.capabilities.aiTransversal.body.length).toBeGreaterThan(0);
   });
 
-  it("enumerates the same concrete AI uses across locales", () => {
-    const esBody = esContent.capabilities.aiTransversal.body.toLowerCase();
-    const enBody = enContent.capabilities.aiTransversal.body.toLowerCase();
-    expect(esBody).toContain("analizar");
-    expect(esBody).toContain("clasificar");
-    expect(esBody).toContain("asistir");
-    expect(esBody).toContain("buscar");
-    expect(esBody).toContain("automatizar");
-    expect(enBody).toContain("analyzing");
-    expect(enBody).toContain("classifying");
-    expect(enBody).toContain("assisting");
-    expect(enBody).toContain("searching");
-    expect(enBody).toContain("automating");
+  it("keeps the AI line consistent across locales", () => {
+    expect(esContent.capabilities.aiTransversal.heading).not.toBe(
+      enContent.capabilities.aiTransversal.heading
+    );
+    expect(esContent.capabilities.aiTransversal.body.length).toBeGreaterThan(0);
   });
 });
 

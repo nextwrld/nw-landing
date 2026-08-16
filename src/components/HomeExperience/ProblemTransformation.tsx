@@ -12,6 +12,8 @@ const ProblemTransformation = ({ content }: { content: HomepageProblem }) => (
       <h2 className="exp-h2">{content.heading}</h2>
       <p className="exp-lead">{content.intro}</p>
 
+      {content.statement ? <p className="problem-statement">{content.statement}</p> : null}
+
       <ol className="problem-list">
         {content.cards.slice(0, 4).map((card, index) => (
           <li key={card.id} className="problem-list-item">
@@ -21,6 +23,8 @@ const ProblemTransformation = ({ content }: { content: HomepageProblem }) => (
           </li>
         ))}
       </ol>
+
+      {content.closing ? <p className="problem-closing">{content.closing}</p> : null}
 
       {content.transformation.length > 0 && (
         <div className="transformation" aria-label="Transformación">
