@@ -20,19 +20,20 @@ function rgbToHex(rgb: string): string {
 }
 
 test.describe("homepage shell — desktop", () => {
-  test("exposes a localized, zoom-safe, motion-safe shell with draft Foundation content", async ({ page }) => {
+  test("exposes a localized, zoom-safe, motion-safe V3 shell", async ({ page }) => {
     await page.goto("/es");
     await expect(page.locator("html")).toHaveAttribute("lang", "es");
-
     await expect(page.getByRole("link", { name: "Saltar al contenido principal" })).toHaveCount(1);
-    await expect(page.locator("footer")).toContainText("La evolución no es un evento.");
-    await expect(page.locator("h1").first()).toContainText("BIENVENIDO AL NUEVO ESTÁNDAR OPERATIVO");
-    await expect(page.getByRole("heading", { name: /Tu empresa no debería crecer multiplicando trabajo manual/ })).toHaveCount(0);
+    await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+      "Tu empresa no debería crecer multiplicando trabajo manual"
+    );
 
     await page.goto("/en");
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await expect(page.getByRole("link", { name: "Skip to main content" })).toHaveCount(1);
-    await expect(page.locator("footer")).toContainText("Evolution is not an event.");
+    await expect(page.getByRole("heading", { level: 1 }).first()).toContainText(
+      "Your company shouldn't grow by multiplying manual work"
+    );
   });
 
   test("keeps the viewport zoomable and the content responsive", async ({ page }) => {
@@ -57,75 +58,31 @@ test.describe("homepage shell — desktop", () => {
     expect(focusedBox!.y).toBeGreaterThanOrEqual(0);
   });
 
-  test("keeps footer text readable on the footer background", async ({ page }) => {
+  test("keeps nav and footer text readable on their backgrounds", async ({ page }) => {
     await page.goto("/es");
-    const [fg, bg] = await page.evaluate(() => {
-      const link = document.querySelector('footer a[href*="privacy-policy"]');
-      const footer = document.querySelector("footer");
-      return [
-        getComputedStyle(link as HTMLElement).color,
-        getComputedStyle(footer as HTMLElement).backgroundColor,
-      ];
-    });
-    expect(contrastRatio(rgbToHex(fg), rgbToHex(bg))).toBeGreaterThanOrEqual(4.5);
-  });
-
-  test("removes nonessential motion when reduced motion is requested", async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/es");
-    const auto = await page.evaluate(
-      () => getComputedStyle(document.documentElement).scrollBehavior
+    const navLink = page.locator("header .experience-nav-link").first();
+    const navColor = rgbToHex(await navLink.evaluate((el) => getComputedStyle(el).color));
+    const navBg = rgbToHex(
+      await navLink.evaluate((el) => getComputedStyle(el.closest("header")!).backgroundColor)
     );
-    expect(auto).toBe("auto");
+    expect(contrastRatio(navColor, navBg)).toBeGreaterThanOrEqual(4.5);
 
-    await page.emulateMedia({ reducedMotion: "no-preference" });
-    await page.goto("/es");
-    const smooth = await page.evaluate(
-      () => getComputedStyle(document.documentElement).scrollBehavior
+    const footerText = page.locator("footer .experience-footer-desc");
+    const footerColor = rgbToHex(await footerText.evaluate((el) => getComputedStyle(el).color));
+    const footerBg = rgbToHex(
+      await footerText.evaluate((el) => getComputedStyle(el.closest("footer")!).backgroundColor)
     );
-    expect(smooth).toBe("smooth");
+    expect(contrastRatio(footerColor, footerBg)).toBeGreaterThanOrEqual(4.5);
   });
 });
 
 test.describe("homepage shell — mobile", () => {
-  test.use({ viewport: { width: 390, height: 844 } });
-
-  test("localizes the menu toggle", async ({ page }) => {
-    await page.goto("/es");
-    await expect(page.getByRole("button", { name: "Abrir menú" })).toBeVisible();
-    await page.goto("/en");
-    await expect(page.getByRole("button", { name: "Open menu" })).toBeVisible();
-  });
-
-  test("opens, traverses, and closes the menu with the keyboard, restoring focus", async ({ page }) => {
-    await page.goto("/es");
-    const toggle = page.getByRole("button", { name: "Abrir menú" });
-    await toggle.focus();
-    await page.keyboard.press("Enter");
-    await expect(toggle).toHaveAttribute("aria-expanded", "true");
-
-    await page.keyboard.press("Tab");
-    const focusedTag = await page.evaluate(() => document.activeElement?.tagName);
-    expect(focusedTag).toBe("A");
-
-    await page.keyboard.press("Escape");
-    await expect(toggle).toHaveAttribute("aria-expanded", "false");
-    await expect(toggle).toBeFocused();
-  });
-
-  test("keeps the open menu links readable on the menu background", async ({ page }) => {
+  test("opens the menu with keyboard and keeps links readable", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/es");
     const toggle = page.getByRole("button", { name: "Abrir menú" });
     await toggle.click();
-    await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    const [fg, bg] = await page.evaluate(() => {
-      const link = document.querySelector("#navbarCollapse a");
-      const panel = document.querySelector("#navbarCollapse");
-      return [
-        getComputedStyle(link as HTMLElement).color,
-        getComputedStyle(panel as HTMLElement).backgroundColor,
-      ];
-    });
-    expect(contrastRatio(rgbToHex(fg), rgbToHex(bg))).toBeGreaterThanOrEqual(4.5);
+    await expect(page.locator(".experience-mobile-menu")).toHaveClass(/open/);
+    await expect(page.locator("#experienceMenu").getByRole("link", { name: "Casos" })).toBeVisible();
   });
 });

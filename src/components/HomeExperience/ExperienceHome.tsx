@@ -24,7 +24,7 @@ const HomeExperience = ({
     <ProblemTransformation content={content.problem} />
     <ServicesOverview content={content.capabilities} locale={locale} />
     <MethodSection content={content.method} locale={locale} />
-    <EvidenceSection content={content.evidence} />
+    <EvidenceSection content={content.evidence} locale={locale} />
     <DiagnosisOffer content={content.diagnosis} locale={locale} />
   </main>
 );
