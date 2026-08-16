@@ -44,17 +44,22 @@ describe("sitemap", () => {
     expect(urls).toContain("https://nextwrld.com/en/success-cases/gym-access-os");
   });
 
-  it("publishes no section sub-page URLs in the sitemap", () => {
+  it("publishes published section routes in the sitemap and withholds unapproved/EN routes", () => {
     const urls = sitemap().map((e) => e.url);
+    expect(urls).toContain("https://nextwrld.com/es/servicios/software-a-medida");
+    expect(urls).toContain("https://nextwrld.com/es/servicios/sistemas-de-gestion");
+    expect(urls).toContain("https://nextwrld.com/es/servicios/automatizacion");
+    expect(urls).toContain("https://nextwrld.com/es/como-trabajamos");
+    expect(urls).toContain("https://nextwrld.com/es/casos");
+    expect(urls).toContain("https://nextwrld.com/es/nosotros");
+    // Unapproved or withheld locales never appear.
+    expect(urls).not.toContain("https://nextwrld.com/es/insights");
+    expect(urls).not.toContain("https://nextwrld.com/es/metodo");
     for (const url of [
-      "https://nextwrld.com/es/servicios",
-      "https://nextwrld.com/es/metodo",
-      "https://nextwrld.com/es/casos",
-      "https://nextwrld.com/es/nosotros",
-      "https://nextwrld.com/en/services",
-      "https://nextwrld.com/en/method",
-      "https://nextwrld.com/en/cases",
-      "https://nextwrld.com/en/about",
+      "https://nextwrld.com/en/servicios/software-a-medida",
+      "https://nextwrld.com/en/como-trabajamos",
+      "https://nextwrld.com/en/casos",
+      "https://nextwrld.com/en/nosotros",
     ]) {
       expect(urls).not.toContain(url);
     }

@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getAllSuccessCases } from "@/utils/markdown";
 import { locales } from "@/i18n/config";
+import { publishedRoutes } from "@/content/sections";
+import { isServiceRoute } from "@/content/sections";
 import { SITE_URL } from "./site";
 
 type Freq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
@@ -23,6 +25,10 @@ function alternates(locale: (typeof locales)[number], path: string): { languages
   return { languages };
 }
 
+function sectionPath(route: string): string {
+  return isServiceRoute(route) ? `/servicios/${route}` : `/${route}`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
@@ -33,6 +39,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency,
         priority,
+        alternates: alternates(locale, path),
+      });
+    }
+
+    // Published V3 section routes (ES skeleton; EN withheld until approved).
+    // `diagnostico` is already covered by staticPaths, so it is skipped here.
+    for (const route of publishedRoutes(locale)) {
+      if (route === "diagnostico") continue;
+      const path = sectionPath(route);
+      entries.push({
+        url: `${SITE_URL}/${locale}${path}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.8,
         alternates: alternates(locale, path),
       });
     }

@@ -1,8 +1,8 @@
 import type { Locale } from "@/i18n/config";
 import { sectionsEN } from "./en";
 import { sectionsES } from "./es";
-import type { SectionContent, SectionRoute } from "./types";
-import { SECTION_LOCALES, SECTION_ROUTES } from "./types";
+import type { SectionContent, SectionRoute, ServiceRoute } from "./types";
+import { SECTION_LOCALES, SECTION_ROUTES, SERVICE_ROUTES } from "./types";
 
 /**
  * V3 section-page registry. One typed content entry per route per locale;
@@ -100,6 +100,20 @@ export function routeFromDestination(destination: string): SectionRoute | null {
 
 export function isRegisteredRoute(route: string, locale: Locale): boolean {
   return (sectionsByLocale[locale] ?? []).some((entry) => entry.route === route);
+}
+
+export function isServiceRoute(route: string): route is ServiceRoute {
+  return (SERVICE_ROUTES as readonly string[]).includes(route);
+}
+
+/**
+ * Published service route slugs for a locale, rendered under
+ * `/servicios/[slug]`. EN returns `[]` until approved content exists.
+ */
+export function serviceRoutes(locale: Locale): ServiceRoute[] {
+  return (publishedRoutes(locale) as readonly string[])
+    .filter((route) => (SERVICE_ROUTES as readonly string[]).includes(route))
+    .map((route) => route as ServiceRoute);
 }
 
 export { SECTION_LOCALES };

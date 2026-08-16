@@ -23,6 +23,15 @@ export const SECTION_ROUTES = [
   "diagnostico",
 ] as const;
 
+/** The three service routes rendered under `/servicios/[slug]`. */
+export const SERVICE_ROUTES = [
+  "software-a-medida",
+  "sistemas-de-gestion",
+  "automatizacion",
+] as const;
+
+export type ServiceRoute = (typeof SERVICE_ROUTES)[number];
+
 export type SectionRoute = (typeof SECTION_ROUTES)[number];
 
 export interface SectionBlock {
