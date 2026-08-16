@@ -17,7 +17,7 @@ import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getSuccessCaseBySlug } from "@/utils/markdown";
 import markdownToHtml from "@/utils/markdownToHtml";
-import { buildPageMetadata, siteUrl } from "@/utils/seo";
+import { buildPageMetadata, sectionPageSchema, siteUrl } from "@/utils/seo";
 import { SITE_NAME } from "../../site";
 
 const FLAT_ROUTES: SectionRoute[] = ["como-trabajamos", "casos", "insights", "nosotros", "diagnostico"];
@@ -184,5 +184,14 @@ export default async function SectionSlugsPage({ params }: Props) {
     notFound();
     return null;
   }
-  return <SectionPageShell content={content} />;
+  const schema = sectionPageSchema(resolved.route, content, l);
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <SectionPageShell content={content} />
+    </>
+  );
 }

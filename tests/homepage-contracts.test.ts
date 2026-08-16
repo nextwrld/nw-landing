@@ -119,17 +119,9 @@ describe("metadata and tracking contract (OBSERVABILITY-001)", () => {
     expect(enContent.seo.description.length).toBeGreaterThan(0);
   });
 
-  it("includes only approved FAQ entries in the homepage schema", () => {
+  it("emits no FAQ schema on the V3 homepage", () => {
     for (const content of [esContent, enContent]) {
-      const schema = homepageSchema(content);
-      const faqPage = schema.find((entry) => entry["@type"] === "FAQPage") as {
-        mainEntity: { name: string }[];
-      };
-      const approved = content.faq.entries.filter((entry) => entry.approved);
-      expect(faqPage.mainEntity).toHaveLength(approved.length);
-      const names = faqPage.mainEntity.map((question) => question.name);
-      expect(names.some((name) => /pertenece|ownership|property/i.test(name))).toBe(false);
-      expect(names).toContain(content.faq.entries.find((entry) => entry.id === "ai-use")!.question);
+      expect(homepageSchema(content)).toEqual([]);
     }
   });
 
@@ -138,26 +130,23 @@ describe("metadata and tracking contract (OBSERVABILITY-001)", () => {
       "diagnosis_cta_click",
       "whatsapp_click",
       "calendar_click",
-      "service_view",
       "service_click",
-      "case_view",
       "case_click",
       "method_click",
-      "insight_view",
       "contact_form_start",
       "contact_form_submit",
       "contact_form_success",
       "contact_form_error",
       "language_change",
     ];
-    expect(EVENT_NAMES).toHaveLength(14);
+    expect(EVENT_NAMES).toHaveLength(11);
     for (const event of required) {
       expect(EVENT_NAMES).toContain(event);
     }
   });
 
-  it("distinguishes the four required diagnosis CTA locations", () => {
-    expect(DIAGNOSIS_CTA_LOCATIONS).toEqual(["header", "hero", "diagnosis_section", "final"]);
+  it("restricts diagnosis CTA locations to header, hero, and diagnosis_section", () => {
+    expect(DIAGNOSIS_CTA_LOCATIONS).toEqual(["header", "hero", "diagnosis_section"]);
   });
 
   it("keeps trackEvent a safe no-op without a browser window", () => {

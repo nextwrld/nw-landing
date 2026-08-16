@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL } from "@/app/site";
 import { locales, type Locale } from "@/i18n/config";
 import { getHomepageContent } from "@/content/homepage";
+import { slugForRoute } from "@/content/sections";
+import { SERVICE_ROUTES } from "@/content/sections/types";
+import type { SectionContent, SectionRoute } from "@/content/sections/types";
 import type { HomepageContent } from "@/content/homepage/types";
 
 const ogLocale = (locale: Locale): string => (locale === "es" ? "es_ES" : "en_US");
@@ -73,21 +76,44 @@ export function buildHomepageMetadata(opts: {
   });
 }
 
-export function homepageSchema(content: HomepageContent): Record<string, unknown>[] {
-  const schema: Record<string, unknown>[] = [];
-  const approvedFaqs = content.faq.entries.filter((entry) => entry.approved);
-  if (approvedFaqs.length > 0) {
-    schema.push({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: approvedFaqs.map((entry) => ({
-        "@type": "Question",
-        name: entry.question,
-        acceptedAnswer: { "@type": "Answer", text: entry.answer },
-      })),
-    });
+/**
+ * Homepage structured data. The V3 homepage publishes no FAQ, so no FAQPage
+ * schema is emitted; the Organization JSON-LD lives in the layout.
+ */
+export function homepageSchema(_content: HomepageContent): Record<string, unknown>[] {
+  return [];
+}
+
+/**
+ * Per-route structured data for section pages, backed by visible approved
+ * content. Services emit `Service` (with the Organization as provider),
+ * nosotros `AboutPage`, casos `CollectionPage`, and the rest `WebPage`.
+ */
+export function sectionPageSchema(
+  route: SectionRoute,
+  content: SectionContent,
+  locale: Locale
+): Record<string, unknown>[] {
+  const type =
+    route === "nosotros"
+      ? "AboutPage"
+      : route === "casos"
+        ? "CollectionPage"
+        : (SERVICE_ROUTES as readonly string[]).includes(route)
+          ? "Service"
+          : "WebPage";
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": type,
+    name: content.heading,
+    description: content.seo.description,
+    inLanguage: locale,
+    url: localeUrl(locale, `/${slugForRoute(route, locale)}`),
+  };
+  if (type === "Service") {
+    schema.provider = { "@type": "Organization", name: SITE_NAME };
   }
-  return schema;
+  return [schema];
 }
 
 export function validateCanonicalAndHreflang(opts: {

@@ -17,7 +17,7 @@ const FinalCta = ({
           <TrackedLink
             href={content.primaryCtaHref}
             event="diagnosis_cta_click"
-            params={{ cta_location: "final", locale }}
+            params={{ cta_location: "diagnosis_section", locale }}
             className="exp-btn exp-btn-primary exp-btn-lg"
           >
             {content.primaryCta}

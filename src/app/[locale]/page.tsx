@@ -63,10 +63,14 @@ export default async function Home({ params }: Props) {
   if (admission.composition !== "foundation") {
     return (
       <>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema(getHomepageContent(l))) }}
-        />
+        {homepageSchema(getHomepageContent(l)).length > 0 ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(homepageSchema(getHomepageContent(l))),
+            }}
+          />
+        ) : null}
         <ExperienceHome locale={l} content={getHomepageContent(l)} />
       </>
     );

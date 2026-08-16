@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { SITE_NAME, SITE_URL } from "../site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../site";
 import { inter } from "../fonts";
 import { siteUrl } from "@/utils/seo";
 import { localizedHref } from "@/utils/i18n-url";
@@ -30,8 +30,7 @@ export const metadata: Metadata = {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Diseñamos y construimos sistemas digitales que transforman procesos manuales y desorden operativo en estructuras claras, eficientes y escalables.",
+  description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   creator: SITE_NAME,
   publisher: SITE_NAME,

@@ -270,32 +270,15 @@ describe("FAQ admission (ADMISSION-FAQ)", () => {
           /pertenece|ownership|property/i.test(entry.question),
         ),
       ).toBe(false);
-      const schema = homepageSchema(content);
-      const faqPage = schema.find((entry) => entry["@type"] === "FAQPage") as {
-        mainEntity: { name: string }[];
-      };
-      expect(
-        faqPage.mainEntity.some((q) =>
-          /pertenece|ownership|property/i.test(q.name),
-        ),
-      ).toBe(false);
+      expect(homepageSchema(content)).toEqual([]);
     }
   });
 
-  it("emits only approved FAQ entries in the schema", () => {
+  it("emits no FAQ schema on the V3 homepage", () => {
     for (const content of [esContent, enContent]) {
-      const schema = homepageSchema(content);
-      const faqPage = schema.find((entry) => entry["@type"] === "FAQPage") as {
-        mainEntity: unknown[];
-      };
-      expect(faqPage.mainEntity).toHaveLength(
-        content.faq.entries.filter((entry) => entry.approved).length,
-      );
+      expect(homepageSchema(content)).toEqual([]);
+      expect(JSON.stringify(homepageSchema(content))).not.toContain("FAQPage");
     }
-  });
-
-  it("blocks release while FAQ ownership wording is unapproved", () => {
-    expectBlocked({ faqOwnership: "pending" }, "faqOwnership");
   });
 });
 

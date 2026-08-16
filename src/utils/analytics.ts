@@ -4,12 +4,9 @@ export const EVENT_NAMES = [
   "diagnosis_cta_click",
   "whatsapp_click",
   "calendar_click",
-  "service_view",
   "service_click",
-  "case_view",
   "case_click",
   "method_click",
-  "insight_view",
   "contact_form_start",
   "contact_form_submit",
   "contact_form_success",
@@ -19,7 +16,7 @@ export const EVENT_NAMES = [
 
 export type EventName = (typeof EVENT_NAMES)[number] | "calendar_booking_click";
 
-export const DIAGNOSIS_CTA_LOCATIONS = ["header", "hero", "diagnosis_section", "final"] as const;
+export const DIAGNOSIS_CTA_LOCATIONS = ["header", "hero", "diagnosis_section"] as const;
 
 export type DiagnosisCtaLocation = (typeof DIAGNOSIS_CTA_LOCATIONS)[number];
 

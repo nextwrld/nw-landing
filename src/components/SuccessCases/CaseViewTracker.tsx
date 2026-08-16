@@ -5,7 +5,7 @@ import { trackEvent } from "@/utils/analytics";
 
 const CaseViewTracker = ({ slug, locale }: { slug: string; locale: string }) => {
   useEffect(() => {
-    trackEvent("case_view", { case_slug: slug, locale });
+    trackEvent("case_click", { case_slug: slug, locale });
   }, [slug, locale]);
 
   return null;

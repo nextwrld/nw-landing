@@ -265,11 +265,7 @@ describe("privacy and legal publication blockers (DIAGNOSIS-07)", () => {
   it("keeps the software-ownership Q&A absent from FAQ content and schema", () => {
     for (const content of [esContent, enContent]) {
       expect(content.faq.entries.some((entry) => /pertenece|ownership|property/i.test(entry.question))).toBe(false);
-      const schema = homepageSchema(content);
-      const faqPage = schema.find((entry) => entry["@type"] === "FAQPage") as {
-        mainEntity: { name: string }[];
-      };
-      expect(faqPage.mainEntity.some((q) => /pertenece|ownership|property/i.test(q.name))).toBe(false);
+          expect(homepageSchema(content)).toEqual([]);
     }
   });
 

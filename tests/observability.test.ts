@@ -10,12 +10,19 @@ import {
 } from "@/utils/analytics";
 import {
   homepageSchema,
+  sectionPageSchema,
   validateCanonicalAndHreflang,
   validateMetadataLocales,
 } from "@/utils/seo";
 
 const esContent = contentByLocale.es;
 const enContent = contentByLocale.en;
+import { getSectionContent } from "@/content/sections";
+const esContentSections = {
+  service: getSectionContent("software-a-medida", "es"),
+  about: getSectionContent("nosotros", "es"),
+  cases: getSectionContent("casos", "es"),
+};
 
 const diagnosisSource = readFileSync(
   new URL("../src/components/HomeExperience/Diagnosis.tsx", import.meta.url),
@@ -148,18 +155,18 @@ describe("consent and analytics failure resilience (OBSERVABILITY-003)", () => {
 });
 
 describe("withheld schema and events for blocked elements (OBSERVABILITY-004)", () => {
-  it("emits only FAQ schema backed by approved visible content in both locales", () => {
+  it("emits no FAQ schema on the V3 homepage and per-route schema on sections", () => {
     for (const content of [esContent, enContent]) {
-      const schema = homepageSchema(content);
-      expect(schema).toHaveLength(1);
-      const serialized = JSON.stringify(schema);
-      for (const blocked of ["JFHP", "InmoCRM", "aion", "placeholder", "pendiente", "calend"]) {
-        expect(serialized).not.toContain(blocked);
-      }
-      const faqPage = schema[0] as { "@type": string; mainEntity: { name: string }[] };
-      expect(faqPage["@type"]).toBe("FAQPage");
-      expect(faqPage.mainEntity).toHaveLength(content.faq.entries.filter((entry) => entry.approved).length);
+      expect(homepageSchema(content)).toEqual([]);
+      expect(JSON.stringify(homepageSchema(content))).not.toContain("FAQPage");
     }
+    const serviceSchema = sectionPageSchema("software-a-medida", esContentSections.service, "es");
+    expect(serviceSchema[0]["@type"]).toBe("Service");
+    const aboutSchema = sectionPageSchema("nosotros", esContentSections.about, "es");
+    expect(aboutSchema[0]["@type"]).toBe("AboutPage");
+    const casesSchema = sectionPageSchema("casos", esContentSections.cases, "es");
+    expect(casesSchema[0]["@type"]).toBe("CollectionPage");
+    expect(JSON.stringify(serviceSchema)).not.toContain("placeholder");
   });
 
   it("owns the structured-data emission at the page layer so a blocked release can never serve schema", () => {
