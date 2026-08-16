@@ -42,3 +42,7 @@ next-env.d.ts
 
 # agent teams lite
 .atl/
+
+# Next.js auto-generated agent docs
+AGENTS.md
+CLAUDE.md
