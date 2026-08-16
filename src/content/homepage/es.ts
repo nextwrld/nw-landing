@@ -150,7 +150,7 @@ cards: [
   },
   capabilities: {
     id: "capabilities",
-    eyebrow: "05 · QUÉ PODEMOS CONSTRUIR",
+    eyebrow: "03 · QUÉ RESOLVEMOS",
     heading: "Tecnología diseñada alrededor de tu operación.",
     supporting:
       "Algunas empresas necesitan reemplazar un proceso. Otras conectar cinco herramientas. Otras construir un sistema completo. Diseñamos la solución alrededor del problema, no al revés.",
@@ -204,7 +204,7 @@ cards: [
   },
   method: {
     id: "method",
-    eyebrow: "06 · CÓMO TRABAJAMOS",
+    eyebrow: "04 · CÓMO TRABAJAMOS",
     heading:
       "De entender el problema a construir algo que funciona dentro de tu operación.",
     body: "Nuestro proceso evita empezar por features. Primero entendemos, después decidimos qué vale la pena construir.",
@@ -283,7 +283,7 @@ cards: [
   },
   evidence: {
     id: "evidence",
-    eyebrow: "08 · TRABAJO REAL",
+    eyebrow: "05 · TRABAJO REAL",
     heading: "También construimos nuestros propios productos.",
     showcase: {
       id: "aion",
@@ -388,7 +388,7 @@ cards: [
   },
   diagnosis: {
     id: "diagnosis",
-    eyebrow: "09 · DIAGNÓSTICO OPERATIVO",
+    eyebrow: "06 · DIAGNÓSTICO OPERATIVO",
     heading: "Antes de decidir qué construir, entendamos qué está frenando tu operación.",
     offer: {
       duration: "30–45 minutos",

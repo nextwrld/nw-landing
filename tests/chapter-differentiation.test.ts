@@ -43,7 +43,7 @@ describe("chapter differentiation on the homepage (CHAPTER-001)", () => {
     }
     expect(esContent.hero.eyebrow).toMatch(/^01 · /);
     expect(esContent.faq.eyebrow).toMatch(/^10 · /);
-    expect(enContent.capabilities.eyebrow).toMatch(/^05 · /);
+    expect(enContent.capabilities.eyebrow).toMatch(/^03 · /);
   });
 
   it("renders the numbered eyebrow inside every homepage chapter", () => {

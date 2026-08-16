@@ -149,7 +149,7 @@ cards: [
   },
   capabilities: {
     id: "capabilities",
-    eyebrow: "05 · WHAT WE CAN BUILD",
+    eyebrow: "03 · WHAT WE SOLVE",
     heading: "Technology designed around your operation.",
     supporting:
       "Some companies need to replace one process. Others need to connect five tools. Others need a complete system. We design the solution around the problem, not the other way around.",
@@ -203,7 +203,7 @@ cards: [
   },
   method: {
     id: "method",
-    eyebrow: "06 · HOW WE WORK",
+    eyebrow: "04 · HOW WE WORK",
     heading: "From understanding the problem to building something that works inside your operation.",
     body: "Our process avoids starting with features. First we understand, then we decide what is worth building.",
     stages: [
@@ -281,7 +281,7 @@ cards: [
   },
   evidence: {
     id: "evidence",
-    eyebrow: "08 · REAL WORK",
+    eyebrow: "05 · REAL WORK",
     heading: "We also build our own products.",
     showcase: {
       id: "aion",
@@ -386,7 +386,7 @@ cards: [
   },
   diagnosis: {
     id: "diagnosis",
-    eyebrow: "09 · OPERATIONAL DIAGNOSIS",
+    eyebrow: "06 · OPERATIONAL DIAGNOSIS",
     heading: "Before deciding what to build, let's understand what is slowing your operation down.",
     offer: {
       duration: "30–45 minutes",
