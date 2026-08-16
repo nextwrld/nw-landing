@@ -9,7 +9,7 @@ import * as pricingModule from "@/app/[locale]/pricing/page";
 import * as privacyModule from "@/app/[locale]/privacy-policy/page";
 import * as legalModule from "@/app/[locale]/legal-notice/page";
 import * as termsModule from "@/app/[locale]/terms-of-service/page";
-import * as caseModule from "@/app/[locale]/success-cases/[slug]/page";
+import * as caseModule from "@/app/[locale]/casos/[slug]/page";
 
 type MetaFn = (p: { params: Promise<Record<string, string>> }) => Promise<Record<string, unknown>>;
 
@@ -40,8 +40,9 @@ describe("sitemap", () => {
     expect(urls).toContain("https://nextwrld.com/en");
     expect(urls).toContain("https://nextwrld.com/es/diagnostico");
     expect(urls).toContain("https://nextwrld.com/en/contact");
-    expect(urls).toContain("https://nextwrld.com/es/success-cases/crm");
-    expect(urls).toContain("https://nextwrld.com/en/success-cases/gym-access-os");
+    expect(urls).toContain("https://nextwrld.com/es/casos/crm");
+    expect(urls).toContain("https://nextwrld.com/es/casos/chatbot");
+    expect(urls).toContain("https://nextwrld.com/es/casos/gym-access-os");
   });
 
   it("publishes published section routes in the sitemap and withholds unapproved/EN routes", () => {

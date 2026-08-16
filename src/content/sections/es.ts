@@ -155,7 +155,11 @@ export const sectionsES: SectionContent[] = [
         body: "Si identificas fricciones parecidas, el diagnóstico operativo es el primer paso para entender qué conviene construir.",
       },
     ],
-    cases: [],
+    cases: [
+      { slug: "gym-access-os", approved: true },
+      { slug: "chatbot", approved: true },
+      { slug: "crm", approved: true },
+    ],
     approved: true,
   },
   {

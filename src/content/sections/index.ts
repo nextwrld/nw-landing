@@ -102,6 +102,15 @@ export function isRegisteredRoute(route: string, locale: Locale): boolean {
   return (sectionsByLocale[locale] ?? []).some((entry) => entry.route === route);
 }
 
+export function approvedCaseSlugs(locale: Locale): string[] {
+  const entry = (sectionsByLocale[locale] ?? []).find(
+    (candidate) => candidate.route === "casos"
+  );
+  return (entry?.cases ?? [])
+    .filter((entryCase) => entryCase.approved)
+    .map((entryCase) => entryCase.slug);
+}
+
 export function isServiceRoute(route: string): route is ServiceRoute {
   return (SERVICE_ROUTES as readonly string[]).includes(route);
 }

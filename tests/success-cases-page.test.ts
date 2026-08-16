@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { renderToString } from "react-dom/server";
 import { getAllSuccessCases } from "@/utils/markdown";
-import SuccessCasePage from "@/app/[locale]/success-cases/[slug]/page";
+import SuccessCasePage from "@/app/[locale]/casos/[slug]/page";
 
 const decodeHtml = (html: string) =>
   html
@@ -13,8 +13,8 @@ const decodeHtml = (html: string) =>
     .replace(/&gt;/g, ">");
 
 describe("success case page semantics", () => {
-  it.each(["es", "en"] as const)(
-    "renders exactly one descriptive H1 and the visible description for every %s case",
+  it.each(["es"] as const)(
+    "renders exactly one descriptive H1 and the visible description for every published %s case",
     async (locale) => {
       const cases = getAllSuccessCases(locale, ["slug", "title", "description"]);
 
@@ -36,6 +36,12 @@ describe("success case page semantics", () => {
       }
     }
   );
+
+  it("withholds EN case details while EN content is unapproved", async () => {
+    await expect(
+      SuccessCasePage({ params: Promise.resolve({ locale: "en", slug: "crm" }) })
+    ).rejects.toThrow(/404/);
+  });
 
   it("renders a descriptive H1 equal to the case title", async () => {
     const element = await SuccessCasePage({

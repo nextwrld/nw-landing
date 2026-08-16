@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllSuccessCases } from "@/utils/markdown";
 import { locales } from "@/i18n/config";
-import { publishedRoutes } from "@/content/sections";
+import { approvedCaseSlugs, publishedRoutes } from "@/content/sections";
 import { isServiceRoute } from "@/content/sections";
 import { SITE_URL } from "./site";
 
@@ -57,9 +56,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
 
-    for (const c of getAllSuccessCases(locale, ["slug"])) {
-      if (!c.slug) continue;
-      const path = `/success-cases/${c.slug}`;
+    // Approved case detail pages under /casos/[slug] (legacy /success-cases
+    // URLs redirect 308 to these). Sitemap never emits /success-cases/*.
+    for (const slug of approvedCaseSlugs(locale)) {
+      const path = `/casos/${slug}`;
       entries.push({
         url: `${SITE_URL}/${locale}${path}`,
         lastModified: new Date(),
