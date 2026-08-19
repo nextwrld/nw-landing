@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
 import { replaceLocale } from "@/utils/i18n-url";
-import { trackEvent } from "@/utils/analytics";
+import { languageChangeParams, trackEvent } from "@/utils/analytics";
 import { locales, type Locale } from "@/i18n/config";
 
 const LanguageSelector = () => {
@@ -13,11 +13,7 @@ const LanguageSelector = () => {
 
   const navigateTo = (target: Locale) => {
     if (target === locale) return;
-    trackEvent("language_change", {
-      from_locale: locale,
-      to_locale: target,
-      page: pathname,
-    });
+    trackEvent("language_change", languageChangeParams(locale, target, pathname));
     const path = replaceLocale(pathname, target);
     const { search, hash } = window.location;
     router.push(`${path}${search}${hash}`);
