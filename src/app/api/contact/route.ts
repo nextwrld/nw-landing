@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { fullName, email, phone, message, source, website } = parsed.data;
+  const { source, website } = parsed.data;
 
   if (typeof website === "string" && website.trim() !== "") {
     return NextResponse.json(
@@ -40,6 +40,42 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   }
+
+  const recipient = process.env.EMAIL_FROM || "contact@nextwrld.com";
+
+  if (source === "homepage_diagnosis") {
+    const { fullName, company, email, operationArea } = parsed.data;
+    const emailHtml = `
+      <h2>New Operational Diagnosis Context</h2>
+      <p><strong>Origin:</strong> ${escapeHtml(source)}</p>
+      <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(company)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Operation area:</strong> ${escapeHtml(operationArea)}</p>
+    `;
+
+    try {
+      await sendEmail({
+        to: recipient,
+        subject: `[homepage_diagnosis] Diagnosis context: ${escapeHtml(company)}`,
+        html: emailHtml,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      console.error(`[contact] failed to send email (source=${source}):`, message);
+      return NextResponse.json(
+        { error: "Something went wrong. Please try again later." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, message: "Message sent successfully" },
+      { status: 200 }
+    );
+  }
+
+  const { fullName, email, phone, message } = parsed.data;
 
   const emailHtml = `
       <h2>New Contact Form Submission</h2>
@@ -53,7 +89,7 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendEmail({
-      to: process.env.EMAIL_FROM || "contact@nextwrld.com",
+      to: recipient,
       subject: `[${source}] New Contact Form: ${escapeHtml(fullName)}`,
       html: emailHtml,
     });

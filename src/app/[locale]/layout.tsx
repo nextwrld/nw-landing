@@ -2,16 +2,24 @@ import Footer from "@/components/Footer";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
-import buildMenuData from "@/components/Header/menuData";
+import buildMenuData, { buildApprovedNav } from "@/components/Header/menuData";
 import Providers from "../providers";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { SITE_NAME, SITE_URL } from "../site";
 import { inter } from "../fonts";
 import { siteUrl } from "@/utils/seo";
+import { localizedHref } from "@/utils/i18n-url";
+import { admitPublication, getPublicationConfig } from "@/content/homepage/publication";
+import { getHomepageContent } from "@/content/homepage";
 import "@/styles/index.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -66,9 +74,16 @@ export default async function LocaleLayout({
 
   const l: Locale = locale;
   const dict = await getDictionary(l);
+  const admission = admitPublication(getPublicationConfig());
+  const content = getHomepageContent(l);
+  const menu = admission === "experience" ? buildApprovedNav(content) : buildMenuData(dict.menu, l);
+  const diagnosisCta =
+    admission === "experience"
+      ? { label: content.hero.primaryCta, href: localizedHref(l, "/#diagnosis") }
+      : undefined;
 
   return (
-    <html lang={locale} suppressHydrationWarning className={`${inter.variable} !scroll-smooth`}>
+    <html lang={locale} suppressHydrationWarning className={`${inter.variable}`}>
       <body>
         <script
           type="application/ld+json"
@@ -77,7 +92,7 @@ export default async function LocaleLayout({
         <GoogleTagManager />
         <Providers>
           <div className="isolate">
-            <Header menu={buildMenuData(dict.menu, l)} />
+            <Header menu={menu} diagnosisCta={diagnosisCta} />
 
             {children}
 

@@ -26,6 +26,15 @@ const validPayload = {
   source: "home",
 };
 
+const validDiagnosisPayload = {
+  fullName: "Ana Pérez",
+  company: "Acme SA",
+  email: "ana@acme.com",
+  operationArea: "Ventas",
+  privacyAccepted: true,
+  source: "homepage_diagnosis",
+};
+
 const validWithoutSource = (() => {
   const { source: _source, ...rest } = validPayload;
   return rest;
@@ -43,7 +52,7 @@ describe("parseContactPayload", () => {
       email: "  jane@example.com  ",
     });
     expect(result.ok).toBe(true);
-    if (result.ok) {
+    if (result.ok && result.data.source !== "homepage_diagnosis") {
       expect(result.data.fullName).toBe("Jane Doe");
       expect(result.data.email).toBe("jane@example.com");
       expect(result.data.phone).toBe("+58 412 000 0000");
@@ -81,6 +90,26 @@ describe("parseContactPayload", () => {
   it("accepts empty phone and empty honeypot", () => {
     const result = parseContactPayload({ ...validPayload, phone: "", source: "contact" });
     expect(result.ok).toBe(true);
+  });
+
+  it("accepts a valid homepage_diagnosis context payload", () => {
+    const result = parseContactPayload(validDiagnosisPayload);
+    expect(result.ok).toBe(true);
+    if (result.ok && result.data.source === "homepage_diagnosis") {
+      expect(result.data.company).toBe("Acme SA");
+      expect(result.data.operationArea).toBe("Ventas");
+      expect(result.data.privacyAccepted).toBe(true);
+    }
+  });
+
+  it.each<[Record<string, unknown>, string]>([
+    [{ ...validDiagnosisPayload, company: "" }, "missing company"],
+    [{ ...validDiagnosisPayload, operationArea: "" }, "missing operation area"],
+    [{ ...validDiagnosisPayload, privacyAccepted: false }, "unaccepted privacy"],
+    [{ ...validDiagnosisPayload, message: "extra legacy field" }, "legacy-only field"],
+  ])("rejects a malformed homepage_diagnosis payload: %s", (payload) => {
+    const result = parseContactPayload(payload);
+    expect(result.ok).toBe(false);
   });
 });
 
@@ -141,5 +170,28 @@ describe("POST /api/contact", () => {
     expect("details" in body).toBe(false);
     expect(JSON.stringify(body)).not.toContain("smtp.example.com");
     expect(JSON.stringify(body)).not.toContain("ECONNECTION");
+  });
+
+  it("sends a context email for a valid homepage_diagnosis submission", async () => {
+    sendEmailMock.mockResolvedValue({ messageId: "test-1", response: "250 OK" });
+    const res = await post(validDiagnosisPayload);
+    expect(res.status).toBe(200);
+    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    const args = sendEmailMock.mock.calls[0][0] as { subject: string; html: string };
+    expect(args.subject).toContain("[homepage_diagnosis]");
+    expect(args.html).toContain("Acme SA");
+    expect(args.html).toContain("Ventas");
+  });
+
+  it("does not send a homepage_diagnosis email when the honeypot is filled", async () => {
+    const res = await post({ ...validDiagnosisPayload, website: "https://spam.example" });
+    expect(res.status).toBe(200);
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 without sending for an invalid homepage_diagnosis payload", async () => {
+    const res = await post({ ...validDiagnosisPayload, privacyAccepted: false });
+    expect(res.status).toBe(400);
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 });
